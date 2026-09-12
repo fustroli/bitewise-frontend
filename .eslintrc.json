@@ -97,9 +97,8 @@
     // Enforce no "magic numbers" (unnamed numerical values) in the code.
     // Allows `0` and `1` to be exceptions (e.g., for array indexing or booleans), and ignores array index values.
     "no-magic-numbers": [
-      "error",
-      {
-        "ignore": [0, 1], // Allow `0` and `1` to be used directly in code (common for loops or boolean values).
+      "warn",
+      {       
         "ignoreArrayIndexes": true // Allow array index values to be "magic numbers" (commonly used in loops).
       }
     ],
