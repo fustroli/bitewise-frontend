@@ -16,7 +16,12 @@ const UserProfile = () => {
       <Avatar className="size-16">
         <AvatarImage src="https://github.com/shadcn.png" />
         <AvatarFallback>
-          <AvatarImage src="https://github.com/shadcn.png" />
+          {/* Plain img: Radix allows only one AvatarImage per Avatar */}
+          <img
+            src="https://github.com/shadcn.png"
+            alt=""
+            className="aspect-square size-full"
+          />
         </AvatarFallback>
       </Avatar>
       <div>{user.email}</div>
