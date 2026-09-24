@@ -13,7 +13,12 @@ const SocialLogin = ({ children, url }: IProps) => {
   };
 
   return (
-    <Button variant="ghost" size="icon" onClick={handleGoogleLogin}>
+    <Button
+      variant="outline"
+      size="icon"
+      className="size-11 bg-card shadow-soft [&_svg]:fill-current"
+      onClick={handleGoogleLogin}
+    >
       {children}
     </Button>
   );

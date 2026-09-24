@@ -16,7 +16,9 @@ import SocialLogin from '@/app/(modules)/(auth)/components/SocialLogin';
 const AuthForm = () => {
   return (
     <section className="md:max-w-4/5 flex h-screen flex-col items-center justify-around px-8 md:mx-auto xl:max-h-[704px] xl:rounded-l-lg xl:bg-card xl:px-16 xl:shadow-soft">
-      <div>Logo</div>
+      <div className="text-2xl font-bold tracking-tight">
+        BiteWise<span className="text-primary">.</span>
+      </div>
       <h1 className="text-2xl font-bold xl:text-3xl">Welcome Back</h1>
       <div>Welcome back, please enter your details</div>
       <Tabs defaultValue={EAuthView.SIGN_IN}>
