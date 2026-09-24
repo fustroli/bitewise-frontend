@@ -39,7 +39,7 @@ const MealPlansTable = async (props: IPageProps) => {
 
   if (mealPlansResult.error) {
     return (
-      <div className="mt-8 p-2 md:p-4 xl:p-8">
+      <div className="px-4 pb-8 md:px-8">
         <section className="flex flex-col gap-4">
           <CustomError result={mealPlansResult as IError} />
         </section>

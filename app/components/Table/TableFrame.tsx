@@ -9,14 +9,11 @@ interface IProps extends PropsWithChildren {
 }
 const TableFrame = async ({ title, children, tableHead, addModal }: IProps) => {
   return (
-    <div className="rounded-xl bg-white shadow-md">
-      <div className="px-4">
-        <div className="-mt-6 flex items-center justify-between rounded-lg bg-primary-gradient px-4 py-6 shadow-table-header">
-          <h6 className="text-base font-semibold text-white">{title}</h6>
-          {addModal}
-        </div>
+    <div className="overflow-hidden rounded-lg bg-card shadow-soft">
+      <div className="flex items-center justify-between gap-4 px-6 py-5">
+        <h6 className="text-lg font-semibold text-foreground">{title}</h6>
+        {addModal}
       </div>
-      <div className="h-4"></div>
       <Table aria-label={title}>
         {tableHead}
         {children}

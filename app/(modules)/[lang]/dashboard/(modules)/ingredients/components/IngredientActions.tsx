@@ -10,7 +10,7 @@ import {
 
 import DeleteDialog from '@/app/components/DeleteDialog';
 import EditIngredientDialog from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/EditIngredientDialog';
-import { EllipsisVertical } from 'lucide-react';
+import { Ellipsis } from 'lucide-react';
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { deleteIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/actions';
 import { useToast } from '@/app/hooks/use-toast';
@@ -39,8 +39,8 @@ const IngredientActions = ({ ingredient }: IProps) => {
   return (
     <Menubar className="w-fit border-none bg-transparent shadow-none">
       <MenubarMenu>
-        <MenubarTrigger className="hover:cursor-pointer">
-          <EllipsisVertical />
+        <MenubarTrigger className="size-9 justify-center rounded-md p-0 text-muted-foreground hover:cursor-pointer hover:bg-accent hover:text-foreground">
+          <Ellipsis />
         </MenubarTrigger>
         <MenubarContent>
           <EditIngredientDialog ingredient={ingredient} />

@@ -27,7 +27,7 @@ const MealPlanTableCell = ({ meals, column, unit, subColumn }: IProps) => {
   );
 
   return (
-    <TableCell className="mx-2 flex items-center gap-2 p-2 text-dark lg:table-cell lg:py-4 lg:text-right">
+    <TableCell className="mx-2 flex items-center gap-2 p-2 text-foreground lg:table-cell lg:py-4 lg:text-right">
       <div className="flex flex-col gap-2">
         {mealValues.map((value, index) => (
           <div key={index} className="px-1 lg:px-2">
@@ -35,7 +35,7 @@ const MealPlanTableCell = ({ meals, column, unit, subColumn }: IProps) => {
             {unit && <span>{unit}</span>}
           </div>
         ))}
-        <div className="rounded-lg bg-dark p-1 font-bold text-light shadow-sm lg:px-2">
+        <div className="rounded-md bg-secondary px-2 py-1 font-semibold text-secondary-foreground">
           {mainValue} {unit && <span>{unit}</span>}
         </div>
       </div>

@@ -37,6 +37,7 @@ import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
 import InputField from '@/app/components/form/InputField';
 import { InputTags } from '@/app/components/form/InputTags';
+import { Plus } from 'lucide-react';
 import { createOrUpdateToasts } from '@/app/utils/helpers';
 import { useForm } from 'react-hook-form';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
@@ -103,7 +104,8 @@ const AddMealPlanDialog = ({ mealPlanEditValues }: IProps) => {
         <DialogTrigger onClick={() => setIsOpen(true)}>Edit</DialogTrigger>
       ) : (
         <DialogTrigger asChild>
-          <Button variant="outline" onClick={() => setIsOpen(true)}>
+          <Button className="shadow-primary" onClick={() => setIsOpen(true)}>
+            <Plus />
             Add
           </Button>
         </DialogTrigger>

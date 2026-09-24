@@ -31,6 +31,7 @@ import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import InputField from '@/app/components/form/InputField';
 import MealIngredient from '@/app/(modules)/[lang]/dashboard/(modules)/meals/components/MealIngredient';
+import { Plus } from 'lucide-react';
 import { createOrUpdateToasts } from '@/app/utils/helpers';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -91,7 +92,8 @@ const AddMealDialog = (props: IProps) => {
         <DialogTrigger onClick={() => setIsOpen(true)}>Edit</DialogTrigger>
       ) : (
         <DialogTrigger asChild>
-          <Button variant="outline" onClick={() => setIsOpen(true)}>
+          <Button className="shadow-primary" onClick={() => setIsOpen(true)}>
+            <Plus />
             Add
           </Button>
         </DialogTrigger>

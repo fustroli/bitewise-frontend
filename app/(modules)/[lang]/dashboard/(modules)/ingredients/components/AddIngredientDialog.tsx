@@ -32,6 +32,7 @@ import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/en
 import { Form } from '@/app/components/ui/form';
 import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 import InputField from '@/app/components/form/InputField';
+import { Plus } from 'lucide-react';
 import SelectField from '@/app/components/form/Select';
 import { SelectItem } from '@/app/components/ui/select';
 import { createOrUpdateToasts } from '@/app/utils/helpers';
@@ -88,7 +89,8 @@ const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
         <DialogTrigger onClick={() => setIsOpen(true)}>Edit</DialogTrigger>
       ) : (
         <DialogTrigger asChild>
-          <Button variant="outline" onClick={() => setIsOpen(true)}>
+          <Button className="shadow-primary" onClick={() => setIsOpen(true)}>
+            <Plus />
             Add
           </Button>
         </DialogTrigger>
