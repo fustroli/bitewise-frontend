@@ -1,3 +1,3 @@
 #!/bin/bash
 cd /home/ubuntu/bitewise-frontend
-npm install --omit=dev
+npm ci --omit=dev
