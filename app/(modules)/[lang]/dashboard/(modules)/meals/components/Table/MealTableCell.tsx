@@ -36,7 +36,7 @@ const MealTableCell = ({
   return (
     <TableCell
       className={cn(
-        'mx-2 flex items-center gap-2 px-2 py-2 text-dark lg:table-cell lg:py-4 lg:text-right',
+        'mx-2 flex items-center gap-2 px-2 py-2 text-foreground lg:table-cell lg:py-4 lg:text-right',
         className,
       )}
     >
@@ -50,7 +50,7 @@ const MealTableCell = ({
         />
       ))}
       {mainValue > 0 && column !== 'quantity' ? (
-        <div className="rounded-lg bg-dark p-1 font-bold text-light shadow-sm lg:px-2">
+        <div className="rounded-md bg-secondary px-2 py-1 font-semibold text-secondary-foreground">
           <span>{mainValue}</span>
           {!isNaN(subValue) && <span>({subValue})</span>}{' '}
           {unit && <span>{unit}</span>}
@@ -60,7 +60,7 @@ const MealTableCell = ({
       )}
       {column === 'quantity' && <div className="h-7"></div>}
       {mealName && (
-        <div className="flex-1 rounded-lg bg-dark p-1 font-bold text-light shadow-sm lg:px-2">
+        <div className="flex-1 rounded-md bg-primary px-2 py-1 font-semibold text-primary-foreground">
           {mealName}
         </div>
       )}

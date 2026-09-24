@@ -5,7 +5,7 @@ export default async function Page(props: IPageProps) {
   const { lang } = await props.params;
 
   return (
-    <div className="p-6">
+    <div className="px-4 pb-8 md:px-8">
       <Statistics lang={lang} />
     </div>
   );

@@ -13,14 +13,14 @@ const MealPlanTableRow = ({ row }: IProps) => {
   const { meals } = row;
   return (
     <TableRow key={row.id}>
-      <TableCell className="mx-2 flex items-center gap-2 p-2 text-dark lg:table-cell lg:py-4">
+      <TableCell className="mx-2 flex items-center gap-2 p-2 text-foreground lg:table-cell lg:py-4">
         <div className="flex flex-col gap-2">
           {meals.map((meal: IMeal, index) => (
             <div key={index} className="px-1 lg:px-2">
               {meal.name}
             </div>
           ))}
-          <div className="rounded-lg bg-dark p-1 font-bold text-light shadow-sm lg:px-2">
+          <div className="rounded-md bg-primary px-2 py-1 font-semibold text-primary-foreground">
             {row.name}
           </div>
         </div>
@@ -41,7 +41,7 @@ const MealPlanTableRow = ({ row }: IProps) => {
       />
       <MealPlanTableCell meals={meals} column="dietaryFiber" unit="g" />
 
-      <TableCell className="mx-2 flex items-center gap-2 p-2 text-dark lg:table-cell lg:py-4 lg:text-right">
+      <TableCell className="mx-2 flex items-center gap-2 p-2 text-foreground lg:table-cell lg:py-4 lg:text-right">
         <MealPlanActions mealPlan={row} allMeals={[]} />
       </TableCell>
     </TableRow>

@@ -10,11 +10,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        dark: '#344767',
-        light: '#f0f2f5',
-        custom: '#7b809a',
-        'custom-gray': '#f8f9fa',
-        'mui-primary': '#1A73E8',
+        dark: '#1d1d21',
+        light: '#f7f7f8',
+        custom: '#8a8a8f',
+        'custom-gray': '#f7f7f8',
+        'mui-primary': '#f9b115',
         background: 'hsl(var(--background))',
         foreground: 'hsl(var(--foreground))',
         card: {
@@ -45,6 +45,10 @@ const config: Config = {
           DEFAULT: 'hsl(var(--destructive))',
           foreground: 'hsl(var(--destructive-foreground))',
         },
+        success: {
+          DEFAULT: 'hsl(var(--success))',
+          foreground: 'hsl(var(--success-foreground))',
+        },
         border: 'hsl(var(--border))',
         input: 'hsl(var(--input))',
         ring: 'hsl(var(--ring))',
@@ -67,22 +71,25 @@ const config: Config = {
         },
       },
       backgroundImage: {
-        'menu-item-active': 'linear-gradient(195deg, #49a3f1, #1A73E8)',
-        'primary-gradient': 'linear-gradient(195deg, #49a3f1, #1A73E8)',
-        'green-gradient': 'linear-gradient(195deg, #66BB6A, #43A047)',
-        'dark-gradient': 'linear-gradient(195deg, #42424a, #191919)',
-        'pink-gradient': 'linear-gradient(195deg, #EC407A, #D81B60)',
+        'menu-item-active': 'linear-gradient(195deg, #fbc54a, #f9b115)',
+        'primary-gradient': 'linear-gradient(195deg, #fbc54a, #f9b115)',
+        'green-gradient': 'linear-gradient(195deg, #a3d16b, #8bc34a)',
+        'dark-gradient': 'linear-gradient(195deg, #3a3a40, #1d1d21)',
+        'pink-gradient': 'linear-gradient(195deg, #f07a7a, #e85a5a)',
       },
       boxShadow: {
-        'table-header':
-          '0rem 0.25rem 1.25rem 0rem rgba(0, 0, 0, 0.14),0rem 0.4375rem 0.625rem -0.3125rem rgba(0, 187, 212, 0.4)',
-        'statistics-card':
-          '0rem 0.25rem 0.375rem -0.0625rem rgba(0, 0, 0, 0.1),0rem 0.125rem 0.25rem -0.0625rem rgba(0, 0, 0, 0.06)',
+        'table-header': '0 0.5rem 1.25rem -0.25rem rgba(249, 177, 21, 0.45)',
+        'statistics-card': '0 0.25rem 1.5rem rgba(17, 17, 26, 0.05)',
+        soft: '0 0.25rem 1.5rem rgba(17, 17, 26, 0.05)',
+        primary: '0 0.5rem 1.25rem -0.25rem rgba(249, 177, 21, 0.45)',
       },
       borderRadius: {
         lg: 'var(--radius)',
         md: 'calc(var(--radius) - 2px)',
         sm: 'calc(var(--radius) - 4px)',
+      },
+      fontFamily: {
+        sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
       },
       padding: {
         '4.5': '1.12rem',

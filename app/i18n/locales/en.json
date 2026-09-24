@@ -18,7 +18,9 @@
       "mealPlans": "Meal Plans",
       "other": "Other",
       "calculators": "Calculators",
-      "paymentPlans": "Payment Plans"
+      "paymentPlans": "Payment Plans",
+      "upgradeTitle": "Upgrade your plan to unlock more features",
+      "upgradeButton": "Upgrade"
     }
   },
   "common": {

@@ -5,14 +5,14 @@ interface IProps {
   unit: EUnit;
 }
 const Unit = ({ unit }: IProps) => {
-  const grammClasses = 'bg-green-gradient';
-  const pieceClasses = 'bg-dark-gradient';
+  const grammClasses = 'bg-success/15 text-success';
+  const pieceClasses = 'bg-secondary text-secondary-foreground';
 
   const isPiece = unit === EUnit.PIECE;
   return (
     <div
       className={cn(
-        'w-fit rounded-md px-1 py-0.5 text-xs font-semibold uppercase text-white',
+        'w-fit rounded-full px-2 py-0.5 text-xs font-semibold uppercase',
         isPiece ? pieceClasses : grammClasses,
       )}
     >

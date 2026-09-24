@@ -26,7 +26,7 @@ const Statistics = async ({ lang }: ILangProps) => {
   const mealPlans = mealPlansResult.data;
 
   return (
-    <section className="flex flex-col gap-8 lg:flex-row">
+    <section className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
       <StatisticsCard
         title={dict.dashboard.statistics.totalIngredients}
         value={ingredients?.data.length || 0}

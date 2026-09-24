@@ -7,7 +7,7 @@ export default async function Page(props: IPageProps) {
   const pageKey = JSON.stringify(await props.searchParams);
 
   return (
-    <div className="flex flex-col gap-8 p-2 md:p-4 xl:p-8">
+    <div className="flex flex-col gap-8 px-4 pb-8 md:px-8">
       <section className="flex flex-col gap-4">
         <Suspense key={pageKey} fallback={<MealPlansLoading />}>
           <MealPlansTable {...props} />

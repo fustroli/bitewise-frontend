@@ -17,7 +17,9 @@
       "mealPlans": "Plans de repas",
       "other": "Autre",
       "calculators": "Calculatrices",
-      "paymentPlans": "Plans de paiement"
+      "paymentPlans": "Plans de paiement",
+      "upgradeTitle": "Passez à une offre supérieure pour plus de fonctionnalités",
+      "upgradeButton": "Améliorer"
     }
   },
   "common": {

@@ -38,8 +38,8 @@ export const Pagination = async (props: IProps) => {
             className={cn(
               'rounded-md px-4 py-2 transition-colors',
               currentPage === 1
-                ? 'pointer-events-none bg-gray-200 text-gray-400'
-                : 'bg-white text-black hover:bg-gray-100',
+                ? 'pointer-events-none bg-muted text-muted-foreground opacity-60'
+                : 'bg-card text-foreground shadow-soft hover:bg-accent',
             )}
           />
         </PaginationItem>
@@ -50,8 +50,8 @@ export const Pagination = async (props: IProps) => {
               className={cn(
                 'rounded-md px-4 py-2 transition-colors',
                 page === currentPage
-                  ? 'bg-primary font-semibold text-white'
-                  : 'bg-white text-black hover:bg-gray-100',
+                  ? 'bg-primary font-semibold text-primary-foreground shadow-primary hover:bg-primary hover:text-primary-foreground'
+                  : 'bg-card text-foreground shadow-soft hover:bg-accent',
               )}
             >
               {page}
@@ -66,8 +66,8 @@ export const Pagination = async (props: IProps) => {
             className={cn(
               'rounded-md px-4 py-2 transition-colors',
               !hasNextPage
-                ? 'pointer-events-none bg-gray-200 text-gray-400'
-                : 'bg-white text-black hover:bg-gray-100',
+                ? 'pointer-events-none bg-muted text-muted-foreground opacity-60'
+                : 'bg-card text-foreground shadow-soft hover:bg-accent',
             )}
           />
         </PaginationItem>

@@ -22,7 +22,7 @@ const PaymentMethod = () => {
       <CardContent>
         <Card className="flex justify-between pl-6">
           <div className="flex items-center">
-            <div className="rounded-md border border-gray-200 px-6 py-4 font-bold italic">
+            <div className="rounded-md border border-border px-6 py-4 font-bold italic">
               VISA
             </div>
             <CardContent className="pb-0">

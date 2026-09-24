@@ -18,7 +18,9 @@
       "mealPlans": "Étrendek",
       "other": "Egyéb",
       "calculators": "Kalkulátorok",
-      "paymentPlans": "Fizetési tervek"
+      "paymentPlans": "Fizetési tervek",
+      "upgradeTitle": "Válts nagyobb csomagra a további funkciókért",
+      "upgradeButton": "Frissítés"
     }
   },
   "common": {

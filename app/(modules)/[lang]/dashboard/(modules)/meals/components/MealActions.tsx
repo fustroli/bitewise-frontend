@@ -10,7 +10,7 @@ import {
 
 import DeleteDialog from '@/app/components/DeleteDialog';
 import EditMealDialog from '@/app/(modules)/[lang]/dashboard/(modules)/meals/components/EditMealDialog';
-import { EllipsisVertical } from 'lucide-react';
+import { Ellipsis } from 'lucide-react';
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
 import { deleteMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/actions';
@@ -27,8 +27,8 @@ const MealActions = ({ meal, ingredients }: IProps) => {
   return (
     <Menubar className="w-fit border-none bg-transparent shadow-none">
       <MenubarMenu>
-        <MenubarTrigger className="hover:cursor-pointer">
-          <EllipsisVertical />
+        <MenubarTrigger className="size-9 justify-center rounded-md p-0 text-muted-foreground hover:cursor-pointer hover:bg-accent hover:text-foreground">
+          <Ellipsis />
         </MenubarTrigger>
         <MenubarContent>
           <EditMealDialog meal={meal} ingredients={ingredients} />

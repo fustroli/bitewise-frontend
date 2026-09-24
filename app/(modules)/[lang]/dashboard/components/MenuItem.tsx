@@ -19,7 +19,8 @@ const MenuItem = ({ item, route }: IProps) => {
   const pathname = usePathname();
   const { dashboard } = useDictionary();
 
-  const isActive = route === pathname;
+  // Routes may carry a query string, the pathname never does
+  const isActive = route.split('?')[0] === pathname;
 
   const labelText =
     dashboard.sidebar[item.label as keyof typeof dashboard.sidebar];
@@ -29,8 +30,9 @@ const MenuItem = ({ item, route }: IProps) => {
       <SidebarMenuButton
         asChild
         className={cn(
-          'transition-all duration-150 hover:bg-primary-gradient hover:text-white',
-          isActive && 'bg-primary-gradient text-white',
+          'h-11 gap-3 rounded-md px-4 font-medium text-sidebar-foreground transition-all duration-150 [&>svg]:size-5',
+          isActive &&
+            'bg-primary text-primary-foreground shadow-primary hover:bg-primary hover:text-primary-foreground',
         )}
       >
         <Link href={route}>
