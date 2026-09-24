@@ -10,7 +10,7 @@ import { redirect } from 'next/navigation';
 export async function deleteUser() {
   await apiRequest<void>(`users/me`, 'DELETE');
 
-  const cookieStore = cookies();
+  const cookieStore = await cookies();
 
   cookieStore.set('accessToken', '', {
     path: '/',

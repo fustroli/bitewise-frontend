@@ -15,7 +15,8 @@ import Security from '@/app/(modules)/[lang]/dashboard/(modules)/profile/compone
 import { getDictionary } from '@/app/i18n/dictionaries';
 
 export default async function Page(props: IPageProps) {
-  const { profile } = await getDictionary(props.params.lang);
+  const { lang } = await props.params;
+  const { profile } = await getDictionary(lang);
 
   return (
     <div className="mt-8 p-2 md:p-4 xl:p-8">

@@ -23,7 +23,7 @@ const Typography: React.FC<IProps> = ({
       : variant === 'blockquote'
         ? 'blockquote'
         : ['h1', 'h2', 'h3', 'h4'].includes(variant)
-          ? (variant as keyof JSX.IntrinsicElements)
+          ? (variant as keyof React.JSX.IntrinsicElements)
           : 'p';
 
   return (

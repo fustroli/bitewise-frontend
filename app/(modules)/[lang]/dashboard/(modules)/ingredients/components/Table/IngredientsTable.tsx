@@ -14,15 +14,14 @@ import TableFrame from '@/app/components/Table/TableFrame';
 import { fetchIngredients } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/actions';
 
 const IngredientsTable = async (props: IPageProps) => {
-  const pageNumber = Number(props?.searchParams?.page || 1);
+  const searchParams = await props.searchParams;
+  const pageNumber = Number(searchParams?.page || 1);
 
   const params: IQueryParams = {
     limit: INGREDTENTS_PAGE_SIZE,
     offset: (pageNumber - 1) * INGREDTENTS_PAGE_SIZE,
-    orderBy: props?.searchParams?.orderBy as string | undefined,
-    orderDirection: props?.searchParams?.orderDirection as
-      | EOrderDirection
-      | undefined,
+    orderBy: searchParams?.orderBy as string | undefined,
+    orderDirection: searchParams?.orderDirection as EOrderDirection | undefined,
   };
 
   const result = await fetchIngredients(params);
@@ -50,7 +49,7 @@ const IngredientsTable = async (props: IPageProps) => {
     <>
       <TableFrame
         title={`Ingredients (${result.data?.count})`}
-        tableHead={<IngredientTableHead {...props.searchParams} />}
+        tableHead={<IngredientTableHead {...searchParams} />}
         addModal={<AddIngredientDialog />}
       >
         <TableBody>
@@ -63,9 +62,7 @@ const IngredientsTable = async (props: IPageProps) => {
           )}
         </TableBody>
       </TableFrame>
-      {!!ingredients.length && (
-        <Pagination {...props.searchParams} {...metadata} />
-      )}
+      {!!ingredients.length && <Pagination {...searchParams} {...metadata} />}
     </>
   );
 };

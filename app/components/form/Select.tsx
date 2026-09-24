@@ -16,7 +16,7 @@ import { PropsWithChildren } from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
 interface IProps extends PropsWithChildren {
-  form: UseFormReturn<any, any, undefined>;
+  form: UseFormReturn<any>;
   name: string;
   label: string;
   placeholder: string;

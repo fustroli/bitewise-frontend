@@ -20,7 +20,7 @@ import { cn } from '@/app/lib';
 import { format } from 'date-fns';
 
 interface IProps {
-  form: UseFormReturn<TPersonalInfoSchema, any, undefined>;
+  form: UseFormReturn<TPersonalInfoSchema>;
   name: string;
 }
 const DatePicker = ({ form, name }: IProps) => {

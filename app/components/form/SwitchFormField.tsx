@@ -11,7 +11,7 @@ import { Switch } from '@/app/components/ui/switch';
 import { UseFormReturn } from 'react-hook-form';
 
 interface IProps {
-  form: UseFormReturn<any, any, undefined>;
+  form: UseFormReturn<any>;
   label: string;
   description: string;
   disabled?: boolean;

@@ -3,8 +3,8 @@ import MealsLoading from '@/app/(modules)/[lang]/dashboard/(modules)/meals/compo
 import MealsTable from '@/app/(modules)/[lang]/dashboard/(modules)/meals/components/Table/MealsTable';
 import { Suspense } from 'react';
 
-export default function Page(props: IPageProps) {
-  const pageKey = JSON.stringify(props.searchParams);
+export default async function Page(props: IPageProps) {
+  const pageKey = JSON.stringify(await props.searchParams);
 
   return (
     <div className="p-2 md:p-4 xl:p-8">

@@ -3,8 +3,8 @@ import MealPlansLoading from '@/app/(modules)/[lang]/dashboard/(modules)/meal-pl
 import MealPlansTable from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/Table/MealPlansTable';
 import { Suspense } from 'react';
 
-export default function Page(props: IPageProps) {
-  const pageKey = JSON.stringify(props.searchParams);
+export default async function Page(props: IPageProps) {
+  const pageKey = JSON.stringify(await props.searchParams);
 
   return (
     <div className="flex flex-col gap-8 p-2 md:p-4 xl:p-8">

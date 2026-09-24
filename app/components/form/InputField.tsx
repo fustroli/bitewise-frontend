@@ -11,7 +11,7 @@ import { Input } from '@/app/components/ui/input';
 import { UseFormReturn } from 'react-hook-form';
 
 interface IProps {
-  form: UseFormReturn<any, any, undefined>;
+  form: UseFormReturn<any>;
   label?: string;
   name: string;
   type: HTMLInputTypeAttribute;

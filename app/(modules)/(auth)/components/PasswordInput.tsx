@@ -15,7 +15,7 @@ import { UseFormReturn } from 'react-hook-form';
 import { useState } from 'react';
 
 interface IProps {
-  form: UseFormReturn<any, any, undefined>;
+  form: UseFormReturn<any>;
   label: string;
   name: string;
 }

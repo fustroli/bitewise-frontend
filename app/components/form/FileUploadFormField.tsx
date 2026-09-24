@@ -11,7 +11,7 @@ import React from 'react';
 import { UseFormReturn } from 'react-hook-form';
 
 interface IProps {
-  form: UseFormReturn<any, any, undefined>;
+  form: UseFormReturn<any>;
   accept: string;
   name: string;
   label: string;

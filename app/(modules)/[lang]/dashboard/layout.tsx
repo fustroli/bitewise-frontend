@@ -14,9 +14,10 @@ export default async function DashboardLayout({
   params,
 }: Readonly<{
   children: React.ReactNode;
-  params: { lang: TLocale };
+  params: Promise<{ lang: string }>;
 }>) {
-  const dictionary = await getDictionary(params.lang);
+  const { lang } = await params;
+  const dictionary = await getDictionary(lang as TLocale);
   const user = await fetchMe();
 
   if (!user) {

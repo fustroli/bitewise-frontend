@@ -14,7 +14,7 @@ export async function apiRequest<T>(
   body?: any,
   params?: IQueryParams,
 ): Promise<IApiResponse<T>> {
-  const accessToken = getAccessToken();
+  const accessToken = await getAccessToken();
   try {
     const url = createUrl(endpoint, params);
     const headers = createHeaders(accessToken, body);
@@ -63,8 +63,8 @@ function createUrl(endpoint: string, params?: IQueryParams): string {
   return `${API_URL}/${endpoint}${queryString}`;
 }
 
-function getAccessToken(): string {
-  const cookieStore = cookies();
+async function getAccessToken(): Promise<string> {
+  const cookieStore = await cookies();
   const accessToken = cookieStore.get('accessToken')?.value;
 
   if (!accessToken) {

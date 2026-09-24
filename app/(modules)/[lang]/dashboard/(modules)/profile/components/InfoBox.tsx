@@ -10,7 +10,7 @@ interface IProps<T extends FieldValues> {
   info?: string;
   isEditable?: boolean;
   name: string;
-  form: UseFormReturn<T, any, undefined>;
+  form: UseFormReturn<T>;
   onBlur?: (e: React.FocusEvent<HTMLInputElement, Element>) => void;
 }
 

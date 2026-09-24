@@ -11,7 +11,7 @@ interface IProps {
   label: string;
   info?: string;
   isEditable?: boolean;
-  form: UseFormReturn<TPersonalInfoSchema, any, undefined>;
+  form: UseFormReturn<TPersonalInfoSchema>;
 }
 const PhoneInfoBox = ({ label, info, isEditable, form }: IProps) => {
   return (

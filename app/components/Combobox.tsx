@@ -25,7 +25,7 @@ interface IProps {
   options: IOption[];
   placeholder: string;
   name: string;
-  form: UseFormReturn<any, any, undefined>;
+  form: UseFormReturn<any>;
 }
 
 export function Combobox({ form, name, options, placeholder }: IProps) {

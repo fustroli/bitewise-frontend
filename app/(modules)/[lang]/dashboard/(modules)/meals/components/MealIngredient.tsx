@@ -12,7 +12,7 @@ import { convertToOptions } from '@/app/utils/helpers';
 interface IProps {
   index: number;
   allIngredients: IIngredient[];
-  form: UseFormReturn<any, any, undefined>;
+  form: UseFormReturn<any>;
   onRemove: () => void;
 }
 

@@ -15,15 +15,14 @@ import { fetchIngredients } from '@/app/(modules)/[lang]/dashboard/(modules)/ing
 import { fetchMeals } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/actions';
 
 const MealsTable = async (props: IPageProps) => {
-  const pageNumber = Number(props?.searchParams?.page || 1);
+  const searchParams = await props.searchParams;
+  const pageNumber = Number(searchParams?.page || 1);
 
   const params: IQueryParams = {
     limit: PAGE_SIZE,
     offset: (pageNumber - 1) * PAGE_SIZE,
-    orderBy: props?.searchParams?.orderBy as string | undefined,
-    orderDirection: props?.searchParams?.orderDirection as
-      | EOrderDirection
-      | undefined,
+    orderBy: searchParams?.orderBy as string | undefined,
+    orderDirection: searchParams?.orderDirection as EOrderDirection | undefined,
   };
 
   const [mealsResult, ingredientsResult] = await Promise.all([
@@ -54,7 +53,7 @@ const MealsTable = async (props: IPageProps) => {
     <>
       <TableFrame
         title={`Meals (${mealsResult.data?.count})`}
-        tableHead={<MealTableHead {...props.searchParams} />}
+        tableHead={<MealTableHead {...searchParams} />}
         addModal={
           <AddMealDialog ingredients={ingredientsResult.data?.data || []} />
         }
@@ -67,7 +66,7 @@ const MealsTable = async (props: IPageProps) => {
           )}
         </TableBody>
       </TableFrame>
-      {!!meals.length && <Pagination {...props.searchParams} {...metadata} />}
+      {!!meals.length && <Pagination {...searchParams} {...metadata} />}
     </>
   );
 };

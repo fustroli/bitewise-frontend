@@ -5,7 +5,7 @@ import LoadingButton from '@/app/components/buttons/LoadingButton';
 import { UseFormReturn } from 'react-hook-form';
 
 interface IProps {
-  form: UseFormReturn<any, any, undefined>;
+  form: UseFormReturn<any>;
   onClose: () => void;
   submitLabel: string;
 }
