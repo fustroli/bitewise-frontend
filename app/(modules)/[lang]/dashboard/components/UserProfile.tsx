@@ -6,16 +6,25 @@ import {
   AvatarImage,
 } from '@/app/components/ui/avatar';
 
+import Link from 'next/link';
+import { useParams } from 'next/navigation';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 
 const UserProfile = () => {
   const { user } = useUserContext();
+  const params = useParams();
 
   return (
-    <div className="mb-16 flex flex-col items-center justify-center gap-4">
-      <Avatar className="size-16">
+    <Link
+      href={`/${params.lang}/dashboard/profile`}
+      className="flex items-center gap-3 rounded-full transition-opacity hover:opacity-80"
+    >
+      <span className="hidden text-sm font-medium text-muted-foreground md:block">
+        {user.email}
+      </span>
+      <Avatar className="size-10 rounded-md">
         <AvatarImage src="https://github.com/shadcn.png" />
-        <AvatarFallback>
+        <AvatarFallback className="rounded-md">
           {/* Plain img: Radix allows only one AvatarImage per Avatar */}
           <img
             src="https://github.com/shadcn.png"
@@ -24,8 +33,7 @@ const UserProfile = () => {
           />
         </AvatarFallback>
       </Avatar>
-      <div>{user.email}</div>
-    </div>
+    </Link>
   );
 };
 
