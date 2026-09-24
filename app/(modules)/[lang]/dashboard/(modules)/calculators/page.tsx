@@ -4,7 +4,7 @@ import CalorieCalculator from '@/app/(modules)/[lang]/dashboard/(modules)/calcul
 
 export default function Page() {
   return (
-    <div className="mt-8 flex flex-col items-center gap-12 p-2 md:flex-row md:items-start md:p-4 xl:p-8">
+    <div className="flex flex-col items-center gap-8 px-4 pb-8 md:flex-row md:items-start md:px-8">
       <BodyFatCalculator />
       <BmiCalculator />
       <CalorieCalculator />

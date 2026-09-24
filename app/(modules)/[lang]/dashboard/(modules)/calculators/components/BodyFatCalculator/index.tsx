@@ -39,10 +39,10 @@ const BodyFatCalculator = () => {
   const reset = () => setResults(null);
 
   return (
-    <div className="relative w-full max-w-80 rounded-xl bg-white shadow-md xl:w-fit">
-      <div className="px-4">
-        <div className="-mt-6 flex items-center justify-between rounded-lg bg-primary-gradient px-4 py-6 shadow-table-header">
-          <h6 className="text-base font-medium text-white">
+    <div className="relative w-full max-w-80 rounded-lg bg-card shadow-soft xl:w-fit">
+      <div>
+        <div className="flex items-center justify-between px-6 py-5">
+          <h6 className="text-lg font-semibold text-foreground">
             Body Fat calculator (Metric units)
           </h6>
         </div>

@@ -18,7 +18,7 @@ const SessionItem = ({ isCurrent }: IProps) => {
         <CardTitle>Chrome</CardTitle>
         <CardDescription className="flex items-center gap-1">
           {isCurrent ? (
-            <Typography variant="small" className="font-medium text-blue-500">
+            <Typography variant="small" className="font-medium text-primary">
               Current session
             </Typography>
           ) : (

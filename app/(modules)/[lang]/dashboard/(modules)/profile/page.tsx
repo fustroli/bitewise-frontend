@@ -19,7 +19,7 @@ export default async function Page(props: IPageProps) {
   const { profile } = await getDictionary(lang);
 
   return (
-    <div className="mt-8 p-2 md:p-4 xl:p-8">
+    <div className="px-4 pb-8 md:px-8">
       <nav></nav>
       <section>
         <Tabs defaultValue={EProfileView.MY_PROFILE}>

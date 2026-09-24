@@ -11,16 +11,16 @@ export default function GlobalError({
 }) {
   return (
     <html lang="en">
-      <body className="flex min-h-screen items-center justify-center bg-gray-50">
-        <div className="max-w-md rounded-lg border border-gray-200 bg-white p-6 shadow-lg">
-          <h2 className="mb-4 text-2xl font-semibold text-red-600">
+      <body className="flex min-h-screen items-center justify-center bg-background">
+        <div className="max-w-md rounded-lg bg-card p-6 shadow-soft">
+          <h2 className="mb-4 text-2xl font-semibold text-destructive">
             Something went wrong!
           </h2>
-          <p className="mb-6 text-gray-700">
+          <p className="mb-6 text-foreground">
             {error.message || 'An unexpected error occurred. Please try again.'}
           </p>
           {error.digest && (
-            <p className="mb-6 text-sm text-gray-500">
+            <p className="mb-6 text-sm text-muted-foreground">
               Error Code: {error.digest}
             </p>
           )}
