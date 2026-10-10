@@ -1,7 +1,6 @@
-import { ICreateMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
+import { TMealSchema } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/validations';
 
-export const DEFAULT_MEAL: ICreateMeal = {
+export const DEFAULT_MEAL: TMealSchema = {
   name: '',
   mealIngredients: [],
-  userId: 0,
 };

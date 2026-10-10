@@ -1,26 +1,35 @@
 import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
+import { INGREDIENT_NUMBER_FIELDS } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/constants';
+import { TDictionary } from '@/app/providers/dictionary-provider';
+import { interpolate } from '@/app/utils/helpers';
 import { z } from 'zod';
 
-export const ingredientSchema = z.object({
-  name: z.string().min(1, { message: 'Name is required' }),
-  protein: z.number().min(0, { message: 'Protein must be a positive number' }),
-  totalFat: z
-    .number()
-    .min(0, { message: 'Total Fat must be a positive number' }),
-  saturatedFat: z
-    .number()
-    .min(0, { message: 'Saturated Fat must be a positive number' }),
-  totalCarbohydrates: z
-    .number()
-    .min(0, { message: 'Total Carbohydrates must be a positive number' }),
-  sugar: z.number().min(0, { message: 'Sugar must be a positive number' }),
-  dietaryFiber: z
-    .number()
-    .min(0, { message: 'Dietary Fiber must be a positive number' }),
-  calories: z
-    .number()
-    .min(0, { message: 'Calories must be a positive number' }),
-  unit: z.nativeEnum(EUnit),
-});
+type TNumberField = (typeof INGREDIENT_NUMBER_FIELDS)[number];
 
-export type TIngredientSchema = z.infer<typeof ingredientSchema>;
+export const createIngredientSchema = ({
+  resourceTable,
+  resources: { ingredients },
+}: TDictionary) => {
+  const positiveNumber = (field: TNumberField) =>
+    z.number().min(0, {
+      message: interpolate(resourceTable.positiveNumber, {
+        field: ingredients.fields[field],
+      }),
+    });
+
+  return z.object({
+    name: z.string().min(1, { message: ingredients.validation.nameRequired }),
+    protein: positiveNumber('protein'),
+    totalFat: positiveNumber('totalFat'),
+    saturatedFat: positiveNumber('saturatedFat'),
+    totalCarbohydrates: positiveNumber('totalCarbohydrates'),
+    sugar: positiveNumber('sugar'),
+    dietaryFiber: positiveNumber('dietaryFiber'),
+    calories: positiveNumber('calories'),
+    unit: z.nativeEnum(EUnit),
+  });
+};
+
+export type TIngredientSchema = z.infer<
+  ReturnType<typeof createIngredientSchema>
+>;

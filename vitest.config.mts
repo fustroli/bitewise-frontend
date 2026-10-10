@@ -13,6 +13,7 @@ export default defineConfig({
   },
   test: {
     environment: 'node',
+    // Component tests opt into jsdom with `// @vitest-environment jsdom`.
     include: ['**/*.test.{ts,tsx}'],
     exclude: ['node_modules/**', '.next/**'],
   },

@@ -8,13 +8,19 @@ interface IProps {
   form: UseFormReturn<any>;
   onClose: () => void;
   submitLabel: string;
+  closeLabel: string;
 }
-const FormDialogFooter = ({ form, onClose, submitLabel }: IProps) => {
+const FormDialogFooter = ({
+  form,
+  onClose,
+  submitLabel,
+  closeLabel,
+}: IProps) => {
   return (
     <DialogFooter>
       <DialogClose asChild>
         <Button type="button" variant="secondary" onClick={onClose}>
-          Close
+          {closeLabel}
         </Button>
       </DialogClose>
 

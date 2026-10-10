@@ -1,15 +1,23 @@
+import { TDictionary } from '@/app/providers/dictionary-provider';
 import { z } from 'zod';
 
-const mealIngredientSchema = z.object({
-  ingredientId: z.number().int().positive(),
-  quantity: z.number().positive(),
-});
+export const createMealSchema = ({ resources: { meals } }: TDictionary) => {
+  const mealIngredientSchema = z.object({
+    ingredientId: z
+      .number()
+      .int()
+      .positive({ message: meals.validation.ingredientRequired }),
+    quantity: z
+      .number()
+      .positive({ message: meals.validation.quantityPositive }),
+  });
 
-export const mealSchema = z.object({
-  name: z.string().min(1, 'Meal name is required'),
-  mealIngredients: z
-    .array(mealIngredientSchema)
-    .min(1, 'At least one ingredient is required'),
-});
+  return z.object({
+    name: z.string().min(1, meals.validation.nameRequired),
+    mealIngredients: z
+      .array(mealIngredientSchema)
+      .min(1, meals.validation.ingredientsRequired),
+  });
+};
 
-export type TMealSchema = z.infer<typeof mealSchema>;
+export type TMealSchema = z.infer<ReturnType<typeof createMealSchema>>;

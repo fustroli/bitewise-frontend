@@ -1,1 +1,0 @@
-export const INGREDTENTS_PAGE_SIZE = 10;

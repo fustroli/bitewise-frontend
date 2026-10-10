@@ -4,10 +4,14 @@ import { TableCell, TableRow } from '@/app/components/ui/table';
 
 import { Inbox } from 'lucide-react';
 
-const EmptyTable = ({ children }: PropsWithChildren) => {
+interface IProps extends PropsWithChildren {
+  colSpan: number;
+}
+
+const EmptyTable = ({ children, colSpan }: IProps) => {
   return (
     <TableRow className="hover:bg-transparent">
-      <TableCell colSpan={8}>
+      <TableCell colSpan={colSpan}>
         <div className="flex flex-col items-center gap-3 py-12 text-muted-foreground">
           <div className="flex size-12 items-center justify-center rounded-lg bg-secondary text-secondary-foreground">
             <Inbox />

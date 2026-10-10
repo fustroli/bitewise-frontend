@@ -70,6 +70,116 @@
       "system": "Système"
     }
   },
+  "resourceTable": {
+    "add": "Ajouter",
+    "save": "Enregistrer",
+    "edit": "Modifier",
+    "delete": "Supprimer",
+    "close": "Fermer",
+    "cancel": "Annuler",
+    "continue": "Continuer",
+    "actions": "Actions",
+    "previous": "Précédent",
+    "next": "Suivant",
+    "previousPage": "Aller à la page précédente",
+    "nextPage": "Aller à la page suivante",
+    "pagination": "Pagination",
+    "search": "Rechercher...",
+    "notFound": "Aucun résultat.",
+    "remove": "Retirer {name}",
+    "deleteConfirm": "Voulez-vous vraiment supprimer {name} ?",
+    "created": "Ajouté avec succès !",
+    "updated": "Mis à jour avec succès !",
+    "deleted": "Supprimé avec succès.",
+    "positiveNumber": "{field} doit être un nombre positif"
+  },
+  "resources": {
+    "ingredients": {
+      "title": "Ingrédients",
+      "empty": "Aucun ingrédient",
+      "addTitle": "Ajouter un ingrédient",
+      "editTitle": "Modifier l'ingrédient",
+      "deleteTitle": "Supprimer l'ingrédient",
+      "columns": {
+        "name": "Nom",
+        "calories": "Calories",
+        "protein": "Protéines",
+        "totalFat": "Lipides (saturés)",
+        "totalCarbohydrates": "Glucides (sucres)",
+        "dietaryFiber": "Fibres",
+        "unit": "Unité"
+      },
+      "fields": {
+        "name": "Nom",
+        "protein": "Protéines",
+        "totalFat": "Lipides totaux",
+        "saturatedFat": "Acides gras saturés",
+        "totalCarbohydrates": "Glucides totaux",
+        "sugar": "Sucres",
+        "dietaryFiber": "Fibres alimentaires",
+        "calories": "Calories",
+        "unit": "Unité",
+        "unitPlaceholder": "Choisir une unité..."
+      },
+      "validation": {
+        "nameRequired": "Le nom est obligatoire"
+      }
+    },
+    "meals": {
+      "title": "Repas",
+      "empty": "Aucun repas",
+      "addTitle": "Ajouter un repas",
+      "editTitle": "Modifier le repas",
+      "deleteTitle": "Supprimer le repas",
+      "columns": {
+        "name": "Nom",
+        "calories": "Calories",
+        "protein": "Protéines",
+        "totalFat": "Lipides (saturés)",
+        "totalCarbohydrates": "Glucides (sucres)",
+        "dietaryFiber": "Fibres",
+        "quantity": "Quantité",
+        "unit": "Unité"
+      },
+      "fields": {
+        "name": "Nom du repas",
+        "ingredient": "Ingrédient",
+        "ingredientPlaceholder": "Choisir un ingrédient...",
+        "quantity": "Quantité",
+        "addIngredient": "Ajouter un ingrédient",
+        "removeIngredient": "Retirer l'ingrédient"
+      },
+      "validation": {
+        "nameRequired": "Le nom du repas est obligatoire",
+        "ingredientsRequired": "Au moins un ingrédient est requis",
+        "ingredientRequired": "Choisissez un ingrédient",
+        "quantityPositive": "La quantité doit être supérieure à 0"
+      }
+    },
+    "mealPlans": {
+      "title": "Plans de repas",
+      "empty": "Aucun plan de repas",
+      "addTitle": "Ajouter un plan de repas",
+      "editTitle": "Modifier le plan de repas",
+      "deleteTitle": "Supprimer le plan de repas",
+      "columns": {
+        "name": "Nom",
+        "calories": "Calories",
+        "protein": "Protéines",
+        "totalFat": "Lipides (saturés)",
+        "totalCarbohydrates": "Glucides (sucres)",
+        "dietaryFiber": "Fibres"
+      },
+      "fields": {
+        "name": "Nom du plan",
+        "meals": "Repas",
+        "mealsPlaceholder": "Choisir des repas..."
+      },
+      "validation": {
+        "nameRequired": "Le nom est obligatoire"
+      }
+    }
+  },
   "auth": {
     "sessionExpired": "Votre session a expiré. Veuillez vous reconnecter."
   },

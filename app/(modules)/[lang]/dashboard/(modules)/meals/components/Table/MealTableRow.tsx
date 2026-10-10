@@ -1,22 +1,20 @@
 import { TableCell, TableRow } from '@/app/components/ui/table';
 
 import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
-import MealActions from '@/app/(modules)/[lang]/dashboard/(modules)/meals/components/MealActions';
 import MealTableCell from '@/app/(modules)/[lang]/dashboard/(modules)/meals/components/Table/MealTableCell';
+import { ReactNode } from 'react';
 import Unit from '@/app/(modules)/[lang]/dashboard/components/Unit';
-import { fetchIngredients } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/api';
 
 interface IProps {
   row: IMeal;
+  actions: ReactNode;
 }
 
-const MealTableRow = async ({ row }: IProps) => {
+const MealTableRow = ({ row, actions }: IProps) => {
   const { mealIngredients } = row;
 
-  const ingredients = await fetchIngredients({});
-
   return (
-    <TableRow key={row.id}>
+    <TableRow>
       <MealTableCell
         mealIngredients={mealIngredients}
         column="ingredientName"
@@ -65,7 +63,7 @@ const MealTableRow = async ({ row }: IProps) => {
       </TableCell>
 
       <TableCell className="block text-right lg:table-cell">
-        <MealActions meal={row} ingredients={ingredients.data} />
+        {actions}
       </TableCell>
     </TableRow>
   );

@@ -24,11 +24,20 @@ import { IOption } from '@/app/utils/interfaces';
 interface IProps {
   options: IOption[];
   placeholder: string;
+  searchPlaceholder: string;
+  emptyText: string;
   name: string;
   form: UseFormReturn<any>;
 }
 
-export function Combobox({ form, name, options, placeholder }: IProps) {
+export function Combobox({
+  form,
+  name,
+  options,
+  placeholder,
+  searchPlaceholder,
+  emptyText,
+}: IProps) {
   return (
     <Controller
       control={form.control}
@@ -49,9 +58,9 @@ export function Combobox({ form, name, options, placeholder }: IProps) {
           </PopoverTrigger>
           <PopoverContent className="w-[200px] p-0">
             <Command>
-              <CommandInput placeholder="Search..." />
+              <CommandInput placeholder={searchPlaceholder} />
               <CommandList>
-                <CommandEmpty>Not found.</CommandEmpty>
+                <CommandEmpty>{emptyText}</CommandEmpty>
                 <CommandGroup>
                   {options.map((option) => (
                     <CommandItem

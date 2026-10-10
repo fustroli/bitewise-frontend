@@ -70,6 +70,116 @@
       "system": "Sistema"
     }
   },
+  "resourceTable": {
+    "add": "Añadir",
+    "save": "Guardar",
+    "edit": "Editar",
+    "delete": "Eliminar",
+    "close": "Cerrar",
+    "cancel": "Cancelar",
+    "continue": "Continuar",
+    "actions": "Acciones",
+    "previous": "Anterior",
+    "next": "Siguiente",
+    "previousPage": "Ir a la página anterior",
+    "nextPage": "Ir a la página siguiente",
+    "pagination": "Paginación",
+    "search": "Buscar...",
+    "notFound": "Sin resultados.",
+    "remove": "Quitar {name}",
+    "deleteConfirm": "¿Seguro que quieres eliminar {name}?",
+    "created": "¡Añadido correctamente!",
+    "updated": "¡Actualizado correctamente!",
+    "deleted": "Eliminado correctamente.",
+    "positiveNumber": "{field} debe ser un número positivo"
+  },
+  "resources": {
+    "ingredients": {
+      "title": "Ingredientes",
+      "empty": "No hay ingredientes",
+      "addTitle": "Añadir ingrediente",
+      "editTitle": "Editar ingrediente",
+      "deleteTitle": "Eliminar ingrediente",
+      "columns": {
+        "name": "Nombre",
+        "calories": "Calorías",
+        "protein": "Proteína",
+        "totalFat": "Grasa (saturada)",
+        "totalCarbohydrates": "Carbohidratos (azúcar)",
+        "dietaryFiber": "Fibra",
+        "unit": "Unidad"
+      },
+      "fields": {
+        "name": "Nombre",
+        "protein": "Proteína",
+        "totalFat": "Grasa total",
+        "saturatedFat": "Grasa saturada",
+        "totalCarbohydrates": "Carbohidratos totales",
+        "sugar": "Azúcar",
+        "dietaryFiber": "Fibra alimentaria",
+        "calories": "Calorías",
+        "unit": "Unidad",
+        "unitPlaceholder": "Selecciona una unidad..."
+      },
+      "validation": {
+        "nameRequired": "El nombre es obligatorio"
+      }
+    },
+    "meals": {
+      "title": "Comidas",
+      "empty": "No hay comidas",
+      "addTitle": "Añadir comida",
+      "editTitle": "Editar comida",
+      "deleteTitle": "Eliminar comida",
+      "columns": {
+        "name": "Nombre",
+        "calories": "Calorías",
+        "protein": "Proteína",
+        "totalFat": "Grasa (saturada)",
+        "totalCarbohydrates": "Carbohidratos (azúcar)",
+        "dietaryFiber": "Fibra",
+        "quantity": "Cantidad",
+        "unit": "Unidad"
+      },
+      "fields": {
+        "name": "Nombre de la comida",
+        "ingredient": "Ingrediente",
+        "ingredientPlaceholder": "Selecciona un ingrediente...",
+        "quantity": "Cantidad",
+        "addIngredient": "Añadir ingrediente",
+        "removeIngredient": "Quitar ingrediente"
+      },
+      "validation": {
+        "nameRequired": "El nombre de la comida es obligatorio",
+        "ingredientsRequired": "Se requiere al menos un ingrediente",
+        "ingredientRequired": "Selecciona un ingrediente",
+        "quantityPositive": "La cantidad debe ser mayor que 0"
+      }
+    },
+    "mealPlans": {
+      "title": "Planes de comidas",
+      "empty": "No hay planes de comidas",
+      "addTitle": "Añadir plan de comidas",
+      "editTitle": "Editar plan de comidas",
+      "deleteTitle": "Eliminar plan de comidas",
+      "columns": {
+        "name": "Nombre",
+        "calories": "Calorías",
+        "protein": "Proteína",
+        "totalFat": "Grasa (saturada)",
+        "totalCarbohydrates": "Carbohidratos (azúcar)",
+        "dietaryFiber": "Fibra"
+      },
+      "fields": {
+        "name": "Nombre del plan",
+        "meals": "Comidas",
+        "mealsPlaceholder": "Selecciona comidas..."
+      },
+      "validation": {
+        "nameRequired": "El nombre es obligatorio"
+      }
+    }
+  },
   "auth": {
     "sessionExpired": "Tu sesión ha caducado. Vuelve a iniciar sesión."
   },

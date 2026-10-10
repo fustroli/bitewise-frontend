@@ -1,18 +1,7 @@
 import { IPageProps } from '@/app/utils/interfaces';
-import IngredientsLoading from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/Table/IngredientsLoading';
-import IngredientsTable from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/Table/IngredientsTable';
-import { Suspense } from 'react';
+import ResourcePage from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/components/ResourcePage';
+import { ingredientList } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/resource/list';
 
-export default async function Page(props: IPageProps) {
-  const pageKey = JSON.stringify(await props.searchParams);
-
-  return (
-    <div className="px-4 pb-8 md:px-8">
-      <section className="flex flex-col gap-4">
-        <Suspense key={pageKey} fallback={<IngredientsLoading />}>
-          <IngredientsTable {...props} />
-        </Suspense>
-      </section>
-    </div>
-  );
+export default function Page(props: IPageProps) {
+  return <ResourcePage resource={ingredientList} {...props} />;
 }
