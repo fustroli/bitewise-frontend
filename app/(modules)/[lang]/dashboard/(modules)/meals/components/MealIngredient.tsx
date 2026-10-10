@@ -1,21 +1,22 @@
 'use client';
 
+import { Control, useWatch } from 'react-hook-form';
+
 import { Button } from '@/app/components/ui/button';
-import { Combobox } from '@/app/components/Combobox';
+import ComboboxField from '@/app/components/form/ComboboxField';
 import { Delete } from 'lucide-react';
 import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { IOption } from '@/app/utils/interfaces';
 import InputField from '@/app/components/form/InputField';
-import { Label } from '@/app/components/ui/label';
-import { UseFormReturn } from 'react-hook-form';
+import { TMealSchema } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/validations';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 
 interface IProps {
   index: number;
   options: IOption[];
   ingredients: IIngredient[];
-  form: UseFormReturn<any>;
+  control: Control<TMealSchema>;
   onRemove: () => void;
 }
 
@@ -23,7 +24,7 @@ const MealIngredient = ({
   index,
   options,
   ingredients,
-  form,
+  control,
   onRemove,
 }: IProps) => {
   const {
@@ -33,28 +34,26 @@ const MealIngredient = ({
     },
   } = useDictionary();
 
-  const ingredientId = form.watch(`mealIngredients.${index}.ingredientId`);
+  const ingredientId = useWatch({
+    control,
+    name: `mealIngredients.${index}.ingredientId`,
+  });
   const unit = ingredients.find(({ id }) => id === ingredientId)?.unit;
 
   return (
-    <div className="flex items-center gap-4">
-      <div className="grid w-full max-w-sm items-center gap-1.5">
-        <Label htmlFor={`mealIngredients.${index}.ingredientId`}>
-          {fields.ingredient}
-        </Label>
-        <Combobox
-          form={form}
-          name={`mealIngredients.${index}.ingredientId`}
-          options={options}
-          placeholder={fields.ingredientPlaceholder}
-          searchPlaceholder={resourceTable.search}
-          emptyText={resourceTable.notFound}
-        />
-      </div>
+    <div className="flex items-start gap-4">
+      <ComboboxField
+        control={control}
+        name={`mealIngredients.${index}.ingredientId`}
+        label={fields.ingredient}
+        options={options}
+        placeholder={fields.ingredientPlaceholder}
+        searchPlaceholder={resourceTable.search}
+        emptyText={resourceTable.notFound}
+      />
 
       <InputField
-        id={`mealIngredients.${index}.quantity`}
-        form={form}
+        control={control}
         label={fields.quantity}
         name={`mealIngredients.${index}.quantity`}
         type="number"
@@ -71,6 +70,7 @@ const MealIngredient = ({
         type="button"
         aria-label={fields.removeIngredient}
         variant="destructive"
+        className="mt-8"
         onClick={() => onRemove()}
       >
         <Delete />

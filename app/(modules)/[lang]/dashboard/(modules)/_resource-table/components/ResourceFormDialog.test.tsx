@@ -37,7 +37,7 @@ const config: IResourceForm<IResourceRecord, TValues> = {
   defaultValues: { name: '' },
   toFormValues: (record) => ({ name: record.name }),
   fields: ({ form }) => (
-    <InputField form={form} label="Name" name="name" type="text" />
+    <InputField control={form.control} label="Name" name="name" type="text" />
   ),
   create,
   update,

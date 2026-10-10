@@ -8,7 +8,7 @@ export const createMealSchema = ({ resources: { meals } }: TDictionary) => {
       .int()
       .positive({ message: meals.validation.ingredientRequired }),
     quantity: z
-      .number()
+      .number({ error: meals.validation.quantityPositive })
       .positive({ message: meals.validation.quantityPositive }),
   });
 

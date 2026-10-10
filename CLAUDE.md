@@ -108,6 +108,13 @@ and the `_user` module's `provider/`/`context/`).
 
 - React Hook Form + Zod resolver
 - Schemas defined in each module's `validations/`
+- Shared fields (`app/components/form/`) take `control` and `name`; the form
+  type is inferred from `control`, so a wrong `name` doesn't compile. One
+  component per field kind, all built on `FieldFrame` (label, control, error,
+  adornment). An emptied number field is `null`, never `0`.
+- ESLint `no-restricted-imports` keeps dependencies one-way: `app/components`,
+  `app/utils`, `app/hooks` never import from `app/(modules)`; `_user` never
+  from `profile`; `profile` never from `(auth)`.
 
 ## Naming conventions (enforced by ESLint)
 

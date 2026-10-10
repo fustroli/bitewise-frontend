@@ -77,7 +77,7 @@ const SignInForm = () => {
         {isFirstStep ? (
           <InputField
             ref={emailRef}
-            form={form}
+            control={form.control}
             label="Email Address"
             name="email"
             type="email"
@@ -85,7 +85,7 @@ const SignInForm = () => {
         ) : (
           <>
             <InputField
-              form={form}
+              control={form.control}
               label="Email Address"
               name="email"
               type="email"
@@ -103,7 +103,11 @@ const SignInForm = () => {
                 </Button>
               }
             />
-            <PasswordInput form={form} label="Password" name="password" />
+            <PasswordInput
+              control={form.control}
+              label="Password"
+              name="password"
+            />
           </>
         )}
 

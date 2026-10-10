@@ -25,9 +25,14 @@ const MealPlanFields = ({
 
   return (
     <>
-      <InputField form={form} label={fields.name} name="name" type="text" />
+      <InputField
+        control={form.control}
+        label={fields.name}
+        name="name"
+        type="text"
+      />
       <MultiSelectField
-        form={form}
+        control={form.control}
         name="mealIds"
         label={fields.meals}
         options={options}

@@ -95,9 +95,8 @@ const BasicInfo = () => {
           <form className="relative" onSubmit={form.handleSubmit(onSubmit)}>
             <div className="flex items-end gap-4">
               <FileUploadFormField
-                id="avatar"
                 name="file"
-                form={form}
+                control={form.control}
                 label={common.profileImage}
                 accept={ACCEPTED_IMAGE_TYPES.join(',')}
                 changeHandler={handleImageChange}

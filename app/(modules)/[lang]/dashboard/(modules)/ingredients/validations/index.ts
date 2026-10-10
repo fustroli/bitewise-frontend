@@ -10,12 +10,13 @@ export const createIngredientSchema = ({
   resourceTable,
   resources: { ingredients },
 }: TDictionary) => {
-  const positiveNumber = (field: TNumberField) =>
-    z.number().min(0, {
-      message: interpolate(resourceTable.positiveNumber, {
-        field: ingredients.fields[field],
-      }),
+  const positiveNumber = (field: TNumberField) => {
+    const message = interpolate(resourceTable.positiveNumber, {
+      field: ingredients.fields[field],
     });
+
+    return z.number({ error: message }).min(0, { message });
+  };
 
   return z.object({
     name: z.string().min(1, { message: ingredients.validation.nameRequired }),

@@ -53,15 +53,19 @@ const SignUpForm = () => {
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <InputField
-          form={form}
+          control={form.control}
           type={'email'}
           label={'Email Address'}
           name={'email'}
         />
-        <PasswordInput form={form} label="Password" name="password" />
+        <PasswordInput
+          control={form.control}
+          label="Password"
+          name="password"
+        />
 
         <PasswordInput
-          form={form}
+          control={form.control}
           label="Confirm Password"
           name="confirmPassword"
         />

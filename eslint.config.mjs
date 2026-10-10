@@ -119,6 +119,56 @@ const eslintConfig = [
       'react/no-unescaped-entities': 'off',
     },
   },
+  // Dependency direction: shared code → nothing in modules; _user → not
+  // profile; profile → not (auth).
+  {
+    files: ['app/components/**', 'app/utils/**', 'app/hooks/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['@/app/(modules)/**', '**/(modules)/**'],
+              message: 'Shared code must not import from app/(modules).',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ['app/**/(modules)/_user/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['**/(modules)/profile/**', '**/profile/**'],
+              message: 'The _user module must not import from profile.',
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
+    files: ['app/**/(modules)/profile/**'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          patterns: [
+            {
+              group: ['**/(auth)/**'],
+              message: 'The profile module must not import from (auth).',
+            },
+          ],
+        },
+      ],
+    },
+  },
   {
     files: ['**/*.test.ts'],
     rules: {
