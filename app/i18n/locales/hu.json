@@ -15,11 +15,7 @@
       "ingredients": "Hozzávalók",
       "recipes": "Receptek",
       "meals": "Ételek",
-      "mealPlans": "Étrendek",
-      "other": "Egyéb",
-      "paymentPlans": "Fizetési tervek",
-      "upgradeTitle": "Válts nagyobb csomagra a további funkciókért",
-      "upgradeButton": "Frissítés"
+      "mealPlans": "Étrendek"
     }
   },
   "common": {
@@ -54,7 +50,6 @@
     "menuOptions": {
       "profile": "Profilom",
       "security": "Biztonság",
-      "billing": "Csomagok és Számlázás",
       "notifications": "Értesítések",
       "preferences": "Beállítások"
     },

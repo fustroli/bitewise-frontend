@@ -8,7 +8,6 @@ import {
 import { EProfileView } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/enum';
 import { IPageProps } from '@/app/utils/interfaces';
 import Notifications from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Notifications';
-import PlansAndBilling from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/PlansAndBilling';
 import Preferences from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Appearance';
 import Profile from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Profile';
 import Security from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Security';
@@ -30,9 +29,6 @@ export default async function Page(props: IPageProps) {
             <TabsTrigger value={EProfileView.SECURITY}>
               {profile.menuOptions.security}
             </TabsTrigger>
-            <TabsTrigger value={EProfileView.BILLING}>
-              {profile.menuOptions.billing}
-            </TabsTrigger>
             <TabsTrigger value={EProfileView.NOTIFICATIONS}>
               {profile.menuOptions.notifications}
             </TabsTrigger>
@@ -46,9 +42,6 @@ export default async function Page(props: IPageProps) {
             </TabsContent>
             <TabsContent value={EProfileView.SECURITY}>
               <Security />
-            </TabsContent>
-            <TabsContent value={EProfileView.BILLING}>
-              <PlansAndBilling />
             </TabsContent>
             <TabsContent value={EProfileView.NOTIFICATIONS}>
               <Notifications />
