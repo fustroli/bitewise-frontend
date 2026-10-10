@@ -2,7 +2,6 @@
   "dashboard": {
     "statistics": {
       "totalIngredients": "Ingrédients totaux",
-      "totalRecipes": "Recettes totales",
       "totalMeals": "Repas totaux",
       "totalMealPlans": "Plans de repas totaux"
     },
@@ -12,7 +11,6 @@
     "sidebar": {
       "dashboard": "Tableau de bord",
       "ingredients": "Ingrédients",
-      "recipes": "Recettes",
       "meals": "Repas",
       "mealPlans": "Plans de repas"
     }

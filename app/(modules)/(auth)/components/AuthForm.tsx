@@ -59,8 +59,8 @@ const AuthForm = ({ notice }: IProps) => {
         </SocialLogin>
       </div>
       <div className="text-center text-xs">
-        BiteWise is your smart meal planner, offering personalized recipes and
-        nutrition insights to help you eat healthier and save time.
+        BiteWise is your smart meal planner: combine your ingredients into
+        meals, group meals into meal plans, and see the nutrition of each.
       </div>
     </section>
   );
