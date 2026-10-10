@@ -20,17 +20,17 @@ const Statistics = async ({ lang }: ILangProps) => {
     <section className="grid gap-6 lg:grid-cols-3">
       <StatisticsCard
         title={dict.dashboard.statistics.totalIngredients}
-        value={ingredients.data.length}
+        value={ingredients.count}
         icon={<ShoppingBasket />}
       />
       <StatisticsCard
         title={dict.dashboard.statistics.totalMeals}
-        value={meals.data.length}
+        value={meals.count}
         icon={<HandPlatter />}
       />
       <StatisticsCard
         title={dict.dashboard.statistics.totalMealPlans}
-        value={mealPlans.data.length}
+        value={mealPlans.count}
         icon={<NotebookPen />}
       />
     </section>
