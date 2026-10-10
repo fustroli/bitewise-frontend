@@ -65,12 +65,6 @@
         "oldPasswordRequired": "Altes Passwort ist erforderlich",
         "confirmPasswordRequired": "Passwort bestätigen ist erforderlich"
       },
-      "twoFactorAuth": "Zwei-Faktor-Authentifizierung",
-      "twoFactorAuthDescription": "Fügen Sie Ihrem Konto eine zusätzliche Sicherheitsebene hinzu, indem Sie die Zwei-Faktor-Authentifizierung aktivieren",
-      "recoveryCodes": "Wiederherstellungscodes",
-      "sessions": "Sitzungen",
-      "sessionsDescription": "Orte, an denen Sie in der App angemeldet sind",
-      "logoutAllSessions": "Von allen Sitzungen abmelden",
       "passwordChanged": "Passwort erfolgreich geändert",
       "toggleVisibility": "Passwort-Sichtbarkeit umschalten"
     },
@@ -78,9 +72,6 @@
       "language": "Sprache",
       "languageDesc": "Standard Sprache für das Dashboard",
       "english": "Englisch",
-      "spanish": "Spanisch",
-      "german": "Deutsch",
-      "french": "Französisch",
       "hungarian": "Ungarisch",
       "theme": "Thema",
       "themeDesc": "Standardthema für das Dashboard",

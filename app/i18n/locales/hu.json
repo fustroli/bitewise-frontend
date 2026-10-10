@@ -83,12 +83,6 @@
         "oldPasswordRequired": "Régi jelszó kötelező",
         "confirmPasswordRequired": "Jelszó megerősítése kötelező"
       },
-      "twoFactorAuth": "Kétlépéses azonosítás",
-      "twoFactorAuthDescription": "Növelje fiókja biztonságát a kétlépéses azonosítás engedélyezésével",
-      "recoveryCodes": "Helyreállítási kódok",
-      "sessions": "Munkamenetek",
-      "sessionsDescription": "Helyek, ahol be van jelentkezve az alkalmazásba",
-      "logoutAllSessions": "Kijelentkezés az összes munkamenetből",
       "passwordChanged": "Jelszó sikeresen megváltoztatva",
       "toggleVisibility": "Jelszó láthatóságának váltása"
     },
@@ -96,17 +90,12 @@
       "language": "Nyelv",
       "languageDesc": "Alapértelmezett nyelv a vezérlőpult számára",
       "english": "Angol",
-      "spanish": "Spanyol",
-      "german": "Német",
-      "french": "Francia",
       "hungarian": "Magyar",
       "theme": "Téma",
       "themeDesc": "Alapértelmezett téma a vezérlőpult számára",
       "light": "Világos",
       "dark": "Sötét",
-      "system": "Rendszer",
-      "currency": "Pénznem",
-      "currencyDesc": "Alapértelmezett pénznem a vezérlőpult számára"
+      "system": "Rendszer"
     },
     "notifications": {
       "defaultEmail": "Alapértelmezett e-mail értesítések",

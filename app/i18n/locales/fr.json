@@ -65,12 +65,6 @@
         "oldPasswordRequired": "Ancien mot de passe requis",
         "confirmPasswordRequired": "Confirmer le mot de passe est requis"
       },
-      "twoFactorAuth": "Vérification en 2 étapes",
-      "twoFactorAuthDescription": "Ajoutez une couche de sécurité supplémentaire à votre compte en activant la vérification en 2 étapes",
-      "recoveryCodes": "Codes de récupération",
-      "sessions": "Sessions",
-      "sessionsDescription": "Endroits où vous êtes connecté à l'application",
-      "logoutAllSessions": "Déconnecter toutes les sessions",
       "passwordChanged": "Mot de passe modifié avec succès",
       "toggleVisibility": "Basculer la visibilité du mot de passe"
     },
@@ -78,9 +72,6 @@
       "language": "Langue",
       "languageDesc": "Langue par défaut pour le tableau de bord",
       "english": "Anglais",
-      "spanish": "Espagnol",
-      "german": "Allemand",
-      "french": "Français",
       "hungarian": "Hongrois",
       "theme": "Thème",
       "themeDesc": "Thème par défaut pour le tableau de bord",
