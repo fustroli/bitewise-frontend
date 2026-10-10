@@ -18,7 +18,7 @@ There is no test suite configured in this repo (no Vitest/Jest/Playwright).
 
 **Next.js 16 App Router**, no `src/` — routes live directly under `app/`.
 Locale-aware routes sit under `app/(modules)/[lang]/`; the unauthenticated
-auth flow sits under `app/(modules)/(auth)/`. `middleware.ts` handles locale
+auth flow sits under `app/(modules)/(auth)/`. `proxy.ts` handles locale
 detection/redirects and gates `/dashboard` routes behind an `accessToken`
 cookie.
 

@@ -38,7 +38,7 @@ Closes #
 - [ ] Forms validated with Zod schemas in the module's `validations/`
 - [ ] Server-only API calls go through `apiRequest()`; client errors via `handleAxiosError()`
 - [ ] No hand edits to generated `app/components/ui/` (shadcn) beyond shadcn output
-- [ ] Auth/route changes checked against `middleware.ts` (locale redirect, `/dashboard` gating)
+- [ ] Auth/route changes checked against `proxy.ts` (locale redirect, `/dashboard` gating)
 - [ ] New env vars documented and added to deploy config (`buildspec.yml` / Dockerfile / EC2)
 - [ ] `CLAUDE.md` / README updated if architecture or commands changed
 
