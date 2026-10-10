@@ -73,16 +73,6 @@
       "password": "Jelszó",
       "confirmPassword": "Jelszó megerősítése",
       "changePassword": "Jelszó megváltoztatása",
-      "passwordRules": {
-        "passwordMinLength": "A jelszónak legalább 8 karakter hosszúnak kell lennie",
-        "passwordUppercase": "A jelszónak tartalmaznia kell legalább egy nagybetűt",
-        "passwordLowercase": "A jelszónak tartalmaznia kell legalább egy kisbetűt",
-        "passwordNumberRequired": "A jelszónak tartalmaznia kell legalább egy számot",
-        "passwordRequired": "A jelszó kötelező",
-        "passwordMatch": "A jelszavaknak egyezniük kell",
-        "oldPasswordRequired": "Régi jelszó kötelező",
-        "confirmPasswordRequired": "Jelszó megerősítése kötelező"
-      },
       "passwordChanged": "Jelszó sikeresen megváltoztatva",
       "toggleVisibility": "Jelszó láthatóságának váltása"
     },
@@ -113,5 +103,15 @@
   },
   "auth": {
     "sessionExpired": "A munkamenet lejárt. Kérjük, jelentkezz be újra."
+  },
+  "passwordPolicy": {
+    "passwordMinLength": "A jelszónak legalább 8 karakter hosszúnak kell lennie",
+    "passwordUppercase": "A jelszónak tartalmaznia kell legalább egy nagybetűt",
+    "passwordLowercase": "A jelszónak tartalmaznia kell legalább egy kisbetűt",
+    "passwordNumberRequired": "A jelszónak tartalmaznia kell legalább egy számot",
+    "passwordRequired": "A jelszó kötelező",
+    "passwordMatch": "A jelszavaknak egyezniük kell",
+    "oldPasswordRequired": "Régi jelszó kötelező",
+    "confirmPasswordRequired": "Jelszó megerősítése kötelező"
   }
 }

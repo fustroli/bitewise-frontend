@@ -3,5 +3,3 @@ export const CHANGE_PASSWORD_DEFAULT_VALUES = {
   password: '',
   confirmPassword: '',
 };
-
-export const PASSWORD_RULES_LENGTH = 4;

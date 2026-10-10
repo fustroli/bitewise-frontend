@@ -55,16 +55,6 @@
       "password": "Mot de passe",
       "confirmPassword": "Confirmer le mot de passe",
       "changePassword": "Changer le mot de passe",
-      "passwordRules": {
-        "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
-        "passwordUppercase": "Le mot de passe doit contenir au moins une lettre majuscule",
-        "passwordLowercase": "Le mot de passe doit contenir au moins une lettre minuscule",
-        "passwordNumberRequired": "Le mot de passe doit contenir au moins un chiffre",
-        "passwordRequired": "Le mot de passe est requis",
-        "passwordMatch": "Les mots de passe doivent correspondre",
-        "oldPasswordRequired": "Ancien mot de passe requis",
-        "confirmPasswordRequired": "Confirmer le mot de passe est requis"
-      },
       "passwordChanged": "Mot de passe modifié avec succès",
       "toggleVisibility": "Basculer la visibilité du mot de passe"
     },
@@ -82,5 +72,15 @@
   },
   "auth": {
     "sessionExpired": "Votre session a expiré. Veuillez vous reconnecter."
+  },
+  "passwordPolicy": {
+    "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
+    "passwordUppercase": "Le mot de passe doit contenir au moins une lettre majuscule",
+    "passwordLowercase": "Le mot de passe doit contenir au moins une lettre minuscule",
+    "passwordNumberRequired": "Le mot de passe doit contenir au moins un chiffre",
+    "passwordRequired": "Le mot de passe est requis",
+    "passwordMatch": "Les mots de passe doivent correspondre",
+    "oldPasswordRequired": "Ancien mot de passe requis",
+    "confirmPasswordRequired": "Confirmer le mot de passe est requis"
   }
 }

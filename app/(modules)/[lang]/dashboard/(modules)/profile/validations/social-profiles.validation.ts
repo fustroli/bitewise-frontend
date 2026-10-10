@@ -1,29 +1,16 @@
 import { z } from 'zod';
 
+const createUrlSchema = (dictionary: Record<string, string>) =>
+  z.string().url(dictionary['invalidUrl']).or(z.literal(''));
+
 export const createSocialProfilesSchema = (
   dictionary: Record<string, string>,
 ) =>
   z.object({
-    facebook: z
-      .string()
-      .url(dictionary['invalidUrl'])
-      .optional()
-      .or(z.literal('')),
-    twitter: z
-      .string()
-      .url(dictionary['invalidUrl'])
-      .optional()
-      .or(z.literal('')),
-    instagram: z
-      .string()
-      .url(dictionary['invalidUrl'])
-      .optional()
-      .or(z.literal('')),
-    linkedin: z
-      .string()
-      .url(dictionary['invalidUrl'])
-      .optional()
-      .or(z.literal('')),
+    facebook: createUrlSchema(dictionary),
+    twitter: createUrlSchema(dictionary),
+    instagram: createUrlSchema(dictionary),
+    linkedin: createUrlSchema(dictionary),
   });
 
 export type TSocialProfilesSchema = z.infer<

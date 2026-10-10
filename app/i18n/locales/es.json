@@ -55,16 +55,6 @@
       "password": "Contraseña",
       "confirmPassword": "Confirmar contraseña",
       "changePassword": "Cambiar contraseña",
-      "passwordRules": {
-        "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
-        "passwordUppercase": "La contraseña debe contener al menos una letra mayúscula",
-        "passwordLowercase": "La contraseña debe contener al menos una letra minúscula",
-        "passwordNumberRequired": "La contraseña debe contener al menos un número",
-        "passwordRequired": "La contraseña es obligatoria",
-        "passwordMatch": "Las contraseñas deben coincidir",
-        "oldPasswordRequired": "Se requiere la contraseña anterior",
-        "confirmPasswordRequired": "Se requiere confirmar la contraseña"
-      },
       "passwordChanged": "Contraseña cambiada con éxito",
       "toggleVisibility": "Alternar visibilidad de la contraseña"
     },
@@ -82,5 +72,15 @@
   },
   "auth": {
     "sessionExpired": "Tu sesión ha caducado. Vuelve a iniciar sesión."
+  },
+  "passwordPolicy": {
+    "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
+    "passwordUppercase": "La contraseña debe contener al menos una letra mayúscula",
+    "passwordLowercase": "La contraseña debe contener al menos una letra minúscula",
+    "passwordNumberRequired": "La contraseña debe contener al menos un número",
+    "passwordRequired": "La contraseña es obligatoria",
+    "passwordMatch": "Las contraseñas deben coincidir",
+    "oldPasswordRequired": "Se requiere la contraseña anterior",
+    "confirmPasswordRequired": "Se requiere confirmar la contraseña"
   }
 }

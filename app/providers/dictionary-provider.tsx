@@ -3,7 +3,7 @@
 import React from 'react';
 import { getDictionary } from '@/app/i18n/dictionaries';
 
-type TDictionary = Awaited<ReturnType<typeof getDictionary>>;
+export type TDictionary = Awaited<ReturnType<typeof getDictionary>>;
 const DictionaryContext = React.createContext<TDictionary | null>(null);
 
 export function DictionaryProvider({

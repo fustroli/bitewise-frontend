@@ -1,24 +1,21 @@
-import { PASSWORD_MIN_LENGTH } from '@/app/(modules)/(auth)/constants';
+import {
+  IPasswordPolicyMessages,
+  createConfirmPasswordSchema,
+  createPasswordSchema,
+  passwordsMatch,
+} from '@/app/utils/password-policy';
 import { z } from 'zod';
 
 export const createChangePasswordSchema = (
-  dictionary: Record<string, string>,
+  messages: IPasswordPolicyMessages & { oldPasswordRequired: string },
 ) =>
   z
     .object({
-      oldPassword: z.string().min(1, dictionary['oldPasswordRequired']),
-      password: z
-        .string()
-        .min(PASSWORD_MIN_LENGTH, dictionary['passwordMinLength'])
-        .regex(/[A-Z]/, dictionary['passwordUppercase'])
-        .regex(/[a-z]/, dictionary['passwordLowercase'])
-        .regex(/\d/, dictionary['passwordNumberRequired']),
-      confirmPassword: z.string().min(1, dictionary['confirmPasswordRequired']),
+      oldPassword: z.string().min(1, messages.oldPasswordRequired),
+      password: createPasswordSchema(messages),
+      confirmPassword: createConfirmPasswordSchema(messages),
     })
-    .refine((data) => data.password === data.confirmPassword, {
-      message: dictionary['passwordsMustMatch'],
-      path: ['confirmPassword'],
-    });
+    .refine(...passwordsMatch(messages));
 
 export type TChangePasswordSchema = z.infer<
   ReturnType<typeof createChangePasswordSchema>

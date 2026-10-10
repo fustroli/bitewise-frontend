@@ -1,18 +1,27 @@
+import {
+  IUser,
+  IUserChange,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 import React, { useContext } from 'react';
 
-import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
+import { TApiResult } from '@/app/utils/interfaces';
 
-interface IDefaultValues {
-  user: IUser;
-  setUser: React.Dispatch<React.SetStateAction<IUser>>;
+export interface IUserActions {
+  updateUser: (change: IUserChange) => Promise<TApiResult<IUser>>;
+  updateAvatar: (formData: FormData) => Promise<TApiResult<IUser>>;
 }
-const defaultValue: IDefaultValues = {
-  user: { id: 0, email: '' },
-  setUser: () => {},
-};
 
-export const UserContext = React.createContext(defaultValue);
+/** On a successful update, `user` becomes the updated User. */
+export interface IUserContext extends IUserActions {
+  user: IUser;
+}
+
+export const UserContext = React.createContext<IUserContext | null>(null);
 
 export const useUserContext = () => {
-  return useContext(UserContext);
+  const context = useContext(UserContext);
+  if (!context) {
+    throw new Error('useUserContext must be used within a UserProvider');
+  }
+  return context;
 };

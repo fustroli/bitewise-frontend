@@ -2,6 +2,7 @@ import { ESignOutReason, parseSignOutReason } from '@/app/session';
 
 import AuthForm from '@/app/(modules)/(auth)/components/AuthForm';
 import AuthImageFrame from '@/app/(modules)/(auth)/components/AuthImageFrame';
+import { DictionaryProvider } from '@/app/providers/dictionary-provider';
 import { getDictionary } from '@/app/i18n/dictionaries';
 import { getLocale } from '@/app/i18n/helpers';
 import { headers } from 'next/headers';
@@ -18,9 +19,11 @@ export default async function Auth({ searchParams }: IProps) {
     reason === ESignOutReason.EXPIRED ? dict.auth.sessionExpired : undefined;
 
   return (
-    <div className="flex h-screen flex-col xl:mx-auto xl:max-w-[1408px] xl:flex-row xl:items-center">
-      <AuthForm notice={notice} />
-      <AuthImageFrame />
-    </div>
+    <DictionaryProvider dictionary={dict}>
+      <div className="flex h-screen flex-col xl:mx-auto xl:max-w-[1408px] xl:flex-row xl:items-center">
+        <AuthForm notice={notice} />
+        <AuthImageFrame />
+      </div>
+    </DictionaryProvider>
   );
 }
