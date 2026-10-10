@@ -22,7 +22,7 @@ const AuthForm = () => {
       <h1 className="text-2xl font-bold xl:text-3xl">Welcome Back</h1>
       <div>Welcome back, please enter your details</div>
       <Tabs defaultValue={EAuthView.SIGN_IN}>
-        <TabsList className="grid w-full grid-cols-2">
+        <TabsList className="mb-6 grid w-full grid-cols-2">
           <TabsTrigger value={EAuthView.SIGN_IN}>Sign In</TabsTrigger>
           <TabsTrigger value={EAuthView.SIGN_UP}>Sign Up</TabsTrigger>
         </TabsList>
