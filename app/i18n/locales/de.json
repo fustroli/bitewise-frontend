@@ -156,7 +156,8 @@
         "nameRequired": "Name der Mahlzeit ist erforderlich",
         "ingredientsRequired": "Mindestens eine Zutat ist erforderlich",
         "ingredientRequired": "Zutat wählen",
-        "quantityPositive": "Menge muss größer als 0 sein"
+        "quantityPositive": "Menge muss größer als 0 sein",
+        "ingredientDuplicate": "Jede Zutat kann nur einmal hinzugefügt werden"
       }
     },
     "mealPlans": {
@@ -179,7 +180,8 @@
         "mealsPlaceholder": "Mahlzeiten wählen..."
       },
       "validation": {
-        "nameRequired": "Name ist erforderlich"
+        "nameRequired": "Name ist erforderlich",
+        "mealsRequired": "Mindestens eine Mahlzeit ist erforderlich"
       }
     }
   },

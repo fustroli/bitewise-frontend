@@ -1,5 +1,7 @@
 'use client';
 
+import { useFieldArray, useWatch } from 'react-hook-form';
+
 import { Button } from '@/app/components/ui/button';
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { IResourceFieldsProps } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
@@ -8,7 +10,6 @@ import MealIngredient from '@/app/(modules)/[lang]/dashboard/(modules)/meals/com
 import { TMealSchema } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/validations';
 import { convertToOptions } from '@/app/utils/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
-import { useFieldArray } from 'react-hook-form';
 import { useMemo } from 'react';
 
 const MealFields = ({
@@ -23,6 +24,25 @@ const MealFields = ({
     control: form.control,
     name: 'mealIngredients',
   });
+
+  const mealIngredients = useWatch({
+    control: form.control,
+    name: 'mealIngredients',
+  });
+
+  // A Meal uses distinct Ingredients: each row offers only those no other row picked.
+  const optionsFor = (index: number) =>
+    options.filter(
+      ({ value }) =>
+        !mealIngredients.some(
+          (mealIngredient, other) =>
+            other !== index && mealIngredient.ingredientId === value,
+        ),
+    );
+
+  const { errors } = form.formState;
+  const listError =
+    errors.mealIngredients?.root?.message ?? errors.mealIngredients?.message;
 
   const addIngredient = () => {
     append({ ingredientId: 0, quantity: 0 });
@@ -42,11 +62,16 @@ const MealFields = ({
           key={ingredient.id}
           index={index}
           control={form.control}
-          options={options}
+          options={optionsFor(index)}
           ingredients={ingredients}
           onRemove={() => remove(index)}
         />
       ))}
+      {listError && (
+        <p className="text-[0.8rem] font-medium text-destructive">
+          {listError}
+        </p>
+      )}
       <Button type="button" onClick={addIngredient} variant="default">
         {labels.addIngredient}
       </Button>

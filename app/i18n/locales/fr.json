@@ -156,7 +156,8 @@
         "nameRequired": "Le nom du repas est obligatoire",
         "ingredientsRequired": "Au moins un ingrédient est requis",
         "ingredientRequired": "Choisissez un ingrédient",
-        "quantityPositive": "La quantité doit être supérieure à 0"
+        "quantityPositive": "La quantité doit être supérieure à 0",
+        "ingredientDuplicate": "Chaque ingrédient ne peut être ajouté qu'une fois"
       }
     },
     "mealPlans": {
@@ -179,7 +180,8 @@
         "mealsPlaceholder": "Choisir des repas..."
       },
       "validation": {
-        "nameRequired": "Le nom est obligatoire"
+        "nameRequired": "Le nom est obligatoire",
+        "mealsRequired": "Au moins un repas est requis"
       }
     }
   },

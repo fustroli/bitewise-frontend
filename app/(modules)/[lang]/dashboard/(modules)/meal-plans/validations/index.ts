@@ -6,7 +6,9 @@ export const createMealPlanSchema = ({
 }: TDictionary) =>
   z.object({
     name: z.string().min(1, mealPlans.validation.nameRequired),
-    mealIds: z.array(z.number().int()),
+    mealIds: z
+      .array(z.number().int())
+      .min(1, mealPlans.validation.mealsRequired),
   });
 
 export type TMealPlanSchema = z.infer<ReturnType<typeof createMealPlanSchema>>;
