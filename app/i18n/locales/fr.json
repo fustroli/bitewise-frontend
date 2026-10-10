@@ -90,5 +90,8 @@
       "dark": "Sombre",
       "system": "Système"
     }
+  },
+  "auth": {
+    "sessionExpired": "Votre session a expiré. Veuillez vous reconnecter."
   }
 }

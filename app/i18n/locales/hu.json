@@ -123,5 +123,8 @@
       "securityEmailDesc": "Kapjon e-maileket a fiókja tevékenységéről és biztonságáról.",
       "updateSuccess": "Értesítések sikeresen frissítve"
     }
+  },
+  "auth": {
+    "sessionExpired": "A munkamenet lejárt. Kérjük, jelentkezz be újra."
   }
 }

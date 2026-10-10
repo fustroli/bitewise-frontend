@@ -17,22 +17,31 @@ npm test        # Run Vitest once (*.test.ts)
 
 **Next.js 16 App Router**, no `src/` — routes live directly under `app/`.
 Locale-aware routes sit under `app/(modules)/[lang]/`; the unauthenticated
-auth flow sits under `app/(modules)/(auth)/`. `proxy.ts` handles locale
-detection/redirects and gates `/dashboard` routes behind an `accessToken`
-cookie.
+auth flow sits under `app/(modules)/(auth)/`. `proxy.ts` only translates the
+request into the Session module's `decideRoute()` and its answer back.
+
+### Session
+
+`app/session/` owns the Session (see `CONTEXT.md`): the cookie names (never
+spell them elsewhere), reading the token (`./server` → the gateway's token
+source), the proxy's routing decision, and ending a Session. Every Session
+ends at the `/signout` route handler (GET/POST), which clears both cookies
+with `COOKIE_DOMAIN` and redirects to `/` (`?reason=expired` shows a notice).
+Link to it with `signOutUrl()` via a form POST or `redirect()`, never a
+`<Link>` (prefetch would sign the user out).
 
 ### Key directories
 
 | Path                          | Purpose                                              |
 | ------------------------------ | ----------------------------------------------------- |
 | `app/(modules)/[lang]/`        | Locale-aware routes (dashboard, etc.)                |
-| `app/(modules)/(auth)/`        | Auth routes (sign in / sign up)                      |
+| `app/(modules)/(auth)/`        | Auth routes (sign in / sign up, `/signout`)          |
+| `app/session/`                 | Session module (cookies, routing decision, sign-out) |
 | `app/components/`              | Shared components (`ui/`, `form/`, `Table/`, `buttons/`, `dialogs/`, `icons/`, `Typography/`) |
 | `app/utils/`                   | Shared config, helpers, constants, enums, interfaces |
 | `app/hooks/`                   | Shared custom hooks                                  |
 | `app/providers/`                | React context providers (theme, dictionary)          |
 | `app/i18n/`                     | i18n settings + `locales/` (`en`, `de`, `es`, `fr`, `hu`) |
-| `app/api/`                      | Route handlers (e.g. `logout`)                       |
 
 ### Module structure
 
@@ -60,7 +69,7 @@ See `docs/adr/0001-reads-throw-mutations-return-results.md`.
 - `app/utils/helpers/server/` (`import 'server-only'`) — the backend gateway
   `request<T>(endpoint, method, body?, params?)`. Returns
   `TApiResult<T>` = `{ ok: true, data } | { ok: false, status, message }`;
-  redirects on a missing token or 401. Also `unwrap()` and
+  on a missing token or 401 redirects to `/signout?reason=expired`. Also `unwrap()` and
   `refreshDashboardOnSuccess()`.
 - Reads live in each module's `api/` (server-only, not `'use server'`) and
   `unwrap()` the result, so failures throw to `error.tsx`.
@@ -113,7 +122,8 @@ via `components.json`:
 
 Deployed to an EC2 instance via AWS CodePipeline/CodeBuild/CodeDeploy:
 
-- `buildspec.yml` — CodeBuild: `npm ci`, `npm run build`
+- `buildspec.yml` — CodeBuild: `npm ci`, writes `.env.production` from the
+  CodeBuild env (`COOKIE_DOMAIN`), `npm run build`
 - `appspec.yml` — CodeDeploy: deploys to `/home/ubuntu/bitewise-frontend`,
   runs `scripts/{stop,install_dependencies,start,validate}.sh`
 - The app runs under `pm2` as `bitewise-frontend` on port 3000
@@ -121,7 +131,11 @@ Deployed to an EC2 instance via AWS CodePipeline/CodeBuild/CodeDeploy:
 
 ## Environment setup
 
-Copy `.env.local` and set required env vars (e.g. `API_URL`).
+Copy `.env.local` and set required env vars:
+
+- `NEXT_PUBLIC_API_URL` — backend base URL (inlined at build time)
+- `COOKIE_DOMAIN` — server-only; same value as the backend's `COOKIE_DOMAIN`
+  (empty locally), so sign-out clears the backend's cookies
 
 ## Agent skills
 

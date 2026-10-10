@@ -1,5 +1,6 @@
 import 'server-only';
 
+import { ESignOutReason, signOutUrl } from '@/app/session';
 import { IQueryParams, TApiResult } from '@/app/utils/interfaces';
 
 import { buildQueryParams } from '@/app/utils/helpers';
@@ -17,9 +18,9 @@ export interface IGatewayDeps {
 const HTTP_UNAUTHORIZED = 401;
 const NETWORK_ERROR_STATUS = 0;
 
-// TODO(#31): redirect to '/signout?reason=expired' once the Session module
-// lands; '/' with a stale cookie loops between '/' and the dashboard.
-const SIGNED_OUT_PATH = '/';
+// A page render can't clear cookies, so hand over to `/signout`; redirecting
+// straight to '/' with a stale cookie would loop back to the dashboard.
+const SESSION_EXPIRED_PATH = signOutUrl(ESignOutReason.EXPIRED);
 
 /**
  * The only way the Next server talks to the backend. Never throws for backend
@@ -39,7 +40,7 @@ export const createGateway = ({
   ): Promise<TApiResult<T>> {
     const token = await getToken();
 
-    if (!token) redirect(SIGNED_OUT_PATH);
+    if (!token) redirect(SESSION_EXPIRED_PATH);
 
     let res: Response;
 
@@ -59,7 +60,7 @@ export const createGateway = ({
       };
     }
 
-    if (res.status === HTTP_UNAUTHORIZED) redirect(SIGNED_OUT_PATH);
+    if (res.status === HTTP_UNAUTHORIZED) redirect(SESSION_EXPIRED_PATH);
 
     if (!res.ok) {
       return { ok: false, status: res.status, message: await readError(res) };

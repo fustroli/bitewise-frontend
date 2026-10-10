@@ -90,5 +90,8 @@
       "dark": "Oscuro",
       "system": "Sistema"
     }
+  },
+  "auth": {
+    "sessionExpired": "Tu sesión ha caducado. Vuelve a iniciar sesión."
   }
 }
