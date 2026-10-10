@@ -10,7 +10,6 @@ import { DictionaryProvider } from '@/app/providers/dictionary-provider';
 import InputField from '@/app/components/form/InputField';
 import ResourceFormDialog from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/components/ResourceFormDialog';
 import { TApiResult } from '@/app/utils/interfaces';
-import { UserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import en from '@/app/i18n/locales/en.json';
 import { toast } from '@/app/hooks/use-toast';
 import userEvent from '@testing-library/user-event';
@@ -20,7 +19,6 @@ vi.mock('@/app/hooks/use-toast', () => ({ toast: vi.fn() }));
 
 type TValues = { name: string };
 
-const USER_ID = 7;
 const OK: TApiResult<unknown> = { ok: true, data: undefined };
 const FAILED: TApiResult<unknown> = {
   ok: false,
@@ -47,19 +45,11 @@ const config: IResourceForm<IResourceRecord, TValues> = {
 const renderDialog = (record?: IResourceRecord) =>
   render(
     <DictionaryProvider dictionary={en}>
-      <UserContext.Provider
-        value={{
-          user: { id: USER_ID, email: '' },
-          updateUser: vi.fn(),
-          updateAvatar: vi.fn(),
-        }}
-      >
-        <ResourceFormDialog
-          config={config}
-          record={record}
-          formData={undefined}
-        />
-      </UserContext.Provider>
+      <ResourceFormDialog
+        config={config}
+        record={record}
+        formData={undefined}
+      />
     </DictionaryProvider>,
   );
 
@@ -81,7 +71,7 @@ describe('ResourceFormDialog', () => {
     await user.type(nameInput(), 'Oats');
     await user.click(screen.getByRole('button', { name: 'Add' }));
 
-    expect(create).toHaveBeenCalledWith({ name: 'Oats' }, USER_ID);
+    expect(create).toHaveBeenCalledWith({ name: 'Oats' });
     expect(toast).toHaveBeenCalledWith({
       variant: 'success',
       description: en.resourceTable.created,
@@ -132,5 +122,19 @@ describe('ResourceFormDialog', () => {
     });
     expect(screen.getByRole('dialog')).toBeTruthy();
     expect(nameInput().value).toBe('Oats');
+  });
+
+  it('shows a taken name on the name field instead of a toast', async () => {
+    const user = userEvent.setup();
+    create.mockResolvedValue({ ...FAILED, status: 409 });
+    renderDialog();
+
+    await user.click(screen.getByRole('button', { name: 'Add' }));
+    await user.type(nameInput(), 'Oats');
+    await user.click(screen.getByRole('button', { name: 'Add' }));
+
+    expect(await screen.findByText(en.resourceTable.nameTaken)).toBeTruthy();
+    expect(toast).not.toHaveBeenCalled();
+    expect(screen.getByRole('dialog')).toBeTruthy();
   });
 });

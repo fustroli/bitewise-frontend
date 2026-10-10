@@ -8,7 +8,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/app/components/ui/dialog';
-import { FieldValues, Resolver, useForm } from 'react-hook-form';
+import { FieldValues, Path, Resolver, useForm } from 'react-hook-form';
 import {
   IResourceDialogProps,
   IResourceForm,
@@ -23,8 +23,10 @@ import { Plus } from 'lucide-react';
 import { getResourceLabels } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/helpers';
 import { toastResult } from '@/app/utils/helpers/client';
 import { useDictionary } from '@/app/providers/dictionary-provider';
-import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
+
+/** The backend's answer to a name another of the user's items already has. */
+const NAME_TAKEN_STATUS = 409;
 
 interface IProps<
   TRecord extends IResourceRecord,
@@ -37,6 +39,7 @@ interface IProps<
 /**
  * Add dialog without a `record`, Edit dialog with one. Closes on success
  * (resetting the Add form); stays open on failure so the input isn't lost.
+ * A name already in use shows on the name field instead of a toast.
  */
 function ResourceFormDialog<
   TRecord extends IResourceRecord,
@@ -47,7 +50,6 @@ function ResourceFormDialog<
   const dictionary = useDictionary();
   const t = dictionary.resourceTable;
   const labels = getResourceLabels(dictionary, config.resourceKey);
-  const { user } = useUserContext();
   const [isOpen, setIsOpen] = useState(false);
 
   const schema = useMemo(() => config.schema(dictionary), [config, dictionary]);
@@ -66,7 +68,13 @@ function ResourceFormDialog<
   const onSubmit = async (values: TValues) => {
     const result = record
       ? await config.update(values, record.id)
-      : await config.create(values, user.id);
+      : await config.create(values);
+
+    if (!result.ok && result.status === NAME_TAKEN_STATUS) {
+      // Every resource has a name; show the clash on that field.
+      form.setError('name' as Path<TValues>, { message: t.nameTaken });
+      return;
+    }
 
     if (toastResult(result, record ? t.updated : t.created)) {
       if (!record) form.reset(config.defaultValues);

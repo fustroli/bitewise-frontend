@@ -122,7 +122,8 @@
     "created": "Sikeresen hozzáadva!",
     "updated": "Sikeresen frissítve!",
     "deleted": "Sikeresen törölve.",
-    "positiveNumber": "{field}: pozitív szám kell legyen"
+    "positiveNumber": "{field}: pozitív szám kell legyen",
+    "nameTaken": "Ez a név már foglalt"
   },
   "resources": {
     "ingredients": {

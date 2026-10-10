@@ -91,7 +91,8 @@
     "created": "Ajouté avec succès !",
     "updated": "Mis à jour avec succès !",
     "deleted": "Supprimé avec succès.",
-    "positiveNumber": "{field} doit être un nombre positif"
+    "positiveNumber": "{field} doit être un nombre positif",
+    "nameTaken": "Ce nom est déjà utilisé"
   },
   "resources": {
     "ingredients": {

@@ -3,5 +3,4 @@ import { ICreateMealIngredient } from '@/app/(modules)/[lang]/dashboard/(modules
 export interface ICreateMeal {
   name: string;
   mealIngredients: ICreateMealIngredient[];
-  userId: number;
 }

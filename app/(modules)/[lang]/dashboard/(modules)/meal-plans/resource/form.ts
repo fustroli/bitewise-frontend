@@ -27,7 +27,7 @@ const mealPlanForm = createResourceForm<IMealPlan, TMealPlanSchema, IMeal[]>({
     mealIds: mealPlan.meals.map((meal) => meal.id),
   }),
   fields: MealPlanFields,
-  create: (values, userId) => createMealPlan({ ...values, userId }),
+  create: createMealPlan,
   update: (values, id) => updateMealPlan(values as ICreateMealPlan, id),
   remove: deleteMealPlan,
 });

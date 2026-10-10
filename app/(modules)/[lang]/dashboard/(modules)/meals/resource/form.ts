@@ -31,7 +31,7 @@ const mealForm = createResourceForm<IMeal, TMealSchema, IIngredient[]>({
     })),
   }),
   fields: MealFields,
-  create: (values, userId) => createMeal({ ...values, userId }),
+  create: createMeal,
   update: (values, id) => updateMeal(values as ICreateMeal, id),
   remove: deleteMeal,
 });
