@@ -14,6 +14,7 @@ import { Ellipsis } from 'lucide-react';
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
 import { deleteMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/actions';
+import { toastResult } from '@/app/utils/helpers/client';
 
 interface IProps {
   meal: IMeal;
@@ -21,7 +22,7 @@ interface IProps {
 }
 const MealActions = ({ meal, ingredients }: IProps) => {
   const handleOnDelete = async () => {
-    await deleteMeal(meal.id);
+    toastResult(await deleteMeal(meal.id), 'Meal deleted successfully.');
   };
 
   return (

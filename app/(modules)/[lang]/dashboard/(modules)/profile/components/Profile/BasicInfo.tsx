@@ -21,10 +21,9 @@ import { ACCEPTED_IMAGE_TYPES } from '@/app/(modules)/[lang]/dashboard/(modules)
 import { Button } from '@/app/components/ui/button';
 import FileUploadFormField from '@/app/components/form/FileUploadFormField';
 import { Form } from '@/app/components/ui/form';
-import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 import ImageCropDialog from '@/app/components/dialogs/ImageCropDialog';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
-import { handleError } from '@/app/utils/helpers';
+import { toastResult } from '@/app/utils/helpers/client';
 import { updateProfilePicture } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
@@ -47,15 +46,12 @@ const BasicInfo = () => {
   });
 
   async function onSubmit(values: TImageSchema) {
-    try {
-      const formData = new FormData();
-      formData.append('file', values.file);
+    const formData = new FormData();
+    formData.append('file', values.file);
 
-      const result = await updateProfilePicture(formData);
-      setUser(result.data as IUser);
-    } catch (error: unknown) {
-      handleError(error);
-    }
+    const result = await updateProfilePicture(formData);
+
+    if (toastResult(result, common.savedSuccessfully)) setUser(result.data);
 
     setImagePreviewUrl(null);
     setIsEditable(false);

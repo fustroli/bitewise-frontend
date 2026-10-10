@@ -32,7 +32,8 @@
     "upload": "Upload",
     "loading": "Loading",
     "profileImage": "Profile Image",
-    "crop": "Crop"
+    "crop": "Crop",
+    "savedSuccessfully": "Saved successfully"
   },
   "validation": {
     "emailInvalid": "Invalid email",

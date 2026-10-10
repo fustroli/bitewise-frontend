@@ -15,12 +15,11 @@ import {
 import { Button } from '@/app/components/ui/button';
 import DateInfoBox from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Profile/DateInfobox';
 import { Form } from '@/app/components/ui/form';
-import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 import InfoBox from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/InfoBox';
 import PhoneInfoBox from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Profile/PhoneInfoBox';
 import { getDefaultValues } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
-import { handleError } from '@/app/utils/helpers';
 import { set } from 'date-fns';
+import { toastResult } from '@/app/utils/helpers/client';
 import { updateUser } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
@@ -43,13 +42,9 @@ const PersonalInformation = () => {
       values.dateOfBirth = set(values.dateOfBirth, { hours: 12 });
     }
 
-    try {
-      const result = await updateUser({ personalInformation: values });
+    const result = await updateUser({ personalInformation: values });
 
-      setUser(result.data as IUser);
-    } catch (error: unknown) {
-      handleError(error);
-    }
+    if (toastResult(result, common.savedSuccessfully)) setUser(result.data);
 
     setIsEditable(false);
   }

@@ -4,7 +4,7 @@ import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfac
 import MealActions from '@/app/(modules)/[lang]/dashboard/(modules)/meals/components/MealActions';
 import MealTableCell from '@/app/(modules)/[lang]/dashboard/(modules)/meals/components/Table/MealTableCell';
 import Unit from '@/app/(modules)/[lang]/dashboard/components/Unit';
-import { fetchIngredients } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/actions';
+import { fetchIngredients } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/api';
 
 interface IProps {
   row: IMeal;
@@ -13,7 +13,7 @@ interface IProps {
 const MealTableRow = async ({ row }: IProps) => {
   const { mealIngredients } = row;
 
-  const ingredientsResult = await fetchIngredients({});
+  const ingredients = await fetchIngredients({});
 
   return (
     <TableRow key={row.id}>
@@ -65,10 +65,7 @@ const MealTableRow = async ({ row }: IProps) => {
       </TableCell>
 
       <TableCell className="block text-right lg:table-cell">
-        <MealActions
-          meal={row}
-          ingredients={ingredientsResult.data?.data || []}
-        />
+        <MealActions meal={row} ingredients={ingredients.data} />
       </TableCell>
     </TableRow>
   );

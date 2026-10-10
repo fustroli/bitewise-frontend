@@ -1,4 +1,4 @@
-'client-only';
+import 'client-only';
 
 import axios from 'axios';
 

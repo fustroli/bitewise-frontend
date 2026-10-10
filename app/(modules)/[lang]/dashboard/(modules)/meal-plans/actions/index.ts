@@ -1,45 +1,28 @@
-'server-only';
 'use server';
 
 import {
   ICreateMealPlan,
   IMealPlan,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
-
-import { IQueryParams } from '@/app/utils/interfaces';
-import { apiRequest } from '@/app/utils/helpers';
-import { revalidatePath } from 'next/cache';
-
-export async function fetchMealPlans(params: IQueryParams) {
-  return apiRequest<{ data: IMealPlan[]; count: number }>(
-    'meal-plan',
-    'GET',
-    undefined,
-    params,
-  );
-}
+import { refreshDashboardOnSuccess, request } from '@/app/utils/helpers/server';
 
 export async function createMealPlan(mealPlan: ICreateMealPlan) {
-  const result = await apiRequest<IMealPlan>('meal-plan', 'POST', mealPlan);
-  if (result.data) revalidatePath('/dashboard/meal-plans');
-  return result;
+  return refreshDashboardOnSuccess(
+    await request<IMealPlan>('meal-plan', 'POST', mealPlan),
+  );
 }
 
 export async function updateMealPlan(
   mealPlan: ICreateMealPlan,
   mealPlanId: number,
 ) {
-  const result = await apiRequest<IMealPlan>(
-    `meal-plan/${mealPlanId}`,
-    'PATCH',
-    mealPlan,
+  return refreshDashboardOnSuccess(
+    await request<IMealPlan>(`meal-plan/${mealPlanId}`, 'PATCH', mealPlan),
   );
-  if (result.data) revalidatePath('/dashboard/meal-plans');
-  return result;
 }
 
 export async function deleteMealPlan(mealPlanId: number) {
-  const result = await apiRequest<null>(`meal-plan/${mealPlanId}`, 'DELETE');
-  if (result) revalidatePath('/dashboard/meal-plans');
-  return result;
+  return refreshDashboardOnSuccess(
+    await request(`meal-plan/${mealPlanId}`, 'DELETE'),
+  );
 }
