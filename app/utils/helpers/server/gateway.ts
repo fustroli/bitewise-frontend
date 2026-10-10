@@ -15,6 +15,14 @@ export interface IGatewayDeps {
   fetch?: typeof fetch;
 }
 
+export interface IRequestOptions {
+  /**
+   * Return a 401 as a failed result instead of ending the Session, for
+   * endpoints where it means a wrong credential (e.g. the old password).
+   */
+  unauthorizedIsResult?: boolean;
+}
+
 const HTTP_UNAUTHORIZED = 401;
 const NETWORK_ERROR_STATUS = 0;
 
@@ -38,6 +46,7 @@ export const createGateway = ({
     method: THttpMethod = 'GET',
     body?: unknown,
     params?: IQueryParams,
+    { unauthorizedIsResult = false }: IRequestOptions = {},
   ): Promise<TApiResult<T>> {
     const token = await getToken();
 
@@ -61,7 +70,9 @@ export const createGateway = ({
       };
     }
 
-    if (res.status === HTTP_UNAUTHORIZED) redirect(SESSION_EXPIRED_PATH);
+    if (res.status === HTTP_UNAUTHORIZED && !unauthorizedIsResult) {
+      redirect(SESSION_EXPIRED_PATH);
+    }
 
     if (!res.ok) {
       return { ok: false, status: res.status, message: await readError(res) };

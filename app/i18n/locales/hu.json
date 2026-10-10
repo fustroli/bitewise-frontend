@@ -215,7 +215,9 @@
     }
   },
   "auth": {
-    "sessionExpired": "A munkamenet lejárt. Kérjük, jelentkezz be újra."
+    "sessionExpired": "A munkamenet lejárt. Kérjük, jelentkezz be újra.",
+    "accountDeleted": "A fiókod törölve lett.",
+    "passwordFirst": "Ezzel az e-mail-címmel már létezik fiók. Először jelentkezz be a jelszavaddal."
   },
   "passwordPolicy": {
     "passwordMinLength": "A jelszónak legalább 8 karakter hosszúnak kell lennie",

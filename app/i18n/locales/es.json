@@ -184,7 +184,9 @@
     }
   },
   "auth": {
-    "sessionExpired": "Tu sesión ha caducado. Vuelve a iniciar sesión."
+    "sessionExpired": "Tu sesión ha caducado. Vuelve a iniciar sesión.",
+    "accountDeleted": "Tu cuenta ha sido eliminada.",
+    "passwordFirst": "Ya existe una cuenta con este correo. Inicia sesión primero con tu contraseña."
   },
   "passwordPolicy": {
     "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
