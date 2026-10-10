@@ -4,7 +4,7 @@ export enum ESignOutReason {
   EXPIRED = 'expired',
 }
 
-const SIGN_OUT_PATH = '/signout';
+export const SIGN_OUT_PATH = '/signout';
 const SIGN_IN_PATH = '/';
 const REASON_PARAM = 'reason';
 
