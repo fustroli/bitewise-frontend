@@ -41,7 +41,7 @@ const SignUpForm = () => {
   return (
     <Form {...form}>
       <form
-        className="flex w-full flex-col gap-4"
+        className="flex w-full flex-col gap-8"
         onSubmit={form.handleSubmit(onSubmit)}
       >
         <InputField
