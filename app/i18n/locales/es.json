@@ -147,7 +147,9 @@
         "ingredientPlaceholder": "Selecciona un ingrediente...",
         "quantity": "Cantidad",
         "addIngredient": "Añadir ingrediente",
-        "removeIngredient": "Quitar ingrediente"
+        "removeIngredient": "Quitar ingrediente",
+        "grams": "g",
+        "pieces": "uds."
       },
       "validation": {
         "nameRequired": "El nombre de la comida es obligatorio",

@@ -178,7 +178,9 @@
         "ingredientPlaceholder": "Select ingredient...",
         "quantity": "Quantity",
         "addIngredient": "Add ingredient",
-        "removeIngredient": "Remove ingredient"
+        "removeIngredient": "Remove ingredient",
+        "grams": "g",
+        "pieces": "pcs"
       },
       "validation": {
         "nameRequired": "Meal name is required",

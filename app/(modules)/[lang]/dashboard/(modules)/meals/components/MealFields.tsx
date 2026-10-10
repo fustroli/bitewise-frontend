@@ -38,6 +38,7 @@ const MealFields = ({
           index={index}
           form={form}
           options={options}
+          ingredients={ingredients}
           onRemove={() => remove(index)}
         />
       ))}
