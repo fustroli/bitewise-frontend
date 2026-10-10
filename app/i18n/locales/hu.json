@@ -178,7 +178,9 @@
         "ingredientPlaceholder": "Válassz hozzávalót...",
         "quantity": "Mennyiség",
         "addIngredient": "Hozzávaló hozzáadása",
-        "removeIngredient": "Hozzávaló eltávolítása"
+        "removeIngredient": "Hozzávaló eltávolítása",
+        "grams": "g",
+        "pieces": "db"
       },
       "validation": {
         "nameRequired": "Az étel nevének megadása kötelező",

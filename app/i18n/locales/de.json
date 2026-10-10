@@ -147,7 +147,9 @@
         "ingredientPlaceholder": "Zutat wählen...",
         "quantity": "Menge",
         "addIngredient": "Zutat hinzufügen",
-        "removeIngredient": "Zutat entfernen"
+        "removeIngredient": "Zutat entfernen",
+        "grams": "g",
+        "pieces": "Stk."
       },
       "validation": {
         "nameRequired": "Name der Mahlzeit ist erforderlich",

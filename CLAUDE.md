@@ -60,7 +60,7 @@ helpers/
 ```
 
 Nested feature modules live under a route's own `(modules)/` folder, e.g.
-`app/(modules)/[lang]/dashboard/(modules)/{profile,ingredients,meals,meal-plans,_user,_resource-table}/`.
+`app/(modules)/[lang]/dashboard/(modules)/{profile,ingredients,meals,meal-plans,_user,_resource-table,_nutrition}/`.
 
 ### Resource tables
 
@@ -72,6 +72,13 @@ fetch, columns, row renderer, page size, form-data loader) and `form.ts`
 `createResourceForm`). They are split because Next can't pass functions from
 server to client. Table/dialog strings live under `resourceTable` and
 `resources.<key>` in the dictionaries.
+
+### Nutrition
+
+The `_nutrition` module computes Nutrition (see `CONTEXT.md`) for a Meal
+ingredient, Meal and Meal plan from the per-ingredient values the backend
+sends, at full precision; `formatNutrition()` rounds only for display. Table
+cells select and format, never compute.
 
 ### API layer
 

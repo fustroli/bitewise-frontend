@@ -3,6 +3,8 @@
 import { Button } from '@/app/components/ui/button';
 import { Combobox } from '@/app/components/Combobox';
 import { Delete } from 'lucide-react';
+import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
+import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { IOption } from '@/app/utils/interfaces';
 import InputField from '@/app/components/form/InputField';
 import { Label } from '@/app/components/ui/label';
@@ -12,17 +14,27 @@ import { useDictionary } from '@/app/providers/dictionary-provider';
 interface IProps {
   index: number;
   options: IOption[];
+  ingredients: IIngredient[];
   form: UseFormReturn<any>;
   onRemove: () => void;
 }
 
-const MealIngredient = ({ index, options, form, onRemove }: IProps) => {
+const MealIngredient = ({
+  index,
+  options,
+  ingredients,
+  form,
+  onRemove,
+}: IProps) => {
   const {
     resourceTable,
     resources: {
       meals: { fields },
     },
   } = useDictionary();
+
+  const ingredientId = form.watch(`mealIngredients.${index}.ingredientId`);
+  const unit = ingredients.find(({ id }) => id === ingredientId)?.unit;
 
   return (
     <div className="flex items-center gap-4">
@@ -46,6 +58,13 @@ const MealIngredient = ({ index, options, form, onRemove }: IProps) => {
         label={fields.quantity}
         name={`mealIngredients.${index}.quantity`}
         type="number"
+        endAdornment={
+          unit && (
+            <span className="pr-3 text-sm text-muted-foreground">
+              {unit === EUnit.PIECE ? fields.pieces : fields.grams}
+            </span>
+          )
+        }
       />
 
       <Button

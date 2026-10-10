@@ -147,7 +147,9 @@
         "ingredientPlaceholder": "Choisir un ingrédient...",
         "quantity": "Quantité",
         "addIngredient": "Ajouter un ingrédient",
-        "removeIngredient": "Retirer l'ingrédient"
+        "removeIngredient": "Retirer l'ingrédient",
+        "grams": "g",
+        "pieces": "pcs"
       },
       "validation": {
         "nameRequired": "Le nom du repas est obligatoire",
