@@ -1,5 +1,10 @@
 {
   "permissions": {
-    "deny": ["Read(./.env.local)"]
+    "deny": [
+      "Read(./.env.local)"
+    ],
+    "allow": [
+      "Bash(git add *)"
+    ]
   }
 }

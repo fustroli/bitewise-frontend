@@ -28,7 +28,14 @@ source), the proxy's routing decision, and ending a Session. Every Session
 ends at the `/signout` route handler (GET/POST), which clears both cookies
 with `COOKIE_DOMAIN` and redirects to `/` (`?reason=expired` shows a notice).
 Link to it with `signOutUrl()` via a form POST or `redirect()`, never a
-`<Link>` (prefetch would sign the user out).
+`<Link>` (prefetch would sign the user out). `/signout` also revokes the
+refresh token on the backend.
+
+The proxy renews the Session before each request (`./renewal`, see
+`docs/adr/0002-proxy-renews-the-session.md`): an access token that is missing
+or expires within a minute is refreshed with the refresh token, the new tokens
+go to the rest of the request and the browser. Concurrent requests share one
+refresh, since the backend treats a reused refresh token as theft.
 
 ### Key directories
 

@@ -25,7 +25,8 @@ const SESSION_EXPIRED_PATH = signOutUrl(ESignOutReason.EXPIRED);
 /**
  * The only way the Next server talks to the backend. Never throws for backend
  * failures: they come back as `{ ok: false, status, message }`. A missing or
- * rejected token redirects instead (token refresh would slot in here).
+ * rejected token redirects instead: the proxy has already renewed the Session
+ * (ADR-0002), so it is over.
  */
 export const createGateway = ({
   baseUrl,
