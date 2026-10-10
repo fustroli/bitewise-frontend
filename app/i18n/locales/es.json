@@ -2,7 +2,6 @@
   "dashboard": {
     "statistics": {
       "totalIngredients": "Ingredientes totales",
-      "totalRecipes": "Recetas totales",
       "totalMeals": "Comidas totales",
       "totalMealPlans": "Planes de comidas totales"
     },
@@ -12,7 +11,6 @@
     "sidebar": {
       "dashboard": "Tablero de control",
       "ingredients": "Ingredientes",
-      "recipes": "Recetas",
       "meals": "Comidas",
       "mealPlans": "Planes de comidas"
     }
@@ -57,22 +55,6 @@
       "password": "Contraseña",
       "confirmPassword": "Confirmar contraseña",
       "changePassword": "Cambiar contraseña",
-      "passwordRules": {
-        "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
-        "passwordUppercase": "La contraseña debe contener al menos una letra mayúscula",
-        "passwordLowercase": "La contraseña debe contener al menos una letra minúscula",
-        "passwordNumberRequired": "La contraseña debe contener al menos un número",
-        "passwordRequired": "La contraseña es obligatoria",
-        "passwordMatch": "Las contraseñas deben coincidir",
-        "oldPasswordRequired": "Se requiere la contraseña anterior",
-        "confirmPasswordRequired": "Se requiere confirmar la contraseña"
-      },
-      "twoFactorAuth": "Verificación en 2 pasos",
-      "twoFactorAuthDescription": "Agregue una capa adicional de seguridad a su cuenta habilitando la verificación en 2 pasos",
-      "recoveryCodes": "Códigos de recuperación",
-      "sessions": "Sesiones",
-      "sessionsDescription": "Lugares donde ha iniciado sesión en la aplicación",
-      "logoutAllSessions": "Cerrar sesión en todas las sesiones",
       "passwordChanged": "Contraseña cambiada con éxito",
       "toggleVisibility": "Alternar visibilidad de la contraseña"
     },
@@ -80,9 +62,6 @@
       "language": "Idioma",
       "languageDesc": "Idioma predeterminado para el tablero de control",
       "english": "Inglés",
-      "spanish": "Español",
-      "german": "Alemán",
-      "french": "Francés",
       "hungarian": "Húngaro",
       "theme": "Tema",
       "themeDesc": "Tema predeterminado para el tablero de control",
@@ -200,5 +179,18 @@
         "nameRequired": "El nombre es obligatorio"
       }
     }
+  },
+  "auth": {
+    "sessionExpired": "Tu sesión ha caducado. Vuelve a iniciar sesión."
+  },
+  "passwordPolicy": {
+    "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
+    "passwordUppercase": "La contraseña debe contener al menos una letra mayúscula",
+    "passwordLowercase": "La contraseña debe contener al menos una letra minúscula",
+    "passwordNumberRequired": "La contraseña debe contener al menos un número",
+    "passwordRequired": "La contraseña es obligatoria",
+    "passwordMatch": "Las contraseñas deben coincidir",
+    "oldPasswordRequired": "Se requiere la contraseña anterior",
+    "confirmPasswordRequired": "Se requiere confirmar la contraseña"
   }
 }

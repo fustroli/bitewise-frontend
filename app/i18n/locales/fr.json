@@ -2,7 +2,6 @@
   "dashboard": {
     "statistics": {
       "totalIngredients": "Ingrédients totaux",
-      "totalRecipes": "Recettes totales",
       "totalMeals": "Repas totaux",
       "totalMealPlans": "Plans de repas totaux"
     },
@@ -12,7 +11,6 @@
     "sidebar": {
       "dashboard": "Tableau de bord",
       "ingredients": "Ingrédients",
-      "recipes": "Recettes",
       "meals": "Repas",
       "mealPlans": "Plans de repas"
     }
@@ -57,22 +55,6 @@
       "password": "Mot de passe",
       "confirmPassword": "Confirmer le mot de passe",
       "changePassword": "Changer le mot de passe",
-      "passwordRules": {
-        "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
-        "passwordUppercase": "Le mot de passe doit contenir au moins une lettre majuscule",
-        "passwordLowercase": "Le mot de passe doit contenir au moins une lettre minuscule",
-        "passwordNumberRequired": "Le mot de passe doit contenir au moins un chiffre",
-        "passwordRequired": "Le mot de passe est requis",
-        "passwordMatch": "Les mots de passe doivent correspondre",
-        "oldPasswordRequired": "Ancien mot de passe requis",
-        "confirmPasswordRequired": "Confirmer le mot de passe est requis"
-      },
-      "twoFactorAuth": "Vérification en 2 étapes",
-      "twoFactorAuthDescription": "Ajoutez une couche de sécurité supplémentaire à votre compte en activant la vérification en 2 étapes",
-      "recoveryCodes": "Codes de récupération",
-      "sessions": "Sessions",
-      "sessionsDescription": "Endroits où vous êtes connecté à l'application",
-      "logoutAllSessions": "Déconnecter toutes les sessions",
       "passwordChanged": "Mot de passe modifié avec succès",
       "toggleVisibility": "Basculer la visibilité du mot de passe"
     },
@@ -80,9 +62,6 @@
       "language": "Langue",
       "languageDesc": "Langue par défaut pour le tableau de bord",
       "english": "Anglais",
-      "spanish": "Espagnol",
-      "german": "Allemand",
-      "french": "Français",
       "hungarian": "Hongrois",
       "theme": "Thème",
       "themeDesc": "Thème par défaut pour le tableau de bord",
@@ -200,5 +179,18 @@
         "nameRequired": "Le nom est obligatoire"
       }
     }
+  },
+  "auth": {
+    "sessionExpired": "Votre session a expiré. Veuillez vous reconnecter."
+  },
+  "passwordPolicy": {
+    "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
+    "passwordUppercase": "Le mot de passe doit contenir au moins une lettre majuscule",
+    "passwordLowercase": "Le mot de passe doit contenir au moins une lettre minuscule",
+    "passwordNumberRequired": "Le mot de passe doit contenir au moins un chiffre",
+    "passwordRequired": "Le mot de passe est requis",
+    "passwordMatch": "Les mots de passe doivent correspondre",
+    "oldPasswordRequired": "Ancien mot de passe requis",
+    "confirmPasswordRequired": "Confirmer le mot de passe est requis"
   }
 }

@@ -87,11 +87,15 @@ describe('backend gateway', () => {
   it('redirects on 401', async () => {
     fakeFetch.mockResolvedValue(jsonResponse({ message: 'Unauthorized' }, 401));
 
-    await expect(gateway()('users/me')).rejects.toThrow('REDIRECT /');
+    await expect(gateway()('users/me')).rejects.toThrow(
+      'REDIRECT /signout?reason=expired',
+    );
   });
 
   it('redirects without calling the backend when there is no token', async () => {
-    await expect(gateway({})('users/me')).rejects.toThrow('REDIRECT /');
+    await expect(gateway({})('users/me')).rejects.toThrow(
+      'REDIRECT /signout?reason=expired',
+    );
     expect(fakeFetch).not.toHaveBeenCalled();
   });
 

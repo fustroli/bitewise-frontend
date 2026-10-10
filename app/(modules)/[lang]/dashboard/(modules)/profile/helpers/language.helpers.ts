@@ -1,22 +1,14 @@
-import { ELanguage } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/enum';
+import { TLocale } from '@/app/i18n/settings';
 
-export const getLanguageText = (
-  value: string,
-  dictionary: Record<string, string>,
-) => {
-  switch (value) {
-    case ELanguage.ENGLISH:
-      return dictionary.english;
-    case ELanguage.SPANISH:
-      return dictionary.spanish;
-    case ELanguage.FRENCH:
-      return dictionary.french;
-    case ELanguage.GERMAN:
-      return dictionary.german;
-    case ELanguage.HUNGARIAN:
-      return dictionary.hungarian;
+/** Dictionary key (under `profile.appearance`) naming each locale. */
+export const LANGUAGE_TEXT_KEYS: Record<TLocale, 'english' | 'hungarian'> = {
+  en: 'english',
+  hu: 'hungarian',
+};
 
-    default:
-      return dictionary.english;
-  }
+/** The same page under another locale: `/en/dashboard/profile` → `/hu/dashboard/profile`. */
+export const switchLocalePath = (pathname: string, locale: TLocale) => {
+  const [, , ...rest] = pathname.split('/');
+
+  return ['', locale, ...rest].join('/');
 };

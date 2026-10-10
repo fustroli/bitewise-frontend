@@ -2,7 +2,6 @@
   "dashboard": {
     "statistics": {
       "totalIngredients": "Total Ingredients",
-      "totalRecipes": "Total Recipes",
       "totalMeals": "Total Meals",
       "totalMealPlans": "Total Meal Plans"
     },
@@ -13,7 +12,6 @@
       "app": "Application",
       "dashboard": "Dashboard",
       "ingredients": "Ingredients",
-      "recipes": "Recipes",
       "meals": "Meals",
       "mealPlans": "Meal Plans"
     }
@@ -75,22 +73,6 @@
       "password": "Password",
       "confirmPassword": "Confirm Password",
       "changePassword": "Change Password",
-      "passwordRules": {
-        "passwordMinLength": "Password must be at least 8 characters long",
-        "passwordUppercase": "Password must contain at least one uppercase letter",
-        "passwordLowercase": "Password must contain at least one lowercase letter",
-        "passwordNumberRequired": "Password must contain at least one number",
-        "passwordRequired": "Password is required",
-        "passwordMatch": "Passwords must match",
-        "oldPasswordRequired": "Old password is required",
-        "confirmPasswordRequired": "Confirm password is required"
-      },
-      "twoFactorAuth": "2-step Verification",
-      "twoFactorAuthDescription": "Add an extra layer of security to your account by enabling 2-step verification",
-      "recoveryCodes": "Recovery Codes",
-      "sessions": "Sessions",
-      "sessionsDescription": "Places where you're logged into the app",
-      "logoutAllSessions": "Logout of all sessions",
       "passwordChanged": "Password changed successfully",
       "toggleVisibility": "Toggle password visibility"
     },
@@ -98,17 +80,12 @@
       "language": "Language",
       "languageDesc": "Default language for dashboard",
       "english": "English",
-      "spanish": "Spanish",
-      "german": "German",
-      "french": "French",
       "hungarian": "Hungarian",
       "theme": "Theme",
       "themeDesc": "Default theme for dashboard",
       "light": "Light",
       "dark": "Dark",
-      "system": "System",
-      "currency": "Currency",
-      "currencyDesc": "Default currency for dashboard"
+      "system": "System"
     },
     "notifications": {
       "defaultEmail": "Default Email Notifications",
@@ -233,5 +210,18 @@
         "nameRequired": "Name is required"
       }
     }
+  },
+  "auth": {
+    "sessionExpired": "Your session has expired. Please sign in again."
+  },
+  "passwordPolicy": {
+    "passwordMinLength": "Password must be at least 8 characters long",
+    "passwordUppercase": "Password must contain at least one uppercase letter",
+    "passwordLowercase": "Password must contain at least one lowercase letter",
+    "passwordNumberRequired": "Password must contain at least one number",
+    "passwordRequired": "Password is required",
+    "passwordMatch": "Passwords must match",
+    "oldPasswordRequired": "Old password is required",
+    "confirmPasswordRequired": "Confirm password is required"
   }
 }

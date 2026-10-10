@@ -48,7 +48,11 @@ const renderDialog = (record?: IResourceRecord) =>
   render(
     <DictionaryProvider dictionary={en}>
       <UserContext.Provider
-        value={{ user: { id: USER_ID, email: '' }, setUser: () => {} }}
+        value={{
+          user: { id: USER_ID, email: '' },
+          updateUser: vi.fn(),
+          updateAvatar: vi.fn(),
+        }}
       >
         <ResourceFormDialog
           config={config}

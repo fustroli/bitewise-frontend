@@ -2,7 +2,6 @@
   "dashboard": {
     "statistics": {
       "totalIngredients": "Összes hozzávaló",
-      "totalRecipes": "Összes recept",
       "totalMeals": "Összes étel",
       "totalMealPlans": "Összes étrend"
     },
@@ -13,7 +12,6 @@
       "app": "Alkalmazás",
       "dashboard": "Vezérlőpult",
       "ingredients": "Hozzávalók",
-      "recipes": "Receptek",
       "meals": "Ételek",
       "mealPlans": "Étrendek"
     }
@@ -75,22 +73,6 @@
       "password": "Jelszó",
       "confirmPassword": "Jelszó megerősítése",
       "changePassword": "Jelszó megváltoztatása",
-      "passwordRules": {
-        "passwordMinLength": "A jelszónak legalább 8 karakter hosszúnak kell lennie",
-        "passwordUppercase": "A jelszónak tartalmaznia kell legalább egy nagybetűt",
-        "passwordLowercase": "A jelszónak tartalmaznia kell legalább egy kisbetűt",
-        "passwordNumberRequired": "A jelszónak tartalmaznia kell legalább egy számot",
-        "passwordRequired": "A jelszó kötelező",
-        "passwordMatch": "A jelszavaknak egyezniük kell",
-        "oldPasswordRequired": "Régi jelszó kötelező",
-        "confirmPasswordRequired": "Jelszó megerősítése kötelező"
-      },
-      "twoFactorAuth": "Kétlépéses azonosítás",
-      "twoFactorAuthDescription": "Növelje fiókja biztonságát a kétlépéses azonosítás engedélyezésével",
-      "recoveryCodes": "Helyreállítási kódok",
-      "sessions": "Munkamenetek",
-      "sessionsDescription": "Helyek, ahol be van jelentkezve az alkalmazásba",
-      "logoutAllSessions": "Kijelentkezés az összes munkamenetből",
       "passwordChanged": "Jelszó sikeresen megváltoztatva",
       "toggleVisibility": "Jelszó láthatóságának váltása"
     },
@@ -98,17 +80,12 @@
       "language": "Nyelv",
       "languageDesc": "Alapértelmezett nyelv a vezérlőpult számára",
       "english": "Angol",
-      "spanish": "Spanyol",
-      "german": "Német",
-      "french": "Francia",
       "hungarian": "Magyar",
       "theme": "Téma",
       "themeDesc": "Alapértelmezett téma a vezérlőpult számára",
       "light": "Világos",
       "dark": "Sötét",
-      "system": "Rendszer",
-      "currency": "Pénznem",
-      "currencyDesc": "Alapértelmezett pénznem a vezérlőpult számára"
+      "system": "Rendszer"
     },
     "notifications": {
       "defaultEmail": "Alapértelmezett e-mail értesítések",
@@ -233,5 +210,18 @@
         "nameRequired": "A név megadása kötelező"
       }
     }
+  },
+  "auth": {
+    "sessionExpired": "A munkamenet lejárt. Kérjük, jelentkezz be újra."
+  },
+  "passwordPolicy": {
+    "passwordMinLength": "A jelszónak legalább 8 karakter hosszúnak kell lennie",
+    "passwordUppercase": "A jelszónak tartalmaznia kell legalább egy nagybetűt",
+    "passwordLowercase": "A jelszónak tartalmaznia kell legalább egy kisbetűt",
+    "passwordNumberRequired": "A jelszónak tartalmaznia kell legalább egy számot",
+    "passwordRequired": "A jelszó kötelező",
+    "passwordMatch": "A jelszavaknak egyezniük kell",
+    "oldPasswordRequired": "Régi jelszó kötelező",
+    "confirmPasswordRequired": "Jelszó megerősítése kötelező"
   }
 }
