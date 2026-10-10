@@ -27,7 +27,6 @@ import {
 } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/actions';
 
 import { Button } from '@/app/components/ui/button';
-import { EActionType } from '@/app/utils/enums';
 import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
 import { Form } from '@/app/components/ui/form';
 import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
@@ -35,7 +34,7 @@ import InputField from '@/app/components/form/InputField';
 import { Plus } from 'lucide-react';
 import SelectField from '@/app/components/form/Select';
 import { SelectItem } from '@/app/components/ui/select';
-import { createOrUpdateToasts } from '@/app/utils/helpers';
+import { toastResult } from '@/app/utils/helpers/client';
 import { useForm } from 'react-hook-form';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -72,12 +71,12 @@ const AddIngredientDialog: React.FC<IProps> = ({ ingredientEditValues }) => {
       } as ICreateIngredient);
     }
 
-    createOrUpdateToasts(
-      ingredientEditValues ? EActionType.UPDATE : EActionType.CREATE,
+    const succeeded = toastResult(
       result,
+      ingredientEditValues ? 'Updated successfully!' : 'Added successfully!',
     );
 
-    if (!result.error) {
+    if (succeeded) {
       form.reset();
       setIsOpen(false);
     }

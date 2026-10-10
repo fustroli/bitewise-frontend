@@ -25,14 +25,13 @@ import { useFieldArray, useForm } from 'react-hook-form';
 
 import { Button } from '@/app/components/ui/button';
 import { DEFAULT_MEAL } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/constants';
-import { EActionType } from '@/app/utils/enums';
 import { Form } from '@/app/components/ui/form';
 import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import InputField from '@/app/components/form/InputField';
 import MealIngredient from '@/app/(modules)/[lang]/dashboard/(modules)/meals/components/MealIngredient';
 import { Plus } from 'lucide-react';
-import { createOrUpdateToasts } from '@/app/utils/helpers';
+import { toastResult } from '@/app/utils/helpers/client';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 
@@ -75,12 +74,12 @@ const AddMealDialog = (props: IProps) => {
       });
     }
 
-    createOrUpdateToasts(
-      mealEditValues ? EActionType.UPDATE : EActionType.CREATE,
+    const succeeded = toastResult(
       result,
+      mealEditValues ? 'Updated successfully!' : 'Added successfully!',
     );
 
-    if (!result.error) {
+    if (succeeded) {
       form.reset();
       setIsOpen(false);
     }

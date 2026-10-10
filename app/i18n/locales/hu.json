@@ -32,7 +32,8 @@
     "upload": "Feltöltés",
     "loading": "Betöltés",
     "profileImage": "Profilkép",
-    "crop": "Vágás"
+    "crop": "Vágás",
+    "savedSuccessfully": "Sikeres mentés"
   },
   "validation": {
     "emailInvalid": "Érvénytelen e-mail",

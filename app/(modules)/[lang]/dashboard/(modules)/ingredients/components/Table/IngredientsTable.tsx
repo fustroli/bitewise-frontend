@@ -1,17 +1,15 @@
 import { IPageProps, IQueryParams } from '@/app/utils/interfaces';
 
 import AddIngredientDialog from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/AddIngredientDialog';
-import CustomError from '@/app/components/Error';
 import { EOrderDirection } from '@/app/utils/enums';
 import EmptyTable from '@/app/components/EmptyTable';
-import { IError } from '@/app/utils/interfaces/error.interface';
 import { INGREDTENTS_PAGE_SIZE } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/constants';
 import IngredientTableHead from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/Table/IngredientTableHead';
 import IngredientTableRow from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/Table/IngredientTableRow';
 import { Pagination } from '@/app/components/Pagination';
 import { TableBody } from '@/app/components/ui/table';
 import TableFrame from '@/app/components/Table/TableFrame';
-import { fetchIngredients } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/actions';
+import { fetchIngredients } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/api';
 
 const IngredientsTable = async (props: IPageProps) => {
   const searchParams = await props.searchParams;
@@ -24,31 +22,21 @@ const IngredientsTable = async (props: IPageProps) => {
     orderDirection: searchParams?.orderDirection as EOrderDirection | undefined,
   };
 
-  const result = await fetchIngredients(params);
+  const ingredientsPage = await fetchIngredients(params);
 
-  const total = result.data?.count || 0;
+  const total = ingredientsPage.count;
 
   const metadata = {
     hasNextPage: (params.offset as number) + INGREDTENTS_PAGE_SIZE < total,
     totalPages: Math.ceil(total / INGREDTENTS_PAGE_SIZE),
   };
 
-  if (result.error) {
-    return (
-      <div className="px-4 pb-8 md:px-8">
-        <section className="flex flex-col gap-4">
-          <CustomError result={result as IError} />
-        </section>
-      </div>
-    );
-  }
-
-  const ingredients = result.data?.data || [];
+  const ingredients = ingredientsPage.data;
 
   return (
     <>
       <TableFrame
-        title={`Ingredients (${result.data?.count})`}
+        title={`Ingredients (${ingredientsPage.count})`}
         tableHead={<IngredientTableHead {...searchParams} />}
         addModal={<AddIngredientDialog />}
       >

@@ -15,10 +15,9 @@ import {
 
 import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
-import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 import InputField from '@/app/components/form/InputField';
 import Typography from '@/app/components/Typography';
-import { handleError } from '@/app/utils/helpers';
+import { toastResult } from '@/app/utils/helpers/client';
 import { updateUser } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
@@ -44,13 +43,9 @@ const DefaultEmail = () => {
   });
 
   async function onSubmit(values: TNotificationSettingsSchema) {
-    try {
-      const result = await updateUser({ notificationSettings: values });
+    const result = await updateUser({ notificationSettings: values });
 
-      setUser(result.data as IUser);
-    } catch (error: unknown) {
-      handleError(error);
-    }
+    if (toastResult(result, common.savedSuccessfully)) setUser(result.data);
 
     setIsEditable(false);
   }

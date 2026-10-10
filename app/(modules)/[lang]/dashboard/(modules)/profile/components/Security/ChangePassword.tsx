@@ -15,8 +15,7 @@ import LoadingButton from '@/app/components/buttons/LoadingButton';
 import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
 import Typography from '@/app/components/Typography';
 import { changePassword } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
-import { handleError } from '@/app/utils/helpers';
-import { toast } from '@/app/hooks/use-toast';
+import { toastResult } from '@/app/utils/helpers/client';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -35,16 +34,9 @@ const ChangePassword = () => {
   });
 
   async function onSubmit(values: TChangePasswordSchema) {
-    try {
-      await changePassword(values);
-      toast({
-        variant: 'success',
-        description: profile.security.passwordChanged,
-      });
-      form.reset();
-    } catch (error: unknown) {
-      handleError(error);
-    }
+    const result = await changePassword(values);
+
+    if (toastResult(result, profile.security.passwordChanged)) form.reset();
   }
   return (
     <Card>

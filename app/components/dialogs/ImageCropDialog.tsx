@@ -15,7 +15,7 @@ import {
   canvasToFile,
   cropImageToCanvas,
   loadImage,
-} from '@/app/utils/helpers';
+} from '@/app/utils/helpers/client';
 
 import { Button } from '@/app/components/ui/button';
 import { Slider } from '@/app/components/ui/slider';

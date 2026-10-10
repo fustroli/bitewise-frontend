@@ -14,11 +14,9 @@ import {
 
 import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
-import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 import { Save } from 'lucide-react';
 import SwitchFormField from '@/app/components/form/SwitchFormField';
-import { handleError } from '@/app/utils/helpers';
-import { toast } from '@/app/hooks/use-toast';
+import { toastResult } from '@/app/utils/helpers/client';
 import { updateUser } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
@@ -43,17 +41,10 @@ const EmailNotifications = () => {
   });
 
   async function onSubmit(values: TNotificationSettingsSchema) {
-    try {
-      const result = await updateUser({ notificationSettings: values });
+    const result = await updateUser({ notificationSettings: values });
 
-      setUser(result.data as IUser);
-
-      toast({
-        variant: 'success',
-        description: profile.notifications.updateSuccess,
-      });
-    } catch (error: unknown) {
-      handleError(error);
+    if (toastResult(result, profile.notifications.updateSuccess)) {
+      setUser(result.data);
     }
   }
 

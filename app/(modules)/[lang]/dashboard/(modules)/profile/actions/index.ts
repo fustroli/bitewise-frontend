@@ -1,14 +1,15 @@
 'use server';
-'server-only';
 
 import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 import { TChangePasswordSchema } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations';
-import { apiRequest } from '@/app/utils/helpers';
 import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { request } from '@/app/utils/helpers/server';
 
 export async function deleteUser() {
-  await apiRequest<void>(`users/me`, 'DELETE');
+  const result = await request(`users/me`, 'DELETE');
+
+  if (!result.ok) return result;
 
   const cookieStore = await cookies();
 
@@ -21,17 +22,13 @@ export async function deleteUser() {
 }
 
 export async function updateUser(user: Partial<IUser>) {
-  const result = await apiRequest<IUser>(`users/me`, 'PATCH', user);
-
-  return result;
+  return request<IUser>(`users/me`, 'PATCH', user);
 }
 
 export async function changePassword(data: TChangePasswordSchema) {
-  await apiRequest<void>(`auth/change-password`, 'POST', data);
+  return request(`auth/change-password`, 'POST', data);
 }
 
 export async function updateProfilePicture(formData: FormData) {
-  const result = await apiRequest<IUser>(`users/me/avatar`, 'POST', formData);
-
-  return result;
+  return request<IUser>(`users/me/avatar`, 'POST', formData);
 }

@@ -32,13 +32,12 @@ import {
 } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/actions';
 
 import { Button } from '@/app/components/ui/button';
-import { EActionType } from '@/app/utils/enums';
 import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
 import InputField from '@/app/components/form/InputField';
 import { InputTags } from '@/app/components/form/InputTags';
 import { Plus } from 'lucide-react';
-import { createOrUpdateToasts } from '@/app/utils/helpers';
+import { toastResult } from '@/app/utils/helpers/client';
 import { useForm } from 'react-hook-form';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -92,10 +91,15 @@ const AddMealPlanDialog = ({ mealPlanEditValues }: IProps) => {
       result = await createMealPlan(data);
     }
 
-    createOrUpdateToasts(
-      mealPlanEditValues ? EActionType.UPDATE : EActionType.CREATE,
+    const succeeded = toastResult(
       result,
+      mealPlanEditValues ? 'Updated successfully!' : 'Added successfully!',
     );
+
+    if (succeeded) {
+      form.reset();
+      setIsOpen(false);
+    }
   };
 
   return (

@@ -119,6 +119,12 @@ const eslintConfig = [
       'react/no-unescaped-entities': 'off',
     },
   },
+  {
+    files: ['**/*.test.ts'],
+    rules: {
+      'no-magic-numbers': 'off',
+    },
+  },
 ];
 
 export default eslintConfig;

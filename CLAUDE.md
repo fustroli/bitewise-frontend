@@ -10,9 +10,8 @@ npm run dev     # Start dev server
 npm run build   # Production build
 npm run start   # Start production server
 npm run lint    # Run ESLint (auto-fix)
+npm test        # Run Vitest once (*.test.ts)
 ```
-
-There is no test suite configured in this repo (no Vitest/Jest/Playwright).
 
 ## Architecture
 
@@ -56,12 +55,21 @@ Nested feature modules live under a route's own `(modules)/` folder, e.g.
 
 ### API layer
 
-- `app/utils/helpers/api.server.helpers.ts` — `apiRequest<T>()`, server-only,
-  used from `actions/`/`api/` files; reads the `accessToken` cookie, throws on
-  non-OK responses
-- `app/utils/helpers/api.client.helpers.ts` — axios-based `handleAxiosError()`
-  for client-side calls
-- Response type: `IApiResponse<T>` (`app/(modules)/[lang]/dashboard/interfaces`)
+See `docs/adr/0001-reads-throw-mutations-return-results.md`.
+
+- `app/utils/helpers/server/` (`import 'server-only'`) — the backend gateway
+  `request<T>(endpoint, method, body?, params?)`. Returns
+  `TApiResult<T>` = `{ ok: true, data } | { ok: false, status, message }`;
+  redirects on a missing token or 401. Also `unwrap()` and
+  `refreshDashboardOnSuccess()`.
+- Reads live in each module's `api/` (server-only, not `'use server'`) and
+  `unwrap()` the result, so failures throw to `error.tsx`.
+- Changes live in each module's `actions/` (`'use server'`) and return the
+  `TApiResult`; clients show it with `toastResult(result, successText)` from
+  `app/utils/helpers/client`.
+- `app/utils/helpers` (index) holds only helpers safe everywhere; client-only
+  ones (`toastResult`, axios `handleAxiosError`, image) are in `./client`.
+- Sign-in/sign-up stay direct browser → backend axios calls.
 
 ### State management
 

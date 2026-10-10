@@ -14,10 +14,9 @@ import {
 
 import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
-import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 import InfoBox from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/InfoBox';
 import { addHttps } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
-import { handleError } from '@/app/utils/helpers';
+import { toastResult } from '@/app/utils/helpers/client';
 import { updateUser } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
@@ -38,13 +37,9 @@ const SocialProfiles = () => {
   });
 
   async function onSubmit(values: TSocialProfilesSchema) {
-    try {
-      const result = await updateUser({ socialProfiles: values });
+    const result = await updateUser({ socialProfiles: values });
 
-      setUser(result.data as IUser);
-    } catch (error: unknown) {
-      handleError(error);
-    }
+    if (toastResult(result, common.savedSuccessfully)) setUser(result.data);
 
     setIsEditable(false);
   }

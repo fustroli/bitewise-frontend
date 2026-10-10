@@ -13,27 +13,17 @@ import EditIngredientDialog from '@/app/(modules)/[lang]/dashboard/(modules)/ing
 import { Ellipsis } from 'lucide-react';
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { deleteIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/actions';
-import { useToast } from '@/app/hooks/use-toast';
+import { toastResult } from '@/app/utils/helpers/client';
 
 interface IProps {
   ingredient: IIngredient;
 }
 const IngredientActions = ({ ingredient }: IProps) => {
-  const { toast } = useToast();
   const handleOnDelete = async () => {
-    const res = await deleteIngredient(ingredient.id);
-
-    if (Object.keys(res).length === 0) {
-      toast({
-        variant: 'success',
-        description: 'Ingredient deleted successfully.',
-      });
-    } else {
-      toast({
-        variant: 'error',
-        description: res.error || 'Unknown error',
-      });
-    }
+    toastResult(
+      await deleteIngredient(ingredient.id),
+      'Ingredient deleted successfully.',
+    );
   };
 
   return (
