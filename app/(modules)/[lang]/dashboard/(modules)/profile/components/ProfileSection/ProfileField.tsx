@@ -29,7 +29,7 @@ const ProfileField = <TValues extends FieldValues>({
   if (field.kind === 'switch') {
     return (
       <SwitchFormField
-        form={form}
+        control={form.control}
         name={field.name}
         label={field.label}
         description={field.description}
@@ -56,7 +56,7 @@ const renderEditView = <TValues extends FieldValues>(
 ) => {
   switch (field.kind) {
     case 'date':
-      return <DatePicker form={form} name={field.name} />;
+      return <DatePicker control={form.control} name={field.name} />;
     case 'phone':
       return (
         <div className="rounded-md border border-input px-3 py-1 shadow-sm">
@@ -72,7 +72,7 @@ const renderEditView = <TValues extends FieldValues>(
 
       return (
         <InputField
-          form={form}
+          control={form.control}
           name={field.name}
           type={field.kind}
           onBlur={

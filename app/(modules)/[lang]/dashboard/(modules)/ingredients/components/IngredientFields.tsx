@@ -16,11 +16,16 @@ const IngredientFields = ({
 
   return (
     <>
-      <InputField form={form} label={fields.name} name="name" type="text" />
+      <InputField
+        control={form.control}
+        label={fields.name}
+        name="name"
+        type="text"
+      />
       {INGREDIENT_NUMBER_FIELDS.map((name) => (
         <InputField
           key={name}
-          form={form}
+          control={form.control}
           label={fields[name]}
           name={name}
           type="number"
@@ -28,7 +33,7 @@ const IngredientFields = ({
       ))}
       <SelectField
         name="unit"
-        form={form}
+        control={form.control}
         label={fields.unit}
         placeholder={fields.unitPlaceholder}
       >

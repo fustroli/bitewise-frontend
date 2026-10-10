@@ -3,21 +3,24 @@
 import { EyeIcon, EyeOffIcon } from 'lucide-react';
 
 import { Button } from '@/app/components/ui/button';
+import { FieldValues } from 'react-hook-form';
+import { IFieldProps } from '@/app/components/form/FieldFrame';
 import InputField from '@/app/components/form/InputField';
-import { UseFormReturn } from 'react-hook-form';
 import { useState } from 'react';
 
-interface IProps {
-  form: UseFormReturn<any>;
+interface IProps<T extends FieldValues> extends IFieldProps<T> {
   label: string;
-  name: string;
 }
-const PasswordInput = ({ form, label, name }: IProps) => {
+const PasswordInput = <T extends FieldValues>({
+  control,
+  label,
+  name,
+}: IProps<T>) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
     <InputField
-      form={form}
+      control={control}
       label={label}
       name={name}
       type={showPassword ? 'text' : 'password'}

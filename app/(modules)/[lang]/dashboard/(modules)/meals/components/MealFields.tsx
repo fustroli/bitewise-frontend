@@ -30,13 +30,18 @@ const MealFields = ({
 
   return (
     <>
-      <InputField form={form} label={labels.name} name="name" type="text" />
+      <InputField
+        control={form.control}
+        label={labels.name}
+        name="name"
+        type="text"
+      />
 
       {fields.map((ingredient, index) => (
         <MealIngredient
           key={ingredient.id}
           index={index}
-          form={form}
+          control={form.control}
           options={options}
           ingredients={ingredients}
           onRemove={() => remove(index)}

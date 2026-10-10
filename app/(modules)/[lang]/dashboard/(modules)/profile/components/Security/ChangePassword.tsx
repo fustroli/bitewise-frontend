@@ -47,18 +47,18 @@ const ChangePassword = () => {
           >
             <article className="w-1/2 space-y-6">
               <PasswordInput
-                form={form}
+                control={form.control}
                 label={profile.security.oldPassword}
                 name="oldPassword"
               />
               <PasswordInput
-                form={form}
+                control={form.control}
                 label={profile.security.password}
                 name="password"
               />
 
               <PasswordInput
-                form={form}
+                control={form.control}
                 label={profile.security.confirmPassword}
                 name="confirmPassword"
               />

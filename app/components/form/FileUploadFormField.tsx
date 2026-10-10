@@ -1,51 +1,31 @@
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/app/components/ui/form';
+import FieldFrame, {
+  FieldControl,
+  IFieldProps,
+} from '@/app/components/form/FieldFrame';
 
+import { FieldValues } from 'react-hook-form';
 import { Input } from '@/app/components/ui/input';
 import React from 'react';
-import { UseFormReturn } from 'react-hook-form';
 
-interface IProps {
-  form: UseFormReturn<any>;
+interface IProps<T extends FieldValues> extends IFieldProps<T> {
   accept: string;
-  name: string;
   label: string;
   changeHandler: (e: React.ChangeEvent<HTMLInputElement>) => void;
-  id: string;
 }
-const FileUploadFormField = ({
-  form,
-  accept,
+const FileUploadFormField = <T extends FieldValues>({
+  control,
   name,
+  accept,
   label,
   changeHandler,
-  id,
-}: IProps) => {
-  return (
-    <FormField
-      control={form.control}
-      name={name}
-      render={() => (
-        <FormItem>
-          <FormLabel>{label}</FormLabel>
-          <FormControl>
-            <Input
-              id={id}
-              type="file"
-              accept={accept}
-              onChange={changeHandler}
-            />
-          </FormControl>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
-  );
-};
+}: IProps<T>) => (
+  <FieldFrame control={control} name={name} label={label}>
+    {() => (
+      <FieldControl>
+        <Input type="file" accept={accept} onChange={changeHandler} />
+      </FieldControl>
+    )}
+  </FieldFrame>
+);
 
 export default FileUploadFormField;

@@ -1,10 +1,7 @@
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/app/components/ui/form';
+import FieldFrame, {
+  FieldControl,
+  IFieldProps,
+} from '@/app/components/form/FieldFrame';
 import {
   Select,
   SelectContent,
@@ -12,40 +9,34 @@ import {
   SelectValue,
 } from '@/app/components/ui/select';
 
+import { FieldValues } from 'react-hook-form';
 import { PropsWithChildren } from 'react';
-import { UseFormReturn } from 'react-hook-form';
 
-interface IProps extends PropsWithChildren {
-  form: UseFormReturn<any>;
-  name: string;
+interface IProps<T extends FieldValues>
+  extends IFieldProps<T>, PropsWithChildren {
   label: string;
   placeholder: string;
 }
 
-const SelectField = ({ form, name, label, placeholder, children }: IProps) => {
-  return (
-    <FormField
-      control={form.control}
-      name={name}
-      render={({ field }) => (
-        <FormItem>
-          <FormLabel>{label}</FormLabel>
-          <Select
-            onValueChange={field.onChange}
-            defaultValue={String(field.value)}
-          >
-            <FormControl>
-              <SelectTrigger>
-                <SelectValue placeholder={placeholder} />
-              </SelectTrigger>
-            </FormControl>
-            <SelectContent>{children}</SelectContent>
-          </Select>
-          <FormMessage />
-        </FormItem>
-      )}
-    />
-  );
-};
+const SelectField = <T extends FieldValues>({
+  control,
+  name,
+  label,
+  placeholder,
+  children,
+}: IProps<T>) => (
+  <FieldFrame control={control} name={name} label={label}>
+    {(field) => (
+      <Select onValueChange={field.onChange} defaultValue={String(field.value)}>
+        <FieldControl>
+          <SelectTrigger>
+            <SelectValue placeholder={placeholder} />
+          </SelectTrigger>
+        </FieldControl>
+        <SelectContent>{children}</SelectContent>
+      </Select>
+    )}
+  </FieldFrame>
+);
 
 export default SelectField;

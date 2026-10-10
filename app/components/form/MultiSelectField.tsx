@@ -9,13 +9,10 @@ import {
   CommandItem,
   CommandList,
 } from '@/app/components/ui/command';
-import {
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage,
-} from '@/app/components/ui/form';
+import FieldFrame, {
+  FieldControl,
+  IFieldProps,
+} from '@/app/components/form/FieldFrame';
 import {
   Popover,
   PopoverContent,
@@ -24,13 +21,11 @@ import {
 
 import { Badge } from '@/app/components/ui/badge';
 import { Button } from '@/app/components/ui/button';
+import { FieldValues } from 'react-hook-form';
 import { IOption } from '@/app/utils/interfaces';
-import { UseFormReturn } from 'react-hook-form';
 import { cn } from '@/app/lib';
 
-interface IProps {
-  form: UseFormReturn<any>;
-  name: string;
+interface IProps<T extends FieldValues> extends IFieldProps<T> {
   label: string;
   options: IOption[];
   placeholder: string;
@@ -40,8 +35,8 @@ interface IProps {
 }
 
 /** Picks a set of distinct options; the field value is their `value`s. */
-const MultiSelectField = ({
-  form,
+const MultiSelectField = <T extends FieldValues>({
+  control,
   name,
   label,
   options,
@@ -49,12 +44,10 @@ const MultiSelectField = ({
   searchPlaceholder,
   emptyText,
   removeLabel,
-}: IProps) => {
+}: IProps<T>) => {
   return (
-    <FormField
-      control={form.control}
-      name={name}
-      render={({ field }) => {
+    <FieldFrame control={control} name={name} label={label}>
+      {(field) => {
         const selected: number[] = field.value ?? [];
 
         const toggle = (value: number) =>
@@ -69,11 +62,10 @@ const MultiSelectField = ({
         );
 
         return (
-          <FormItem>
-            <FormLabel>{label}</FormLabel>
+          <>
             <Popover>
               <PopoverTrigger asChild>
-                <FormControl>
+                <FieldControl>
                   <Button
                     type="button"
                     variant="outline"
@@ -83,7 +75,7 @@ const MultiSelectField = ({
                     {placeholder}
                     <ChevronsUpDown className="opacity-50" />
                   </Button>
-                </FormControl>
+                </FieldControl>
               </PopoverTrigger>
               <PopoverContent className="w-[--radix-popover-trigger-width] p-0">
                 <Command>
@@ -130,11 +122,10 @@ const MultiSelectField = ({
                 ))}
               </div>
             )}
-            <FormMessage />
-          </FormItem>
+          </>
         );
       }}
-    />
+    </FieldFrame>
   );
 };
 
