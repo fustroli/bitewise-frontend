@@ -10,11 +10,14 @@ import {
   AlertDialogTrigger,
 } from '@/app/components/ui/alert-dialog';
 
+import { ReactNode } from 'react';
+
 interface IProps {
   onConfirm: () => void;
   title: string;
   subtitle: string;
-  triggerLabel: string;
+  triggerLabel: ReactNode;
+  triggerClassName?: string;
   cancelLabel: string;
   confirmLabel: string;
 }
@@ -25,6 +28,7 @@ const DeleteDialog = (props: IProps) => {
     title,
     subtitle,
     triggerLabel,
+    triggerClassName,
     cancelLabel,
     confirmLabel,
   } = props;
@@ -32,7 +36,9 @@ const DeleteDialog = (props: IProps) => {
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger>{triggerLabel}</AlertDialogTrigger>
+      <AlertDialogTrigger className={triggerClassName}>
+        {triggerLabel}
+      </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>

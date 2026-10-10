@@ -14,12 +14,13 @@ import {
   IResourceForm,
   IResourceRecord,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
+import { Pencil, Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
 import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
-import { Plus } from 'lucide-react';
+import { ROW_ACTION_ITEM_CLASS } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/constants';
 import { getResourceLabels } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/helpers';
 import { toastResult } from '@/app/utils/helpers/client';
 import { useDictionary } from '@/app/providers/dictionary-provider';
@@ -85,7 +86,10 @@ function ResourceFormDialog<
   return (
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       {record ? (
-        <DialogTrigger>{t.edit}</DialogTrigger>
+        <DialogTrigger className={ROW_ACTION_ITEM_CLASS}>
+          <Pencil />
+          {t.edit}
+        </DialogTrigger>
       ) : (
         <DialogTrigger asChild>
           <Button className="shadow-primary">
