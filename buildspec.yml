@@ -8,6 +8,8 @@ phases:
       - npm ci
   build:
     commands:
+      # Server-only runtime config; `next start` reads it on the instance.
+      - echo "COOKIE_DOMAIN=${COOKIE_DOMAIN}" > .env.production
       - npm run build
 
 artifacts:
@@ -19,3 +21,4 @@ artifacts:
     - package.json
     - package-lock.json
     - next.config.mjs
+    - .env.production

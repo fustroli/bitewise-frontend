@@ -7,34 +7,16 @@ import CustomBreadCrumbs from '@/app/(modules)/[lang]/dashboard/components/Custo
 import LoadingButton from '@/app/components/buttons/LoadingButton';
 import { SidebarTrigger } from '@/app/components/ui/sidebar';
 import UserProfile from '@/app/(modules)/[lang]/dashboard/components/UserProfile';
-import { logout } from '@/app/(modules)/(auth)/api';
+import { signOutUrl } from '@/app/session';
 import { useDictionary } from '@/app/providers/dictionary-provider';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
-import { useToast } from '@/app/hooks/use-toast';
 
 const iconButtonClasses =
   'size-10 rounded-md bg-card text-muted-foreground shadow-soft hover:bg-accent hover:text-foreground';
 
 const AppBar = () => {
   const dict = useDictionary();
-  const router = useRouter();
-  const { toast } = useToast();
   const [isLoading, setIsLoading] = useState(false);
-
-  const handleLogout = async () => {
-    setIsLoading(true);
-    try {
-      await logout();
-      router.push('/');
-    } catch (error: any) {
-      setIsLoading(false);
-      toast({
-        variant: 'error',
-        description: (error?.message as string) || 'Uknown Error',
-      });
-    }
-  };
 
   return (
     <header className="flex items-center justify-between gap-4 px-4 py-6 md:px-8">
@@ -53,17 +35,24 @@ const AppBar = () => {
         >
           <Bell />
         </Button>
-        <LoadingButton
-          variant="ghost"
-          size="icon"
-          className={iconButtonClasses}
-          onClick={handleLogout}
-          loading={isLoading}
-          aria-label={dict.dashboard.appbar.logout}
-          title={dict.dashboard.appbar.logout}
+        {/* A form POST, never a <Link>: prefetching would sign the user out. */}
+        <form
+          action={signOutUrl()}
+          method="post"
+          onSubmit={() => setIsLoading(true)}
         >
-          <LogOut />
-        </LoadingButton>
+          <LoadingButton
+            type="submit"
+            variant="ghost"
+            size="icon"
+            className={iconButtonClasses}
+            loading={isLoading}
+            aria-label={dict.dashboard.appbar.logout}
+            title={dict.dashboard.appbar.logout}
+          >
+            <LogOut />
+          </LoadingButton>
+        </form>
         <UserProfile />
       </div>
     </header>

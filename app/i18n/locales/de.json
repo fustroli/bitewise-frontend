@@ -90,5 +90,8 @@
       "dark": "Dunkel",
       "system": "System"
     }
+  },
+  "auth": {
+    "sessionExpired": "Deine Sitzung ist abgelaufen. Bitte melde dich erneut an."
   }
 }

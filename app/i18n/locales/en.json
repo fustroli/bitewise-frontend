@@ -123,5 +123,8 @@
       "securityEmailDesc": "Receive emails about your account activity and security.",
       "updateSuccess": "Notifications updated successfully"
     }
+  },
+  "auth": {
+    "sessionExpired": "Your session has expired. Please sign in again."
   }
 }

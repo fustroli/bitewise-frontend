@@ -2,23 +2,16 @@
 
 import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 import { TChangePasswordSchema } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations';
-import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { request } from '@/app/utils/helpers/server';
+import { signOutUrl } from '@/app/session';
 
 export async function deleteUser() {
   const result = await request(`users/me`, 'DELETE');
 
   if (!result.ok) return result;
 
-  const cookieStore = await cookies();
-
-  cookieStore.set('accessToken', '', {
-    path: '/',
-    httpOnly: true,
-    maxAge: 0,
-  });
-  redirect('/login');
+  redirect(signOutUrl());
 }
 
 export async function updateUser(user: Partial<IUser>) {
