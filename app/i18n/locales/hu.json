@@ -187,7 +187,8 @@
         "nameRequired": "Az étel nevének megadása kötelező",
         "ingredientsRequired": "Legalább egy hozzávaló szükséges",
         "ingredientRequired": "Válassz hozzávalót",
-        "quantityPositive": "A mennyiségnek nagyobbnak kell lennie 0-nál"
+        "quantityPositive": "A mennyiségnek nagyobbnak kell lennie 0-nál",
+        "ingredientDuplicate": "Minden hozzávaló csak egyszer adható hozzá"
       }
     },
     "mealPlans": {
@@ -210,7 +211,8 @@
         "mealsPlaceholder": "Válassz ételeket..."
       },
       "validation": {
-        "nameRequired": "A név megadása kötelező"
+        "nameRequired": "A név megadása kötelező",
+        "mealsRequired": "Legalább egy étel szükséges"
       }
     }
   },

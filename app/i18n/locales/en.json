@@ -187,7 +187,8 @@
         "nameRequired": "Meal name is required",
         "ingredientsRequired": "At least one ingredient is required",
         "ingredientRequired": "Select an ingredient",
-        "quantityPositive": "Quantity must be greater than 0"
+        "quantityPositive": "Quantity must be greater than 0",
+        "ingredientDuplicate": "Each ingredient can be added only once"
       }
     },
     "mealPlans": {
@@ -210,7 +211,8 @@
         "mealsPlaceholder": "Select meals..."
       },
       "validation": {
-        "nameRequired": "Name is required"
+        "nameRequired": "Name is required",
+        "mealsRequired": "At least one meal is required"
       }
     }
   },
