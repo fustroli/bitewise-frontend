@@ -26,7 +26,8 @@ const MenuItem = ({ item, route }: IProps) => {
     dashboard.sidebar[item.label as keyof typeof dashboard.sidebar];
 
   return (
-    <SidebarMenuItem key={item.label}>
+    // Active item stacks above its siblings so their hover background doesn't cut its shadow
+    <SidebarMenuItem key={item.label} className={cn(isActive && 'z-10')}>
       <SidebarMenuButton
         asChild
         className={cn(
