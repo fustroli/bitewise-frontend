@@ -1,10 +1,8 @@
 'use client';
 
-import { Bell, LogOut } from 'lucide-react';
-
-import { Button } from '@/app/components/ui/button';
 import CustomBreadCrumbs from '@/app/(modules)/[lang]/dashboard/components/CustomBreadCrumbs';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
+import { LogOut } from 'lucide-react';
 import { SidebarTrigger } from '@/app/components/ui/sidebar';
 import UserProfile from '@/app/(modules)/[lang]/dashboard/components/UserProfile';
 import { signOutUrl } from '@/app/session';
@@ -25,16 +23,7 @@ const AppBar = () => {
         <CustomBreadCrumbs />
       </div>
       <div className="flex items-center gap-3">
-        <Button
-          variant="ghost"
-          size="icon"
-          className={iconButtonClasses}
-          onClick={() => {
-            // TODO: notifications'
-          }}
-        >
-          <Bell />
-        </Button>
+        <UserProfile />
         {/* A form POST, never a <Link>: prefetching would sign the user out. */}
         <form
           action={signOutUrl()}
@@ -53,7 +42,6 @@ const AppBar = () => {
             <LogOut />
           </LoadingButton>
         </form>
-        <UserProfile />
       </div>
     </header>
   );
