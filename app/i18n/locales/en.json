@@ -85,12 +85,6 @@
         "oldPasswordRequired": "Old password is required",
         "confirmPasswordRequired": "Confirm password is required"
       },
-      "twoFactorAuth": "2-step Verification",
-      "twoFactorAuthDescription": "Add an extra layer of security to your account by enabling 2-step verification",
-      "recoveryCodes": "Recovery Codes",
-      "sessions": "Sessions",
-      "sessionsDescription": "Places where you're logged into the app",
-      "logoutAllSessions": "Logout of all sessions",
       "passwordChanged": "Password changed successfully",
       "toggleVisibility": "Toggle password visibility"
     },
@@ -98,17 +92,12 @@
       "language": "Language",
       "languageDesc": "Default language for dashboard",
       "english": "English",
-      "spanish": "Spanish",
-      "german": "German",
-      "french": "French",
       "hungarian": "Hungarian",
       "theme": "Theme",
       "themeDesc": "Default theme for dashboard",
       "light": "Light",
       "dark": "Dark",
-      "system": "System",
-      "currency": "Currency",
-      "currencyDesc": "Default currency for dashboard"
+      "system": "System"
     },
     "notifications": {
       "defaultEmail": "Default Email Notifications",

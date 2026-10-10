@@ -67,12 +67,6 @@
         "oldPasswordRequired": "Se requiere la contraseña anterior",
         "confirmPasswordRequired": "Se requiere confirmar la contraseña"
       },
-      "twoFactorAuth": "Verificación en 2 pasos",
-      "twoFactorAuthDescription": "Agregue una capa adicional de seguridad a su cuenta habilitando la verificación en 2 pasos",
-      "recoveryCodes": "Códigos de recuperación",
-      "sessions": "Sesiones",
-      "sessionsDescription": "Lugares donde ha iniciado sesión en la aplicación",
-      "logoutAllSessions": "Cerrar sesión en todas las sesiones",
       "passwordChanged": "Contraseña cambiada con éxito",
       "toggleVisibility": "Alternar visibilidad de la contraseña"
     },
@@ -80,9 +74,6 @@
       "language": "Idioma",
       "languageDesc": "Idioma predeterminado para el tablero de control",
       "english": "Inglés",
-      "spanish": "Español",
-      "german": "Alemán",
-      "french": "Francés",
       "hungarian": "Húngaro",
       "theme": "Tema",
       "themeDesc": "Tema predeterminado para el tablero de control",
