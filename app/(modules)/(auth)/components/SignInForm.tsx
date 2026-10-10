@@ -14,7 +14,7 @@ import { Form } from '@/app/components/ui/form';
 import { ISignIn } from '@/app/(modules)/(auth)/interfaces';
 import InputField from '@/app/components/form/InputField';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
-import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
+import PasswordInput from '@/app/components/form/PasswordInput';
 import { PencilIcon } from 'lucide-react';
 import { defaultSignInValues } from '@/app/(modules)/(auth)/constants';
 import { useForm } from 'react-hook-form';

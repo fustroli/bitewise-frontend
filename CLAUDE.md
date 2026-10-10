@@ -10,7 +10,7 @@ npm run dev     # Start dev server
 npm run build   # Production build
 npm run start   # Start production server
 npm run lint    # Run ESLint (auto-fix)
-npm test        # Run Vitest once (*.test.ts)
+npm test        # Run Vitest once (*.test.ts, *.test.tsx)
 ```
 
 ## Architecture

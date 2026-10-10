@@ -1,31 +1,30 @@
 'use client';
 
-import {
-  CHANGE_PASSWORD_DEFAULT_VALUES,
-  PASSWORD_RULES_LENGTH,
-} from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
 import { Card, CardContent } from '@/app/components/ui/card';
 import {
   TChangePasswordSchema,
   createChangePasswordSchema,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations';
 
+import { CHANGE_PASSWORD_DEFAULT_VALUES } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
 import { Form } from '@/app/components/ui/form';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
-import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
+import { PASSWORD_RULE_KEYS } from '@/app/utils/password-policy';
+import PasswordInput from '@/app/components/form/PasswordInput';
 import Typography from '@/app/components/Typography';
 import { changePassword } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { toastResult } from '@/app/utils/helpers/client';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
+import { useMemo } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const ChangePassword = () => {
-  const dict = useDictionary();
-  const { profile } = dict;
+  const { profile, passwordPolicy } = useDictionary();
 
-  const changePasswordSchema = createChangePasswordSchema(
-    dict.profile.security.passwordRules,
+  const changePasswordSchema = useMemo(
+    () => createChangePasswordSchema(passwordPolicy),
+    [passwordPolicy],
   );
 
   const form = useForm<TChangePasswordSchema>({
@@ -67,15 +66,13 @@ const ChangePassword = () => {
 
             <article className="flex w-1/2 flex-col items-center justify-center">
               <ul className="list-disc space-y-3">
-                {Object.values(profile.security.passwordRules)
-                  .slice(0, PASSWORD_RULES_LENGTH)
-                  .map((val) => (
-                    <li key={val}>
-                      <Typography variant="p" className="font-medium">
-                        {val}
-                      </Typography>
-                    </li>
-                  ))}
+                {PASSWORD_RULE_KEYS.map((key) => (
+                  <li key={key}>
+                    <Typography variant="p" className="font-medium">
+                      {passwordPolicy[key]}
+                    </Typography>
+                  </li>
+                ))}
               </ul>
 
               <LoadingButton

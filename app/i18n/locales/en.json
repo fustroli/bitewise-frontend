@@ -73,16 +73,6 @@
       "password": "Password",
       "confirmPassword": "Confirm Password",
       "changePassword": "Change Password",
-      "passwordRules": {
-        "passwordMinLength": "Password must be at least 8 characters long",
-        "passwordUppercase": "Password must contain at least one uppercase letter",
-        "passwordLowercase": "Password must contain at least one lowercase letter",
-        "passwordNumberRequired": "Password must contain at least one number",
-        "passwordRequired": "Password is required",
-        "passwordMatch": "Passwords must match",
-        "oldPasswordRequired": "Old password is required",
-        "confirmPasswordRequired": "Confirm password is required"
-      },
       "passwordChanged": "Password changed successfully",
       "toggleVisibility": "Toggle password visibility"
     },
@@ -113,5 +103,15 @@
   },
   "auth": {
     "sessionExpired": "Your session has expired. Please sign in again."
+  },
+  "passwordPolicy": {
+    "passwordMinLength": "Password must be at least 8 characters long",
+    "passwordUppercase": "Password must contain at least one uppercase letter",
+    "passwordLowercase": "Password must contain at least one lowercase letter",
+    "passwordNumberRequired": "Password must contain at least one number",
+    "passwordRequired": "Password is required",
+    "passwordMatch": "Passwords must match",
+    "oldPasswordRequired": "Old password is required",
+    "confirmPasswordRequired": "Confirm password is required"
   }
 }

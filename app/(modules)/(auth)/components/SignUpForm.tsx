@@ -4,15 +4,17 @@ import * as api from '../api';
 
 import {
   TSignupSchema,
-  signupSchema,
+  createSignupSchema,
 } from '@/app/(modules)/(auth)/validations';
 
 import { Form } from '@/app/components/ui/form';
 import InputField from '@/app/components/form/InputField';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
-import PasswordInput from '@/app/(modules)/(auth)/components/PasswordInput';
+import PasswordInput from '@/app/components/form/PasswordInput';
 import { defaultSignUpValues } from '@/app/(modules)/(auth)/constants';
+import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
+import { useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/app/hooks/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -20,6 +22,12 @@ import { zodResolver } from '@hookform/resolvers/zod';
 const SignUpForm = () => {
   const router = useRouter();
   const { toast } = useToast();
+  const { passwordPolicy } = useDictionary();
+
+  const signupSchema = useMemo(
+    () => createSignupSchema(passwordPolicy),
+    [passwordPolicy],
+  );
 
   const form = useForm<TSignupSchema>({
     resolver: zodResolver(signupSchema),

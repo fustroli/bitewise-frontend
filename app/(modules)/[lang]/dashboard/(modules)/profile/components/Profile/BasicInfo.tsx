@@ -16,6 +16,7 @@ import {
   TImageSchema,
   createImageSchema,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations';
+import { useMemo, useState } from 'react';
 
 import { ACCEPTED_IMAGE_TYPES } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
 import { Button } from '@/app/components/ui/button';
@@ -24,21 +25,22 @@ import { Form } from '@/app/components/ui/form';
 import ImageCropDialog from '@/app/components/dialogs/ImageCropDialog';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
 import { toastResult } from '@/app/utils/helpers/client';
-import { updateProfilePicture } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
-import { useState } from 'react';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 const BasicInfo = () => {
   const { common, validation } = useDictionary();
-  const { user, setUser } = useUserContext();
+  const { user, updateAvatar } = useUserContext();
 
   const [isEditable, setIsEditable] = useState(false);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
 
-  const imageSchema = createImageSchema(validation);
+  const imageSchema = useMemo(
+    () => createImageSchema(validation),
+    [validation],
+  );
 
   const form = useForm<TImageSchema>({
     resolver: zodResolver(imageSchema),
@@ -49,9 +51,9 @@ const BasicInfo = () => {
     const formData = new FormData();
     formData.append('file', values.file);
 
-    const result = await updateProfilePicture(formData);
+    const result = await updateAvatar(formData);
 
-    if (toastResult(result, common.savedSuccessfully)) setUser(result.data);
+    if (!toastResult(result, common.savedSuccessfully)) return;
 
     setImagePreviewUrl(null);
     setIsEditable(false);
