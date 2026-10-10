@@ -215,7 +215,9 @@
     }
   },
   "auth": {
-    "sessionExpired": "Your session has expired. Please sign in again."
+    "sessionExpired": "Your session has expired. Please sign in again.",
+    "accountDeleted": "Your account has been deleted.",
+    "passwordFirst": "An account with this email already exists. Sign in with your password first."
   },
   "passwordPolicy": {
     "passwordMinLength": "Password must be at least 8 characters long",

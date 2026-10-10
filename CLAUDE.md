@@ -92,9 +92,11 @@ cells select and format, never compute.
 See `docs/adr/0001-reads-throw-mutations-return-results.md`.
 
 - `app/utils/helpers/server/` (`import 'server-only'`) — the backend gateway
-  `request<T>(endpoint, method, body?, params?)`. Returns
+  `request<T>(endpoint, method, body?, params?, options?)`. Returns
   `TApiResult<T>` = `{ ok: true, data } | { ok: false, status, message }`;
-  on a missing token or 401 redirects to `/signout?reason=expired`. Also `unwrap()` and
+  on a missing token or 401 redirects to `/signout?reason=expired`, unless
+  `{ unauthorizedIsResult: true }` (a 401 meaning a wrong credential, e.g.
+  change-password). Also `unwrap()` and
   `refreshDashboardOnSuccess()`.
 - Reads live in each module's `api/` (server-only, not `'use server'`) and
   `unwrap()` the result, so failures throw to `error.tsx`.

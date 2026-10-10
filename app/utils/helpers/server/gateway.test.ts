@@ -92,6 +92,26 @@ describe('backend gateway', () => {
     );
   });
 
+  it('returns a 401 as a result when asked to', async () => {
+    fakeFetch.mockResolvedValue(
+      jsonResponse({ message: 'Invalid password' }, 401),
+    );
+
+    const result = await gateway()(
+      'auth/change-password',
+      'POST',
+      {},
+      undefined,
+      { unauthorizedIsResult: true },
+    );
+
+    expect(result).toEqual({
+      ok: false,
+      status: 401,
+      message: 'Invalid password',
+    });
+  });
+
   it('redirects without calling the backend when there is no token', async () => {
     await expect(gateway({})('users/me')).rejects.toThrow(
       'REDIRECT /signout?reason=expired',

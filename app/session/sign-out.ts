@@ -2,6 +2,8 @@ import { IWritableCookies, clearSessionCookies } from './cookies';
 
 export enum ESignOutReason {
   EXPIRED = 'expired',
+  // The backend already rejects a deleted User's Sessions.
+  ACCOUNT_DELETED = 'account-deleted',
 }
 
 export const SIGN_OUT_PATH = '/signout';

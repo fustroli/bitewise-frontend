@@ -1,5 +1,10 @@
+import {
+  ESignOutReason,
+  endSession,
+  readRefreshToken,
+  readSignOutReason,
+} from '@/app/session';
 import { NextRequest, NextResponse } from 'next/server';
-import { endSession, readRefreshToken, readSignOutReason } from '@/app/session';
 
 import { COOKIE_DOMAIN } from '@/app/utils/config';
 import { cookies } from 'next/headers';
@@ -12,14 +17,15 @@ const SEE_OTHER = 303;
 async function signOut(request: NextRequest) {
   const cookieStore = await cookies();
   const refreshToken = readRefreshToken(cookieStore);
+  const reason = readSignOutReason(request.nextUrl.searchParams);
 
-  // Revoke the refresh token too, or it would outlive the cookies.
-  if (refreshToken) await sessionBackend.signOut(refreshToken);
+  // Revoke the refresh token too, or it would outlive the cookies. A deleted
+  // account's Sessions are already gone.
+  if (refreshToken && reason !== ESignOutReason.ACCOUNT_DELETED) {
+    await sessionBackend.signOut(refreshToken);
+  }
 
-  const target = endSession(cookieStore, {
-    domain: COOKIE_DOMAIN,
-    reason: readSignOutReason(request.nextUrl.searchParams),
-  });
+  const target = endSession(cookieStore, { domain: COOKIE_DOMAIN, reason });
 
   // 303 so a POST continues as a GET to the sign-in page.
   return NextResponse.redirect(new URL(target, request.url), SEE_OTHER);

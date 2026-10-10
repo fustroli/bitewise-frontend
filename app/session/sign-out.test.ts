@@ -63,6 +63,7 @@ describe('sign-out URL', () => {
   it.each([
     [undefined, '/signout'],
     [ESignOutReason.EXPIRED, '/signout?reason=expired'],
+    [ESignOutReason.ACCOUNT_DELETED, '/signout?reason=account-deleted'],
   ])('reason %s → %s', (reason, url) => {
     expect(signOutUrl(reason)).toBe(url);
   });
