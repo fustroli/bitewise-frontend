@@ -52,7 +52,7 @@ helpers/
 ```
 
 Nested feature modules live under a route's own `(modules)/` folder, e.g.
-`app/(modules)/[lang]/dashboard/(modules)/{calculators,profile,ingredients,meals,meal-plans,payment-plans,_user}/`.
+`app/(modules)/[lang]/dashboard/(modules)/{profile,ingredients,meals,meal-plans,payment-plans,_user}/`.
 
 ### API layer
 

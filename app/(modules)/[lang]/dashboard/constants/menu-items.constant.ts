@@ -1,5 +1,4 @@
 import {
-  Calculator,
   CreditCard,
   HandPlatter,
   LayoutDashboard,
@@ -34,11 +33,6 @@ export const MENU_ITEMS: IMenuItem[] = [
 ];
 
 export const SUB_MENU_ITEMS: IMenuItem[] = [
-  {
-    label: 'calculators',
-    route: '/calculators',
-    icon: Calculator,
-  },
   {
     label: 'paymentPlans',
     route: '/payment-plans',

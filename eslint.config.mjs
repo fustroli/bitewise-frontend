@@ -13,7 +13,6 @@ const eslintConfig = [
       'app/hooks/use-mobile.tsx',
       'app/hooks/use-toast.ts',
       'app/lib/utils.ts',
-      'app/(modules)/dashboard/(modules)/calculators/helpers/**',
     ],
   },
   ...coreWebVitals,
