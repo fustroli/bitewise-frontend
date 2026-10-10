@@ -11,5 +11,4 @@ export interface ICreateIngredient {
   calories: number;
   //price: number;
   unit: EUnit;
-  userId: number;
 }

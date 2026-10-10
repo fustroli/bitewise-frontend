@@ -29,7 +29,7 @@ export interface IResourceForm<
   defaultValues: DefaultValues<TValues>;
   toFormValues: (record: TRecord) => DefaultValues<TValues>;
   fields: ComponentType<IResourceFieldsProps<TValues, TFormData>>;
-  create: (values: TValues, userId: number) => Promise<TApiResult<unknown>>;
+  create: (values: TValues) => Promise<TApiResult<unknown>>;
   update: (values: TValues, id: number) => Promise<TApiResult<unknown>>;
   remove: (id: number) => Promise<TApiResult<unknown>>;
 }

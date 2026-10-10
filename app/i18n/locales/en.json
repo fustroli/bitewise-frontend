@@ -122,7 +122,8 @@
     "created": "Added successfully!",
     "updated": "Updated successfully!",
     "deleted": "Deleted successfully.",
-    "positiveNumber": "{field} must be a positive number"
+    "positiveNumber": "{field} must be a positive number",
+    "nameTaken": "This name is already in use"
   },
   "resources": {
     "ingredients": {
