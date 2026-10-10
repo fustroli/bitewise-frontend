@@ -123,5 +123,115 @@
       "securityEmailDesc": "Receive emails about your account activity and security.",
       "updateSuccess": "Notifications updated successfully"
     }
+  },
+  "resourceTable": {
+    "add": "Add",
+    "save": "Save",
+    "edit": "Edit",
+    "delete": "Delete",
+    "close": "Close",
+    "cancel": "Cancel",
+    "continue": "Continue",
+    "actions": "Actions",
+    "previous": "Previous",
+    "next": "Next",
+    "previousPage": "Go to previous page",
+    "nextPage": "Go to next page",
+    "pagination": "Pagination",
+    "search": "Search...",
+    "notFound": "Not found.",
+    "remove": "Remove {name}",
+    "deleteConfirm": "Are you sure you want to delete {name}?",
+    "created": "Added successfully!",
+    "updated": "Updated successfully!",
+    "deleted": "Deleted successfully.",
+    "positiveNumber": "{field} must be a positive number"
+  },
+  "resources": {
+    "ingredients": {
+      "title": "Ingredients",
+      "empty": "No ingredients available",
+      "addTitle": "Add Ingredient",
+      "editTitle": "Edit Ingredient",
+      "deleteTitle": "Delete Ingredient",
+      "columns": {
+        "name": "Name",
+        "calories": "Calories",
+        "protein": "Protein",
+        "totalFat": "Fat (Saturated)",
+        "totalCarbohydrates": "Carbs (Sugar)",
+        "dietaryFiber": "Fiber",
+        "unit": "Unit"
+      },
+      "fields": {
+        "name": "Name",
+        "protein": "Protein",
+        "totalFat": "Total fat",
+        "saturatedFat": "Saturated fat",
+        "totalCarbohydrates": "Total carbohydrates",
+        "sugar": "Sugar",
+        "dietaryFiber": "Dietary fiber",
+        "calories": "Calories",
+        "unit": "Unit",
+        "unitPlaceholder": "Select unit..."
+      },
+      "validation": {
+        "nameRequired": "Name is required"
+      }
+    },
+    "meals": {
+      "title": "Meals",
+      "empty": "No meals available",
+      "addTitle": "Add Meal",
+      "editTitle": "Edit Meal",
+      "deleteTitle": "Delete Meal",
+      "columns": {
+        "name": "Name",
+        "calories": "Calories",
+        "protein": "Protein",
+        "totalFat": "Fat (Saturated)",
+        "totalCarbohydrates": "Carbs (Sugar)",
+        "dietaryFiber": "Fiber",
+        "quantity": "Quantity",
+        "unit": "Unit"
+      },
+      "fields": {
+        "name": "Meal name",
+        "ingredient": "Ingredient",
+        "ingredientPlaceholder": "Select ingredient...",
+        "quantity": "Quantity",
+        "addIngredient": "Add ingredient",
+        "removeIngredient": "Remove ingredient"
+      },
+      "validation": {
+        "nameRequired": "Meal name is required",
+        "ingredientsRequired": "At least one ingredient is required",
+        "ingredientRequired": "Select an ingredient",
+        "quantityPositive": "Quantity must be greater than 0"
+      }
+    },
+    "mealPlans": {
+      "title": "Meal Plans",
+      "empty": "No meal plans available",
+      "addTitle": "Add Meal Plan",
+      "editTitle": "Edit Meal Plan",
+      "deleteTitle": "Delete Meal Plan",
+      "columns": {
+        "name": "Name",
+        "calories": "Calories",
+        "protein": "Protein",
+        "totalFat": "Fat (Saturated)",
+        "totalCarbohydrates": "Carbs (Sugar)",
+        "dietaryFiber": "Fiber"
+      },
+      "fields": {
+        "name": "Meal plan name",
+        "meals": "Meals",
+        "mealsPlaceholder": "Select meals..."
+      },
+      "validation": {
+        "nameRequired": "Name is required"
+      }
+    }
   }
 }

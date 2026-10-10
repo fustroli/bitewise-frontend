@@ -1,44 +1,49 @@
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
-import IngredientActions from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/IngredientActions';
+import { IResourceRowContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
 import IngredientTableCell from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/Table/IngredientTableCell';
 import { TableRow } from '@/app/components/ui/table';
 import Unit from '@/app/(modules)/[lang]/dashboard/components/Unit';
 
-interface IProps {
+interface IProps extends IResourceRowContext {
   row: IIngredient;
 }
 
-const IngredientTableRow = async ({ row }: IProps) => {
+const IngredientTableRow = ({ row, labels, tableLabels, actions }: IProps) => {
+  const { columns } = labels;
+
   return (
-    <TableRow
-      key={row.id}
-      className="block border-b text-left last:border-b-0 lg:table-row lg:border-none"
-    >
+    <TableRow className="block border-b text-left last:border-b-0 lg:table-row lg:border-none">
       <IngredientTableCell
-        rowName="Name"
+        rowName={columns.name}
         className="lg:text-left lg:font-semibold"
         rowValue={row.name}
       />
       <IngredientTableCell
-        rowName="Calories"
+        rowName={columns.calories}
         rowValue={`${row.calories} kcal`}
       />
 
-      <IngredientTableCell rowName="Protein" rowValue={`${row.protein} g`} />
+      <IngredientTableCell
+        rowName={columns.protein}
+        rowValue={`${row.protein} g`}
+      />
 
       <IngredientTableCell
-        rowName="Fat"
+        rowName={columns.totalFat}
         rowValue={`${row.totalFat} (${row.saturatedFat}) g`}
       />
 
       <IngredientTableCell
-        rowName="Carbs"
+        rowName={columns.totalCarbohydrates}
         rowValue={`${row.totalCarbohydrates} (${row.sugar}) g`}
       />
 
-      <IngredientTableCell rowName="Fiber" rowValue={`${row.dietaryFiber} g`} />
       <IngredientTableCell
-        rowName="Unit"
+        rowName={columns.dietaryFiber}
+        rowValue={`${row.dietaryFiber} g`}
+      />
+      <IngredientTableCell
+        rowName={columns.unit}
         className="flex items-center gap-1"
         rowValue={
           <div className="block justify-end lg:flex">
@@ -47,9 +52,9 @@ const IngredientTableRow = async ({ row }: IProps) => {
         }
       />
       <IngredientTableCell
-        rowName="Actions"
+        rowName={tableLabels.actions}
         className="flex justify-end text-right"
-        rowValue={<IngredientActions ingredient={row} />}
+        rowValue={actions}
       />
     </TableRow>
   );

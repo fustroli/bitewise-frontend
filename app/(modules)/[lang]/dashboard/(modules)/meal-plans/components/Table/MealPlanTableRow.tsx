@@ -2,17 +2,18 @@ import { TableCell, TableRow } from '@/app/components/ui/table';
 
 import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
 import { IMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
-import MealPlanActions from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/MealPlanAction';
 import MealPlanTableCell from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/Table/MealPlanTableCell';
+import { ReactNode } from 'react';
 
 interface IProps {
   row: IMealPlan;
+  actions: ReactNode;
 }
 
-const MealPlanTableRow = ({ row }: IProps) => {
+const MealPlanTableRow = ({ row, actions }: IProps) => {
   const { meals } = row;
   return (
-    <TableRow key={row.id}>
+    <TableRow>
       <TableCell className="mx-2 flex items-center gap-2 p-2 text-foreground lg:table-cell lg:py-4">
         <div className="flex flex-col gap-2">
           {meals.map((meal: IMeal, index) => (
@@ -42,7 +43,7 @@ const MealPlanTableRow = ({ row }: IProps) => {
       <MealPlanTableCell meals={meals} column="dietaryFiber" unit="g" />
 
       <TableCell className="mx-2 flex items-center gap-2 p-2 text-foreground lg:table-cell lg:py-4 lg:text-right">
-        <MealPlanActions mealPlan={row} allMeals={[]} />
+        {actions}
       </TableCell>
     </TableRow>
   );

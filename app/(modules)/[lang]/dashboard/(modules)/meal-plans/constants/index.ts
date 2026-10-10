@@ -1,1 +1,1 @@
-export * from './table-head-data.constant';
+export * from './columns.constant';

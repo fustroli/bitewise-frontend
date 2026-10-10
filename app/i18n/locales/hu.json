@@ -123,5 +123,115 @@
       "securityEmailDesc": "Kapjon e-maileket a fiókja tevékenységéről és biztonságáról.",
       "updateSuccess": "Értesítések sikeresen frissítve"
     }
+  },
+  "resourceTable": {
+    "add": "Hozzáadás",
+    "save": "Mentés",
+    "edit": "Szerkesztés",
+    "delete": "Törlés",
+    "close": "Bezárás",
+    "cancel": "Mégse",
+    "continue": "Folytatás",
+    "actions": "Műveletek",
+    "previous": "Előző",
+    "next": "Következő",
+    "previousPage": "Ugrás az előző oldalra",
+    "nextPage": "Ugrás a következő oldalra",
+    "pagination": "Lapozás",
+    "search": "Keresés...",
+    "notFound": "Nincs találat.",
+    "remove": "{name} eltávolítása",
+    "deleteConfirm": "Biztosan törölni szeretnéd: {name}?",
+    "created": "Sikeresen hozzáadva!",
+    "updated": "Sikeresen frissítve!",
+    "deleted": "Sikeresen törölve.",
+    "positiveNumber": "{field}: pozitív szám kell legyen"
+  },
+  "resources": {
+    "ingredients": {
+      "title": "Hozzávalók",
+      "empty": "Nincsenek hozzávalók",
+      "addTitle": "Hozzávaló hozzáadása",
+      "editTitle": "Hozzávaló szerkesztése",
+      "deleteTitle": "Hozzávaló törlése",
+      "columns": {
+        "name": "Név",
+        "calories": "Kalória",
+        "protein": "Fehérje",
+        "totalFat": "Zsír (telített)",
+        "totalCarbohydrates": "Szénhidrát (cukor)",
+        "dietaryFiber": "Rost",
+        "unit": "Egység"
+      },
+      "fields": {
+        "name": "Név",
+        "protein": "Fehérje",
+        "totalFat": "Összes zsír",
+        "saturatedFat": "Telített zsír",
+        "totalCarbohydrates": "Összes szénhidrát",
+        "sugar": "Cukor",
+        "dietaryFiber": "Élelmi rost",
+        "calories": "Kalória",
+        "unit": "Egység",
+        "unitPlaceholder": "Válassz egységet..."
+      },
+      "validation": {
+        "nameRequired": "A név megadása kötelező"
+      }
+    },
+    "meals": {
+      "title": "Ételek",
+      "empty": "Nincsenek ételek",
+      "addTitle": "Étel hozzáadása",
+      "editTitle": "Étel szerkesztése",
+      "deleteTitle": "Étel törlése",
+      "columns": {
+        "name": "Név",
+        "calories": "Kalória",
+        "protein": "Fehérje",
+        "totalFat": "Zsír (telített)",
+        "totalCarbohydrates": "Szénhidrát (cukor)",
+        "dietaryFiber": "Rost",
+        "quantity": "Mennyiség",
+        "unit": "Egység"
+      },
+      "fields": {
+        "name": "Étel neve",
+        "ingredient": "Hozzávaló",
+        "ingredientPlaceholder": "Válassz hozzávalót...",
+        "quantity": "Mennyiség",
+        "addIngredient": "Hozzávaló hozzáadása",
+        "removeIngredient": "Hozzávaló eltávolítása"
+      },
+      "validation": {
+        "nameRequired": "Az étel nevének megadása kötelező",
+        "ingredientsRequired": "Legalább egy hozzávaló szükséges",
+        "ingredientRequired": "Válassz hozzávalót",
+        "quantityPositive": "A mennyiségnek nagyobbnak kell lennie 0-nál"
+      }
+    },
+    "mealPlans": {
+      "title": "Étrendek",
+      "empty": "Nincsenek étrendek",
+      "addTitle": "Étrend hozzáadása",
+      "editTitle": "Étrend szerkesztése",
+      "deleteTitle": "Étrend törlése",
+      "columns": {
+        "name": "Név",
+        "calories": "Kalória",
+        "protein": "Fehérje",
+        "totalFat": "Zsír (telített)",
+        "totalCarbohydrates": "Szénhidrát (cukor)",
+        "dietaryFiber": "Rost"
+      },
+      "fields": {
+        "name": "Étrend neve",
+        "meals": "Ételek",
+        "mealsPlaceholder": "Válassz ételeket..."
+      },
+      "validation": {
+        "nameRequired": "A név megadása kötelező"
+      }
+    }
   }
 }

@@ -51,7 +51,18 @@ helpers/
 ```
 
 Nested feature modules live under a route's own `(modules)/` folder, e.g.
-`app/(modules)/[lang]/dashboard/(modules)/{profile,ingredients,meals,meal-plans,_user}/`.
+`app/(modules)/[lang]/dashboard/(modules)/{profile,ingredients,meals,meal-plans,_user,_resource-table}/`.
+
+### Resource tables
+
+Ingredients, Meals and Meal plans list pages go through the `_resource-table`
+module (list page, sort, paging, row-actions menu, add/edit dialog). Each
+resource keeps two halves in its `resource/` folder: `list.tsx` (server:
+fetch, columns, row renderer, page size, form-data loader) and `form.ts`
+(`'use client'`: schema, defaults, fields, server actions, bound via
+`createResourceForm`). They are split because Next can't pass functions from
+server to client. Table/dialog strings live under `resourceTable` and
+`resources.<key>` in the dictionaries.
 
 ### API layer
 

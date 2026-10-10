@@ -1,8 +1,12 @@
+import { TDictionary } from '@/app/providers/dictionary-provider';
 import { z } from 'zod';
 
-export const mealPlanSchema = z.object({
-  name: z.string().min(1, 'Name is required'),
-  mealIds: z.array(z.number().int()),
-});
+export const createMealPlanSchema = ({
+  resources: { mealPlans },
+}: TDictionary) =>
+  z.object({
+    name: z.string().min(1, mealPlans.validation.nameRequired),
+    mealIds: z.array(z.number().int()),
+  });
 
-export type TMealPlanSchema = z.infer<typeof mealPlanSchema>;
+export type TMealPlanSchema = z.infer<ReturnType<typeof createMealPlanSchema>>;

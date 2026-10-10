@@ -14,24 +14,34 @@ interface IProps {
   onConfirm: () => void;
   title: string;
   subtitle: string;
+  triggerLabel: string;
+  cancelLabel: string;
+  confirmLabel: string;
 }
 
 const DeleteDialog = (props: IProps) => {
-  const { onConfirm, title, subtitle } = props;
+  const {
+    onConfirm,
+    title,
+    subtitle,
+    triggerLabel,
+    cancelLabel,
+    confirmLabel,
+  } = props;
   const handleConfirm = () => onConfirm();
 
   return (
     <AlertDialog>
-      <AlertDialogTrigger>Delete</AlertDialogTrigger>
+      <AlertDialogTrigger>{triggerLabel}</AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>
           <AlertDialogDescription>{subtitle}</AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>{cancelLabel}</AlertDialogCancel>
           <AlertDialogAction onClick={handleConfirm}>
-            Continue
+            {confirmLabel}
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

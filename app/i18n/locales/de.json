@@ -90,5 +90,115 @@
       "dark": "Dunkel",
       "system": "System"
     }
+  },
+  "resourceTable": {
+    "add": "Hinzufügen",
+    "save": "Speichern",
+    "edit": "Bearbeiten",
+    "delete": "Löschen",
+    "close": "Schließen",
+    "cancel": "Abbrechen",
+    "continue": "Weiter",
+    "actions": "Aktionen",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "previousPage": "Zur vorherigen Seite",
+    "nextPage": "Zur nächsten Seite",
+    "pagination": "Seitennavigation",
+    "search": "Suchen...",
+    "notFound": "Nichts gefunden.",
+    "remove": "{name} entfernen",
+    "deleteConfirm": "Möchtest du {name} wirklich löschen?",
+    "created": "Erfolgreich hinzugefügt!",
+    "updated": "Erfolgreich aktualisiert!",
+    "deleted": "Erfolgreich gelöscht.",
+    "positiveNumber": "{field} muss eine positive Zahl sein"
+  },
+  "resources": {
+    "ingredients": {
+      "title": "Zutaten",
+      "empty": "Keine Zutaten vorhanden",
+      "addTitle": "Zutat hinzufügen",
+      "editTitle": "Zutat bearbeiten",
+      "deleteTitle": "Zutat löschen",
+      "columns": {
+        "name": "Name",
+        "calories": "Kalorien",
+        "protein": "Eiweiß",
+        "totalFat": "Fett (gesättigt)",
+        "totalCarbohydrates": "Kohlenhydrate (Zucker)",
+        "dietaryFiber": "Ballaststoffe",
+        "unit": "Einheit"
+      },
+      "fields": {
+        "name": "Name",
+        "protein": "Eiweiß",
+        "totalFat": "Fett gesamt",
+        "saturatedFat": "Gesättigte Fettsäuren",
+        "totalCarbohydrates": "Kohlenhydrate gesamt",
+        "sugar": "Zucker",
+        "dietaryFiber": "Ballaststoffe",
+        "calories": "Kalorien",
+        "unit": "Einheit",
+        "unitPlaceholder": "Einheit wählen..."
+      },
+      "validation": {
+        "nameRequired": "Name ist erforderlich"
+      }
+    },
+    "meals": {
+      "title": "Mahlzeiten",
+      "empty": "Keine Mahlzeiten vorhanden",
+      "addTitle": "Mahlzeit hinzufügen",
+      "editTitle": "Mahlzeit bearbeiten",
+      "deleteTitle": "Mahlzeit löschen",
+      "columns": {
+        "name": "Name",
+        "calories": "Kalorien",
+        "protein": "Eiweiß",
+        "totalFat": "Fett (gesättigt)",
+        "totalCarbohydrates": "Kohlenhydrate (Zucker)",
+        "dietaryFiber": "Ballaststoffe",
+        "quantity": "Menge",
+        "unit": "Einheit"
+      },
+      "fields": {
+        "name": "Name der Mahlzeit",
+        "ingredient": "Zutat",
+        "ingredientPlaceholder": "Zutat wählen...",
+        "quantity": "Menge",
+        "addIngredient": "Zutat hinzufügen",
+        "removeIngredient": "Zutat entfernen"
+      },
+      "validation": {
+        "nameRequired": "Name der Mahlzeit ist erforderlich",
+        "ingredientsRequired": "Mindestens eine Zutat ist erforderlich",
+        "ingredientRequired": "Zutat wählen",
+        "quantityPositive": "Menge muss größer als 0 sein"
+      }
+    },
+    "mealPlans": {
+      "title": "Ernährungspläne",
+      "empty": "Keine Ernährungspläne vorhanden",
+      "addTitle": "Ernährungsplan hinzufügen",
+      "editTitle": "Ernährungsplan bearbeiten",
+      "deleteTitle": "Ernährungsplan löschen",
+      "columns": {
+        "name": "Name",
+        "calories": "Kalorien",
+        "protein": "Eiweiß",
+        "totalFat": "Fett (gesättigt)",
+        "totalCarbohydrates": "Kohlenhydrate (Zucker)",
+        "dietaryFiber": "Ballaststoffe"
+      },
+      "fields": {
+        "name": "Name des Ernährungsplans",
+        "meals": "Mahlzeiten",
+        "mealsPlaceholder": "Mahlzeiten wählen..."
+      },
+      "validation": {
+        "nameRequired": "Name ist erforderlich"
+      }
+    }
   }
 }
