@@ -2,7 +2,6 @@
   "dashboard": {
     "statistics": {
       "totalIngredients": "Total Ingredients",
-      "totalRecipes": "Total Recipes",
       "totalMeals": "Total Meals",
       "totalMealPlans": "Total Meal Plans"
     },
@@ -13,7 +12,6 @@
       "app": "Application",
       "dashboard": "Dashboard",
       "ingredients": "Ingredients",
-      "recipes": "Recipes",
       "meals": "Meals",
       "mealPlans": "Meal Plans"
     }

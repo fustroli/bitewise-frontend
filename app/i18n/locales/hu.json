@@ -2,7 +2,6 @@
   "dashboard": {
     "statistics": {
       "totalIngredients": "Összes hozzávaló",
-      "totalRecipes": "Összes recept",
       "totalMeals": "Összes étel",
       "totalMealPlans": "Összes étrend"
     },
@@ -13,7 +12,6 @@
       "app": "Alkalmazás",
       "dashboard": "Vezérlőpult",
       "ingredients": "Hozzávalók",
-      "recipes": "Receptek",
       "meals": "Ételek",
       "mealPlans": "Étrendek"
     }

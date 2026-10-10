@@ -1,9 +1,4 @@
-import {
-  CookingPot,
-  HandPlatter,
-  NotebookPen,
-  ShoppingBasket,
-} from 'lucide-react';
+import { HandPlatter, NotebookPen, ShoppingBasket } from 'lucide-react';
 
 import { ILangProps } from '@/app/utils/interfaces';
 import StatisticsCard from '@/app/(modules)/[lang]/dashboard/components/Statistics/StatisticsCard';
@@ -22,7 +17,7 @@ const Statistics = async ({ lang }: ILangProps) => {
   ]);
 
   return (
-    <section className="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
+    <section className="grid gap-6 lg:grid-cols-3">
       <StatisticsCard
         title={dict.dashboard.statistics.totalIngredients}
         value={ingredients.data.length}
@@ -37,11 +32,6 @@ const Statistics = async ({ lang }: ILangProps) => {
         title={dict.dashboard.statistics.totalMealPlans}
         value={mealPlans.data.length}
         icon={<NotebookPen />}
-      />
-      <StatisticsCard
-        title={dict.dashboard.statistics.totalRecipes}
-        value={100}
-        icon={<CookingPot />}
       />
     </section>
   );
