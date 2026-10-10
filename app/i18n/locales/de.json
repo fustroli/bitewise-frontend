@@ -14,11 +14,7 @@
       "ingredients": "Zutaten",
       "recipes": "Rezepte",
       "meals": "Mahlzeiten",
-      "mealPlans": "Essenspläne",
-      "other": "Sonstiges",
-      "paymentPlans": "Zahlungspläne",
-      "upgradeTitle": "Upgrade deinen Plan für mehr Funktionen",
-      "upgradeButton": "Upgraden"
+      "mealPlans": "Essenspläne"
     }
   },
   "common": {
@@ -37,7 +33,6 @@
     "menuOptions": {
       "profile": "Mein Profil",
       "security": "Sicherheit",
-      "billing": "Pläne und Abrechnung",
       "notifications": "Benachrichtigungen",
       "preferences": "Einstellungen"
     },

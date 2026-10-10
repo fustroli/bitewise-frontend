@@ -1,5 +1,4 @@
 import {
-  CreditCard,
   HandPlatter,
   LayoutDashboard,
   NotebookPen,
@@ -29,13 +28,5 @@ export const MENU_ITEMS: IMenuItem[] = [
     label: 'mealPlans',
     route: `/meal-plans?page=1&orderBy=name&orderDirection=${EOrderDirection.ASC}`,
     icon: NotebookPen,
-  },
-];
-
-export const SUB_MENU_ITEMS: IMenuItem[] = [
-  {
-    label: 'paymentPlans',
-    route: '/payment-plans',
-    icon: CreditCard,
   },
 ];

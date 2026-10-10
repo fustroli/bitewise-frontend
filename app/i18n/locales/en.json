@@ -15,11 +15,7 @@
       "ingredients": "Ingredients",
       "recipes": "Recipes",
       "meals": "Meals",
-      "mealPlans": "Meal Plans",
-      "other": "Other",
-      "paymentPlans": "Payment Plans",
-      "upgradeTitle": "Upgrade your plan to unlock more features",
-      "upgradeButton": "Upgrade"
+      "mealPlans": "Meal Plans"
     }
   },
   "common": {
@@ -54,7 +50,6 @@
     "menuOptions": {
       "profile": "My Profile",
       "security": "Security",
-      "billing": "Plans and Billing",
       "notifications": "Notifications",
       "preferences": "Preferences"
     },
