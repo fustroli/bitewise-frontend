@@ -33,7 +33,11 @@ async function ResourceTable<TRecord extends IResourceRecord, TFormData>({
 }: IProps<TRecord, TFormData>) {
   const { dialog: Dialog, rowActions: RowActions, columns } = resource;
   const pageSize = resource.pageSize ?? DEFAULT_PAGE_SIZE;
-  const { page, sort, search, params } = toListQuery(searchParams, pageSize);
+  const { page, sort, search, params } = toListQuery(
+    searchParams,
+    columns,
+    pageSize,
+  );
 
   const [{ data: rows, count }, formData] = await Promise.all([
     resource.fetch(params),

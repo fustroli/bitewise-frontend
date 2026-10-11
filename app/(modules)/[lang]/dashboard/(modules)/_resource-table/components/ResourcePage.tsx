@@ -39,7 +39,7 @@ async function ResourcePage<TRecord extends IResourceRecord, TFormData>({
   const [{ lang }, query] = await Promise.all([params, searchParams]);
   const dictionary = await getDictionary(lang);
   const pageSize = resource.pageSize ?? DEFAULT_PAGE_SIZE;
-  const { sort, search } = toListQuery(query, pageSize);
+  const { sort, search } = toListQuery(query, resource.columns, pageSize);
 
   return (
     <div className="px-4 pb-8 md:px-8">
@@ -50,7 +50,7 @@ async function ResourcePage<TRecord extends IResourceRecord, TFormData>({
           )}
           <ResourceSearchPending>
             <Suspense
-              key={toSuspenseKey(query)}
+              key={toSuspenseKey(query, resource.columns)}
               fallback={
                 <ResourceTableSkeleton
                   columns={resource.columns}

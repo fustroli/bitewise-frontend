@@ -5,6 +5,7 @@ import {
 import {
   IListQuery,
   IPageMetadata,
+  IResourceColumn,
   ISortState,
   TSearchParams,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
@@ -26,10 +27,26 @@ const parseDirection = (value: string | undefined) =>
 export const normalizeSearch = (value: string | undefined) =>
   value?.trim().slice(0, MAX_SEARCH_LENGTH).trim() || undefined;
 
-const parseSort = (searchParams: TSearchParams | undefined): ISortState => ({
-  orderBy: first(searchParams?.orderBy) || undefined,
-  orderDirection: parseDirection(first(searchParams?.orderDirection)),
-});
+/**
+ * Keeps the sort only when it names one of the table's sortable columns;
+ * anything else is no sort, so the list falls back to `DEFAULT_SORT`.
+ */
+const parseSort = (
+  searchParams: TSearchParams | undefined,
+  columns: IResourceColumn[],
+): ISortState => {
+  const orderBy = first(searchParams?.orderBy);
+  const isSortable = columns.some(
+    (column) => column.sortable && column.id === orderBy,
+  );
+
+  return isSortable
+    ? {
+        orderBy,
+        orderDirection: parseDirection(first(searchParams?.orderDirection)),
+      }
+    : { orderBy: undefined, orderDirection: undefined };
+};
 
 /**
  * Reads page, sort and search from the URL and turns them into a backend
@@ -37,10 +54,11 @@ const parseSort = (searchParams: TSearchParams | undefined): ISortState => ({
  */
 export const toListQuery = (
   searchParams: TSearchParams | undefined,
+  columns: IResourceColumn[],
   pageSize: number,
 ): IListQuery => {
   const page = parsePage(first(searchParams?.page));
-  const sort = parseSort(searchParams);
+  const sort = parseSort(searchParams, columns);
   const search = normalizeSearch(first(searchParams?.search));
 
   return {
@@ -110,8 +128,11 @@ export const buildSearchHref = (sort: ISortState, search: string | undefined) =>
  * Changes with the page or sort, so Suspense shows the skeleton again. Search
  * is left out: while a search loads, the old rows stay (dimmed) instead.
  */
-export const toSuspenseKey = (searchParams: TSearchParams | undefined) =>
+export const toSuspenseKey = (
+  searchParams: TSearchParams | undefined,
+  columns: IResourceColumn[],
+) =>
   JSON.stringify({
     page: parsePage(first(searchParams?.page)),
-    ...parseSort(searchParams),
+    ...parseSort(searchParams, columns),
   });
