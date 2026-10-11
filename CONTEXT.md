@@ -50,7 +50,7 @@ _Avoid_: Login (as a noun), auth
 ### Body
 
 **Body stats**:
-A User's sex, height, weight and Activity level as currently recorded (metric, no history). Part of their Profile.
+A User's sex, height, weight, neck, waist and hip circumference, and Activity level as currently recorded (metric, no history). Part of their Profile.
 _Avoid_: Body metrics, biometrics, health data
 
 **Activity level**:

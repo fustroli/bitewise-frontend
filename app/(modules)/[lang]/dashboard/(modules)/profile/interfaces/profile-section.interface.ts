@@ -26,6 +26,8 @@ interface IProfileNumberField<
   min: number;
   max: number;
   step: number;
+  /** Shown under the label. */
+  hint?: string;
 }
 
 export interface IProfileSelectOption {

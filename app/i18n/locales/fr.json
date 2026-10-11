@@ -199,5 +199,12 @@
     "passwordMatch": "Les mots de passe doivent correspondre",
     "oldPasswordRequired": "Ancien mot de passe requis",
     "confirmPasswordRequired": "Confirmer le mot de passe est requis"
+  },
+  "validation": {
+    "neckRange": "Le cou doit être compris entre {min} et {max} cm",
+    "waistRange": "La taille doit être comprise entre {min} et {max} cm",
+    "hipRange": "Les hanches doivent être comprises entre {min} et {max} cm",
+    "halfStep": "Utilisez des pas de 0,5",
+    "waistAboveNeck": "La taille doit être supérieure au cou"
   }
 }

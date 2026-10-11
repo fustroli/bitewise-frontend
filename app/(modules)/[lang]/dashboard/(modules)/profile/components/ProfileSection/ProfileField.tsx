@@ -43,6 +43,9 @@ const ProfileField = <TValues extends FieldValues>({
   return (
     <article>
       {field.label && <Typography variant="p">{field.label}</Typography>}
+      {field.kind === 'number' && field.hint && (
+        <Typography variant="muted">{field.hint}</Typography>
+      )}
       {isEditing ? (
         <div className="max-w-[200px]">{renderEditView(field, form)}</div>
       ) : (

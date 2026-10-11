@@ -8,6 +8,9 @@ export const toBodyStatsFormValues = (user: IUser): TBodyStatsSchema => ({
   sex: user.bodyStats?.sex ?? null,
   heightCm: user.bodyStats?.heightCm ?? null,
   weightKg: user.bodyStats?.weightKg ?? null,
+  neckCm: user.bodyStats?.neckCm ?? null,
+  waistCm: user.bodyStats?.waistCm ?? null,
+  hipCm: user.bodyStats?.hipCm ?? null,
   activityLevel: user.bodyStats?.activityLevel ?? null,
 });
 

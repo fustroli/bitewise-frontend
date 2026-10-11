@@ -89,7 +89,12 @@
     "weightRange": "A testsúly {min} és {max} kg között lehet",
     "wholeNumber": "Egész számot adjon meg",
     "oneDecimal": "Legfeljebb egy tizedesjegyet adjon meg",
-    "ageRange": "Az életkornak {min} és {max} év között kell lennie"
+    "ageRange": "Az életkornak {min} és {max} év között kell lennie",
+    "neckRange": "A nyak {min} és {max} cm között lehet",
+    "waistRange": "A derék {min} és {max} cm között lehet",
+    "hipRange": "A csípő {min} és {max} cm között lehet",
+    "halfStep": "0,5-ös lépésekben adja meg",
+    "waistAboveNeck": "A derék legyen nagyobb, mint a nyak"
   },
   "profile": {
     "basic": {
@@ -121,6 +126,10 @@
       "sex": "Nem (a számításokhoz)",
       "height": "Magasság (cm)",
       "weight": "Testsúly (kg)",
+      "neck": "Nyak (cm)",
+      "waist": "Derék (cm)",
+      "hip": "Csípő (cm, nem kötelező)",
+      "hipHint": "Csak nőknél használjuk.",
       "activityLevel": "Aktivitási szint",
       "notSet": "Nincs megadva",
       "select": "Válasszon",

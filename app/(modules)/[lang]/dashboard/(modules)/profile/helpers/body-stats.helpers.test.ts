@@ -19,6 +19,9 @@ const VALID: TBodyStatsSchema = {
   sex: ESex.FEMALE,
   heightCm: 170,
   weightKg: 62.5,
+  neckCm: 32,
+  waistCm: 70.5,
+  hipCm: 96,
   activityLevel: EActivityLevel.LIGHT,
 };
 
@@ -40,6 +43,9 @@ describe('Body stats validation', () => {
         sex: null,
         heightCm: null,
         weightKg: null,
+        neckCm: null,
+        waistCm: null,
+        hipCm: null,
         activityLevel: null,
       }),
     ).toBeUndefined();
@@ -70,6 +76,47 @@ describe('Body stats validation', () => {
   it('rejects a weight with two decimals', () => {
     expect(errorFor({ weightKg: 72.35 })).toBe(en.validation.oneDecimal);
   });
+
+  it.each([
+    ['neckCm', 20, 60, 'Neck must be between 20 and 60 cm'],
+    ['waistCm', 40, 200, 'Waist must be between 40 and 200 cm'],
+    ['hipCm', 50, 200, 'Hip must be between 50 and 200 cm'],
+  ] as const)('limits %s to %s–%s cm', (field, min, max, message) => {
+    const neckCm = field === 'neckCm' ? null : VALID.neckCm;
+    expect(errorFor({ neckCm, [field]: min })).toBeUndefined();
+    expect(errorFor({ neckCm, [field]: max })).toBeUndefined();
+    expect(errorFor({ neckCm, [field]: min - 0.5 })).toBe(message);
+    expect(errorFor({ neckCm, [field]: max + 0.5 })).toBe(message);
+  });
+
+  it.each(['neckCm', 'waistCm', 'hipCm'] as const)(
+    'rejects %s off the 0.5 step',
+    (field) => {
+      expect(errorFor({ [field]: 55.5 })).toBeUndefined();
+      expect(errorFor({ [field]: 55.3 })).toBe(en.validation.halfStep);
+    },
+  );
+
+  it.each([50, 49.5])(
+    'rejects a waist of %s cm not above a 50 cm neck',
+    (waistCm) => {
+      const result = schema.safeParse({ ...VALID, neckCm: 50, waistCm });
+      expect(result.success).toBe(false);
+      expect(result.error!.issues).toEqual([
+        expect.objectContaining({
+          path: ['waistCm'],
+          message: en.validation.waistAboveNeck,
+        }),
+      ]);
+    },
+  );
+
+  it.each([
+    { neckCm: null, waistCm: 40 },
+    { neckCm: 60, waistCm: null },
+  ])('compares waist and neck only when both are set: %o', (values) => {
+    expect(errorFor(values)).toBeUndefined();
+  });
 });
 
 describe('Body stats change', () => {
@@ -78,6 +125,9 @@ describe('Body stats change', () => {
       sex: null,
       heightCm: null,
       weightKg: null,
+      neckCm: null,
+      waistCm: null,
+      hipCm: null,
       activityLevel: null,
     });
   });
@@ -92,6 +142,12 @@ describe('Body stats change', () => {
     expect(toBodyStatsChange({ ...VALID, heightCm: null }, USER)).toEqual({
       bodyStats: { heightCm: null },
     });
+  });
+
+  it('sends changed and emptied measurements', () => {
+    expect(
+      toBodyStatsChange({ ...VALID, waistCm: 72, hipCm: null }, USER),
+    ).toEqual({ bodyStats: { waistCm: 72, hipCm: null } });
   });
 
   it('sends nothing when nothing changed', () => {
