@@ -1,15 +1,14 @@
-import { HandPlatter, NotebookPen, ShoppingBasket } from 'lucide-react';
-
-import { ILangProps } from '@/app/utils/interfaces';
-import StatisticsCard from '@/app/(modules)/[lang]/dashboard/components/Statistics/StatisticsCard';
+import StatisticsCards from '@/app/(modules)/[lang]/dashboard/components/Statistics/StatisticsCards';
+import { TDictionary } from '@/app/providers/dictionary-provider';
 import { fetchIngredients } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/api';
 import { fetchMealPlans } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/api';
 import { fetchMeals } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/api';
-import { getDictionary } from '@/app/i18n/dictionaries';
 
-const Statistics = async ({ lang }: ILangProps) => {
-  const dict = await getDictionary(lang);
+interface IProps {
+  labels: TDictionary['dashboard']['statistics'];
+}
 
+const Statistics = async ({ labels }: IProps) => {
   const [ingredients, meals, mealPlans] = await Promise.all([
     fetchIngredients({}),
     fetchMeals({}),
@@ -17,23 +16,14 @@ const Statistics = async ({ lang }: ILangProps) => {
   ]);
 
   return (
-    <section className="grid gap-6 lg:grid-cols-3">
-      <StatisticsCard
-        title={dict.dashboard.statistics.totalIngredients}
-        value={ingredients.count}
-        icon={<ShoppingBasket />}
-      />
-      <StatisticsCard
-        title={dict.dashboard.statistics.totalMeals}
-        value={meals.count}
-        icon={<HandPlatter />}
-      />
-      <StatisticsCard
-        title={dict.dashboard.statistics.totalMealPlans}
-        value={mealPlans.count}
-        icon={<NotebookPen />}
-      />
-    </section>
+    <StatisticsCards
+      labels={labels}
+      counts={{
+        ingredients: ingredients.count,
+        meals: meals.count,
+        mealPlans: mealPlans.count,
+      }}
+    />
   );
 };
 

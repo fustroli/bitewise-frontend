@@ -18,8 +18,8 @@ import { useCallback, useMemo } from 'react';
 
 import { Button } from '@/app/components/ui/button';
 import DraftMealPlanEditor from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftMealPlanEditor';
+import DraftMealPlanSkeleton from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftMealPlanSkeleton';
 import { IDraftSources } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
-import { Skeleton } from '@/app/components/ui/skeleton';
 import { TStoredDraft } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/validations';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useLocalStorage } from '@/app/hooks/use-local-storage';
@@ -51,7 +51,7 @@ const DraftMealPlan = ({ meals, ingredients, profileHref }: IProps) => {
 
   // Not read until the client has hydrated.
   if (resolved === undefined) {
-    return <Skeleton className="h-40 w-full rounded-xl" />;
+    return <DraftMealPlanSkeleton />;
   }
 
   if (!resolved) {
