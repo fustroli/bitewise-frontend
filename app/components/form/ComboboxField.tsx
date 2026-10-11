@@ -31,6 +31,8 @@ interface IProps<T extends FieldValues> extends IFieldProps<T> {
   placeholder: string;
   searchPlaceholder: string;
   emptyText: string;
+  /** Overrides the trigger's default 200px width. */
+  className?: string;
 }
 
 /** Picks one option; the field value is its `value`. */
@@ -43,52 +45,59 @@ const ComboboxField = <T extends FieldValues>({
   placeholder,
   searchPlaceholder,
   emptyText,
+  className,
 }: IProps<T>) => (
   <FieldFrame control={control} name={name} label={label} hideLabel={hideLabel}>
-    {(field) => (
-      <Popover>
-        <PopoverTrigger asChild>
-          <FieldControl>
-            <Button
-              type="button"
-              variant="outline"
-              role="combobox"
-              className="w-[200px] justify-between"
-            >
-              {options.find((option) => option.value === field.value)?.label ??
-                placeholder}
-              <ChevronsUpDown className="opacity-50" />
-            </Button>
-          </FieldControl>
-        </PopoverTrigger>
-        <PopoverContent className="w-[200px] p-0">
-          <Command>
-            <CommandInput placeholder={searchPlaceholder} />
-            <CommandList>
-              <CommandEmpty>{emptyText}</CommandEmpty>
-              <CommandGroup>
-                {options.map((option) => (
-                  <CommandItem
-                    key={option.value}
-                    onSelect={() => field.onChange(option.value)}
-                  >
-                    {option.label}
-                    <Check
-                      className={cn(
-                        'ml-auto',
-                        field.value === option.value
-                          ? 'opacity-100'
-                          : 'opacity-0',
-                      )}
-                    />
-                  </CommandItem>
-                ))}
-              </CommandGroup>
-            </CommandList>
-          </Command>
-        </PopoverContent>
-      </Popover>
-    )}
+    {(field) => {
+      const selectedLabel = options.find(
+        (option) => option.value === field.value,
+      )?.label;
+
+      return (
+        <Popover>
+          <PopoverTrigger asChild>
+            <FieldControl>
+              <Button
+                type="button"
+                variant="outline"
+                role="combobox"
+                title={selectedLabel}
+                className={cn('w-[200px] justify-between', className)}
+              >
+                <span className="truncate">{selectedLabel ?? placeholder}</span>
+                <ChevronsUpDown className="opacity-50" />
+              </Button>
+            </FieldControl>
+          </PopoverTrigger>
+          <PopoverContent className="w-[--radix-popover-trigger-width] min-w-[200px] p-0">
+            <Command>
+              <CommandInput placeholder={searchPlaceholder} />
+              <CommandList>
+                <CommandEmpty>{emptyText}</CommandEmpty>
+                <CommandGroup>
+                  {options.map((option) => (
+                    <CommandItem
+                      key={option.value}
+                      onSelect={() => field.onChange(option.value)}
+                    >
+                      {option.label}
+                      <Check
+                        className={cn(
+                          'ml-auto',
+                          field.value === option.value
+                            ? 'opacity-100'
+                            : 'opacity-0',
+                        )}
+                      />
+                    </CommandItem>
+                  ))}
+                </CommandGroup>
+              </CommandList>
+            </Command>
+          </PopoverContent>
+        </Popover>
+      );
+    }}
   </FieldFrame>
 );
 

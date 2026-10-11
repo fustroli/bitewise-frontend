@@ -59,7 +59,7 @@ const DraftLineRow = ({
 
   return (
     <TableRow className="align-top">
-      <TableCell>
+      <TableCell className="w-80 min-w-52">
         <ComboboxField
           control={control}
           name={`lines.${index}.itemId`}
@@ -71,6 +71,7 @@ const DraftLineRow = ({
           }
           searchPlaceholder={resourceTable.search}
           emptyText={resourceTable.notFound}
+          className="w-full"
         />
       </TableCell>
       <TableCell className="w-32 min-w-32">
