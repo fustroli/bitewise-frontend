@@ -3,8 +3,14 @@ import {
   DictionaryProvider,
   TDictionary,
 } from '@/app/providers/dictionary-provider';
+import {
+  EActivityLevel,
+  ESex,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
+
+import BodyStats from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Profile/BodyStats';
 
 import EmailNotifications from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Notifications/EmailNotifications';
 import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
@@ -155,5 +161,103 @@ describe('Email notifications', () => {
       name: en.profile.notifications.securityEmail,
     });
     expect(securitySwitch.getAttribute('aria-checked')).toBe('false');
+  });
+});
+
+describe('Body stats', () => {
+  const labels = en.profile.bodyStats;
+  const BODY_USER: IUser = {
+    ...USER,
+    bodyStats: {
+      sex: ESex.MALE,
+      heightCm: 180,
+      weightKg: 80.5,
+      activityLevel: EActivityLevel.MODERATE,
+    },
+  };
+  const savedWith = (bodyStats: IUser['bodyStats']) =>
+    vi.fn().mockResolvedValue({ ok: true, data: { ...BODY_USER, bodyStats } });
+
+  const heightInput = () => screen.getAllByRole('spinbutton')[0];
+  const weightInput = () => screen.getAllByRole('spinbutton')[1];
+  const sexSelect = () => screen.getAllByRole('combobox')[0];
+  const activitySelect = () => screen.getAllByRole('combobox')[1];
+
+  beforeEach(() => {
+    vi.mocked(toast).mockClear();
+    // Radix Select uses pointer capture and scrolling that jsdom lacks.
+    Element.prototype.hasPointerCapture = () => false;
+    Element.prototype.releasePointerCapture = () => {};
+    Element.prototype.scrollIntoView = () => {};
+  });
+
+  afterEach(cleanup);
+
+  it('reads numbers as entered and selects as their labels', () => {
+    renderWithUser(<BodyStats />, BODY_USER, vi.fn());
+
+    expect(screen.getByText(labels.sexes.MALE)).toBeTruthy();
+    expect(screen.getByText('180')).toBeTruthy();
+    expect(screen.getByText('80.5')).toBeTruthy();
+    expect(screen.getByText(labels.activityLevels.MODERATE)).toBeTruthy();
+  });
+
+  it('submits edited numbers and selects, and only those', async () => {
+    const user = userEvent.setup();
+    const updateUser = savedWith({
+      ...BODY_USER.bodyStats!,
+      sex: ESex.FEMALE,
+      heightCm: 175,
+    });
+    renderWithUser(<BodyStats />, BODY_USER, updateUser);
+
+    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.clear(heightInput());
+    await user.type(heightInput(), '175');
+    await user.click(sexSelect());
+    await user.click(screen.getByRole('option', { name: labels.sexes.FEMALE }));
+    await user.click(screen.getByRole('button', { name: common.save }));
+
+    expect(updateUser).toHaveBeenCalledWith({
+      bodyStats: { sex: ESex.FEMALE, heightCm: 175 },
+    });
+    expect(screen.getByText(labels.sexes.FEMALE)).toBeTruthy();
+    expect(screen.getByText('175')).toBeTruthy();
+  });
+
+  it('submits an emptied number and a cleared select as null', async () => {
+    const user = userEvent.setup();
+    const updateUser = savedWith({
+      ...BODY_USER.bodyStats!,
+      weightKg: null,
+      activityLevel: null,
+    });
+    renderWithUser(<BodyStats />, BODY_USER, updateUser);
+
+    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.clear(weightInput());
+    await user.click(activitySelect());
+    await user.click(screen.getByRole('option', { name: labels.notSet }));
+    await user.click(screen.getByRole('button', { name: common.save }));
+
+    expect(updateUser).toHaveBeenCalledWith({
+      bodyStats: { weightKg: null, activityLevel: null },
+    });
+  });
+
+  it('rejects an out-of-range number without saving', async () => {
+    const user = userEvent.setup();
+    const updateUser = vi.fn();
+    renderWithUser(<BodyStats />, BODY_USER, updateUser);
+
+    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.clear(heightInput());
+    await user.type(heightInput(), '90');
+    await user.click(screen.getByRole('button', { name: common.save }));
+
+    expect(updateUser).not.toHaveBeenCalled();
+    expect(
+      screen.getByText('Height must be between 100 and 250 cm'),
+    ).toBeTruthy();
   });
 });

@@ -19,6 +19,30 @@ interface IProfilePhoneOrDateField<
   kind: 'phone' | 'date';
 }
 
+interface IProfileNumberField<
+  TValues extends FieldValues,
+> extends IProfileFieldBase<TValues> {
+  kind: 'number';
+  min: number;
+  max: number;
+  step: number;
+}
+
+export interface IProfileSelectOption {
+  value: string;
+  label: string;
+}
+
+interface IProfileSelectField<
+  TValues extends FieldValues,
+> extends IProfileFieldBase<TValues> {
+  kind: 'select';
+  options: IProfileSelectOption[];
+  placeholder: string;
+  /** Label of the option that unsets the field. */
+  clearLabel: string;
+}
+
 interface IProfileSwitchField<
   TValues extends FieldValues,
 > extends IProfileFieldBase<TValues> {
@@ -32,4 +56,6 @@ interface IProfileSwitchField<
 export type TProfileField<TValues extends FieldValues> =
   | IProfileTextField<TValues>
   | IProfilePhoneOrDateField<TValues>
+  | IProfileNumberField<TValues>
+  | IProfileSelectField<TValues>
   | IProfileSwitchField<TValues>;

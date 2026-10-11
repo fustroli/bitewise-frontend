@@ -87,6 +87,15 @@ ingredient, Meal and Meal plan from the per-ingredient values the backend
 sends, at full precision; `formatNutrition()` rounds only for display. Table
 cells select and format, never compute.
 
+### Body metrics
+
+The `_body-metrics` module derives BMI, the BMI category, the healthy weight
+range, Maintenance calories (Mifflin-St Jeor × Activity multiplier) and
+Calorie targets (±250/500/1000 kcal) from the User's Body stats, date of
+birth and today, via `bodyMetrics()`, and lists the missing inputs. Nothing is
+stored; the dashboard's BMI and Calorie cards read the User from context, so
+they update after a Profile save, and only format what the module returns.
+
 ### API layer
 
 See `docs/adr/0001-reads-throw-mutations-return-results.md`.

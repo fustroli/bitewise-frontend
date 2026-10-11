@@ -11,6 +11,10 @@ import { cn } from '@/app/lib/utils';
 interface IProps<T extends FieldValues> extends IFieldProps<T> {
   label?: string;
   type?: HTMLInputTypeAttribute;
+  /** For a number field; the schema still does the validating. */
+  min?: number;
+  max?: number;
+  step?: number;
   disabled?: boolean;
   endAdornment?: ReactNode;
   /** Called after React Hook Form's own blur handler. */
@@ -23,6 +27,9 @@ const InputField = <T extends FieldValues>({
   name,
   label,
   type = 'text',
+  min,
+  max,
+  step,
   disabled,
   endAdornment,
   onBlur,
@@ -40,6 +47,9 @@ const InputField = <T extends FieldValues>({
           type={type}
           name={field.name}
           value={field.value ?? ''}
+          min={min}
+          max={max}
+          step={step}
           disabled={disabled}
           className={cn(endAdornment && 'pr-10')}
           ref={(element) => {

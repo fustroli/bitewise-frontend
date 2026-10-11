@@ -1,18 +1,23 @@
 'use client';
 
 import {
+  TDictionary,
+  useDictionary,
+} from '@/app/providers/dictionary-provider';
+import {
   TPersonalInfoSchema,
-  personalInformationSchema,
+  createPersonalInformationSchema,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations';
 import {
   toPersonalInfoChange,
   toPersonalInfoFormValues,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
 
+import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
 import ProfileSection from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/ProfileSection';
-import { useDictionary } from '@/app/providers/dictionary-provider';
 
-const createSchema = () => personalInformationSchema;
+const createSchema = (dictionary: TDictionary) =>
+  createPersonalInformationSchema(dictionary);
 
 const PersonalInformation = () => {
   const { profile } = useDictionary();
@@ -20,6 +25,7 @@ const PersonalInformation = () => {
 
   return (
     <ProfileSection<TPersonalInfoSchema>
+      id={PROFILE_SECTION_IDS.personalInformation}
       title={labels.title}
       createSchema={createSchema}
       toFormValues={toPersonalInfoFormValues}
