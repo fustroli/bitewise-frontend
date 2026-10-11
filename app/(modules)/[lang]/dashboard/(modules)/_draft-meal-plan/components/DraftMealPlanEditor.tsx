@@ -221,7 +221,7 @@ const DraftMealPlanEditor = ({
           <div className="flex flex-wrap gap-2">
             <Button
               type="button"
-              variant="outline"
+              variant="tinted"
               onClick={() =>
                 append({
                   kind: EDraftLineKind.MEAL,
@@ -234,7 +234,7 @@ const DraftMealPlanEditor = ({
             </Button>
             <Button
               type="button"
-              variant="outline"
+              variant="tinted"
               onClick={() =>
                 append({
                   kind: EDraftLineKind.INGREDIENT,

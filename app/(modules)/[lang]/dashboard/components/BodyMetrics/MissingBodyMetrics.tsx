@@ -11,7 +11,7 @@ interface IProps {
 const MissingBodyMetrics = ({ message, linkLabel, href }: IProps) => (
   <div className="flex flex-col items-start gap-4">
     <p className="text-sm text-muted-foreground">{message}</p>
-    <Button variant="outline" asChild>
+    <Button asChild>
       <Link href={href}>{linkLabel}</Link>
     </Button>
   </div>

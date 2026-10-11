@@ -39,7 +39,7 @@ const DraftMaintenance = ({ kcal, profileHref }: IProps) => {
     return (
       <div className="flex flex-col items-start gap-4">
         <p className="text-sm text-muted-foreground">{labels.missing}</p>
-        <Button variant="outline" asChild>
+        <Button asChild>
           <Link href={profileHref}>{labels.completeProfile}</Link>
         </Button>
       </div>
