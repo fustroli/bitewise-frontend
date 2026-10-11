@@ -31,27 +31,27 @@ const AuthForm = ({ notice }: IProps) => {
           <AlertDescription>{notice}</AlertDescription>
         </Alert>
       )}
-      <Tabs defaultValue={EAuthView.SIGN_IN}>
-        <TabsList className="mb-6 grid w-full grid-cols-2">
-          <TabsTrigger value={EAuthView.SIGN_IN}>Sign In</TabsTrigger>
-          <TabsTrigger value={EAuthView.SIGN_UP}>Sign Up</TabsTrigger>
-        </TabsList>
-        <TabsContent value={EAuthView.SIGN_IN}>
-          <SignInForm />
-        </TabsContent>
-        <TabsContent value={EAuthView.SIGN_UP}>
-          <SignUpForm />
-        </TabsContent>
-      </Tabs>
-
-      <div className="flex w-full items-center">
-        <Separator className="shrink" />
-        <p className="mx-4 shrink-0">Or continue with</p>
-        <Separator className="shrink" />
-      </div>
-      <div className="space-x-4">
+      <div className="flex flex-col gap-10">
+        <Tabs defaultValue={EAuthView.SIGN_IN}>
+          <TabsList className="mb-6 grid w-full grid-cols-2">
+            <TabsTrigger value={EAuthView.SIGN_IN}>Sign In</TabsTrigger>
+            <TabsTrigger value={EAuthView.SIGN_UP}>Sign Up</TabsTrigger>
+          </TabsList>
+          <TabsContent value={EAuthView.SIGN_IN}>
+            <SignInForm />
+          </TabsContent>
+          <TabsContent value={EAuthView.SIGN_UP}>
+            <SignUpForm />
+          </TabsContent>
+        </Tabs>
+        <div className="flex w-full items-center">
+          <Separator className="shrink" />
+          <p className="mx-4 shrink-0">Or continue with</p>
+          <Separator className="shrink" />
+        </div>
         <SocialLogin url="/auth/google/login">
           <GoogleIcon />
+          Google
         </SocialLogin>
       </div>
       <div className="text-center text-xs">
