@@ -1,6 +1,6 @@
 import 'server-only';
 
-import { TLocale, fallbackLocale } from '@/app/i18n/settings';
+import { fallbackLocale, isLocale } from '@/app/i18n/settings';
 
 const dictionaries = {
   en: () => import('./locales/en.json').then((module) => module.default),
@@ -10,10 +10,9 @@ const dictionaries = {
   // fr: () => import('./locales/fr.json').then((module) => module.default),
 };
 
-export const getDictionary = async (locale: TLocale) => {
-  if (!dictionaries[locale]) {
-    console.warn(`Locale '${locale}' is not supported. Falling back to 'en'.`);
-    locale = fallbackLocale;
-  }
-  return dictionaries[locale]();
-};
+/**
+ * The dictionary for a locale. An unsupported one (e.g. a prototype key such
+ * as `constructor`, never looked up on the map) gets the fallback locale's.
+ */
+export const getDictionary = async (locale: string) =>
+  dictionaries[isLocale(locale) ? locale : fallbackLocale]();

@@ -2,7 +2,6 @@ import AppBar from '@/app/(modules)/[lang]/dashboard/components/AppBar';
 import { AppSidebar } from '@/app/(modules)/[lang]/dashboard/components/AppSidebar';
 import { DictionaryProvider } from '@/app/providers/dictionary-provider';
 import { SidebarProvider } from '@/app/components/ui/sidebar';
-import { TLocale } from '@/app/i18n/settings';
 import { UserProvider } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/provider';
 import { fetchMe } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/api';
 import { getDictionary } from '@/app/i18n/dictionaries';
@@ -16,7 +15,7 @@ export default async function DashboardLayout({
 }>) {
   const { lang } = await params;
   const [dictionary, user] = await Promise.all([
-    getDictionary(lang as TLocale),
+    getDictionary(lang),
     fetchMe(),
   ]);
 
