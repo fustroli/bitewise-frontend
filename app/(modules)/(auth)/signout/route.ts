@@ -14,6 +14,8 @@ const SEE_OTHER = 303;
 
 // GET for redirects (gateway 401, account deletion), POST for the logout
 // button. Never link here with <Link>: prefetching would sign the user out.
+// GET isn't origin-checked, so any site can sign a User out; accepted, see
+// docs/adr/0005-signout-get-accepts-cross-site.md.
 async function signOut(request: NextRequest) {
   const cookieStore = await cookies();
   const refreshToken = readRefreshToken(cookieStore);
