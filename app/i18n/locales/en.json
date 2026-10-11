@@ -104,6 +104,7 @@
     "imageRequired": "Please update or add new image.",
     "imageType": ".jpg, .jpeg, .png and .webp files are accepted.",
     "imageSize": "Max file size is 5MB.",
+    "imageRejected": "The image couldn't be uploaded. Use a .jpg, .png or .webp file up to 5MB.",
     "required": "This field is required",
     "invalidUrl": "Invalid URL",
     "heightRange": "Height must be between {min} and {max} cm",

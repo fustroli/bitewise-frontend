@@ -15,6 +15,14 @@ const SECURITY_HEADERS = [
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   poweredByHeader: false,
+  experimental: {
+    serverActions: {
+      // The avatar upload is a server action; the default 1 MB would reject
+      // most photos. Above `MAX_FILE_SIZE` (5 MB) with room for the multipart
+      // overhead, still under the proxy's 10 MB `proxyClientMaxBodySize`.
+      bodySizeLimit: '6mb',
+    },
+  },
   async headers() {
     return [{ source: '/:path*', headers: SECURITY_HEADERS }];
   },

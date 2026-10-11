@@ -236,7 +236,8 @@
     "waistRange": "La cintura debe estar entre {min} y {max} cm",
     "hipRange": "La cadera debe estar entre {min} y {max} cm",
     "halfStep": "Usa incrementos de 0,5",
-    "waistAboveNeck": "La cintura debe ser mayor que el cuello"
+    "waistAboveNeck": "La cintura debe ser mayor que el cuello",
+    "imageRejected": "No se pudo subir la imagen. Usa un archivo .jpg, .png o .webp de hasta 5 MB."
   },
   "draftMealPlan": {
     "title": "Borrador de plan de comidas",

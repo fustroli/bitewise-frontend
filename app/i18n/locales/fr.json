@@ -236,7 +236,8 @@
     "waistRange": "La taille doit être comprise entre {min} et {max} cm",
     "hipRange": "Les hanches doivent être comprises entre {min} et {max} cm",
     "halfStep": "Utilisez des pas de 0,5",
-    "waistAboveNeck": "La taille doit être supérieure au cou"
+    "waistAboveNeck": "La taille doit être supérieure au cou",
+    "imageRejected": "L'image n'a pas pu être téléversée. Utilisez un fichier .jpg, .png ou .webp de 5 Mo maximum."
   },
   "draftMealPlan": {
     "title": "Brouillon de plan de repas",

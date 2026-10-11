@@ -104,6 +104,7 @@
     "imageRequired": "Kép kötelező",
     "imageType": "Csak .jpg, .jpeg vagy .png fájlok engedélyezettek",
     "imageSize": "A kép mérete nem lehet nagyobb, mint 5 MB",
+    "imageRejected": "A kép feltöltése nem sikerült. Legfeljebb 5 MB-os .jpg, .png vagy .webp fájlt használjon.",
     "required": "Ez a mező kötelező",
     "invalidUrl": "Érvénytelen URL",
     "heightRange": "A magasság {min} és {max} cm között lehet",
