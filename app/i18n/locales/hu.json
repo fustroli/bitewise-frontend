@@ -335,8 +335,8 @@
   },
   "draftMealPlan": {
     "title": "Étrendvázlat",
-    "description": "Jegyzetlap egy étrendjeiden kívüli naphoz, csak ebben a böngészőben mentve.",
-    "startDescription": "Próbálj ki egy napot, ami nem része az étrendjeidnek, például egy csalónapot. Csak ebben a böngészőben mentjük.",
+    "description": "Jegyzetlap egy étrendjeiden kívüli naphoz.",
+    "startDescription": "Próbálj ki egy napot, ami nem része az étrendjeidnek, például egy csalónapot.",
     "start": "Vázlat indítása",
     "empty": "Adj hozzá ételeket vagy alapanyagokat a tápértékük megtekintéséhez.",
     "addMeal": "Étel hozzáadása",

@@ -335,8 +335,8 @@
   },
   "draftMealPlan": {
     "title": "Draft meal plan",
-    "description": "A scratchpad for a day outside your Meal plans, saved in this browser only.",
-    "startDescription": "Try out a day that isn't part of your Meal plans, like a cheat day. It's saved in this browser only.",
+    "description": "A scratchpad for a day outside your Meal plans.",
+    "startDescription": "Try out a day that isn't part of your Meal plans, like a cheat day.",
     "start": "Start draft",
     "empty": "Add meals or ingredients to see their nutrition.",
     "addMeal": "Add meal",

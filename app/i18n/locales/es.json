@@ -232,8 +232,8 @@
   },
   "draftMealPlan": {
     "title": "Borrador de plan de comidas",
-    "description": "Un borrador para un día fuera de tus planes de comidas, guardado solo en este navegador.",
-    "startDescription": "Prueba un día que no forma parte de tus planes de comidas, como un día libre. Se guarda solo en este navegador.",
+    "description": "Un borrador para un día fuera de tus planes de comidas.",
+    "startDescription": "Prueba un día que no forma parte de tus planes de comidas, como un día libre.",
     "start": "Empezar borrador",
     "empty": "Añade comidas o ingredientes para ver su información nutricional.",
     "addMeal": "Añadir comida",

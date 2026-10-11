@@ -232,8 +232,8 @@
   },
   "draftMealPlan": {
     "title": "Ernährungsplan-Entwurf",
-    "description": "Ein Notizblock für einen Tag außerhalb deiner Ernährungspläne, nur in diesem Browser gespeichert.",
-    "startDescription": "Probiere einen Tag aus, der nicht zu deinen Ernährungsplänen gehört, etwa einen Cheat Day. Er wird nur in diesem Browser gespeichert.",
+    "description": "Ein Notizblock für einen Tag außerhalb deiner Ernährungspläne.",
+    "startDescription": "Probiere einen Tag aus, der nicht zu deinen Ernährungsplänen gehört, etwa einen Cheat Day.",
     "start": "Entwurf starten",
     "empty": "Füge Mahlzeiten oder Zutaten hinzu, um ihre Nährwerte zu sehen.",
     "addMeal": "Mahlzeit hinzufügen",
