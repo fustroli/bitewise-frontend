@@ -22,13 +22,32 @@ import { ACCEPTED_IMAGE_TYPES } from '@/app/(modules)/[lang]/dashboard/(modules)
 import { Button } from '@/app/components/ui/button';
 import FileUploadFormField from '@/app/components/form/FileUploadFormField';
 import { Form } from '@/app/components/ui/form';
-import ImageCropDialog from '@/app/components/dialogs/ImageCropDialog';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
+import dynamic from 'next/dynamic';
 import { toastResult } from '@/app/utils/helpers/client';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import { zodResolver } from '@hookform/resolvers/zod';
+
+const loadImageCropDialog = () =>
+  import('@/app/components/dialogs/ImageCropDialog');
+
+/** Holds the Crop button's place while react-easy-crop loads. */
+const CropButtonFallback = () => {
+  const { common } = useDictionary();
+
+  return (
+    <Button variant="outline" disabled>
+      {common.crop}
+    </Button>
+  );
+};
+
+/** Only needed once an image is picked, so react-easy-crop loads lazily. */
+const ImageCropDialog = dynamic(loadImageCropDialog, {
+  loading: CropButtonFallback,
+});
 
 const BasicInfo = () => {
   const { common, validation } = useDictionary();
@@ -127,6 +146,8 @@ const BasicInfo = () => {
         variant="outline"
         type={'button'}
         onClick={() => {
+          // Fetch the cropper while the user picks a file.
+          if (!isEditable) void loadImageCropDialog();
           setImagePreviewUrl(null);
           setIsEditable((prev) => !prev);
         }}
