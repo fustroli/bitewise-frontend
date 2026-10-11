@@ -1,4 +1,13 @@
+import { EOrderDirection } from '@/app/utils/enums';
+import { ISortState } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
+
 export const DEFAULT_PAGE_SIZE = 20;
+
+/** The order a list has until a column is sorted: newest first. */
+export const DEFAULT_SORT: ISortState = {
+  orderBy: 'createTimeStamp',
+  orderDirection: EOrderDirection.DESC,
+};
 
 /** The backend's list cap; dialog pickers load this many options. */
 export const MAX_LIST_LIMIT = 100;

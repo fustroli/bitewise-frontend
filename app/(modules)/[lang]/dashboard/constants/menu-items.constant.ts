@@ -5,7 +5,6 @@ import {
   ShoppingBasket,
 } from 'lucide-react';
 
-import { EOrderDirection } from '@/app/utils/enums';
 import { IMenuItem } from '@/app/(modules)/[lang]/dashboard/interfaces';
 
 export const MENU_ITEMS: IMenuItem[] = [
@@ -16,17 +15,17 @@ export const MENU_ITEMS: IMenuItem[] = [
   },
   {
     label: 'ingredients',
-    route: `/ingredients?page=1&orderBy=createTimeStamp&orderDirection=${EOrderDirection.DESC}`,
+    route: '/ingredients',
     icon: ShoppingBasket,
   },
   {
     label: 'meals',
-    route: `/meals?page=1&orderBy=name&orderDirection=${EOrderDirection.ASC}`,
+    route: '/meals',
     icon: HandPlatter,
   },
   {
     label: 'mealPlans',
-    route: `/meal-plans?page=1&orderBy=name&orderDirection=${EOrderDirection.ASC}`,
+    route: '/meal-plans',
     icon: NotebookPen,
   },
 ];

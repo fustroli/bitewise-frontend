@@ -4,6 +4,7 @@ import {
   ISortState,
   TSearchParams,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
+import { DEFAULT_SORT } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/constants';
 import { EOrderDirection } from '@/app/utils/enums';
 import { FIRST_PAGE } from '@/app/utils/constants';
 
@@ -18,7 +19,10 @@ const parsePage = (value: string | undefined) => {
 const parseDirection = (value: string | undefined) =>
   Object.values(EOrderDirection).find((direction) => direction === value);
 
-/** Reads page and sort from the URL and turns them into a backend query. */
+/**
+ * Reads page and sort from the URL and turns them into a backend query. With
+ * no column sorted, the backend gets `DEFAULT_SORT`.
+ */
 export const toListQuery = (
   searchParams: TSearchParams | undefined,
   pageSize: number,
@@ -35,7 +39,7 @@ export const toListQuery = (
     params: {
       limit: pageSize,
       offset: (page - FIRST_PAGE) * pageSize,
-      ...sort,
+      ...(sort.orderBy ? sort : DEFAULT_SORT),
     },
   };
 };

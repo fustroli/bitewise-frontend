@@ -24,15 +24,15 @@ describe('toListQuery', () => {
     });
   });
 
-  it('starts on page 1 with no sort when the URL has nothing', () => {
+  it('starts on page 1, newest first, when the URL has nothing', () => {
     expect(toListQuery(undefined, 5)).toEqual({
       page: 1,
       sort: { orderBy: undefined, orderDirection: undefined },
       params: {
         limit: 5,
         offset: 0,
-        orderBy: undefined,
-        orderDirection: undefined,
+        orderBy: 'createTimeStamp',
+        orderDirection: EOrderDirection.DESC,
       },
     });
   });
