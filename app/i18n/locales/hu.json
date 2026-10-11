@@ -35,6 +35,27 @@
           "obeseClassIII": "III. fokú elhízás"
         }
       },
+      "bodyFat": {
+        "title": "Testzsír",
+        "description": "US Navy módszer, ACE kategóriák",
+        "yourBodyFat": "Az Ön testzsírja",
+        "category": "Kategória",
+        "range": "Testzsír",
+        "fatMass": "Zsírtömeg",
+        "leanMass": "Zsírmentes tömeg",
+        "kg": "{value} kg",
+        "empty": "Adja meg a nemét, magasságát, testsúlyát, nyak- és derékbőségét (nőknél a csípőbőségét is) a testzsír megtekintéséhez.",
+        "implausible": "A méreteiből nem jön ki hihető testzsír. Nagyobb a derékbősége, mint a nyakbősége?",
+        "addMeasurements": "Méretek megadása",
+        "checkMeasurements": "Méretek ellenőrzése",
+        "categories": {
+          "essential": "Esszenciális zsír",
+          "athletes": "Sportolók",
+          "fitness": "Fitnesz",
+          "average": "Átlagos",
+          "obese": "Elhízott"
+        }
+      },
       "calories": {
         "title": "Kalória",
         "description": "Napi kalória a heti testsúlyváltozás szerint",

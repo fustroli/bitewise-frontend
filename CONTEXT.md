@@ -61,6 +61,14 @@ _Avoid_: Exercise level, lifestyle
 The adult WHO band a User's BMI falls in, from Severe thinness to Obese class III.
 _Avoid_: Weight class
 
+**Body fat percentage**:
+The share of a User's weight that is fat, estimated with the US Navy method from their sex, height, neck, waist and (for women) hip.
+_Avoid_: Body composition, BF%
+
+**Body fat category**:
+The ACE band a User's Body fat percentage falls in for their sex, from Essential fat to Obese.
+_Avoid_: Fat class
+
 **Maintenance calories**:
 The daily calories that keep a User's weight stable, given their Body stats, age and Activity level.
 _Avoid_: TDEE, BMR

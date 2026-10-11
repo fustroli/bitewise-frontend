@@ -3,12 +3,15 @@ import {
   ESex,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import {
+  EBmiCategory,
+  EBodyFatCategory,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
+import {
   ageOn,
   bodyMetrics,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/helpers';
 import { describe, expect, it } from 'vitest';
 
-import { EBmiCategory } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
 import { IBodyStats } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 
 const TODAY = new Date(2025, 5, 1);
@@ -20,14 +23,45 @@ const MAN: IBodyStats = {
   sex: ESex.MALE,
   heightCm: 180,
   weightKg: 71.5,
-  neckCm: null,
-  waistCm: null,
+  neckCm: 38,
+  waistCm: 85,
   hipCm: null,
   activityLevel: EActivityLevel.MODERATE,
 };
 
+/** calculator.net's body fat examples (US Navy, metric). */
+const NAVY_MAN: Partial<IBodyStats> = {
+  sex: ESex.MALE,
+  heightCm: 178,
+  weightKg: 70,
+  neckCm: 50,
+  waistCm: 96,
+};
+const NAVY_WOMAN: Partial<IBodyStats> = {
+  sex: ESex.FEMALE,
+  heightCm: 165,
+  weightKg: 60,
+  neckCm: 32,
+  waistCm: 72,
+  hipCm: 96,
+};
+
 const metrics = (bodyStats: Partial<IBodyStats>, dateOfBirth = DOB_25) =>
   bodyMetrics({ bodyStats, dateOfBirth, today: TODAY });
+
+const bodyFat = (bodyStats: Partial<IBodyStats>) =>
+  bodyMetrics({ bodyStats, today: TODAY }).bodyFat;
+
+/**
+ * The man's neck at which the US Navy formula gives `percent`, at 100 cm
+ * tall and a 100 cm waist.
+ */
+const manNeckFor = (percent: number) =>
+  100 - 10 ** ((1.0324 + 0.15456 * 2 - 495 / (percent + 450)) / 0.19077);
+
+/** The woman's neck for `percent`, at 100 cm tall, waist 100 and hip 100. */
+const womanNeckFor = (percent: number) =>
+  200 - 10 ** ((1.29579 + 0.221 * 2 - 495 / (percent + 450)) / 0.35004);
 
 const calories = (bodyStats: Partial<IBodyStats>, dateOfBirth = DOB_25) =>
   metrics(bodyStats, dateOfBirth).calories!;
@@ -172,16 +206,120 @@ describe('BMI', () => {
   });
 });
 
+describe('Body fat percentage', () => {
+  it('reproduces calculator.net for a man', () => {
+    const result = bodyFat(NAVY_MAN)!;
+
+    expect(result.percent).toBeCloseTo(15.7, 1);
+    expect(result.category).toBe(EBodyFatCategory.FITNESS);
+  });
+
+  it('reproduces calculator.net for a woman', () => {
+    const result = bodyFat(NAVY_WOMAN)!;
+
+    expect(result.percent).toBeCloseTo(26.4, 1);
+    expect(result.category).toBe(EBodyFatCategory.AVERAGE);
+  });
+
+  it('ignores the hip for a man', () => {
+    expect(bodyFat({ ...NAVY_MAN, hipCm: 120 })!.percent).toBe(
+      bodyFat(NAVY_MAN)!.percent,
+    );
+  });
+
+  it('splits the weight into fat and lean mass', () => {
+    const man = bodyFat(NAVY_MAN)!;
+    const woman = bodyFat(NAVY_WOMAN)!;
+
+    expect(man.fatMassKg).toBeCloseTo((70 * man.percent) / 100);
+    expect(man.fatMassKg + man.leanMassKg).toBeCloseTo(70);
+    // calculator.net: 11.0 / 59.0 kg and 15.8 / 44.2 kg.
+    expect(man.fatMassKg).toBeCloseTo(11, 0);
+    expect(woman.fatMassKg).toBeCloseTo(15.8, 1);
+    expect(woman.leanMassKg).toBeCloseTo(44.2, 1);
+  });
+
+  it.each([
+    [5.99, EBodyFatCategory.ESSENTIAL],
+    [6.01, EBodyFatCategory.ATHLETES],
+    [13.99, EBodyFatCategory.ATHLETES],
+    [14.01, EBodyFatCategory.FITNESS],
+    [17.99, EBodyFatCategory.FITNESS],
+    [18.01, EBodyFatCategory.AVERAGE],
+    [24.99, EBodyFatCategory.AVERAGE],
+    [25.01, EBodyFatCategory.OBESE],
+  ])('puts a man at %s%% in %s', (percent, category) => {
+    const result = bodyFat({
+      sex: ESex.MALE,
+      heightCm: 100,
+      weightKg: 70,
+      neckCm: manNeckFor(percent),
+      waistCm: 100,
+    })!;
+
+    expect(result.percent).toBeCloseTo(percent, 6);
+    expect(result.category).toBe(category);
+  });
+
+  it.each([
+    [13.99, EBodyFatCategory.ESSENTIAL],
+    [14.01, EBodyFatCategory.ATHLETES],
+    [20.99, EBodyFatCategory.ATHLETES],
+    [21.01, EBodyFatCategory.FITNESS],
+    [24.99, EBodyFatCategory.FITNESS],
+    [25.01, EBodyFatCategory.AVERAGE],
+    [31.99, EBodyFatCategory.AVERAGE],
+    [32.01, EBodyFatCategory.OBESE],
+  ])('puts a woman at %s%% in %s', (percent, category) => {
+    const result = bodyFat({
+      sex: ESex.FEMALE,
+      heightCm: 100,
+      weightKg: 60,
+      neckCm: womanNeckFor(percent),
+      waistCm: 100,
+      hipCm: 100,
+    })!;
+
+    expect(result.percent).toBeCloseTo(percent, 6);
+    expect(result.category).toBe(category);
+  });
+
+  it.each([
+    ['a man with waist equal to neck', { ...NAVY_MAN, waistCm: 50 }],
+    ['a man with waist below neck', { ...NAVY_MAN, waistCm: 40 }],
+    [
+      'a woman with waist + hip at most neck',
+      { ...NAVY_WOMAN, waistCm: 40, hipCm: 50, neckCm: 90 },
+    ],
+    // Barely above the neck: the formula goes below 0 %.
+    ['a result below 0 %', { ...NAVY_MAN, waistCm: 51 }],
+    // Far above the neck: the formula goes above 75 %.
+    [
+      'a result above 75 %',
+      { ...NAVY_MAN, heightCm: 100, neckCm: 20, waistCm: 200 },
+    ],
+  ])('is unset for %s', (_, bodyStats) => {
+    expect(bodyFat(bodyStats)).toBeUndefined();
+  });
+
+  it('needs no date of birth', () => {
+    expect(bodyFat(NAVY_MAN)).toBeDefined();
+  });
+});
+
 describe('missing inputs', () => {
   it('computes nothing without Body stats', () => {
     const result = bodyMetrics({ today: TODAY });
 
     expect(result.bmi).toBeUndefined();
     expect(result.calories).toBeUndefined();
+    expect(result.bodyFat).toBeUndefined();
     expect(result.missing).toEqual([
       'heightCm',
       'weightKg',
       'sex',
+      'neckCm',
+      'waistCm',
       'activityLevel',
       'dateOfBirth',
     ]);
@@ -191,8 +329,44 @@ describe('missing inputs', () => {
     const result = metrics({ ...MAN, [field]: null });
 
     expect(result.bmi).toBeUndefined();
+    expect(result.bodyFat).toBeUndefined();
     expect(result.calories).toBeUndefined();
     expect(result.missing).toEqual([field]);
+  });
+
+  it.each(['neckCm', 'waistCm'] as const)(
+    'shows BMI and calories but no body fat without %s',
+    (field) => {
+      const result = metrics({ ...MAN, [field]: null });
+
+      expect(result.bmi).toBeDefined();
+      expect(result.calories).toBeDefined();
+      expect(result.bodyFat).toBeUndefined();
+      expect(result.missing).toEqual([field]);
+    },
+  );
+
+  it('needs the hip for a woman', () => {
+    const result = metrics({ ...NAVY_WOMAN, hipCm: null });
+
+    expect(result.bodyFat).toBeUndefined();
+    expect(result.missing).toContain('hipCm');
+  });
+
+  it("doesn't need the hip for a man", () => {
+    expect(metrics(MAN).missing).not.toContain('hipCm');
+  });
+
+  it("doesn't list the hip while sex is unset", () => {
+    expect(
+      metrics({ ...NAVY_WOMAN, sex: null, hipCm: null }).missing,
+    ).not.toContain('hipCm');
+  });
+
+  it('needs sex for body fat', () => {
+    const result = metrics({ ...MAN, sex: null });
+
+    expect(result.bodyFat).toBeUndefined();
   });
 
   it.each(['sex', 'activityLevel'] as const)(

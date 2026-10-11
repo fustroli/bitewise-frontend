@@ -13,6 +13,29 @@
       "ingredients": "Zutaten",
       "meals": "Mahlzeiten",
       "mealPlans": "Essenspläne"
+    },
+    "bodyMetrics": {
+      "bodyFat": {
+        "title": "Körperfett",
+        "description": "US-Navy-Methode, ACE-Kategorien",
+        "yourBodyFat": "Ihr Körperfett",
+        "category": "Kategorie",
+        "range": "Körperfett",
+        "fatMass": "Fettmasse",
+        "leanMass": "Magermasse",
+        "kg": "{value} kg",
+        "empty": "Geben Sie Geschlecht, Größe, Gewicht, Hals- und Taillenumfang (bei Frauen auch Hüftumfang) an, um Ihr Körperfett zu sehen.",
+        "implausible": "Ihre Maße ergeben keinen plausiblen Körperfettanteil. Ist Ihre Taille größer als Ihr Hals?",
+        "addMeasurements": "Maße angeben",
+        "checkMeasurements": "Maße prüfen",
+        "categories": {
+          "essential": "Essenzielles Fett",
+          "athletes": "Sportler",
+          "fitness": "Fitness",
+          "average": "Durchschnitt",
+          "obese": "Adipös"
+        }
+      }
     }
   },
   "common": {

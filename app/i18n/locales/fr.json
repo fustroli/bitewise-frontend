@@ -13,6 +13,29 @@
       "ingredients": "Ingrédients",
       "meals": "Repas",
       "mealPlans": "Plans de repas"
+    },
+    "bodyMetrics": {
+      "bodyFat": {
+        "title": "Masse grasse",
+        "description": "Méthode de l'US Navy, catégories ACE",
+        "yourBodyFat": "Votre masse grasse",
+        "category": "Catégorie",
+        "range": "Masse grasse",
+        "fatMass": "Masse grasse",
+        "leanMass": "Masse maigre",
+        "kg": "{value} kg",
+        "empty": "Ajoutez votre sexe, taille, poids, tour de cou et tour de taille (et tour de hanches pour les femmes) pour voir votre masse grasse.",
+        "implausible": "Vos mesures ne donnent pas une masse grasse plausible. Votre tour de taille est-il supérieur à votre tour de cou ?",
+        "addMeasurements": "Ajouter vos mesures",
+        "checkMeasurements": "Vérifier vos mesures",
+        "categories": {
+          "essential": "Graisse essentielle",
+          "athletes": "Athlètes",
+          "fitness": "Forme",
+          "average": "Moyenne",
+          "obese": "Obésité"
+        }
+      }
     }
   },
   "common": {
