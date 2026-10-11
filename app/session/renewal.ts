@@ -9,6 +9,7 @@ import {
 import { TRefreshResult, sessionBackend } from './backend';
 
 import { SIGN_OUT_PATH } from './sign-out';
+import { createHash } from 'node:crypto';
 
 export type TSessionRenewal =
   | { type: 'unchanged' }
@@ -34,6 +35,13 @@ const RENEW_BEFORE_EXPIRY_MS = 60_000;
 // it has stored the new cookies, all carry the old token, so they share one
 // refresh for this long.
 const SHARE_REFRESH_MS = 30_000;
+// Bounds the shared refreshes a flood of made-up tokens can pile up; past it
+// the oldest is dropped.
+const MAX_SHARED_REFRESHES = 1000;
+// The backend's refresh tokens are a few hundred characters; a cookie can
+// carry about 4 KB.
+const MAX_TOKEN_LENGTH = 2048;
+const JWT_SHAPE = /^[\w-]+\.[\w-]+\.[\w-]+$/;
 
 const UNCHANGED: TSessionRenewal = { type: 'unchanged' };
 const ENDED: TSessionRenewal = { type: 'ended' };
@@ -56,6 +64,20 @@ export const needsRenewal = (accessToken: string | undefined, now: number) => {
 };
 
 /**
+ * Whether a refresh token is worth sending to the backend: JWT-shaped and not
+ * expired. Anything else the backend would reject, so the Session is over.
+ */
+export const isRefreshable = (refreshToken: string, now: number) => {
+  if (refreshToken.length > MAX_TOKEN_LENGTH) return false;
+  if (!JWT_SHAPE.test(refreshToken)) return false;
+  const expiry = readExpiry(refreshToken);
+  return expiry !== undefined && expiry > now;
+};
+
+const hash = (token: string) =>
+  createHash('sha256').update(token).digest('base64url');
+
+/**
  * Keeps the Session alive (ADR-0002). Run by the proxy before every request:
  * when the access token is missing or about to expire and there is a refresh
  * token, it refreshes, and the rest of the request sees the new tokens. Write
@@ -70,18 +92,25 @@ export const createSessionRenewal = ({
     { at: number; result: Promise<TRefreshResult> }
   >();
 
+  // Keyed by the token's hash, in insertion (so age) order.
   const refreshOnce = (refreshToken: string) => {
     const at = now();
 
-    for (const [token, entry] of recent) {
-      if (at - entry.at > SHARE_REFRESH_MS) recent.delete(token);
+    for (const [key, entry] of recent) {
+      if (at - entry.at <= SHARE_REFRESH_MS) break;
+      recent.delete(key);
     }
 
-    const shared = recent.get(refreshToken);
+    const key = hash(refreshToken);
+    const shared = recent.get(key);
     if (shared) return shared.result;
 
+    if (recent.size >= MAX_SHARED_REFRESHES) {
+      recent.delete(recent.keys().next().value!);
+    }
+
     const result = refresh(refreshToken);
-    recent.set(refreshToken, { at, result });
+    recent.set(key, { at, result });
     return result;
   };
 
@@ -95,6 +124,11 @@ export const createSessionRenewal = ({
     const refreshToken = readRefreshToken(cookies);
     if (!refreshToken || !needsRenewal(readAccessToken(cookies), now())) {
       return UNCHANGED;
+    }
+
+    if (!isRefreshable(refreshToken, now())) {
+      replaceRequestTokens(cookies);
+      return ENDED;
     }
 
     const result = await refreshOnce(refreshToken);
