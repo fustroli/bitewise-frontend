@@ -5,8 +5,10 @@ import '@fontsource/poppins/700.css';
 import './globals.css';
 
 import type { Metadata } from 'next';
+import { NONCE_HEADER } from '@/app/utils/security/csp';
 import { ThemeProvider } from '@/app/providers/theme-provider';
 import { Toaster } from '@/app/components/ui/toaster';
+import { headers } from 'next/headers';
 
 export const metadata: Metadata = {
   title: 'BiteWise - The Meal Planner',
@@ -19,6 +21,9 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // next-themes' inline anti-flash script needs the proxy's CSP nonce.
+  const nonce = (await headers()).get(NONCE_HEADER) ?? undefined;
+
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
@@ -27,6 +32,7 @@ export default async function RootLayout({
           defaultTheme="system"
           enableSystem
           disableTransitionOnChange
+          nonce={nonce}
         >
           {children}
         </ThemeProvider>
