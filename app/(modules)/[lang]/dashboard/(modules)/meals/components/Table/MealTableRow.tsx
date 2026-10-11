@@ -9,7 +9,7 @@ import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfac
 import MealTableCell from '@/app/(modules)/[lang]/dashboard/(modules)/meals/components/Table/MealTableCell';
 import { NUTRITION_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
 import { ReactNode } from 'react';
-import Unit from '@/app/(modules)/[lang]/dashboard/components/Unit';
+import Unit from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/Unit';
 
 interface IProps {
   row: IMeal;
