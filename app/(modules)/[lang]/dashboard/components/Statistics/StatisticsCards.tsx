@@ -1,12 +1,13 @@
 import { HandPlatter, NotebookPen, ShoppingBasket } from 'lucide-react';
 
+import { IStatistics } from '@/app/(modules)/[lang]/dashboard/interfaces';
 import StatisticsCard from '@/app/(modules)/[lang]/dashboard/components/Statistics/StatisticsCard';
 import { TDictionary } from '@/app/providers/dictionary-provider';
 
 interface IProps {
   labels: TDictionary['dashboard']['statistics'];
   /** Left out while loading: the cards show skeleton values. */
-  counts?: { ingredients: number; meals: number; mealPlans: number };
+  counts?: IStatistics;
 }
 
 /** The three count cards, shared by the loaded section and its skeleton. */
