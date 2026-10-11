@@ -1,4 +1,5 @@
 import BodyMetrics from '@/app/(modules)/[lang]/dashboard/components/BodyMetrics';
+import DraftMealPlanSection from '@/app/(modules)/[lang]/dashboard/components/DraftMealPlan';
 import { IPageProps } from '@/app/utils/interfaces';
 import Statistics from '@/app/(modules)/[lang]/dashboard/components/Statistics';
 
@@ -8,6 +9,7 @@ export default async function Page(props: IPageProps) {
   return (
     <div className="space-y-6 px-4 pb-8 md:px-8">
       <Statistics lang={lang} />
+      <DraftMealPlanSection lang={lang} />
       <BodyMetrics />
     </div>
   );

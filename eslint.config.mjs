@@ -32,6 +32,13 @@ const MODULE_DEPENDENCIES = {
   _nutrition: ['ingredients'],
   profile: ['_user', '_body-metrics'],
   '_body-metrics': ['_user'],
+  '_draft-meal-plan': [
+    'meals',
+    'ingredients',
+    '_nutrition',
+    '_body-metrics',
+    '_user',
+  ],
   _user: [],
   '_resource-table': [],
 };

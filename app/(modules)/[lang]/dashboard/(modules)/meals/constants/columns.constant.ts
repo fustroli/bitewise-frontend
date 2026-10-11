@@ -10,5 +10,3 @@ export const MEAL_COLUMNS: IResourceColumn[] = [
   { id: 'quantity', sortable: false, align: 'justify-end' },
   { id: 'unit', sortable: false, align: 'justify-end' },
 ];
-
-export const MEALS_PAGE_SIZE = 5;

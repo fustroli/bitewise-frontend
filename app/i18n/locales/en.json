@@ -332,5 +332,51 @@
     "passwordMatch": "Passwords must match",
     "oldPasswordRequired": "Old password is required",
     "confirmPasswordRequired": "Confirm password is required"
+  },
+  "draftMealPlan": {
+    "title": "Draft meal plan",
+    "description": "A scratchpad for a day outside your Meal plans, saved in this browser only.",
+    "startDescription": "Try out a day that isn't part of your Meal plans, like a cheat day. It's saved in this browser only.",
+    "start": "Start draft",
+    "empty": "Add meals or ingredients to see their nutrition.",
+    "addMeal": "Add meal",
+    "addIngredient": "Add ingredient",
+    "clear": "Clear draft",
+    "clearConfirm": "This removes every meal and ingredient from the draft. It can't be undone.",
+    "collapse": "Collapse draft meal plan",
+    "expand": "Expand draft meal plan",
+    "removed": "Removed {count} item(s) from the draft that no longer exist.",
+    "total": "Total",
+    "columns": {
+      "item": "Meal or ingredient",
+      "quantity": "Quantity",
+      "calories": "Calories",
+      "protein": "Protein",
+      "totalFat": "Fat (Saturated)",
+      "totalCarbohydrates": "Carbs (Sugar)",
+      "dietaryFiber": "Fiber"
+    },
+    "fields": {
+      "meal": "Meal",
+      "ingredient": "Ingredient",
+      "mealPlaceholder": "Select meal...",
+      "ingredientPlaceholder": "Select ingredient...",
+      "multiplier": "Servings",
+      "amount": "Amount",
+      "servings": "×",
+      "grams": "g",
+      "pieces": "pcs"
+    },
+    "maintenance": {
+      "kcal": "kcal",
+      "comparedWith": "compared with your Maintenance calories ({maintenance} kcal/day)",
+      "missing": "Add your Body stats and date of birth to compare the draft with your Maintenance calories.",
+      "completeProfile": "Complete Profile"
+    },
+    "validation": {
+      "itemRequired": "Select a meal or ingredient",
+      "quantityPositive": "Quantity must be greater than 0",
+      "multiplierStep": "Use steps of 0.5"
+    }
   }
 }

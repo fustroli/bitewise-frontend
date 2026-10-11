@@ -26,6 +26,7 @@ import { cn } from '@/app/lib';
 
 interface IProps<T extends FieldValues> extends IFieldProps<T> {
   label: string;
+  hideLabel?: boolean;
   options: IOption[];
   placeholder: string;
   searchPlaceholder: string;
@@ -37,12 +38,13 @@ const ComboboxField = <T extends FieldValues>({
   control,
   name,
   label,
+  hideLabel,
   options,
   placeholder,
   searchPlaceholder,
   emptyText,
 }: IProps<T>) => (
-  <FieldFrame control={control} name={name} label={label}>
+  <FieldFrame control={control} name={name} label={label} hideLabel={hideLabel}>
     {(field) => (
       <Popover>
         <PopoverTrigger asChild>
