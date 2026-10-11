@@ -12,5 +12,6 @@ The proxy is the only place that can do both halves: a Server Component render c
 ## Consequences
 
 - The backend rotates the refresh token on use and treats reuse as theft (backend #19). Parallel requests, and requests sent before the browser stores the new cookies, carry the old token, so the proxy shares one refresh per token for 30 seconds. That sharing is in-process memory: it holds while the app runs as a single process (`pm2`, one instance).
+- Any request can carry a made-up refresh token, so the proxy only sends ones that are JWT-shaped, at most 2 KB and not expired; anything else ends the Session without a backend call. Shared refreshes are keyed by the token's SHA-256 and capped at 1000 (oldest dropped), so a flood can't grow memory without bound. A flood of plausible tokens still reaches the backend, all from the frontend's IP, so it can use up the backend's per-IP throttle for every User: rate-limiting at the edge (ALB/WAF) is the real defence.
 - `/signout` is never renewed. It calls `POST /auth/signout` with the refresh token (best effort) before clearing the cookies, so the Session also ends on the backend.
 - A gateway 401 still means the Session is over and goes to `/signout?reason=expired`.
