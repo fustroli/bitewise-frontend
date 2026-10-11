@@ -1,5 +1,7 @@
 "use client"
 
+import { CircleAlert, CircleCheck } from "lucide-react"
+
 import { useToast } from "@/app/hooks/use-toast"
 import {
   Toast,
@@ -18,7 +20,13 @@ export function Toaster() {
       {toasts.map(function ({ id, title, description, action, ...props }) {
         return (
           <Toast key={id} {...props}>
-            <div className="grid gap-1">
+            {props.variant === "success" && (
+              <CircleCheck className="size-5 shrink-0 text-success" />
+            )}
+            {props.variant === "error" && (
+              <CircleAlert className="size-5 shrink-0 text-destructive" />
+            )}
+            <div className="grid flex-1 gap-1">
               {title && <ToastTitle>{title}</ToastTitle>}
               {description && (
                 <ToastDescription>{description}</ToastDescription>
