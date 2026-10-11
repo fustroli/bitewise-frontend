@@ -218,7 +218,8 @@
   "auth": {
     "sessionExpired": "Tu sesión ha caducado. Vuelve a iniciar sesión.",
     "accountDeleted": "Tu cuenta ha sido eliminada.",
-    "passwordFirst": "Ya existe una cuenta con este correo. Inicia sesión primero con tu contraseña."
+    "passwordFirst": "Ya existe una cuenta con este correo. Inicia sesión primero con tu contraseña.",
+    "oauthFailed": "No se completó el inicio de sesión con Google. Inténtalo de nuevo."
   },
   "passwordPolicy": {
     "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
