@@ -130,9 +130,12 @@ and the `_user` module's `provider/`/`context/`).
   type is inferred from `control`, so a wrong `name` doesn't compile. One
   component per field kind, all built on `FieldFrame` (label, control, error,
   adornment). An emptied number field is `null`, never `0`.
-- ESLint `no-restricted-imports` keeps dependencies one-way: `app/components`,
-  `app/utils`, `app/hooks` never import from `app/(modules)`; `_user` never
-  from `profile`; `profile` never from `(auth)`.
+- `eslint-plugin-boundaries` (`eslint.config.mjs`) keeps dependencies
+  one-way: shared code (`app/components`, `utils`, `hooks`, …) never imports
+  a module or route; a module imports only shared code, itself and the modules
+  `MODULE_DEPENDENCIES` lists for it; routes may import anything. A new
+  dashboard module must be registered there. See
+  `docs/adr/0003-module-boundaries-enforced-by-eslint.md`.
 
 ## Naming conventions (enforced by ESLint)
 
