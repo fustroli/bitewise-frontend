@@ -2,7 +2,7 @@ import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredie
 import { IResourceRowContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
 import IngredientTableCell from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/Table/IngredientTableCell';
 import { TableRow } from '@/app/components/ui/table';
-import Unit from '@/app/(modules)/[lang]/dashboard/components/Unit';
+import Unit from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/Unit';
 
 interface IProps extends IResourceRowContext {
   row: IIngredient;
