@@ -102,6 +102,7 @@ const DraftLineRow = ({
           type="button"
           variant="ghost"
           size="icon"
+          className="text-destructive hover:bg-destructive/10 hover:text-destructive"
           aria-label={interpolate(resourceTable.remove, { name })}
           onClick={onRemove}
         >
