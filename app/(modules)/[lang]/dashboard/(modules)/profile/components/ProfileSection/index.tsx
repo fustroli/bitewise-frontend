@@ -32,12 +32,15 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 interface IProps<TValues extends FieldValues> {
+  /** The card's anchor, for links to this section. */
+  id?: string;
   title: string;
   description?: string;
   /** Pass a stable (module-level) function; it runs once per dictionary. */
   createSchema: (dictionary: TDictionary) => z.ZodType<TValues, TValues>;
   toFormValues: (user: IUser) => TValues;
-  toChange: (values: TValues) => IUserChange;
+  /** `user` is the User as saved, before this change. */
+  toChange: (values: TValues, user: IUser) => IUserChange;
   fields: TProfileField<TValues>[];
   /** Defaults to `common.savedSuccessfully`. */
   successMessage?: string;
@@ -53,6 +56,7 @@ interface IProps<TValues extends FieldValues> {
  * a successful one updates the User and leaves edit mode.
  */
 const ProfileSection = <TValues extends FieldValues>({
+  id,
   title,
   description,
   createSchema,
@@ -91,7 +95,7 @@ const ProfileSection = <TValues extends FieldValues>({
   };
 
   async function onSubmit(values: TValues) {
-    const result = await updateUser(toChange(values));
+    const result = await updateUser(toChange(values, user));
 
     if (!toastResult(result, successMessage ?? common.savedSuccessfully)) {
       return;
@@ -102,9 +106,10 @@ const ProfileSection = <TValues extends FieldValues>({
   }
 
   return (
-    <Card>
+    <Card id={id}>
       <Form {...form}>
-        <form onSubmit={form.handleSubmit(onSubmit)}>
+        {/* The schema validates, with the dictionary's messages. */}
+        <form noValidate onSubmit={form.handleSubmit(onSubmit)}>
           <CardHeader className="flex flex-row items-center justify-between">
             <div className="space-y-2">
               <CardTitle>{title}</CardTitle>

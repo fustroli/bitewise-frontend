@@ -14,6 +14,51 @@
       "ingredients": "Ingredients",
       "meals": "Meals",
       "mealPlans": "Meal Plans"
+    },
+    "bodyMetrics": {
+      "bmi": {
+        "title": "BMI",
+        "description": "Body mass index, adult WHO table",
+        "yourBmi": "Your BMI",
+        "range": "BMI",
+        "category": "Category",
+        "healthyWeight": "Healthy weight for your height: {min} – {max} kg",
+        "empty": "Add your height and weight to see your BMI.",
+        "categories": {
+          "severeThinness": "Severe thinness",
+          "moderateThinness": "Moderate thinness",
+          "mildThinness": "Mild thinness",
+          "normal": "Normal",
+          "overweight": "Overweight",
+          "obeseClassI": "Obese class I",
+          "obeseClassII": "Obese class II",
+          "obeseClassIII": "Obese class III"
+        }
+      },
+      "calories": {
+        "title": "Calories",
+        "description": "Daily calories by weekly weight change",
+        "maintenance": "Maintenance calories",
+        "kcalPerDay": "kcal/day",
+        "kgPerWeek": "{value} kg/week",
+        "lose": "Lose",
+        "gain": "Gain",
+        "loseTargets": {
+          "mild": "Mild weight loss",
+          "normal": "Weight loss",
+          "fast": "Extreme weight loss"
+        },
+        "gainTargets": {
+          "mild": "Mild weight gain",
+          "normal": "Weight gain",
+          "fast": "Fast weight gain"
+        },
+        "belowSafeMinimum": "Below the safe minimum of {min} kcal/day",
+        "empty": "Add your sex, height, weight and Activity level to see your calories.",
+        "dateOfBirthMissing": "Add your date of birth to see your calories."
+      },
+      "addBodyStats": "Add Body stats",
+      "addDateOfBirth": "Add date of birth"
     }
   },
   "common": {
@@ -39,7 +84,12 @@
     "imageType": ".jpg, .jpeg, .png and .webp files are accepted.",
     "imageSize": "Max file size is 5MB.",
     "required": "This field is required",
-    "invalidUrl": "Invalid URL"
+    "invalidUrl": "Invalid URL",
+    "heightRange": "Height must be between {min} and {max} cm",
+    "weightRange": "Weight must be between {min} and {max} kg",
+    "wholeNumber": "Use a whole number",
+    "oneDecimal": "Use at most one decimal",
+    "ageRange": "You must be between {min} and {max} years old"
   },
   "profile": {
     "basic": {
@@ -64,6 +114,28 @@
       "phoneNumber": "Phone Number",
       "username": "Username",
       "dob": "Date of Birth"
+    },
+    "bodyStats": {
+      "title": "Body Stats",
+      "description": "Used for your BMI and calories on the dashboard.",
+      "sex": "Sex (for calculations)",
+      "height": "Height (cm)",
+      "weight": "Weight (kg)",
+      "activityLevel": "Activity Level",
+      "notSet": "Not set",
+      "select": "Select",
+      "sexes": {
+        "MALE": "Male",
+        "FEMALE": "Female"
+      },
+      "activityLevels": {
+        "SEDENTARY": "Sedentary: little or no exercise",
+        "LIGHT": "Light: exercise 1–3 times/week",
+        "MODERATE": "Moderate: exercise 4–5 times/week",
+        "ACTIVE": "Active: daily exercise, or intense exercise 3–4 times/week",
+        "VERY_ACTIVE": "Very active: intense exercise 6–7 times/week",
+        "EXTRA_ACTIVE": "Extra active: very intense exercise daily, or a physical job"
+      }
     },
     "socialProfiles": {
       "title": "Social Profiles"

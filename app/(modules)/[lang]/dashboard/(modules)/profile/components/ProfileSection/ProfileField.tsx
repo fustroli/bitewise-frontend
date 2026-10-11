@@ -7,6 +7,8 @@ import { FieldValues, PathValue, UseFormReturn } from 'react-hook-form';
 import DatePicker from '@/app/components/form/DatePicker';
 import InputField from '@/app/components/form/InputField';
 import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form';
+import SelectField from '@/app/components/form/Select';
+import { SelectItem } from '@/app/components/ui/select';
 import SwitchFormField from '@/app/components/form/SwitchFormField';
 import { TProfileField } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/interfaces';
 import Typography from '@/app/components/Typography';
@@ -57,6 +59,32 @@ const renderEditView = <TValues extends FieldValues>(
   switch (field.kind) {
     case 'date':
       return <DatePicker control={form.control} name={field.name} />;
+    case 'number':
+      return (
+        <InputField
+          control={form.control}
+          name={field.name}
+          type="number"
+          min={field.min}
+          max={field.max}
+          step={field.step}
+        />
+      );
+    case 'select':
+      return (
+        <SelectField
+          control={form.control}
+          name={field.name}
+          placeholder={field.placeholder}
+          clearLabel={field.clearLabel}
+        >
+          {field.options.map(({ value, label }) => (
+            <SelectItem key={value} value={value}>
+              {label}
+            </SelectItem>
+          ))}
+        </SelectField>
+      );
     case 'phone':
       return (
         <div className="rounded-md border border-input px-3 py-1 shadow-sm">
@@ -97,8 +125,11 @@ const readView = <TValues extends FieldValues>(
   field: TProfileField<TValues>,
   value: unknown,
 ) => {
-  if (!value) return '-';
+  if (value === undefined || value === null || value === '') return '-';
   if (field.kind === 'date') return format(value as Date, 'PPP');
+  if (field.kind === 'select') {
+    return field.options.find((option) => option.value === value)?.label;
+  }
   return String(value);
 };
 

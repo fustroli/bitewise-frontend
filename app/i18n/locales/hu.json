@@ -14,6 +14,51 @@
       "ingredients": "Hozzávalók",
       "meals": "Ételek",
       "mealPlans": "Étrendek"
+    },
+    "bodyMetrics": {
+      "bmi": {
+        "title": "BMI",
+        "description": "Testtömegindex, felnőtt WHO-táblázat",
+        "yourBmi": "Az Ön BMI-je",
+        "range": "BMI",
+        "category": "Kategória",
+        "healthyWeight": "Egészséges testsúly az Ön magasságához: {min} – {max} kg",
+        "empty": "Adja meg a magasságát és a testsúlyát a BMI-je megtekintéséhez.",
+        "categories": {
+          "severeThinness": "Súlyos soványság",
+          "moderateThinness": "Mérsékelt soványság",
+          "mildThinness": "Enyhe soványság",
+          "normal": "Normál",
+          "overweight": "Túlsúly",
+          "obeseClassI": "I. fokú elhízás",
+          "obeseClassII": "II. fokú elhízás",
+          "obeseClassIII": "III. fokú elhízás"
+        }
+      },
+      "calories": {
+        "title": "Kalória",
+        "description": "Napi kalória a heti testsúlyváltozás szerint",
+        "maintenance": "Fenntartó kalória",
+        "kcalPerDay": "kcal/nap",
+        "kgPerWeek": "{value} kg/hét",
+        "lose": "Fogyás",
+        "gain": "Hízás",
+        "loseTargets": {
+          "mild": "Enyhe fogyás",
+          "normal": "Fogyás",
+          "fast": "Erőteljes fogyás"
+        },
+        "gainTargets": {
+          "mild": "Enyhe hízás",
+          "normal": "Hízás",
+          "fast": "Gyors hízás"
+        },
+        "belowSafeMinimum": "A biztonságos minimum ({min} kcal/nap) alatt",
+        "empty": "Adja meg a nemét, magasságát, testsúlyát és aktivitási szintjét a kalóriák megtekintéséhez.",
+        "dateOfBirthMissing": "Adja meg a születési dátumát a kalóriák megtekintéséhez."
+      },
+      "addBodyStats": "Testadatok megadása",
+      "addDateOfBirth": "Születési dátum megadása"
     }
   },
   "common": {
@@ -39,7 +84,12 @@
     "imageType": "Csak .jpg, .jpeg vagy .png fájlok engedélyezettek",
     "imageSize": "A kép mérete nem lehet nagyobb, mint 5 MB",
     "required": "Ez a mező kötelező",
-    "invalidUrl": "Érvénytelen URL"
+    "invalidUrl": "Érvénytelen URL",
+    "heightRange": "A magasság {min} és {max} cm között lehet",
+    "weightRange": "A testsúly {min} és {max} kg között lehet",
+    "wholeNumber": "Egész számot adjon meg",
+    "oneDecimal": "Legfeljebb egy tizedesjegyet adjon meg",
+    "ageRange": "Az életkornak {min} és {max} év között kell lennie"
   },
   "profile": {
     "basic": {
@@ -64,6 +114,28 @@
       "phoneNumber": "Telefonszám",
       "username": "Felhasználónév",
       "dob": "Születési dátum"
+    },
+    "bodyStats": {
+      "title": "Testadatok",
+      "description": "Ezekből számoljuk a BMI-t és a kalóriákat a vezérlőpulton.",
+      "sex": "Nem (a számításokhoz)",
+      "height": "Magasság (cm)",
+      "weight": "Testsúly (kg)",
+      "activityLevel": "Aktivitási szint",
+      "notSet": "Nincs megadva",
+      "select": "Válasszon",
+      "sexes": {
+        "MALE": "Férfi",
+        "FEMALE": "Nő"
+      },
+      "activityLevels": {
+        "SEDENTARY": "Ülő: kevés vagy semmi mozgás",
+        "LIGHT": "Enyhe: edzés heti 1–3 alkalommal",
+        "MODERATE": "Mérsékelt: edzés heti 4–5 alkalommal",
+        "ACTIVE": "Aktív: napi edzés, vagy intenzív edzés heti 3–4 alkalommal",
+        "VERY_ACTIVE": "Nagyon aktív: intenzív edzés heti 6–7 alkalommal",
+        "EXTRA_ACTIVE": "Rendkívül aktív: nagyon intenzív napi edzés, vagy fizikai munka"
+      }
     },
     "socialProfiles": {
       "title": "Közösségi profilok"

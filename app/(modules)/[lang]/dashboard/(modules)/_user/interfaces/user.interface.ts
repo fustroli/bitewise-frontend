@@ -1,3 +1,8 @@
+import {
+  EActivityLevel,
+  ESex,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
+
 export interface IPersonalInformation {
   userName?: string;
   firstName?: string;
@@ -22,12 +27,21 @@ export interface INotificationSettings {
   securityEmail?: boolean;
 }
 
+/** Metric, as currently recorded; any field may be unset. */
+export interface IBodyStats {
+  sex: ESex | null;
+  heightCm: number | null;
+  weightKg: number | null;
+  activityLevel: EActivityLevel | null;
+}
+
 export interface IUser {
   id: number;
   email: string;
   personalInformation?: IPersonalInformation;
   socialProfiles?: ISocialProfiles;
   notificationSettings?: INotificationSettings;
+  bodyStats?: IBodyStats;
   avatarUrl?: string;
 }
 
@@ -36,4 +50,5 @@ export interface IUserChange {
   personalInformation?: IPersonalInformation;
   socialProfiles?: ISocialProfiles;
   notificationSettings?: INotificationSettings;
+  bodyStats?: Partial<IBodyStats>;
 }
