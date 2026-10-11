@@ -1,9 +1,12 @@
 import { Card, CardContent } from '@/app/components/ui/card';
 
+import { Skeleton } from '@/app/components/ui/skeleton';
+
 interface IProps {
   title: string;
   icon: React.ReactNode;
-  value: number;
+  /** Left out while loading: a skeleton of the value's size takes its place. */
+  value?: number;
 }
 const StatisticsCard = ({ title, value, icon }: IProps) => {
   return (
@@ -14,7 +17,11 @@ const StatisticsCard = ({ title, value, icon }: IProps) => {
         </div>
         <div className="flex flex-col gap-1">
           <p className="text-sm text-muted-foreground">{title}</p>
-          <h3 className="text-2xl font-bold text-foreground">{value}</h3>
+          {value === undefined ? (
+            <Skeleton className="h-8 w-12" />
+          ) : (
+            <h3 className="text-2xl font-bold text-foreground">{value}</h3>
+          )}
         </div>
       </CardContent>
     </Card>
