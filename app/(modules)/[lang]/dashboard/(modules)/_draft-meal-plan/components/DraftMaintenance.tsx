@@ -11,10 +11,22 @@ import {
 
 import { Button } from '@/app/components/ui/button';
 import Link from 'next/link';
+import { cn } from '@/app/lib';
 import { interpolate } from '@/app/utils/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useParams } from 'next/navigation';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
+
+/** Tints by where the rounded delta lands: over, at or under Maintenance. */
+const DELTA_CLASSES: Record<string, string> = {
+  '1': 'border-destructive/40 bg-destructive/15',
+  '0': 'border-primary/40 bg-primary/15',
+  '-1': 'border-success/40 bg-success/15',
+};
+
+// `Math.sign(-0)` is `-0`, which `String()` still makes `'0'`.
+const deltaClass = (delta: number) =>
+  DELTA_CLASSES[String(Math.sign(Math.round(delta)))];
 
 interface IProps {
   /** The draft's total, full precision. */
@@ -47,7 +59,12 @@ const DraftMaintenance = ({ kcal, profileHref }: IProps) => {
   }
 
   return (
-    <div className="flex flex-col gap-1">
+    <div
+      className={cn(
+        'flex flex-col gap-1 rounded-lg border p-4 shadow-sm',
+        deltaClass(delta),
+      )}
+    >
       <p className="text-2xl font-bold text-foreground">
         {formatCalorieDelta(delta, lang)}{' '}
         <span className="text-base font-medium text-muted-foreground">
