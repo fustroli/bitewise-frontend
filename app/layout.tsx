@@ -1,14 +1,20 @@
-import '@fontsource/poppins/400.css';
-import '@fontsource/poppins/500.css';
-import '@fontsource/poppins/600.css';
-import '@fontsource/poppins/700.css';
 import './globals.css';
 
 import type { Metadata } from 'next';
 import { NONCE_HEADER } from '@/app/utils/security/csp';
+import { Poppins } from 'next/font/google';
 import { ThemeProvider } from '@/app/providers/theme-provider';
 import { Toaster } from '@/app/components/ui/toaster';
 import { headers } from 'next/headers';
+
+// Self-hosted by Next at build time (so `font-src 'self'` holds), preloaded,
+// with a size-adjusted fallback. latin-ext covers hu/de/es/fr (ő, ű, ...).
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin', 'latin-ext'],
+  display: 'swap',
+  variable: '--font-poppins',
+});
 
 export const metadata: Metadata = {
   title: 'BiteWise - The Meal Planner',
@@ -25,7 +31,7 @@ export default async function RootLayout({
   const nonce = (await headers()).get(NONCE_HEADER) ?? undefined;
 
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className={poppins.variable} suppressHydrationWarning>
       <body>
         <ThemeProvider
           attribute="class"

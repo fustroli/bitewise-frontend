@@ -90,7 +90,12 @@ const config: Config = {
         sm: 'calc(var(--radius) - 4px)',
       },
       fontFamily: {
-        sans: ['Poppins', 'ui-sans-serif', 'system-ui', 'sans-serif'],
+        sans: [
+          'var(--font-poppins)',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
       },
       padding: {
         '4.5': '1.12rem',
