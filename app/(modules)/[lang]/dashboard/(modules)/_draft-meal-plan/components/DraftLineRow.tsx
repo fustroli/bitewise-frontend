@@ -73,7 +73,7 @@ const DraftLineRow = ({
           emptyText={resourceTable.notFound}
         />
       </TableCell>
-      <TableCell className="min-w-28">
+      <TableCell className="w-32 min-w-32">
         <InputField
           control={control}
           name={`lines.${index}.quantity`}
