@@ -24,6 +24,7 @@ import FileUploadFormField from '@/app/components/form/FileUploadFormField';
 import { Form } from '@/app/components/ui/form';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
 import dynamic from 'next/dynamic';
+import { readableAvatarResult } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
 import { toastResult } from '@/app/utils/helpers/client';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
@@ -70,7 +71,10 @@ const BasicInfo = () => {
     const formData = new FormData();
     formData.append('file', values.file);
 
-    const result = await updateAvatar(formData);
+    const result = readableAvatarResult(
+      await updateAvatar(formData),
+      validation.imageRejected,
+    );
 
     if (!toastResult(result, common.savedSuccessfully)) return;
 

@@ -236,7 +236,8 @@
     "waistRange": "Die Taille muss zwischen {min} und {max} cm liegen",
     "hipRange": "Die Hüfte muss zwischen {min} und {max} cm liegen",
     "halfStep": "In Schritten von 0,5 angeben",
-    "waistAboveNeck": "Die Taille muss größer als der Hals sein"
+    "waistAboveNeck": "Die Taille muss größer als der Hals sein",
+    "imageRejected": "Das Bild konnte nicht hochgeladen werden. Verwende eine .jpg-, .png- oder .webp-Datei bis 5 MB."
   },
   "draftMealPlan": {
     "title": "Ernährungsplan-Entwurf",
