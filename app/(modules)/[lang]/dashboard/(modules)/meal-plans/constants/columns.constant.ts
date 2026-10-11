@@ -8,5 +8,3 @@ export const MEAL_PLAN_COLUMNS: IResourceColumn[] = [
   { id: 'totalCarbohydrates', sortable: false, align: 'justify-end' },
   { id: 'dietaryFiber', sortable: false, align: 'justify-end' },
 ];
-
-export const MEAL_PLANS_PAGE_SIZE = 5;
