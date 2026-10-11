@@ -37,7 +37,7 @@ A person with a BiteWise account, identified by their sign-in email. Owns their 
 _Avoid_: Account (for the person), member
 
 **Profile**:
-What a User says about themselves: personal information, social profiles, avatar, and Notification settings.
+What a User says about themselves: personal information, social profiles, avatar, Body stats, and Notification settings.
 _Avoid_: Settings (for the whole page)
 
 **Notification settings**:
@@ -46,3 +46,25 @@ Which kinds of email a User receives, and the default email address they are sen
 **Session**:
 The period during which a User is signed in on a device. It starts at sign-in and ends at sign-out, account deletion, or when the backend rejects the User's token.
 _Avoid_: Login (as a noun), auth
+
+### Body
+
+**Body stats**:
+A User's sex, height, weight and Activity level as currently recorded (metric, no history). Part of their Profile.
+_Avoid_: Body metrics, biometrics, health data
+
+**Activity level**:
+How physically active a User is day to day: one of six steps from Sedentary to Extra active.
+_Avoid_: Exercise level, lifestyle
+
+**BMI category**:
+The adult WHO band a User's BMI falls in, from Severe thinness to Obese class III.
+_Avoid_: Weight class
+
+**Maintenance calories**:
+The daily calories that keep a User's weight stable, given their Body stats, age and Activity level.
+_Avoid_: TDEE, BMR
+
+**Calorie target**:
+Maintenance calories shifted for a weekly weight change: lose or gain 0.25, 0.5 or 1 kg.
+_Avoid_: Calorie goal, calorie budget
