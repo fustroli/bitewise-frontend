@@ -32,4 +32,4 @@ Anything not allowed is disallowed: shared → module or route, module → route
 
 - `@/` imports are resolved with `eslint-import-resolver-typescript`; without it they are unclassified and silently skipped.
 - Element patterns are micromatch globs, so `(modules)` and `[lang]` must be escaped.
-- Public-API barrels per module are a non-goal for now; deep imports along an allowed edge are fine.
+- Public-API barrels per module are a non-goal (see `0004`); deep imports along an allowed edge are fine.
