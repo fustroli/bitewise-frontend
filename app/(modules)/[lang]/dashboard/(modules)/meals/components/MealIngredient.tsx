@@ -66,11 +66,12 @@ const MealIngredient = ({
         }
       />
 
+      {/* Offset by the fields' label and its gap, so it lines up with their controls. */}
       <Button
         type="button"
         aria-label={fields.removeIngredient}
         variant="destructive"
-        className="mt-8"
+        className="mt-[1.375rem]"
         onClick={() => onRemove()}
       >
         <Delete />
