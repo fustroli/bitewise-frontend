@@ -15,8 +15,10 @@ export default async function DashboardLayout({
   params: Promise<{ lang: string }>;
 }>) {
   const { lang } = await params;
-  const dictionary = await getDictionary(lang as TLocale);
-  const user = await fetchMe();
+  const [dictionary, user] = await Promise.all([
+    getDictionary(lang as TLocale),
+    fetchMe(),
+  ]);
 
   return (
     <DictionaryProvider dictionary={dictionary}>
