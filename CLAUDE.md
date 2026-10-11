@@ -116,7 +116,10 @@ See `docs/adr/0001-reads-throw-mutations-return-results.md`.
   `unwrap()` the result, so failures throw to `error.tsx`.
 - Changes live in each module's `actions/` (`'use server'`) and return the
   `TApiResult`; clients show it with `toastResult(result, successText)` from
-  `app/utils/helpers/client`.
+  `app/utils/helpers/client`. Actions are public endpoints: each parses all
+  its arguments with `parseActionInput()` (ids via `idSchema`, bodies via the
+  module's schema, unknown keys stripped) and returns a 400 before calling
+  the backend.
 - `app/utils/helpers` (index) holds only helpers safe everywhere; client-only
   ones (`toastResult`, axios `handleAxiosError`, image) are in `./client`.
 - Sign-in/sign-up stay direct browser → backend axios calls.

@@ -1,7 +1,7 @@
 import {
   ACCEPTED_IMAGE_TYPES,
   MAX_FILE_SIZE,
-} from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_user/constants';
 
 import { z } from 'zod';
 

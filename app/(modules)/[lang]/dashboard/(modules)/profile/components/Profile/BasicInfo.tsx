@@ -18,7 +18,7 @@ import {
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations';
 import { useMemo, useState } from 'react';
 
-import { ACCEPTED_IMAGE_TYPES } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
+import { ACCEPTED_IMAGE_TYPES } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/constants';
 import { Button } from '@/app/components/ui/button';
 import FileUploadFormField from '@/app/components/form/FileUploadFormField';
 import { Form } from '@/app/components/ui/form';
