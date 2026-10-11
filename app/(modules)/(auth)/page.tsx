@@ -7,6 +7,7 @@ import { EAuthError } from '@/app/(modules)/(auth)/enum';
 import { getDictionary } from '@/app/i18n/dictionaries';
 import { getLocale } from '@/app/i18n/helpers';
 import { headers } from 'next/headers';
+import { parseAuthError } from '@/app/(modules)/(auth)/helpers';
 
 interface IProps {
   searchParams: Promise<{
@@ -18,6 +19,7 @@ interface IProps {
 export default async function Auth({ searchParams }: IProps) {
   const query = await searchParams;
   const reason = parseSignOutReason(query.reason);
+  const error = parseAuthError(query.error);
   const dict = await getDictionary(getLocale({ headers: await headers() }));
 
   // Only known codes map to text, so the page never echoes arbitrary input.
@@ -25,10 +27,11 @@ export default async function Auth({ searchParams }: IProps) {
     [ESignOutReason.EXPIRED]: dict.auth.sessionExpired,
     [ESignOutReason.ACCOUNT_DELETED]: dict.auth.accountDeleted,
   };
-  const notice =
-    query.error === EAuthError.PASSWORD_FIRST
-      ? dict.auth.passwordFirst
-      : reason && reasonNotices[reason];
+  const errorNotices: Record<EAuthError, string> = {
+    [EAuthError.PASSWORD_FIRST]: dict.auth.passwordFirst,
+    [EAuthError.OAUTH_FAILED]: dict.auth.oauthFailed,
+  };
+  const notice = error ? errorNotices[error] : reason && reasonNotices[reason];
 
   return (
     <DictionaryProvider dictionary={dict}>
