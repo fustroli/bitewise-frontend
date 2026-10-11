@@ -29,7 +29,9 @@ ends at the `/signout` route handler (GET/POST), which clears both cookies
 with `COOKIE_DOMAIN` and redirects to `/` (`?reason=expired` shows a notice).
 Link to it with `signOutUrl()` via a form POST or `redirect()`, never a
 `<Link>` (prefetch would sign the user out). `/signout` also revokes the
-refresh token on the backend.
+refresh token on the backend. GET isn't origin-checked, so a cross-site
+navigation can sign a User out; accepted (see
+`docs/adr/0005-signout-get-accepts-cross-site.md`).
 
 The proxy renews the Session before each request (`./renewal`, see
 `docs/adr/0002-proxy-renews-the-session.md`): an access token that is missing
