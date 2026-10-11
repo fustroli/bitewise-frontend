@@ -21,10 +21,10 @@ const mapNutrition = (value: (nutrient: TNutrient) => number): INutrition =>
     EMPTY_NUTRITION,
   );
 
-const scaleNutrition = (nutrition: INutrition, scale: number) =>
+export const scaleNutrition = (nutrition: INutrition, scale: number) =>
   mapNutrition((nutrient) => nutrition[nutrient] * scale);
 
-const sumNutrition = (items: INutrition[]) =>
+export const sumNutrition = (items: INutrition[]) =>
   items.reduce(
     (total, item) =>
       mapNutrition((nutrient) => total[nutrient] + item[nutrient]),

@@ -229,5 +229,51 @@
     "hipRange": "La cadera debe estar entre {min} y {max} cm",
     "halfStep": "Usa incrementos de 0,5",
     "waistAboveNeck": "La cintura debe ser mayor que el cuello"
+  },
+  "draftMealPlan": {
+    "title": "Borrador de plan de comidas",
+    "description": "Un borrador para un día fuera de tus planes de comidas, guardado solo en este navegador.",
+    "startDescription": "Prueba un día que no forma parte de tus planes de comidas, como un día libre. Se guarda solo en este navegador.",
+    "start": "Empezar borrador",
+    "empty": "Añade comidas o ingredientes para ver su información nutricional.",
+    "addMeal": "Añadir comida",
+    "addIngredient": "Añadir ingrediente",
+    "clear": "Vaciar borrador",
+    "clearConfirm": "Se quitarán todas las comidas e ingredientes del borrador. No se puede deshacer.",
+    "collapse": "Contraer borrador de plan de comidas",
+    "expand": "Expandir borrador de plan de comidas",
+    "removed": "Se quitaron del borrador {count} elemento(s) que ya no existen.",
+    "total": "Total",
+    "columns": {
+      "item": "Comida o ingrediente",
+      "quantity": "Cantidad",
+      "calories": "Calorías",
+      "protein": "Proteína",
+      "totalFat": "Grasa (saturada)",
+      "totalCarbohydrates": "Carbohidratos (azúcar)",
+      "dietaryFiber": "Fibra"
+    },
+    "fields": {
+      "meal": "Comida",
+      "ingredient": "Ingrediente",
+      "mealPlaceholder": "Selecciona una comida...",
+      "ingredientPlaceholder": "Selecciona un ingrediente...",
+      "multiplier": "Raciones",
+      "amount": "Cantidad",
+      "servings": "×",
+      "grams": "g",
+      "pieces": "uds."
+    },
+    "maintenance": {
+      "kcal": "kcal",
+      "comparedWith": "en comparación con tus calorías de mantenimiento ({maintenance} kcal/día)",
+      "missing": "Añade tus datos corporales y tu fecha de nacimiento para comparar el borrador con tus calorías de mantenimiento.",
+      "completeProfile": "Completar perfil"
+    },
+    "validation": {
+      "itemRequired": "Selecciona una comida o un ingrediente",
+      "quantityPositive": "La cantidad debe ser mayor que 0",
+      "multiplierStep": "Usa pasos de 0,5"
+    }
   }
 }

@@ -332,5 +332,51 @@
     "passwordMatch": "A jelszavaknak egyezniük kell",
     "oldPasswordRequired": "Régi jelszó kötelező",
     "confirmPasswordRequired": "Jelszó megerősítése kötelező"
+  },
+  "draftMealPlan": {
+    "title": "Étrendvázlat",
+    "description": "Jegyzetlap egy étrendjeiden kívüli naphoz, csak ebben a böngészőben mentve.",
+    "startDescription": "Próbálj ki egy napot, ami nem része az étrendjeidnek, például egy csalónapot. Csak ebben a böngészőben mentjük.",
+    "start": "Vázlat indítása",
+    "empty": "Adj hozzá ételeket vagy alapanyagokat a tápértékük megtekintéséhez.",
+    "addMeal": "Étel hozzáadása",
+    "addIngredient": "Alapanyag hozzáadása",
+    "clear": "Vázlat törlése",
+    "clearConfirm": "Ez minden ételt és alapanyagot eltávolít a vázlatból. Nem vonható vissza.",
+    "collapse": "Étrendvázlat összecsukása",
+    "expand": "Étrendvázlat kinyitása",
+    "removed": "{count} már nem létező tételt eltávolítottunk a vázlatból.",
+    "total": "Összesen",
+    "columns": {
+      "item": "Étel vagy alapanyag",
+      "quantity": "Mennyiség",
+      "calories": "Kalória",
+      "protein": "Fehérje",
+      "totalFat": "Zsír (telített)",
+      "totalCarbohydrates": "Szénhidrát (cukor)",
+      "dietaryFiber": "Rost"
+    },
+    "fields": {
+      "meal": "Étel",
+      "ingredient": "Alapanyag",
+      "mealPlaceholder": "Válassz ételt...",
+      "ingredientPlaceholder": "Válassz alapanyagot...",
+      "multiplier": "Adag",
+      "amount": "Mennyiség",
+      "servings": "×",
+      "grams": "g",
+      "pieces": "db"
+    },
+    "maintenance": {
+      "kcal": "kcal",
+      "comparedWith": "a szinttartó kalóriádhoz képest ({maintenance} kcal/nap)",
+      "missing": "Add meg a testadataidat és a születési dátumodat, hogy összevethesd a vázlatot a szinttartó kalóriáddal.",
+      "completeProfile": "Profil kiegészítése"
+    },
+    "validation": {
+      "itemRequired": "Válassz ételt vagy alapanyagot",
+      "quantityPositive": "A mennyiségnek 0-nál nagyobbnak kell lennie",
+      "multiplierStep": "0,5-ös lépésekben add meg"
+    }
   }
 }

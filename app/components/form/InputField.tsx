@@ -10,6 +10,7 @@ import { cn } from '@/app/lib/utils';
 
 interface IProps<T extends FieldValues> extends IFieldProps<T> {
   label?: string;
+  hideLabel?: boolean;
   type?: HTMLInputTypeAttribute;
   /** For a number field; the schema still does the validating. */
   min?: number;
@@ -26,6 +27,7 @@ const InputField = <T extends FieldValues>({
   control,
   name,
   label,
+  hideLabel,
   type = 'text',
   min,
   max,
@@ -39,6 +41,7 @@ const InputField = <T extends FieldValues>({
     control={control}
     name={name}
     label={label}
+    hideLabel={hideLabel}
     adornment={endAdornment}
   >
     {(field) => (

@@ -229,5 +229,51 @@
     "hipRange": "Die Hüfte muss zwischen {min} und {max} cm liegen",
     "halfStep": "In Schritten von 0,5 angeben",
     "waistAboveNeck": "Die Taille muss größer als der Hals sein"
+  },
+  "draftMealPlan": {
+    "title": "Ernährungsplan-Entwurf",
+    "description": "Ein Notizblock für einen Tag außerhalb deiner Ernährungspläne, nur in diesem Browser gespeichert.",
+    "startDescription": "Probiere einen Tag aus, der nicht zu deinen Ernährungsplänen gehört, etwa einen Cheat Day. Er wird nur in diesem Browser gespeichert.",
+    "start": "Entwurf starten",
+    "empty": "Füge Mahlzeiten oder Zutaten hinzu, um ihre Nährwerte zu sehen.",
+    "addMeal": "Mahlzeit hinzufügen",
+    "addIngredient": "Zutat hinzufügen",
+    "clear": "Entwurf leeren",
+    "clearConfirm": "Damit werden alle Mahlzeiten und Zutaten aus dem Entwurf entfernt. Das kann nicht rückgängig gemacht werden.",
+    "collapse": "Ernährungsplan-Entwurf einklappen",
+    "expand": "Ernährungsplan-Entwurf ausklappen",
+    "removed": "{count} nicht mehr vorhandene Einträge wurden aus dem Entwurf entfernt.",
+    "total": "Gesamt",
+    "columns": {
+      "item": "Mahlzeit oder Zutat",
+      "quantity": "Menge",
+      "calories": "Kalorien",
+      "protein": "Eiweiß",
+      "totalFat": "Fett (gesättigt)",
+      "totalCarbohydrates": "Kohlenhydrate (Zucker)",
+      "dietaryFiber": "Ballaststoffe"
+    },
+    "fields": {
+      "meal": "Mahlzeit",
+      "ingredient": "Zutat",
+      "mealPlaceholder": "Mahlzeit wählen...",
+      "ingredientPlaceholder": "Zutat wählen...",
+      "multiplier": "Portionen",
+      "amount": "Menge",
+      "servings": "×",
+      "grams": "g",
+      "pieces": "Stk."
+    },
+    "maintenance": {
+      "kcal": "kcal",
+      "comparedWith": "im Vergleich zu deinem Erhaltungsbedarf ({maintenance} kcal/Tag)",
+      "missing": "Gib deine Körperdaten und dein Geburtsdatum an, um den Entwurf mit deinem Erhaltungsbedarf zu vergleichen.",
+      "completeProfile": "Profil vervollständigen"
+    },
+    "validation": {
+      "itemRequired": "Wähle eine Mahlzeit oder Zutat",
+      "quantityPositive": "Die Menge muss größer als 0 sein",
+      "multiplierStep": "In Schritten von 0,5 angeben"
+    }
   }
 }

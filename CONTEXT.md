@@ -26,6 +26,10 @@ _Avoid_: Line item, component
 A named set of distinct Meals; the same Meal cannot appear twice. Its nutrition is the sum over its Meals.
 _Avoid_: Diet, schedule
 
+**Draft meal plan**:
+A User's single scratchpad day outside their Meal plans (e.g. a cheat day): Meals with a multiplier and Ingredients with a quantity, each distinct. Kept only in the User's browser, never on the backend; its nutrition is compared with their Maintenance calories.
+_Avoid_: Test plan, cheat plan
+
 **Nutrition**:
 The calories, protein, fat, saturated fat, carbohydrates, sugar and fiber of an Ingredient amount, Meal or Meal plan.
 _Avoid_: Macros, nutrients

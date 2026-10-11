@@ -229,5 +229,51 @@
     "hipRange": "Les hanches doivent être comprises entre {min} et {max} cm",
     "halfStep": "Utilisez des pas de 0,5",
     "waistAboveNeck": "La taille doit être supérieure au cou"
+  },
+  "draftMealPlan": {
+    "title": "Brouillon de plan de repas",
+    "description": "Un brouillon pour une journée hors de vos plans de repas, enregistré uniquement dans ce navigateur.",
+    "startDescription": "Essayez une journée qui ne fait pas partie de vos plans de repas, comme un jour de craquage. Elle est enregistrée uniquement dans ce navigateur.",
+    "start": "Commencer un brouillon",
+    "empty": "Ajoutez des repas ou des ingrédients pour voir leurs valeurs nutritionnelles.",
+    "addMeal": "Ajouter un repas",
+    "addIngredient": "Ajouter un ingrédient",
+    "clear": "Vider le brouillon",
+    "clearConfirm": "Tous les repas et ingrédients seront retirés du brouillon. Cette action est irréversible.",
+    "collapse": "Réduire le brouillon de plan de repas",
+    "expand": "Développer le brouillon de plan de repas",
+    "removed": "{count} élément(s) qui n'existent plus ont été retirés du brouillon.",
+    "total": "Total",
+    "columns": {
+      "item": "Repas ou ingrédient",
+      "quantity": "Quantité",
+      "calories": "Calories",
+      "protein": "Protéines",
+      "totalFat": "Lipides (saturés)",
+      "totalCarbohydrates": "Glucides (sucres)",
+      "dietaryFiber": "Fibres"
+    },
+    "fields": {
+      "meal": "Repas",
+      "ingredient": "Ingrédient",
+      "mealPlaceholder": "Choisir un repas...",
+      "ingredientPlaceholder": "Choisir un ingrédient...",
+      "multiplier": "Portions",
+      "amount": "Quantité",
+      "servings": "×",
+      "grams": "g",
+      "pieces": "pcs"
+    },
+    "maintenance": {
+      "kcal": "kcal",
+      "comparedWith": "par rapport à vos calories de maintien ({maintenance} kcal/jour)",
+      "missing": "Ajoutez vos données corporelles et votre date de naissance pour comparer le brouillon à vos calories de maintien.",
+      "completeProfile": "Compléter le profil"
+    },
+    "validation": {
+      "itemRequired": "Choisissez un repas ou un ingrédient",
+      "quantityPositive": "La quantité doit être supérieure à 0",
+      "multiplierStep": "Utilisez des pas de 0,5"
+    }
   }
 }

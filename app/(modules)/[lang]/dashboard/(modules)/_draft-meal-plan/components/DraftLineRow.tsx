@@ -1,0 +1,114 @@
+'use client';
+
+import {
+  TDraftLine,
+  TDraftSchema,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/validations';
+import { TableCell, TableRow } from '@/app/components/ui/table';
+
+import { Button } from '@/app/components/ui/button';
+import ComboboxField from '@/app/components/form/ComboboxField';
+import { Control } from 'react-hook-form';
+import { Delete } from 'lucide-react';
+import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
+import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
+import { IDraftSources } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
+import { INutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/interfaces';
+import { IOption } from '@/app/utils/interfaces';
+import InputField from '@/app/components/form/InputField';
+import { MEAL_MULTIPLIER_STEP } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
+import { NUTRITION_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
+import { draftLineUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
+import { formatNutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/helpers';
+import { interpolate } from '@/app/utils/helpers';
+import { useDictionary } from '@/app/providers/dictionary-provider';
+
+interface IProps {
+  index: number;
+  line: TDraftLine;
+  control: Control<TDraftSchema>;
+  /** The items of the line's kind that no other line picked. */
+  options: IOption[];
+  sources: IDraftSources;
+  nutrition: INutrition;
+  onRemove: () => void;
+}
+
+const DraftLineRow = ({
+  index,
+  line,
+  control,
+  options,
+  sources,
+  nutrition,
+  onRemove,
+}: IProps) => {
+  const {
+    draftMealPlan: { fields },
+    resourceTable,
+  } = useDictionary();
+
+  const isMeal = line.kind === EDraftLineKind.MEAL;
+  const unit = draftLineUnit(line, sources);
+  const unitLabel = isMeal
+    ? fields.servings
+    : unit && (unit === EUnit.PIECE ? fields.pieces : fields.grams);
+  const name =
+    options.find(({ value }) => value === line.itemId)?.label ??
+    (isMeal ? fields.meal : fields.ingredient);
+
+  return (
+    <TableRow className="align-top">
+      <TableCell>
+        <ComboboxField
+          control={control}
+          name={`lines.${index}.itemId`}
+          label={isMeal ? fields.meal : fields.ingredient}
+          hideLabel
+          options={options}
+          placeholder={
+            isMeal ? fields.mealPlaceholder : fields.ingredientPlaceholder
+          }
+          searchPlaceholder={resourceTable.search}
+          emptyText={resourceTable.notFound}
+        />
+      </TableCell>
+      <TableCell className="min-w-28">
+        <InputField
+          control={control}
+          name={`lines.${index}.quantity`}
+          label={isMeal ? fields.multiplier : fields.amount}
+          hideLabel
+          type="number"
+          min={isMeal ? MEAL_MULTIPLIER_STEP : 0}
+          step={isMeal ? MEAL_MULTIPLIER_STEP : undefined}
+          endAdornment={
+            unitLabel && (
+              <span className="pr-3 text-sm text-muted-foreground">
+                {unitLabel}
+              </span>
+            )
+          }
+        />
+      </TableCell>
+      {NUTRITION_COLUMNS.map((column) => (
+        <TableCell key={column.nutrient} className="whitespace-nowrap pt-4">
+          {formatNutrition(nutrition, column)}
+        </TableCell>
+      ))}
+      <TableCell className="text-right">
+        <Button
+          type="button"
+          variant="ghost"
+          size="icon"
+          aria-label={interpolate(resourceTable.remove, { name })}
+          onClick={onRemove}
+        >
+          <Delete />
+        </Button>
+      </TableCell>
+    </TableRow>
+  );
+};
+
+export default DraftLineRow;
