@@ -1,18 +1,27 @@
 'use client';
 
-import 'react-phone-number-input/style.css';
-
 import { FieldValues, PathValue, UseFormReturn } from 'react-hook-form';
 
 import DatePicker from '@/app/components/form/DatePicker';
 import InputField from '@/app/components/form/InputField';
-import PhoneInputWithCountry from 'react-phone-number-input/react-hook-form';
 import SelectField from '@/app/components/form/Select';
 import { SelectItem } from '@/app/components/ui/select';
 import SwitchFormField from '@/app/components/form/SwitchFormField';
+import type TPhoneInput from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/ProfileSection/PhoneInput';
 import { TProfileField } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/interfaces';
 import Typography from '@/app/components/Typography';
+import dynamic from 'next/dynamic';
 import { format } from 'date-fns';
+
+/**
+ * Edit-mode only, so libphonenumber loads lazily. Its box below has a fixed
+ * height, so there's no jump when it arrives. The cast keeps the generic props.
+ */
+const PhoneInput = dynamic(
+  () =>
+    import('@/app/(modules)/[lang]/dashboard/(modules)/profile/components/ProfileSection/PhoneInput'),
+  { ssr: false },
+) as typeof TPhoneInput;
 
 interface IProps<TValues extends FieldValues> {
   field: TProfileField<TValues>;
@@ -90,12 +99,8 @@ const renderEditView = <TValues extends FieldValues>(
       );
     case 'phone':
       return (
-        <div className="rounded-md border border-input px-3 py-1 shadow-sm">
-          <PhoneInputWithCountry
-            name={field.name}
-            control={form.control}
-            className="focus:outline-none"
-          />
+        <div className="flex h-9 items-center rounded-md border border-input px-3 py-1 shadow-sm">
+          <PhoneInput control={form.control} name={field.name} />
         </div>
       );
     default: {
