@@ -89,7 +89,12 @@
     "weightRange": "Weight must be between {min} and {max} kg",
     "wholeNumber": "Use a whole number",
     "oneDecimal": "Use at most one decimal",
-    "ageRange": "You must be between {min} and {max} years old"
+    "ageRange": "You must be between {min} and {max} years old",
+    "neckRange": "Neck must be between {min} and {max} cm",
+    "waistRange": "Waist must be between {min} and {max} cm",
+    "hipRange": "Hip must be between {min} and {max} cm",
+    "halfStep": "Use steps of 0.5",
+    "waistAboveNeck": "Waist must be greater than neck"
   },
   "profile": {
     "basic": {
@@ -121,6 +126,10 @@
       "sex": "Sex (for calculations)",
       "height": "Height (cm)",
       "weight": "Weight (kg)",
+      "neck": "Neck (cm)",
+      "waist": "Waist (cm)",
+      "hip": "Hip (cm, optional)",
+      "hipHint": "Only used for women.",
       "activityLevel": "Activity Level",
       "notSet": "Not set",
       "select": "Select",

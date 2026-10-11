@@ -57,6 +57,25 @@ const BodyStats = () => {
           ...BODY_STATS_LIMITS.weightKg,
         },
         {
+          kind: 'number',
+          name: 'neckCm',
+          label: labels.neck,
+          ...BODY_STATS_LIMITS.neckCm,
+        },
+        {
+          kind: 'number',
+          name: 'waistCm',
+          label: labels.waist,
+          ...BODY_STATS_LIMITS.waistCm,
+        },
+        {
+          kind: 'number',
+          name: 'hipCm',
+          label: labels.hip,
+          hint: labels.hipHint,
+          ...BODY_STATS_LIMITS.hipCm,
+        },
+        {
           kind: 'select',
           name: 'activityLevel',
           label: labels.activityLevel,

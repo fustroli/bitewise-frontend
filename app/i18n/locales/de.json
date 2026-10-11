@@ -199,5 +199,12 @@
     "passwordMatch": "Passwörter müssen übereinstimmen",
     "oldPasswordRequired": "Altes Passwort ist erforderlich",
     "confirmPasswordRequired": "Passwort bestätigen ist erforderlich"
+  },
+  "validation": {
+    "neckRange": "Der Hals muss zwischen {min} und {max} cm liegen",
+    "waistRange": "Die Taille muss zwischen {min} und {max} cm liegen",
+    "hipRange": "Die Hüfte muss zwischen {min} und {max} cm liegen",
+    "halfStep": "In Schritten von 0,5 angeben",
+    "waistAboveNeck": "Die Taille muss größer als der Hals sein"
   }
 }

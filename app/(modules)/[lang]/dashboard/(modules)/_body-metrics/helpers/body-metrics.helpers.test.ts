@@ -20,6 +20,9 @@ const MAN: IBodyStats = {
   sex: ESex.MALE,
   heightCm: 180,
   weightKg: 71.5,
+  neckCm: null,
+  waistCm: null,
+  hipCm: null,
   activityLevel: EActivityLevel.MODERATE,
 };
 

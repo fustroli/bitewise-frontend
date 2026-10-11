@@ -172,6 +172,9 @@ describe('Body stats', () => {
       sex: ESex.MALE,
       heightCm: 180,
       weightKg: 80.5,
+      neckCm: 38,
+      waistCm: 85.5,
+      hipCm: null,
       activityLevel: EActivityLevel.MODERATE,
     },
   };
@@ -180,6 +183,9 @@ describe('Body stats', () => {
 
   const heightInput = () => screen.getAllByRole('spinbutton')[0];
   const weightInput = () => screen.getAllByRole('spinbutton')[1];
+  const neckInput = () => screen.getAllByRole('spinbutton')[2];
+  const waistInput = () => screen.getAllByRole('spinbutton')[3];
+  const hipInput = () => screen.getAllByRole('spinbutton')[4];
   const sexSelect = () => screen.getAllByRole('combobox')[0];
   const activitySelect = () => screen.getAllByRole('combobox')[1];
 
@@ -199,6 +205,9 @@ describe('Body stats', () => {
     expect(screen.getByText(labels.sexes.MALE)).toBeTruthy();
     expect(screen.getByText('180')).toBeTruthy();
     expect(screen.getByText('80.5')).toBeTruthy();
+    expect(screen.getByText('85.5')).toBeTruthy();
+    expect(screen.getByText(labels.hip)).toBeTruthy();
+    expect(screen.getByText(labels.hipHint)).toBeTruthy();
     expect(screen.getByText(labels.activityLevels.MODERATE)).toBeTruthy();
   });
 
@@ -259,5 +268,34 @@ describe('Body stats', () => {
     expect(
       screen.getByText('Height must be between 100 and 250 cm'),
     ).toBeTruthy();
+  });
+
+  it('saves measurements only once the waist is above the neck', async () => {
+    const user = userEvent.setup();
+    const updateUser = savedWith({
+      ...BODY_USER.bodyStats!,
+      neckCm: 45,
+      hipCm: 98.5,
+    });
+    renderWithUser(<BodyStats />, BODY_USER, updateUser);
+
+    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.clear(neckInput());
+    await user.type(neckInput(), '45');
+    await user.clear(waistInput());
+    await user.type(waistInput(), '45');
+    await user.type(hipInput(), '98.5');
+    await user.click(screen.getByRole('button', { name: common.save }));
+
+    expect(updateUser).not.toHaveBeenCalled();
+    expect(screen.getByText(en.validation.waistAboveNeck)).toBeTruthy();
+
+    await user.clear(waistInput());
+    await user.type(waistInput(), '85.5');
+    await user.click(screen.getByRole('button', { name: common.save }));
+
+    expect(updateUser).toHaveBeenCalledWith({
+      bodyStats: { neckCm: 45, hipCm: 98.5 },
+    });
   });
 });

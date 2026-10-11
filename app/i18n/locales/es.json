@@ -199,5 +199,12 @@
     "passwordMatch": "Las contraseñas deben coincidir",
     "oldPasswordRequired": "Se requiere la contraseña anterior",
     "confirmPasswordRequired": "Se requiere confirmar la contraseña"
+  },
+  "validation": {
+    "neckRange": "El cuello debe estar entre {min} y {max} cm",
+    "waistRange": "La cintura debe estar entre {min} y {max} cm",
+    "hipRange": "La cadera debe estar entre {min} y {max} cm",
+    "halfStep": "Usa incrementos de 0,5",
+    "waistAboveNeck": "La cintura debe ser mayor que el cuello"
   }
 }

@@ -32,6 +32,9 @@ export interface IBodyStats {
   sex: ESex | null;
   heightCm: number | null;
   weightKg: number | null;
+  neckCm: number | null;
+  waistCm: number | null;
+  hipCm: number | null;
   activityLevel: EActivityLevel | null;
 }
 
