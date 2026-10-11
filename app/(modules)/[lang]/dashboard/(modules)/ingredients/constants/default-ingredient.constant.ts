@@ -10,5 +10,4 @@ export const DEFAULT_INGREDIENT_VALUES = {
   dietaryFiber: 0,
   calories: 0,
   unit: EUnit.HUNDRED_GRAMS,
-  price: 0,
 };

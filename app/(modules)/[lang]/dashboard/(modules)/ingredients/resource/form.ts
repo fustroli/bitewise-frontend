@@ -34,11 +34,7 @@ const ingredientForm = createResourceForm<IIngredient, TIngredientSchema>({
     unit: ingredient.unit,
   }),
   fields: IngredientFields,
-  create: (values) =>
-    createIngredient({
-      ...values,
-      price: 0, //TODO: implement later on
-    } as ICreateIngredient),
+  create: (values) => createIngredient(values as ICreateIngredient),
   update: (values, id) => updateIngredient(values as ICreateIngredient, id),
   remove: deleteIngredient,
 });
