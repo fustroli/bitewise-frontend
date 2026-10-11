@@ -13,6 +13,29 @@
       "ingredients": "Ingredientes",
       "meals": "Comidas",
       "mealPlans": "Planes de comidas"
+    },
+    "bodyMetrics": {
+      "bodyFat": {
+        "title": "Grasa corporal",
+        "description": "Método de la Marina de EE. UU., categorías ACE",
+        "yourBodyFat": "Su grasa corporal",
+        "category": "Categoría",
+        "range": "Grasa corporal",
+        "fatMass": "Masa grasa",
+        "leanMass": "Masa magra",
+        "kg": "{value} kg",
+        "empty": "Añada su sexo, altura, peso, cuello y cintura (y cadera si es mujer) para ver su grasa corporal.",
+        "implausible": "Sus medidas no dan una grasa corporal plausible. ¿Su cintura es mayor que su cuello?",
+        "addMeasurements": "Añadir medidas",
+        "checkMeasurements": "Revisar medidas",
+        "categories": {
+          "essential": "Grasa esencial",
+          "athletes": "Atletas",
+          "fitness": "Fitness",
+          "average": "Promedio",
+          "obese": "Obesidad"
+        }
+      }
     }
   },
   "common": {

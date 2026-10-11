@@ -1,5 +1,6 @@
 import {
   EBmiCategory,
+  EBodyFatCategory,
   ECaloriePace,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
 
@@ -20,6 +21,21 @@ export interface IBmiBand {
   category: EBmiCategory;
   min?: number;
   max?: number;
+}
+
+/** A body fat band in %; `min` is inclusive, `max` exclusive, either may be open. */
+export interface IBodyFatBand {
+  category: EBodyFatCategory;
+  min?: number;
+  max?: number;
+}
+
+export interface IBodyFat {
+  /** US Navy method, full precision; round only for display. */
+  percent: number;
+  category: EBodyFatCategory;
+  fatMassKg: number;
+  leanMassKg: number;
 }
 
 export interface IWeightRange {
@@ -55,8 +71,13 @@ export interface ICalories {
 export interface IBodyMetrics {
   /** Unset while height or weight is missing. */
   bmi?: IBmi;
+  /**
+   * Unset while sex, height, weight, neck, waist or (for a woman) hip is
+   * missing, or when they give an implausible result.
+   */
+  bodyFat?: IBodyFat;
   /** Unset while any input is missing. */
   calories?: ICalories;
-  /** The inputs still needed, for BMI and calories alike. */
+  /** The inputs still needed, for BMI, body fat and calories alike. */
   missing: TBodyMetricsField[];
 }

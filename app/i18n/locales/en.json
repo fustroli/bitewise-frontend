@@ -35,6 +35,27 @@
           "obeseClassIII": "Obese class III"
         }
       },
+      "bodyFat": {
+        "title": "Body fat",
+        "description": "US Navy method, ACE categories",
+        "yourBodyFat": "Your body fat",
+        "category": "Category",
+        "range": "Body fat",
+        "fatMass": "Fat mass",
+        "leanMass": "Lean mass",
+        "kg": "{value} kg",
+        "empty": "Add your sex, height, weight, neck and waist (and hip for women) to see your body fat.",
+        "implausible": "Your measurements don't give a plausible body fat. Is your waist larger than your neck?",
+        "addMeasurements": "Add your measurements",
+        "checkMeasurements": "Check your measurements",
+        "categories": {
+          "essential": "Essential fat",
+          "athletes": "Athletes",
+          "fitness": "Fitness",
+          "average": "Average",
+          "obese": "Obese"
+        }
+      },
       "calories": {
         "title": "Calories",
         "description": "Daily calories by weekly weight change",
