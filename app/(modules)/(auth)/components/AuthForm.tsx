@@ -7,7 +7,6 @@ import {
 } from '@/app/components/ui/tabs';
 
 import { EAuthView } from '@/app/(modules)/(auth)/enum';
-import FacebookIcon from '@/app/components/icons/FacebookIcon';
 import GoogleIcon from '@/app/components/icons/GoogleIcon';
 import { Separator } from '@/app/components/ui/separator';
 import SignInForm from '@/app/(modules)/(auth)/components/SignInForm';
@@ -51,9 +50,6 @@ const AuthForm = ({ notice }: IProps) => {
         <Separator className="shrink" />
       </div>
       <div className="space-x-4">
-        <SocialLogin url="/auth/facebook/login">
-          <FacebookIcon />
-        </SocialLogin>
         <SocialLogin url="/auth/google/login">
           <GoogleIcon />
         </SocialLogin>
