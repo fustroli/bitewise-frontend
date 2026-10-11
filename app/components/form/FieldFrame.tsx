@@ -1,4 +1,10 @@
 import {
+  ComponentPropsWithoutRef,
+  ReactElement,
+  ReactNode,
+  forwardRef,
+} from 'react';
+import {
   Control,
   ControllerRenderProps,
   FieldPath,
@@ -13,7 +19,6 @@ import {
   FormMessage,
   useFormField,
 } from '@/app/components/ui/form';
-import { ReactElement, ReactNode } from 'react';
 
 /** What every field takes: `T` is inferred from `control`, so `name` is checked. */
 export interface IFieldProps<T extends FieldValues> {
@@ -72,11 +77,18 @@ const FieldFrame = <T extends FieldValues>({
   />
 );
 
-/** Wraps the focusable control; its `id` is the field's name. */
-export const FieldControl = ({ children }: { children: ReactElement }) => {
+/**
+ * Wraps the focusable control; its `id` is the field's name. Passes props and
+ * `ref` on, so it can sit under an `asChild` trigger (e.g. `PopoverTrigger`).
+ */
+export const FieldControl = forwardRef<
+  HTMLElement,
+  ComponentPropsWithoutRef<typeof FormControl> & { children: ReactElement }
+>((props, ref) => {
   const { name } = useFormField();
 
-  return <FormControl id={name}>{children}</FormControl>;
-};
+  return <FormControl ref={ref} {...props} id={name} />;
+});
+FieldControl.displayName = 'FieldControl';
 
 export default FieldFrame;

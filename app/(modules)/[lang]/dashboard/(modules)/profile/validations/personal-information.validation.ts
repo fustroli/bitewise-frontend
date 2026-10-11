@@ -12,7 +12,8 @@ export const createPersonalInformationSchema = (
     userName: z.string(),
     firstName: z.string(),
     lastName: z.string(),
-    phoneNumber: z.string().optional(),
+    /** The phone input sets an emptied number to `null`. */
+    phoneNumber: z.string().nullish(),
     dateOfBirth: z
       .date()
       .optional()

@@ -45,11 +45,13 @@ export const toPersonalInfoFormValues = (user: IUser): TPersonalInfoSchema => {
 };
 
 export const toPersonalInfoChange = ({
+  phoneNumber,
   dateOfBirth,
   ...values
 }: TPersonalInfoSchema): IUserChange => ({
   personalInformation: {
     ...values,
+    phoneNumber: phoneNumber ?? '',
     dateOfBirth: dateOfBirthToUser(dateOfBirth),
   },
 });

@@ -58,6 +58,17 @@ describe('date of birth age limits', () => {
     expect(parse(dateOfBirth).success).toBe(true);
   });
 
+  it('accepts an emptied phone number', () => {
+    expect(
+      schema.safeParse({
+        userName: '',
+        firstName: '',
+        lastName: '',
+        phoneNumber: null,
+      }).success,
+    ).toBe(true);
+  });
+
   it.each([
     ['18 tomorrow', new Date(2007, 5, 16)],
     ['101 today', new Date(1924, 5, 15)],

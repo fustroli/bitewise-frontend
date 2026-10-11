@@ -35,6 +35,7 @@ const DatePicker = <T extends FieldValues>({
         <PopoverTrigger asChild>
           <FieldControl>
             <Button
+              type="button"
               variant={'outline'}
               className={cn(
                 'w-[200px] pl-3 text-left font-normal',
