@@ -282,5 +282,11 @@
       "quantityPositive": "Die Menge muss größer als 0 sein",
       "multiplierStep": "In Schritten von 0,5 angeben"
     }
+  },
+  "errorBoundary": {
+    "title": "Etwas ist schiefgelaufen!",
+    "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
+    "errorCode": "Fehlercode",
+    "tryAgain": "Erneut versuchen"
   }
 }
