@@ -21,6 +21,11 @@ interface ISessionRenewalDeps {
   now?: () => number;
 }
 
+interface ISharedRefresh {
+  result: Promise<TRefreshResult>;
+  settledAt?: number;
+}
+
 interface IRenewalInput {
   cookies: IRequestCookies;
   pathname: string;
@@ -33,8 +38,9 @@ const RENEW_BEFORE_EXPIRY_MS = 60_000;
 // The backend rotates the refresh token on use and treats a second use as
 // theft, ending the Session. Requests the browser sends in parallel, or before
 // it has stored the new cookies, all carry the old token, so they share one
-// refresh for this long.
-const SHARE_REFRESH_MS = 30_000;
+// refresh while it runs and for this long after. Kept short: until it lapses,
+// a replayed old token gets the new pair instead of tripping that detection.
+const SHARE_REFRESH_MS = 10_000;
 // Bounds the shared refreshes a flood of made-up tokens can pile up; past it
 // the oldest is dropped.
 const MAX_SHARED_REFRESHES = 1000;
@@ -87,17 +93,16 @@ export const createSessionRenewal = ({
   refresh,
   now = Date.now,
 }: ISessionRenewalDeps) => {
-  const recent = new Map<
-    string,
-    { at: number; result: Promise<TRefreshResult> }
-  >();
+  // Keyed by the token's hash. A refresh still running has no `settledAt`;
+  // settled ones are moved to the end, so they sit in settle order.
+  const recent = new Map<string, ISharedRefresh>();
 
-  // Keyed by the token's hash, in insertion (so age) order.
   const refreshOnce = (refreshToken: string) => {
     const at = now();
 
-    for (const [key, entry] of recent) {
-      if (at - entry.at <= SHARE_REFRESH_MS) break;
+    for (const [key, { settledAt }] of recent) {
+      if (settledAt === undefined) continue;
+      if (at - settledAt <= SHARE_REFRESH_MS) break;
       recent.delete(key);
     }
 
@@ -109,9 +114,14 @@ export const createSessionRenewal = ({
       recent.delete(recent.keys().next().value!);
     }
 
-    const result = refresh(refreshToken);
-    recent.set(key, { at, result });
-    return result;
+    const entry: ISharedRefresh = { result: refresh(refreshToken) };
+    recent.set(key, entry);
+    void entry.result.then(() => {
+      if (recent.get(key) !== entry) return;
+      recent.delete(key);
+      recent.set(key, { ...entry, settledAt: now() });
+    });
+    return entry.result;
   };
 
   return async ({

@@ -185,11 +185,28 @@ describe('session renewal', () => {
     expect(refresh).toHaveBeenCalledTimes(1002);
   });
 
+  it('shares a slow refresh for a while after it settles', async () => {
+    const { renew, refresh, advance } = setup();
+    let settle!: (result: TRefreshResult) => void;
+    refresh.mockImplementationOnce(
+      () => new Promise((resolve) => (settle = resolve)),
+    );
+
+    const first = renew({ cookies: expiringSession(), pathname: '/' });
+    advance(20 * SECOND);
+    settle(REFRESHED);
+    await first;
+    advance(5 * SECOND);
+    await renew({ cookies: expiringSession(), pathname: '/' });
+
+    expect(refresh).toHaveBeenCalledTimes(1);
+  });
+
   it('refreshes again once the shared result is stale', async () => {
     const { renew, refresh, advance } = setup();
 
     await renew({ cookies: expiringSession(), pathname: '/en/dashboard' });
-    advance(31 * SECOND);
+    advance(11 * SECOND);
     await renew({
       cookies: fakeRequestCookies({ refreshToken: OLD_REFRESH }),
       pathname: '/en/dashboard',
