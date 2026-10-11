@@ -14,6 +14,7 @@ export const ingredientList: IResourceList<IIngredient> = {
   resourceKey: 'ingredients',
   fetch: fetchIngredients,
   columns: INGREDIENT_COLUMNS,
+  searchable: true,
   renderRow: (row, context) => <IngredientTableRow row={row} {...context} />,
   dialog: IngredientDialog,
   rowActions: IngredientRowActions,

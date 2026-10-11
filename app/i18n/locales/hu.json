@@ -218,6 +218,7 @@
     "nextPage": "Ugrás a következő oldalra",
     "pagination": "Lapozás",
     "search": "Keresés...",
+    "clearSearch": "Keresés törlése",
     "notFound": "Nincs találat.",
     "remove": "{name} eltávolítása",
     "deleteConfirm": "Biztosan törölni szeretnéd: {name}?",
@@ -231,6 +232,8 @@
     "ingredients": {
       "title": "Hozzávalók",
       "empty": "Nincsenek hozzávalók",
+      "noMatch": "Nincs a(z) „{term}” keresésnek megfelelő hozzávaló",
+      "searchPlaceholder": "Hozzávalók keresése...",
       "addTitle": "Hozzávaló hozzáadása",
       "editTitle": "Hozzávaló szerkesztése",
       "deleteTitle": "Hozzávaló törlése",
@@ -262,6 +265,8 @@
     "meals": {
       "title": "Ételek",
       "empty": "Nincsenek ételek",
+      "noMatch": "Nincs a(z) „{term}” keresésnek megfelelő étel",
+      "searchPlaceholder": "Ételek keresése...",
       "addTitle": "Étel hozzáadása",
       "editTitle": "Étel szerkesztése",
       "deleteTitle": "Étel törlése",
@@ -296,6 +301,8 @@
     "mealPlans": {
       "title": "Étrendek",
       "empty": "Nincsenek étrendek",
+      "noMatch": "Nincs a(z) „{term}” keresésnek megfelelő étrend",
+      "searchPlaceholder": "Étrendek keresése...",
       "addTitle": "Étrend hozzáadása",
       "editTitle": "Étrend szerkesztése",
       "deleteTitle": "Étrend törlése",

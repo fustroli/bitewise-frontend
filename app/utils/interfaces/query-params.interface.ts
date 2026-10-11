@@ -5,4 +5,6 @@ export interface IQueryParams {
   offset?: number;
   orderBy?: string;
   orderDirection?: EOrderDirection;
+  /** Filters a list by name. */
+  search?: string;
 }

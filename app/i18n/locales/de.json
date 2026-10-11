@@ -108,6 +108,7 @@
     "nextPage": "Zur nächsten Seite",
     "pagination": "Seitennavigation",
     "search": "Suchen...",
+    "clearSearch": "Suche löschen",
     "notFound": "Nichts gefunden.",
     "remove": "{name} entfernen",
     "deleteConfirm": "Möchtest du {name} wirklich löschen?",
@@ -121,6 +122,8 @@
     "ingredients": {
       "title": "Zutaten",
       "empty": "Keine Zutaten vorhanden",
+      "noMatch": "Keine Zutaten passen zu „{term}“",
+      "searchPlaceholder": "Zutaten suchen...",
       "addTitle": "Zutat hinzufügen",
       "editTitle": "Zutat bearbeiten",
       "deleteTitle": "Zutat löschen",
@@ -152,6 +155,8 @@
     "meals": {
       "title": "Mahlzeiten",
       "empty": "Keine Mahlzeiten vorhanden",
+      "noMatch": "Keine Mahlzeiten passen zu „{term}“",
+      "searchPlaceholder": "Mahlzeiten suchen...",
       "addTitle": "Mahlzeit hinzufügen",
       "editTitle": "Mahlzeit bearbeiten",
       "deleteTitle": "Mahlzeit löschen",
@@ -186,6 +191,8 @@
     "mealPlans": {
       "title": "Ernährungspläne",
       "empty": "Keine Ernährungspläne vorhanden",
+      "noMatch": "Keine Ernährungspläne passen zu „{term}“",
+      "searchPlaceholder": "Ernährungspläne suchen...",
       "addTitle": "Ernährungsplan hinzufügen",
       "editTitle": "Ernährungsplan bearbeiten",
       "deleteTitle": "Ernährungsplan löschen",

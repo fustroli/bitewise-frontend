@@ -18,6 +18,9 @@ export interface IResourceColumn {
 export interface IResourceLabels {
   title: string;
   empty: string;
+  /** Shown when a search finds nothing; `{term}` is the search term. */
+  noMatch: string;
+  searchPlaceholder: string;
   addTitle: string;
   editTitle: string;
   deleteTitle: string;
@@ -49,6 +52,8 @@ export interface IResourceList<
   /** Data columns; the module appends the actions column. */
   columns: IResourceColumn[];
   renderRow: (row: TRecord, context: IResourceRowContext) => ReactNode;
+  /** Shows a search bar that filters the list by name. */
+  searchable?: boolean;
   /** Defaults to `DEFAULT_PAGE_SIZE`. */
   pageSize?: number;
   /** Loads, once per table, the data the add/edit form needs. */

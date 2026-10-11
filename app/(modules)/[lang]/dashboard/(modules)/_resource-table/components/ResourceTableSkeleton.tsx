@@ -14,18 +14,30 @@ interface IProps {
   columns: IResourceColumn[];
   labels: IResourceLabels;
   sort: ISortState;
+  search?: string;
   pageSize: number;
 }
 
 /** One skeleton row per page slot, one cell per head column. */
-const ResourceTableSkeleton = ({ columns, labels, sort, pageSize }: IProps) => {
+const ResourceTableSkeleton = ({
+  columns,
+  labels,
+  sort,
+  search,
+  pageSize,
+}: IProps) => {
   const rows = Array.from({ length: pageSize });
 
   return (
     <TableFrame
       title={labels.title}
       tableHead={
-        <ResourceTableHead columns={columns} labels={labels} sort={sort} />
+        <ResourceTableHead
+          columns={columns}
+          labels={labels}
+          sort={sort}
+          search={search}
+        />
       }
       addModal={<div className="h-9" />}
     >

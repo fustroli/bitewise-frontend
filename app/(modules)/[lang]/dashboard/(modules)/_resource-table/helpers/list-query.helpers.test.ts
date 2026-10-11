@@ -1,8 +1,10 @@
 import {
   buildPageHref,
+  buildSearchHref,
   buildSortHref,
   getPageMetadata,
   toListQuery,
+  toSuspenseKey,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/helpers/list-query.helpers';
 import { describe, expect, it } from 'vitest';
 
@@ -50,6 +52,27 @@ describe('toListQuery', () => {
   it('takes the first value of a repeated param', () => {
     expect(toListQuery({ page: ['2', '4'] }, 10).page).toBe(2);
   });
+
+  it('trims the search and sends it to the backend', () => {
+    const query = toListQuery({ search: '  oats ' }, 10);
+
+    expect(query.search).toBe('oats');
+    expect(query.params.search).toBe('oats');
+  });
+
+  it('caps the search at 100 characters', () => {
+    const query = toListQuery({ search: 'a'.repeat(120) }, 10);
+
+    expect(query.search).toBe('a'.repeat(100));
+    expect(query.params.search).toBe('a'.repeat(100));
+  });
+
+  it.each(['', '   ', undefined])('drops an empty search ("%s")', (search) => {
+    const query = toListQuery({ search }, 10);
+
+    expect(query.search).toBeUndefined();
+    expect(query.params).not.toHaveProperty('search');
+  });
 });
 
 describe('getPageMetadata', () => {
@@ -96,6 +119,12 @@ describe('buildSortHref', () => {
       ),
     ).toBe('?page=1&orderBy=name&orderDirection=asc');
   });
+
+  it('keeps the search', () => {
+    expect(buildSortHref({}, 'name', 'oats')).toBe(
+      '?page=1&orderBy=name&orderDirection=asc&search=oats',
+    );
+  });
 });
 
 describe('buildPageHref', () => {
@@ -110,5 +139,43 @@ describe('buildPageHref', () => {
 
   it('leaves out a missing sort', () => {
     expect(buildPageHref(2, {})).toBe('?page=2');
+  });
+
+  it('keeps the search', () => {
+    expect(buildPageHref(3, {}, 'rice bowl')).toBe('?page=3&search=rice+bowl');
+  });
+
+  it('leaves out an empty search', () => {
+    expect(buildPageHref(2, {}, '  ')).toBe('?page=2');
+  });
+});
+
+describe('buildSearchHref', () => {
+  it('goes back to page 1 and keeps the sort', () => {
+    expect(
+      buildSearchHref(
+        { orderBy: 'name', orderDirection: EOrderDirection.DESC },
+        ' oats ',
+      ),
+    ).toBe('?page=1&orderBy=name&orderDirection=desc&search=oats');
+  });
+
+  it('drops the param when the search is cleared', () => {
+    expect(buildSearchHref({}, '')).toBe('?page=1');
+  });
+});
+
+describe('toSuspenseKey', () => {
+  it('ignores the search', () => {
+    expect(toSuspenseKey({ search: 'oats' })).toBe(toSuspenseKey({}));
+  });
+
+  it('treats a missing page as page 1', () => {
+    expect(toSuspenseKey({ page: '1' })).toBe(toSuspenseKey(undefined));
+  });
+
+  it('changes with the page and sort', () => {
+    expect(toSuspenseKey({ page: '2' })).not.toBe(toSuspenseKey({}));
+    expect(toSuspenseKey({ orderBy: 'name' })).not.toBe(toSuspenseKey({}));
   });
 });

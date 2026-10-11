@@ -108,6 +108,7 @@
     "nextPage": "Aller à la page suivante",
     "pagination": "Pagination",
     "search": "Rechercher...",
+    "clearSearch": "Effacer la recherche",
     "notFound": "Aucun résultat.",
     "remove": "Retirer {name}",
     "deleteConfirm": "Voulez-vous vraiment supprimer {name} ?",
@@ -121,6 +122,8 @@
     "ingredients": {
       "title": "Ingrédients",
       "empty": "Aucun ingrédient",
+      "noMatch": "Aucun ingrédient ne correspond à « {term} »",
+      "searchPlaceholder": "Rechercher des ingrédients...",
       "addTitle": "Ajouter un ingrédient",
       "editTitle": "Modifier l'ingrédient",
       "deleteTitle": "Supprimer l'ingrédient",
@@ -152,6 +155,8 @@
     "meals": {
       "title": "Repas",
       "empty": "Aucun repas",
+      "noMatch": "Aucun repas ne correspond à « {term} »",
+      "searchPlaceholder": "Rechercher des repas...",
       "addTitle": "Ajouter un repas",
       "editTitle": "Modifier le repas",
       "deleteTitle": "Supprimer le repas",
@@ -186,6 +191,8 @@
     "mealPlans": {
       "title": "Plans de repas",
       "empty": "Aucun plan de repas",
+      "noMatch": "Aucun plan de repas ne correspond à « {term} »",
+      "searchPlaceholder": "Rechercher des plans de repas...",
       "addTitle": "Ajouter un plan de repas",
       "editTitle": "Modifier le plan de repas",
       "deleteTitle": "Supprimer le plan de repas",
