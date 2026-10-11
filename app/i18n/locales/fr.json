@@ -282,5 +282,11 @@
       "quantityPositive": "La quantité doit être supérieure à 0",
       "multiplierStep": "Utilisez des pas de 0,5"
     }
+  },
+  "errorBoundary": {
+    "title": "Une erreur est survenue !",
+    "description": "Une erreur inattendue s'est produite. Veuillez réessayer.",
+    "errorCode": "Code d'erreur",
+    "tryAgain": "Réessayer"
   }
 }

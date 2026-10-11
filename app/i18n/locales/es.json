@@ -282,5 +282,11 @@
       "quantityPositive": "La cantidad debe ser mayor que 0",
       "multiplierStep": "Usa pasos de 0,5"
     }
+  },
+  "errorBoundary": {
+    "title": "¡Algo salió mal!",
+    "description": "Se produjo un error inesperado. Inténtelo de nuevo.",
+    "errorCode": "Código de error",
+    "tryAgain": "Intentar de nuevo"
   }
 }

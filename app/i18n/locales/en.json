@@ -385,5 +385,11 @@
       "quantityPositive": "Quantity must be greater than 0",
       "multiplierStep": "Use steps of 0.5"
     }
+  },
+  "errorBoundary": {
+    "title": "Something went wrong!",
+    "description": "An unexpected error occurred. Please try again.",
+    "errorCode": "Error code",
+    "tryAgain": "Try again"
   }
 }
