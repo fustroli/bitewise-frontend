@@ -17,6 +17,7 @@ export const mealPlanList: IResourceList<IMealPlan, IMeal[]> = {
   resourceKey: 'mealPlans',
   fetch: fetchMealPlans,
   columns: MEAL_PLAN_COLUMNS,
+  searchable: true,
   loadFormData: async () => (await fetchMeals({ limit: MAX_LIST_LIMIT })).data,
   renderRow: (row, { actions }) => (
     <MealPlanTableRow row={row} actions={actions} />

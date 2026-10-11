@@ -18,6 +18,7 @@ import { getPagesToShow } from '@/app/utils/helpers';
 interface IProps extends IPageMetadata {
   page: number;
   sort: ISortState;
+  search?: string;
   labels: TDictionary['resourceTable'];
 }
 
@@ -26,7 +27,7 @@ const disabledClasses =
 const idleClasses = 'bg-card text-foreground shadow-soft hover:bg-accent';
 
 const ResourcePagination = (props: IProps) => {
-  const { page, totalPages, hasNextPage, sort, labels } = props;
+  const { page, totalPages, hasNextPage, sort, search, labels } = props;
 
   const currentPage = Math.min(Math.max(page, FIRST_PAGE), totalPages);
   const isFirstPage = currentPage === FIRST_PAGE;
@@ -38,7 +39,7 @@ const ResourcePagination = (props: IProps) => {
       <PaginationContent>
         <PaginationItem>
           <PaginationLink
-            href={buildPageHref(currentPage - 1, sort)}
+            href={buildPageHref(currentPage - 1, sort, search)}
             aria-label={labels.previousPage}
             aria-disabled={isFirstPage}
             size="default"
@@ -54,7 +55,7 @@ const ResourcePagination = (props: IProps) => {
         {pages.map((pageNumber) => (
           <PaginationItem key={pageNumber}>
             <PaginationLink
-              href={buildPageHref(pageNumber, sort)}
+              href={buildPageHref(pageNumber, sort, search)}
               className={cn(
                 'rounded-md px-4 py-2 transition-colors',
                 pageNumber === currentPage
@@ -69,7 +70,7 @@ const ResourcePagination = (props: IProps) => {
 
         <PaginationItem>
           <PaginationLink
-            href={buildPageHref(currentPage + 1, sort)}
+            href={buildPageHref(currentPage + 1, sort, search)}
             aria-label={labels.nextPage}
             aria-disabled={!hasNextPage}
             size="default"

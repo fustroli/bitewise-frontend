@@ -15,9 +15,10 @@ interface IProps {
   columns: IResourceColumn[];
   labels: IResourceLabels;
   sort: ISortState;
+  search?: string;
 }
 
-const ResourceTableHead = ({ columns, labels, sort }: IProps) => {
+const ResourceTableHead = ({ columns, labels, sort, search }: IProps) => {
   const Icon =
     sort.orderDirection === EOrderDirection.ASC ? ArrowDownAZ : ArrowUpAZ;
 
@@ -36,7 +37,7 @@ const ResourceTableHead = ({ columns, labels, sort }: IProps) => {
             <TableHead key={column.id}>
               {column.sortable ? (
                 <Link
-                  href={buildSortHref(sort, column.id)}
+                  href={buildSortHref(sort, column.id, search)}
                   className={cn(
                     className,
                     'transition-colors duration-200 hover:text-primary',

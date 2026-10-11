@@ -9,6 +9,7 @@ import {
   toListQuery,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/helpers';
 
+import ClearSearchButton from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/components/ClearSearchButton';
 import { DEFAULT_PAGE_SIZE } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/constants';
 import EmptyTable from '@/app/components/EmptyTable';
 import { Fragment } from 'react';
@@ -17,6 +18,7 @@ import ResourceTableHead from '@/app/(modules)/[lang]/dashboard/(modules)/_resou
 import { TDictionary } from '@/app/providers/dictionary-provider';
 import { TableBody } from '@/app/components/ui/table';
 import TableFrame from '@/app/components/Table/TableFrame';
+import { interpolate } from '@/app/utils/helpers';
 
 interface IProps<TRecord extends IResourceRecord, TFormData> {
   resource: IResourceList<TRecord, TFormData>;
@@ -31,7 +33,7 @@ async function ResourceTable<TRecord extends IResourceRecord, TFormData>({
 }: IProps<TRecord, TFormData>) {
   const { dialog: Dialog, rowActions: RowActions, columns } = resource;
   const pageSize = resource.pageSize ?? DEFAULT_PAGE_SIZE;
-  const { page, sort, params } = toListQuery(searchParams, pageSize);
+  const { page, sort, search, params } = toListQuery(searchParams, pageSize);
 
   const [{ data: rows, count }, formData] = await Promise.all([
     resource.fetch(params),
@@ -46,7 +48,12 @@ async function ResourceTable<TRecord extends IResourceRecord, TFormData>({
       <TableFrame
         title={`${labels.title} (${count})`}
         tableHead={
-          <ResourceTableHead columns={columns} labels={labels} sort={sort} />
+          <ResourceTableHead
+            columns={columns}
+            labels={labels}
+            sort={sort}
+            search={search}
+          />
         }
         addModal={<Dialog formData={formData} />}
       >
@@ -61,6 +68,13 @@ async function ResourceTable<TRecord extends IResourceRecord, TFormData>({
                 })}
               </Fragment>
             ))
+          ) : search ? (
+            <EmptyTable
+              colSpan={columns.length + 1}
+              action={<ClearSearchButton />}
+            >
+              {interpolate(labels.noMatch, { term: search })}
+            </EmptyTable>
           ) : (
             <EmptyTable colSpan={columns.length + 1}>{labels.empty}</EmptyTable>
           )}
@@ -70,6 +84,7 @@ async function ResourceTable<TRecord extends IResourceRecord, TFormData>({
         <ResourcePagination
           page={page}
           sort={sort}
+          search={search}
           labels={tableLabels}
           {...getPageMetadata(page, pageSize, count)}
         />

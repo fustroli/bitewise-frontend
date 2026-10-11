@@ -11,6 +11,8 @@ export interface ISortState {
 export interface IListQuery {
   page: number;
   sort: ISortState;
+  /** The trimmed, capped search term; unset when empty. */
+  search?: string;
   params: IQueryParams;
 }
 

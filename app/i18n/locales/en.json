@@ -218,6 +218,7 @@
     "nextPage": "Go to next page",
     "pagination": "Pagination",
     "search": "Search...",
+    "clearSearch": "Clear search",
     "notFound": "Not found.",
     "remove": "Remove {name}",
     "deleteConfirm": "Are you sure you want to delete {name}?",
@@ -231,6 +232,8 @@
     "ingredients": {
       "title": "Ingredients",
       "empty": "No ingredients available",
+      "noMatch": "No ingredients match \"{term}\"",
+      "searchPlaceholder": "Search ingredients...",
       "addTitle": "Add Ingredient",
       "editTitle": "Edit Ingredient",
       "deleteTitle": "Delete Ingredient",
@@ -262,6 +265,8 @@
     "meals": {
       "title": "Meals",
       "empty": "No meals available",
+      "noMatch": "No meals match \"{term}\"",
+      "searchPlaceholder": "Search meals...",
       "addTitle": "Add Meal",
       "editTitle": "Edit Meal",
       "deleteTitle": "Delete Meal",
@@ -296,6 +301,8 @@
     "mealPlans": {
       "title": "Meal Plans",
       "empty": "No meal plans available",
+      "noMatch": "No meal plans match \"{term}\"",
+      "searchPlaceholder": "Search meal plans...",
       "addTitle": "Add Meal Plan",
       "editTitle": "Edit Meal Plan",
       "deleteTitle": "Delete Meal Plan",

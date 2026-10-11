@@ -77,7 +77,9 @@ resource keeps two halves in its `resource/` folder: `list.tsx` (server:
 fetch, columns, row renderer, page size, form-data loader) and `form.ts`
 (`'use client'`: schema, defaults, fields, server actions, bound via
 `createResourceForm`). They are split because Next can't pass functions from
-server to client. Table/dialog strings live under `resourceTable` and
+server to client. `searchable: true` adds a name search bar (`?search=`,
+outside the Suspense boundary; search is left out of the Suspense key, so
+old rows stay dimmed while results load). Table/dialog strings live under `resourceTable` and
 `resources.<key>` in the dictionaries.
 
 ### Nutrition

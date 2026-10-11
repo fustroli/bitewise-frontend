@@ -6,9 +6,11 @@ import { Inbox } from 'lucide-react';
 
 interface IProps extends PropsWithChildren {
   colSpan: number;
+  /** Shown under the message, e.g. a button that gets the user out of it. */
+  action?: React.ReactNode;
 }
 
-const EmptyTable = ({ children, colSpan }: IProps) => {
+const EmptyTable = ({ children, colSpan, action }: IProps) => {
   return (
     <TableRow className="hover:bg-transparent">
       <TableCell colSpan={colSpan}>
@@ -17,6 +19,7 @@ const EmptyTable = ({ children, colSpan }: IProps) => {
             <Inbox />
           </div>
           <h6 className="text-center text-base font-medium">{children}</h6>
+          {action}
         </div>
       </TableCell>
     </TableRow>

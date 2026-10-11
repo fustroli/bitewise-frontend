@@ -1,10 +1,13 @@
 import {
+  DEFAULT_SORT,
+  MAX_SEARCH_LENGTH,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/constants';
+import {
   IListQuery,
   IPageMetadata,
   ISortState,
   TSearchParams,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
-import { DEFAULT_SORT } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/constants';
 import { EOrderDirection } from '@/app/utils/enums';
 import { FIRST_PAGE } from '@/app/utils/constants';
 
@@ -19,27 +22,36 @@ const parsePage = (value: string | undefined) => {
 const parseDirection = (value: string | undefined) =>
   Object.values(EOrderDirection).find((direction) => direction === value);
 
+/** Trims and caps a search term; an empty one is no search. */
+export const normalizeSearch = (value: string | undefined) =>
+  value?.trim().slice(0, MAX_SEARCH_LENGTH).trim() || undefined;
+
+const parseSort = (searchParams: TSearchParams | undefined): ISortState => ({
+  orderBy: first(searchParams?.orderBy) || undefined,
+  orderDirection: parseDirection(first(searchParams?.orderDirection)),
+});
+
 /**
- * Reads page and sort from the URL and turns them into a backend query. With
- * no column sorted, the backend gets `DEFAULT_SORT`.
+ * Reads page, sort and search from the URL and turns them into a backend
+ * query. With no column sorted, the backend gets `DEFAULT_SORT`.
  */
 export const toListQuery = (
   searchParams: TSearchParams | undefined,
   pageSize: number,
 ): IListQuery => {
   const page = parsePage(first(searchParams?.page));
-  const sort: ISortState = {
-    orderBy: first(searchParams?.orderBy) || undefined,
-    orderDirection: parseDirection(first(searchParams?.orderDirection)),
-  };
+  const sort = parseSort(searchParams);
+  const search = normalizeSearch(first(searchParams?.search));
 
   return {
     page,
     sort,
+    search,
     params: {
       limit: pageSize,
       offset: (page - FIRST_PAGE) * pageSize,
       ...(sort.orderBy ? sort : DEFAULT_SORT),
+      ...(search && { search }),
     },
   };
 };
@@ -53,11 +65,17 @@ export const getPageMetadata = (
   hasNextPage: page * pageSize < total,
 });
 
-export const buildPageHref = (page: number, sort: ISortState) => {
+export const buildPageHref = (
+  page: number,
+  sort: ISortState,
+  search?: string,
+) => {
   const query = new URLSearchParams({ page: String(page) });
+  const term = normalizeSearch(search);
 
   if (sort.orderBy) query.set('orderBy', sort.orderBy);
   if (sort.orderDirection) query.set('orderDirection', sort.orderDirection);
+  if (term) query.set('search', term);
 
   return `?${query}`;
 };
@@ -66,16 +84,34 @@ export const buildPageHref = (page: number, sort: ISortState) => {
  * A new column sorts ascending; the current column flips direction. Either
  * way the list goes back to the first page.
  */
-export const buildSortHref = (sort: ISortState, columnId: string) => {
+export const buildSortHref = (
+  sort: ISortState,
+  columnId: string,
+  search?: string,
+) => {
   const isAscending =
     sort.orderBy === columnId && sort.orderDirection === EOrderDirection.ASC;
 
-  return buildPageHref(FIRST_PAGE, {
-    orderBy: columnId,
-    orderDirection: isAscending ? EOrderDirection.DESC : EOrderDirection.ASC,
-  });
+  return buildPageHref(
+    FIRST_PAGE,
+    {
+      orderBy: columnId,
+      orderDirection: isAscending ? EOrderDirection.DESC : EOrderDirection.ASC,
+    },
+    search,
+  );
 };
 
-/** Changes whenever the list changes, so Suspense shows the skeleton again. */
+/** A new search term keeps the sort and goes back to the first page. */
+export const buildSearchHref = (sort: ISortState, search: string | undefined) =>
+  buildPageHref(FIRST_PAGE, sort, search);
+
+/**
+ * Changes with the page or sort, so Suspense shows the skeleton again. Search
+ * is left out: while a search loads, the old rows stay (dimmed) instead.
+ */
 export const toSuspenseKey = (searchParams: TSearchParams | undefined) =>
-  JSON.stringify(searchParams ?? {});
+  JSON.stringify({
+    page: parsePage(first(searchParams?.page)),
+    ...parseSort(searchParams),
+  });
