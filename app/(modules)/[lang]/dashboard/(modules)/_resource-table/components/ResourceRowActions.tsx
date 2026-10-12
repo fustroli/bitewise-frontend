@@ -34,7 +34,7 @@ interface IProps<
 
 const useNoAfterRemove = () => () => {};
 
-/** Edit, then a delete confirmation naming the record. */
+/** Edit, Duplicate, then a delete confirmation naming the record. */
 function ResourceRowActions<
   TRecord extends IResourceRecord,
   TValues extends FieldValues,
@@ -73,6 +73,12 @@ function ResourceRowActions<
             config={config}
             record={record}
             formData={formData}
+          />
+          <ResourceFormDialog
+            config={config}
+            record={record}
+            formData={formData}
+            duplicate
           />
           {RowMenuItem && <RowMenuItem record={record} />}
           <MenubarSeparator className="mx-0 my-1.5" />

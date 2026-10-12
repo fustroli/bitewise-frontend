@@ -1,5 +1,13 @@
 'use client';
 
+import { Copy, Pencil, Plus } from 'lucide-react';
+import {
+  DefaultValues,
+  FieldValues,
+  Path,
+  Resolver,
+  useForm,
+} from 'react-hook-form';
 import {
   Dialog,
   DialogContent,
@@ -8,13 +16,11 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/app/components/ui/dialog';
-import { FieldValues, Path, Resolver, useForm } from 'react-hook-form';
 import {
   IResourceDialogProps,
   IResourceForm,
   IResourceRecord,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
-import { Pencil, Plus } from 'lucide-react';
 import { useMemo, useState } from 'react';
 
 import { Button } from '@/app/components/ui/button';
@@ -22,6 +28,7 @@ import { Form } from '@/app/components/ui/form';
 import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 import { ROW_ACTION_ITEM_CLASS } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/constants';
 import { getResourceLabels } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/helpers';
+import { interpolate } from '@/app/utils/helpers';
 import { toastResult } from '@/app/utils/helpers/client';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -38,7 +45,8 @@ interface IProps<
 }
 
 /**
- * Add dialog without a `record`, Edit dialog with one. Closes on success
+ * Add dialog without a `record`, Edit dialog with one. With `duplicate` the
+ * record only seeds an Add dialog, its name prefixed "Copy of". Closes on success
  * (resetting the Add form); stays open on failure so the input isn't lost.
  * A name already in use shows on the name field instead of a toast.
  */
@@ -46,7 +54,12 @@ function ResourceFormDialog<
   TRecord extends IResourceRecord,
   TValues extends FieldValues,
   TFormData,
->({ config, record, formData }: IProps<TRecord, TValues, TFormData>) {
+>({
+  config,
+  record,
+  duplicate,
+  formData,
+}: IProps<TRecord, TValues, TFormData>) {
   const { fields: Fields } = config;
   const dictionary = useDictionary();
   const t = dictionary.resourceTable;
@@ -55,21 +68,34 @@ function ResourceFormDialog<
 
   const schema = useMemo(() => config.schema(dictionary), [config, dictionary]);
 
+  const isEdit = !!record && !duplicate;
+
+  const seedValues = () => {
+    if (!record) return config.defaultValues;
+    const values = config.toFormValues(record);
+    if (!duplicate) return values;
+    return {
+      ...values,
+      name: interpolate(t.copyOf, { name: record.name }),
+    } as DefaultValues<TValues>;
+  };
+
   const form = useForm<TValues>({
     resolver: zodResolver(schema) as Resolver<TValues>,
-    defaultValues: record ? config.toFormValues(record) : config.defaultValues,
+    defaultValues: seedValues(),
   });
 
   const handleOpenChange = (open: boolean) => {
-    // Edit always starts from the record as it is now.
-    if (open && record) form.reset(config.toFormValues(record));
+    // Edit and Duplicate always start from the record as it is now.
+    if (open && record) form.reset(seedValues());
     setIsOpen(open);
   };
 
   const onSubmit = async (values: TValues) => {
-    const result = record
-      ? await config.update(values, record.id)
-      : await config.create(values);
+    const result =
+      isEdit && record
+        ? await config.update(values, record.id)
+        : await config.create(values);
 
     if (!result.ok && result.status === NAME_TAKEN_STATUS) {
       // Every resource has a name; show the clash on that field.
@@ -77,8 +103,8 @@ function ResourceFormDialog<
       return;
     }
 
-    if (toastResult(result, record ? t.updated : t.created)) {
-      if (!record) form.reset(config.defaultValues);
+    if (toastResult(result, isEdit ? t.updated : t.created)) {
+      if (!isEdit) form.reset(seedValues());
       setIsOpen(false);
     }
   };
@@ -87,8 +113,8 @@ function ResourceFormDialog<
     <Dialog open={isOpen} onOpenChange={handleOpenChange}>
       {record ? (
         <DialogTrigger className={ROW_ACTION_ITEM_CLASS}>
-          <Pencil />
-          {t.edit}
+          {duplicate ? <Copy /> : <Pencil />}
+          {duplicate ? t.duplicate : t.edit}
         </DialogTrigger>
       ) : (
         <DialogTrigger asChild>
@@ -106,14 +132,14 @@ function ResourceFormDialog<
           >
             <DialogHeader>
               <DialogTitle>
-                {record ? labels.editTitle : labels.addTitle}
+                {isEdit ? labels.editTitle : labels.addTitle}
               </DialogTitle>
               <DialogDescription />
             </DialogHeader>
             <Fields form={form} formData={formData} />
             <FormDialogFooter
               form={form}
-              submitLabel={record ? t.save : t.add}
+              submitLabel={isEdit ? t.save : t.add}
               closeLabel={t.close}
               onClose={() => setIsOpen(false)}
             />

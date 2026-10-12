@@ -209,6 +209,8 @@
     "save": "Mentés",
     "edit": "Szerkesztés",
     "delete": "Törlés",
+    "duplicate": "Duplikálás",
+    "copyOf": "{name} másolata",
     "close": "Bezárás",
     "cancel": "Mégse",
     "continue": "Folytatás",

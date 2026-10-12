@@ -98,6 +98,8 @@
     "save": "Guardar",
     "edit": "Editar",
     "delete": "Eliminar",
+    "duplicate": "Duplicar",
+    "copyOf": "Copia de {name}",
     "close": "Cerrar",
     "cancel": "Cancelar",
     "continue": "Continuar",
