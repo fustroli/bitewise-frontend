@@ -32,6 +32,8 @@ interface IProps<
   config: IResourceForm<TRecord, TValues, TFormData>;
 }
 
+const useNoAfterRemove = () => () => {};
+
 /** Edit, then a delete confirmation naming the record. */
 function ResourceRowActions<
   TRecord extends IResourceRecord,
@@ -42,8 +44,14 @@ function ResourceRowActions<
   const t = dictionary.resourceTable;
   const labels = getResourceLabels(dictionary, config.resourceKey);
 
+  const RowMenuItem = config.rowMenuItem;
+  const useAfterRemove = config.useAfterRemove ?? useNoAfterRemove;
+  const afterRemove = useAfterRemove();
+
   const handleOnDelete = async () => {
-    toastResult(await config.remove(record.id), t.deleted);
+    const result = await config.remove(record.id);
+    toastResult(result, t.deleted);
+    if (result.ok) afterRemove(record.id);
   };
 
   return (
@@ -66,6 +74,7 @@ function ResourceRowActions<
             record={record}
             formData={formData}
           />
+          {RowMenuItem && <RowMenuItem record={record} />}
           <MenubarSeparator className="mx-0 my-1.5" />
           <DeleteDialog
             onConfirm={handleOnDelete}

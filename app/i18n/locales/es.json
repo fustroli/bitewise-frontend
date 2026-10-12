@@ -290,5 +290,33 @@
     "description": "Se produjo un error inesperado. Inténtelo de nuevo.",
     "errorCode": "Código de error",
     "tryAgain": "Intentar de nuevo"
+  },
+  "comparison": {
+    "title": {
+      "ingredients": "Comparar ingredientes",
+      "meals": "Comparar comidas",
+      "mealPlans": "Comparar planes de comidas"
+    },
+    "description": "Hasta 3 a la vez.",
+    "empty": "Aún no hay nada que comparar. Usa «Añadir a la comparación» en el menú de acciones de una fila.",
+    "addMore": "Añade al menos uno más para comparar.",
+    "loading": "Cargando...",
+    "clearAll": "Quitar todo",
+    "removeItem": "Quitar {name} de la comparación",
+    "add": "Añadir a la comparación",
+    "remove": "Quitar de la comparación",
+    "full": "Comparación llena",
+    "columns": {
+      "name": "Nombre",
+      "calories": "Calorías",
+      "protein": "Proteína",
+      "totalFat": "Grasa",
+      "saturatedFat": "Grasa saturada",
+      "totalCarbohydrates": "Carbohidratos",
+      "sugar": "Azúcar",
+      "dietaryFiber": "Fibra",
+      "unit": "Unidad",
+      "actions": "Acciones"
+    }
   }
 }

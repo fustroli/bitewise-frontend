@@ -393,5 +393,33 @@
     "description": "An unexpected error occurred. Please try again.",
     "errorCode": "Error code",
     "tryAgain": "Try again"
+  },
+  "comparison": {
+    "title": {
+      "ingredients": "Compare ingredients",
+      "meals": "Compare meals",
+      "mealPlans": "Compare meal plans"
+    },
+    "description": "Up to 3 at a time.",
+    "empty": "Nothing to compare yet. Use \"Add to comparison\" in a row's actions menu.",
+    "addMore": "Add at least one more to compare.",
+    "loading": "Loading...",
+    "clearAll": "Clear all",
+    "removeItem": "Remove {name} from comparison",
+    "add": "Add to comparison",
+    "remove": "Remove from comparison",
+    "full": "Comparison full",
+    "columns": {
+      "name": "Name",
+      "calories": "Calories",
+      "protein": "Protein",
+      "totalFat": "Fat",
+      "saturatedFat": "Saturated fat",
+      "totalCarbohydrates": "Carbs",
+      "sugar": "Sugar",
+      "dietaryFiber": "Fiber",
+      "unit": "Unit",
+      "actions": "Actions"
+    }
   }
 }

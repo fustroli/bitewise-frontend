@@ -32,6 +32,10 @@ export interface IResourceForm<
   create: (values: TValues) => Promise<TApiResult<unknown>>;
   update: (values: TValues, id: number) => Promise<TApiResult<unknown>>;
   remove: (id: number) => Promise<TApiResult<unknown>>;
+  /** An extra entry in the row-actions menu, after Edit. */
+  rowMenuItem?: ComponentType<{ record: TRecord }>;
+  /** Called with the id of a record once it was deleted. */
+  useAfterRemove?: () => (id: number) => void;
 }
 
 export interface IResourceDialogProps<TRecord, TFormData> {

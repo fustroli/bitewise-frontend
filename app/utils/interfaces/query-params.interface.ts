@@ -7,4 +7,6 @@ export interface IQueryParams {
   orderDirection?: EOrderDirection;
   /** Filters a list by name. */
   search?: string;
+  /** Comma-separated ids to restrict a list to. */
+  ids?: string;
 }

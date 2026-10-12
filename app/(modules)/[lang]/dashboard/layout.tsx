@@ -1,5 +1,6 @@
 import AppBar from '@/app/(modules)/[lang]/dashboard/components/AppBar';
 import { AppSidebar } from '@/app/(modules)/[lang]/dashboard/components/AppSidebar';
+import { ComparisonProvider } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/provider';
 import { DictionaryProvider } from '@/app/providers/dictionary-provider';
 import { SidebarProvider } from '@/app/components/ui/sidebar';
 import { UserProvider } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/provider';
@@ -22,13 +23,15 @@ export default async function DashboardLayout({
   return (
     <DictionaryProvider dictionary={dictionary}>
       <UserProvider authUser={user}>
-        <SidebarProvider>
-          <AppSidebar />
-          <main className="w-full">
-            <AppBar />
-            {children}
-          </main>
-        </SidebarProvider>
+        <ComparisonProvider>
+          <SidebarProvider>
+            <AppSidebar />
+            <main className="w-full">
+              <AppBar />
+              {children}
+            </main>
+          </SidebarProvider>
+        </ComparisonProvider>
       </UserProvider>
     </DictionaryProvider>
   );

@@ -290,5 +290,33 @@
     "description": "Ein unerwarteter Fehler ist aufgetreten. Bitte versuchen Sie es erneut.",
     "errorCode": "Fehlercode",
     "tryAgain": "Erneut versuchen"
+  },
+  "comparison": {
+    "title": {
+      "ingredients": "Zutaten vergleichen",
+      "meals": "Mahlzeiten vergleichen",
+      "mealPlans": "Essenspläne vergleichen"
+    },
+    "description": "Bis zu 3 gleichzeitig.",
+    "empty": "Noch nichts zu vergleichen. Nutze „Zum Vergleich hinzufügen“ im Aktionsmenü einer Zeile.",
+    "addMore": "Füge mindestens ein weiteres Element hinzu.",
+    "loading": "Wird geladen...",
+    "clearAll": "Alle entfernen",
+    "removeItem": "{name} aus dem Vergleich entfernen",
+    "add": "Zum Vergleich hinzufügen",
+    "remove": "Aus dem Vergleich entfernen",
+    "full": "Vergleich voll",
+    "columns": {
+      "name": "Name",
+      "calories": "Kalorien",
+      "protein": "Eiweiß",
+      "totalFat": "Fett",
+      "saturatedFat": "Gesättigte Fettsäuren",
+      "totalCarbohydrates": "Kohlenhydrate",
+      "sugar": "Zucker",
+      "dietaryFiber": "Ballaststoffe",
+      "unit": "Einheit",
+      "actions": "Aktionen"
+    }
   }
 }

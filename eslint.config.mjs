@@ -28,8 +28,9 @@ const SHARED = [
 const MODULE_DEPENDENCIES = {
   'meal-plans': ['meals', '_resource-table', '_nutrition'],
   meals: ['ingredients', '_resource-table', '_nutrition'],
-  ingredients: ['_resource-table'],
+  ingredients: ['_resource-table', '_comparison'],
   _nutrition: ['ingredients'],
+  _comparison: ['_resource-table', '_nutrition', '_user'],
   profile: ['_user', '_body-metrics'],
   '_body-metrics': ['_user'],
   '_draft-meal-plan': [
