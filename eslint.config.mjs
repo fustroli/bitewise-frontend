@@ -27,7 +27,7 @@ const SHARED = [
 // registered here, or every file in it fails lint.
 const MODULE_DEPENDENCIES = {
   'meal-plans': ['meals', '_resource-table', '_nutrition'],
-  meals: ['ingredients', '_resource-table', '_nutrition'],
+  meals: ['ingredients', '_resource-table', '_nutrition', '_comparison'],
   ingredients: ['_resource-table', '_comparison'],
   _nutrition: ['ingredients'],
   _comparison: ['_resource-table', '_nutrition', '_user'],
