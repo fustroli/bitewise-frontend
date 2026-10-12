@@ -393,5 +393,33 @@
     "description": "Váratlan hiba történt. Kérjük, próbálja újra.",
     "errorCode": "Hibakód",
     "tryAgain": "Próbálja újra"
+  },
+  "comparison": {
+    "title": {
+      "ingredients": "Hozzávalók összehasonlítása",
+      "meals": "Ételek összehasonlítása",
+      "mealPlans": "Étrendek összehasonlítása"
+    },
+    "description": "Egyszerre legfeljebb 3.",
+    "empty": "Még nincs mit összehasonlítani. Használd az „Hozzáadás az összehasonlításhoz” menüpontot egy sor műveleti menüjében.",
+    "addMore": "Adj hozzá legalább még egyet az összehasonlításhoz.",
+    "loading": "Betöltés...",
+    "clearAll": "Összes törlése",
+    "removeItem": "{name} eltávolítása az összehasonlításból",
+    "add": "Hozzáadás az összehasonlításhoz",
+    "remove": "Eltávolítás az összehasonlításból",
+    "full": "Az összehasonlítás megtelt",
+    "columns": {
+      "name": "Név",
+      "calories": "Kalória",
+      "protein": "Fehérje",
+      "totalFat": "Zsír",
+      "saturatedFat": "Telített zsír",
+      "totalCarbohydrates": "Szénhidrát",
+      "sugar": "Cukor",
+      "dietaryFiber": "Rost",
+      "unit": "Egység",
+      "actions": "Műveletek"
+    }
   }
 }

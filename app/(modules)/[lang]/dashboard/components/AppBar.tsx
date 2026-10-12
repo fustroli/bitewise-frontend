@@ -1,10 +1,12 @@
 'use client';
 
+import ComparisonButtons from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/components/ComparisonButtons';
 import CustomBreadCrumbs from '@/app/(modules)/[lang]/dashboard/components/CustomBreadCrumbs';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
 import { LogOut } from 'lucide-react';
 import { SidebarTrigger } from '@/app/components/ui/sidebar';
 import UserProfile from '@/app/(modules)/[lang]/dashboard/components/UserProfile';
+import { cn } from '@/app/lib/utils';
 import { signOutUrl } from '@/app/session';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useState } from 'react';
@@ -23,6 +25,9 @@ const AppBar = () => {
         <CustomBreadCrumbs />
       </div>
       <div className="flex items-center gap-3">
+        <ComparisonButtons
+          triggerClassName={cn('relative', iconButtonClasses)}
+        />
         <UserProfile />
         {/* A form POST, never a <Link>: prefetching would sign the user out. */}
         <form

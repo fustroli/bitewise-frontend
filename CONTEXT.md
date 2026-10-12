@@ -30,6 +30,10 @@ _Avoid_: Diet, schedule
 A User's single scratchpad day outside their Meal plans (e.g. a cheat day): Meals with a multiplier and Ingredients with a quantity, each distinct. Kept only in the User's browser, never on the backend; its nutrition is compared with their Maintenance calories.
 _Avoid_: Test plan, cheat plan
 
+**Comparison**:
+Up to 3 Ingredients, Meals or Meal plans (one list per kind) a User puts side by side to compare their Nutrition. Only the ids are kept, in the User's browser.
+_Avoid_: Compare list, basket
+
 **Nutrition**:
 The calories, protein, fat, saturated fat, carbohydrates, sugar and fiber of an Ingredient amount, Meal or Meal plan.
 _Avoid_: Macros, nutrients

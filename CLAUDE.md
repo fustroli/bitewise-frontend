@@ -91,6 +91,16 @@ ingredient, Meal and Meal plan from the per-ingredient values the backend
 sends, at full precision; `formatNutrition()` rounds only for display. Table
 cells select and format, never compute.
 
+### Comparison
+
+The `_comparison` module keeps a User's Comparison ids in localStorage
+(`bitewise:comparison:v1:<userId>`, zod-parsed, unreadable counts as empty)
+behind `ComparisonProvider` (mounted in `dashboard/layout.tsx`). Row menus
+get "Add to comparison" via `IResourceForm.rowMenuItem`, and a deleted record
+leaves it via `useAfterRemove`. The header's modal loads fresh rows with the
+`fetchComparison(kind, ids)` action (backend `ids` filter) and prunes ids the
+backend no longer returns. Only ingredients are wired so far.
+
 ### Body metrics
 
 The `_body-metrics` module derives BMI, the BMI category, the healthy weight
