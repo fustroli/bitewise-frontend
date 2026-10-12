@@ -1,6 +1,6 @@
 # Module boundaries are enforced by ESLint
 
-The module architecture is machine-checked by `eslint-plugin-boundaries` in `npm run lint`, as errors. Every file under `app/` and `proxy.ts` is one of three element types:
+The module architecture is machine-checked by `eslint-plugin-boundaries` in `bun run lint`, as errors. Every file under `app/` and `proxy.ts` is one of three element types:
 
 - **shared**: `app/{assets,components,hooks,i18n,lib,providers,session,utils}`. Imports only shared code.
 - **module**: a folder under `app/(modules)/[lang]/dashboard/(modules)/`, named by its folder. Imports shared code, itself, and the modules it is allowed:
@@ -26,7 +26,7 @@ Anything not allowed is disallowed: shared → module or route, module → route
 
 - **`no-restricted-imports` blocks** (what we had): each one forbids a single path pattern, so the allowed graph lived only in people's heads, and a new module or edge was unchecked until someone added a block.
 - **dependency-cruiser**: also checks the graph and adds cycle detection and graph output, but runs as a separate command with no in-editor feedback. It can still be added later for graphs or cycles.
-- **eslint-plugin-boundaries** (chosen): the allowlist is the config, errors show in the editor, and it runs inside the existing `npm run lint` at no noticeable cost.
+- **eslint-plugin-boundaries** (chosen): the allowlist is the config, errors show in the editor, and it runs inside the existing `bun run lint` at no noticeable cost.
 
 ## Consequences
 
