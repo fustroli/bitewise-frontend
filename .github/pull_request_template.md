@@ -31,8 +31,8 @@ Closes #
 
 ## Checklist
 
-- [ ] `npm run lint` passes with no new warnings
-- [ ] `npm run build` succeeds
+- [ ] `bun run lint` passes with no new warnings
+- [ ] `bun run build` succeeds
 - [ ] Manually tested in the browser (light + dark theme, mobile width)
 - [ ] New UI strings added to **all** locales (`en`, `de`, `es`, `fr`, `hu`)
 - [ ] Forms validated with Zod schemas in the module's `validations/`

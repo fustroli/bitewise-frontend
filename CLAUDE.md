@@ -6,11 +6,11 @@ code in this repository.
 ## Commands
 
 ```bash
-npm run dev     # Start dev server
-npm run build   # Production build
-npm run start   # Start production server
-npm run lint    # Run ESLint (auto-fix)
-npm test        # Run Vitest once (*.test.ts, *.test.tsx)
+bun run dev     # Start dev server
+bun run build   # Production build
+bun run start   # Start production server
+bun run lint    # Run ESLint (auto-fix)
+bun run test  # Run Vitest once (*.test.ts, *.test.tsx)
 ```
 
 ## Architecture
@@ -188,8 +188,8 @@ via `components.json`:
 
 Deployed to an EC2 instance via AWS CodePipeline/CodeBuild/CodeDeploy:
 
-- `buildspec.yml` — CodeBuild: `npm ci`, writes `.env.production` from the
-  CodeBuild env (`COOKIE_DOMAIN`), `npm run build`
+- `buildspec.yml` — CodeBuild: `bun install --frozen-lockfile`, writes `.env.production` from the
+  CodeBuild env (`COOKIE_DOMAIN`), `bun run build`
 - `appspec.yml` — CodeDeploy: deploys to `/home/ubuntu/bitewise-frontend`,
   runs `scripts/{stop,install_dependencies,start,validate}.sh`
 - The app runs under `pm2` as `bitewise-frontend` on port 3000

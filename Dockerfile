@@ -1,14 +1,15 @@
 # ---- build ----
 FROM node:22-alpine AS build
+COPY --from=oven/bun:1.4.3-alpine /usr/local/bin/bun /usr/local/bin/bun
 WORKDIR /app
-COPY package*.json ./
-RUN npm ci
+COPY package.json bun.lock ./
+RUN bun install --frozen-lockfile
 COPY . .
 # NEXT_PUBLIC_* vars are inlined at build time
 ARG NEXT_PUBLIC_API_URL
 ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 ENV NEXT_TELEMETRY_DISABLED=1
-RUN npm run build && npm prune --omit=dev
+RUN bun run build && bun install --frozen-lockfile --production
 
 # ---- runtime ----
 FROM node:22-alpine

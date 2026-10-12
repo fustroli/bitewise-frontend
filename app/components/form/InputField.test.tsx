@@ -53,7 +53,7 @@ const NumberHarness = ({ onSubmit }: { onSubmit: (v: TNumber) => void }) => {
   );
 };
 
-// Type-level check, picked up by `tsc` in `npm run build`.
+// Type-level check, picked up by `tsc` in `bun run build`.
 const WrongName = () => {
   const form = useForm<TText>();
 
