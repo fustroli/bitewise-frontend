@@ -209,6 +209,8 @@
     "save": "Save",
     "edit": "Edit",
     "delete": "Delete",
+    "duplicate": "Duplicate",
+    "copyOf": "Copy of {name}",
     "close": "Close",
     "cancel": "Cancel",
     "continue": "Continue",

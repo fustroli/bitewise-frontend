@@ -98,6 +98,8 @@
     "save": "Speichern",
     "edit": "Bearbeiten",
     "delete": "Löschen",
+    "duplicate": "Duplizieren",
+    "copyOf": "Kopie von {name}",
     "close": "Schließen",
     "cancel": "Abbrechen",
     "continue": "Weiter",

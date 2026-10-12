@@ -40,6 +40,8 @@ export interface IResourceForm<
 
 export interface IResourceDialogProps<TRecord, TFormData> {
   record?: TRecord;
+  /** With a `record`: Add dialog prefilled from it instead of Edit. */
+  duplicate?: boolean;
   formData: TFormData;
 }
 

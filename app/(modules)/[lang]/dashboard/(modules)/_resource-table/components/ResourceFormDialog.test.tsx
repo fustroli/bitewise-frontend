@@ -42,12 +42,13 @@ const config: IResourceForm<IResourceRecord, TValues> = {
   remove: vi.fn(),
 };
 
-const renderDialog = (record?: IResourceRecord) =>
+const renderDialog = (record?: IResourceRecord, duplicate?: boolean) =>
   render(
     <DictionaryProvider dictionary={en}>
       <ResourceFormDialog
         config={config}
         record={record}
+        duplicate={duplicate}
         formData={undefined}
       />
     </DictionaryProvider>,
@@ -136,5 +137,55 @@ describe('ResourceFormDialog', () => {
     expect(await screen.findByText(en.resourceTable.nameTaken)).toBeTruthy();
     expect(toast).not.toHaveBeenCalled();
     expect(screen.getByRole('dialog')).toBeTruthy();
+  });
+
+  it('duplicates into an Add dialog prefilled with a "Copy of" name', async () => {
+    const user = userEvent.setup();
+    renderDialog({ id: 3, name: 'Oats' }, true);
+
+    await user.click(screen.getByRole('button', { name: 'Duplicate' }));
+
+    expect(screen.getByRole('dialog')).toBeTruthy();
+    expect(nameInput().value).toBe('Copy of Oats');
+  });
+
+  it('creates, not updates, on submitting a duplicate', async () => {
+    const user = userEvent.setup();
+    create.mockResolvedValue(OK);
+    renderDialog({ id: 3, name: 'Oats' }, true);
+
+    await user.click(screen.getByRole('button', { name: 'Duplicate' }));
+    await user.click(screen.getByRole('button', { name: 'Add' }));
+
+    expect(create).toHaveBeenCalledWith({ name: 'Copy of Oats' });
+    expect(update).not.toHaveBeenCalled();
+    expect(toast).toHaveBeenCalledWith({
+      variant: 'success',
+      description: en.resourceTable.created,
+    });
+  });
+
+  it('re-seeds a discarded duplicate from the source row', async () => {
+    const user = userEvent.setup();
+    renderDialog({ id: 3, name: 'Oats' }, true);
+
+    await user.click(screen.getByRole('button', { name: 'Duplicate' }));
+    await user.type(nameInput(), ' edited');
+    await user.click(screen.getAllByRole('button', { name: 'Close' })[0]);
+    await user.click(screen.getByRole('button', { name: 'Duplicate' }));
+
+    expect(nameInput().value).toBe('Copy of Oats');
+  });
+
+  it('shows a taken duplicate name on the name field', async () => {
+    const user = userEvent.setup();
+    create.mockResolvedValue({ ...FAILED, status: 409 });
+    renderDialog({ id: 3, name: 'Oats' }, true);
+
+    await user.click(screen.getByRole('button', { name: 'Duplicate' }));
+    await user.click(screen.getByRole('button', { name: 'Add' }));
+
+    expect(await screen.findByText(en.resourceTable.nameTaken)).toBeTruthy();
+    expect(toast).not.toHaveBeenCalled();
   });
 });
