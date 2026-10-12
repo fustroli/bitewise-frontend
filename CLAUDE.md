@@ -99,7 +99,7 @@ behind `ComparisonProvider` (mounted in `dashboard/layout.tsx`). Row menus
 get "Add to comparison" via `IResourceForm.rowMenuItem`, and a deleted record
 leaves it via `useAfterRemove`. The header's modal loads fresh rows with the
 `fetchComparison(kind, ids)` action (backend `ids` filter) and prunes ids the
-backend no longer returns. Only ingredients are wired so far.
+backend no longer returns. Ingredients and Meals are wired so far.
 
 ### Body metrics
 

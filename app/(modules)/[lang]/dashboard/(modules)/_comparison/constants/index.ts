@@ -1,4 +1,5 @@
-import { Carrot, LucideIcon } from 'lucide-react';
+import { Carrot, LucideIcon, Utensils } from 'lucide-react';
+
 import { EComparisonKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/enums';
 import { INutritionColumn } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/interfaces';
 
@@ -11,6 +12,7 @@ export const COMPARISON_STORAGE_VERSION = 1;
 /** The kinds that can be compared so far, in header order. */
 export const COMPARISON_KINDS: { kind: EComparisonKind; icon: LucideIcon }[] = [
   { kind: EComparisonKind.INGREDIENTS, icon: Carrot },
+  { kind: EComparisonKind.MEALS, icon: Utensils },
 ];
 
 /** One column per Nutrition value. */
