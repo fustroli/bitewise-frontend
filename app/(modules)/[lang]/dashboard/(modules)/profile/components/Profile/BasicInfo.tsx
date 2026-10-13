@@ -125,7 +125,6 @@ const BasicInfo = () => {
                 changeHandler={handleImageChange}
               />
               <LoadingButton
-                variant="outline"
                 type={'submit'}
                 disabled={!imagePreviewUrl}
                 loading={form.formState.isSubmitting}
