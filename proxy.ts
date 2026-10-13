@@ -32,6 +32,7 @@ export async function proxy(request: NextRequest) {
   const csp = contentSecurityPolicy({
     nonce,
     apiUrl: API_URL,
+    avatarUrl: process.env.NEXT_PUBLIC_AVATAR_URL,
     isDev: process.env.NODE_ENV === 'development',
   });
 
