@@ -376,7 +376,8 @@
     "resend": "Resend email",
     "resendIn": "Resend in {seconds}s",
     "resent": "Verification email sent to {email}.",
-    "resendThrottled": "You've requested too many emails. Please wait a few minutes and try again."
+    "resendThrottled": "You've requested too many emails. Please wait a few minutes and try again.",
+    "avatarLocked": "Verify your email address to upload a profile image."
   },
   "passwordPolicy": {
     "passwordMinLength": "Password must be at least 8 characters long",

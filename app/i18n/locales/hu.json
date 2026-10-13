@@ -376,7 +376,8 @@
     "resend": "E-mail újraküldése",
     "resendIn": "Újraküldés {seconds} mp múlva",
     "resent": "Megerősítő e-mail elküldve ide: {email}.",
-    "resendThrottled": "Túl sok e-mailt kértél. Várj néhány percet, és próbáld újra."
+    "resendThrottled": "Túl sok e-mailt kértél. Várj néhány percet, és próbáld újra.",
+    "avatarLocked": "Erősítsd meg az e-mail-címedet, hogy profilképet tölthess fel."
   },
   "passwordPolicy": {
     "passwordMinLength": "A jelszónak legalább 8 karakter hosszúnak kell lennie",

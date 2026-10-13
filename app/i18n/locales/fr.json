@@ -239,7 +239,8 @@
     "resend": "Renvoyer l'e-mail",
     "resendIn": "Renvoyer dans {seconds} s",
     "resent": "E-mail de vérification envoyé à {email}.",
-    "resendThrottled": "Vous avez demandé trop d'e-mails. Patientez quelques minutes et réessayez."
+    "resendThrottled": "Vous avez demandé trop d'e-mails. Patientez quelques minutes et réessayez.",
+    "avatarLocked": "Vérifiez votre adresse e-mail pour importer une photo de profil."
   },
   "passwordPolicy": {
     "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
