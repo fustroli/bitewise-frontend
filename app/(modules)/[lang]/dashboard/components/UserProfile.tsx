@@ -1,12 +1,7 @@
 'use client';
 
-import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/app/components/ui/avatar';
-
 import Link from 'next/link';
+import UserAvatar from '@/app/(modules)/[lang]/dashboard/(modules)/_user/components/UserAvatar';
 import { useParams } from 'next/navigation';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 
@@ -22,17 +17,7 @@ const UserProfile = () => {
       <span className="hidden text-sm font-medium text-muted-foreground md:block">
         {user.email}
       </span>
-      <Avatar className="size-10 rounded-md">
-        <AvatarImage src={user.avatarUrl} />
-        <AvatarFallback className="rounded-md">
-          {/* Plain img: Radix allows only one AvatarImage per Avatar */}
-          <img
-            src="https://github.com/shadcn.png"
-            alt=""
-            className="aspect-square size-full"
-          />
-        </AvatarFallback>
-      </Avatar>
+      <UserAvatar user={user} className="size-10 rounded-md" />
     </Link>
   );
 };

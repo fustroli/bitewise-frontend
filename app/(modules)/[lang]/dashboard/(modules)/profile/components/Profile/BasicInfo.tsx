@@ -1,11 +1,6 @@
 'use client';
 
 import {
-  Avatar,
-  AvatarFallback,
-  AvatarImage,
-} from '@/app/components/ui/avatar';
-import {
   Card,
   CardDescription,
   CardHeader,
@@ -23,6 +18,7 @@ import { Button } from '@/app/components/ui/button';
 import FileUploadFormField from '@/app/components/form/FileUploadFormField';
 import { Form } from '@/app/components/ui/form';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
+import UserAvatar from '@/app/(modules)/[lang]/dashboard/(modules)/_user/components/UserAvatar';
 import dynamic from 'next/dynamic';
 import { readableAvatarResult } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
 import { toastResult } from '@/app/utils/helpers/client';
@@ -96,17 +92,7 @@ const BasicInfo = () => {
     <Card className="relative flex min-h-32 w-full items-center justify-between p-6">
       {!isEditable ? (
         <div className="flex items-center">
-          <Avatar className="size-16">
-            <AvatarImage src={user?.avatarUrl} />
-            <AvatarFallback>
-              {/* Plain img: Radix allows only one AvatarImage per Avatar */}
-              <img
-                src="https://github.com/shadcn.png"
-                alt=""
-                className="aspect-square size-full"
-              />
-            </AvatarFallback>
-          </Avatar>
+          {user && <UserAvatar user={user} className="size-16" />}
           <CardHeader>
             <CardTitle className="flex items-center justify-between font-medium">
               {user?.personalInformation?.firstName}{' '}
