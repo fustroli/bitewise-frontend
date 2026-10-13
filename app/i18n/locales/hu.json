@@ -332,6 +332,9 @@
       "addTitle": "Étrend hozzáadása",
       "editTitle": "Étrend szerkesztése",
       "deleteTitle": "Étrend törlése",
+      "maintenance": "Fenntartó",
+      "showMaintenance": "Fenntartó értékek mutatása",
+      "hideMaintenance": "Fenntartó értékek elrejtése",
       "columns": {
         "name": "Név",
         "calories": "Kalória",

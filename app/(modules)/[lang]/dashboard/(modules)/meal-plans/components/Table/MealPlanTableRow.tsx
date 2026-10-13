@@ -6,6 +6,9 @@ import {
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/helpers';
 
 import { IMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
+import MealPlanMaintenanceLabel from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/Table/MealPlanMaintenanceLabel';
+import { MealPlanMaintenanceProvider } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/Table/MealPlanMaintenanceContext';
+import MealPlanMaintenanceToggle from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/Table/MealPlanMaintenanceToggle';
 import MealPlanTableCell from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/Table/MealPlanTableCell';
 import { NUTRITION_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
 import { ReactNode } from 'react';
@@ -24,34 +27,39 @@ const MealPlanTableRow = ({ row, actions }: IProps) => {
   const total = mealPlanNutrition(row);
 
   return (
-    <TableRow>
-      <TableCell className="mx-2 flex items-center gap-2 p-2 text-foreground lg:table-cell lg:py-4">
-        <div className="flex flex-col gap-2">
-          {meals.map((meal) => (
-            <div key={meal.id} className="px-1 lg:px-2">
-              {meal.name}
+    <MealPlanMaintenanceProvider>
+      <TableRow>
+        <TableCell className="mx-2 flex items-center gap-2 p-2 text-foreground lg:table-cell lg:py-4">
+          <div className="flex flex-col gap-2">
+            {meals.map((meal) => (
+              <div key={meal.id} className="px-1 lg:px-2">
+                {meal.name}
+              </div>
+            ))}
+            <div className="flex items-center justify-between gap-2 rounded-md bg-primary px-2 py-1 font-semibold text-primary-foreground">
+              {row.name}
+              <MealPlanMaintenanceToggle />
             </div>
-          ))}
-          <div className="rounded-md bg-primary px-2 py-1 font-semibold text-primary-foreground">
-            {row.name}
+            <MealPlanMaintenanceLabel />
           </div>
-        </div>
-      </TableCell>
-      {NUTRITION_COLUMNS.map((column) => (
-        <MealPlanTableCell
-          key={column.nutrient}
-          lines={mealsNutrition.map(({ key, nutrition }) => ({
-            key,
-            content: formatNutrition(nutrition, column),
-          }))}
-          total={formatNutrition(total, column)}
-        />
-      ))}
+        </TableCell>
+        {NUTRITION_COLUMNS.map((column) => (
+          <MealPlanTableCell
+            key={column.nutrient}
+            lines={mealsNutrition.map(({ key, nutrition }) => ({
+              key,
+              content: formatNutrition(nutrition, column),
+            }))}
+            total={formatNutrition(total, column)}
+            column={column}
+          />
+        ))}
 
-      <TableCell className="mx-2 flex items-center gap-2 p-2 text-foreground lg:table-cell lg:py-4 lg:text-right">
-        {actions}
-      </TableCell>
-    </TableRow>
+        <TableCell className="mx-2 flex items-center gap-2 p-2 text-foreground lg:table-cell lg:py-4 lg:text-right">
+          {actions}
+        </TableCell>
+      </TableRow>
+    </MealPlanMaintenanceProvider>
   );
 };
 
