@@ -39,6 +39,15 @@ or expires within a minute is refreshed with the refresh token, the new tokens
 go to the rest of the request and the browser. Concurrent requests share one
 refresh, since the backend treats a reused refresh token as theft.
 
+### Email verification
+
+The mailed link lands on the public `/verify-email?token=…` page, which
+redeems the token from the browser (the backend throttles per client, so
+never from the Next server) once, even under Strict Mode, and shows verified /
+invalid-or-expired / failed. While `/users/me` says `emailVerified: false`, the
+dashboard shows `EmailVerificationBanner` with a resend action (429 gets its
+own message; a send or a 429 locks the button for 60 s, client-side only).
+
 ### Key directories
 
 | Path                          | Purpose                                              |

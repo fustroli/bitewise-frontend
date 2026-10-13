@@ -360,6 +360,24 @@
     "passwordFirst": "Ezzel az e-mail-címmel már létezik fiók. Először jelentkezz be a jelszavaddal.",
     "oauthFailed": "A Google-bejelentkezés nem fejeződött be. Kérjük, próbáld újra."
   },
+  "emailVerification": {
+    "signUpSent": "Fiók létrehozva. Megerősítő e-mailt küldtünk ide: {email}.",
+    "verifying": "E-mail-cím megerősítése…",
+    "verifiedTitle": "E-mail-cím megerősítve",
+    "verified": "Köszönjük, az e-mail-címed megerősítve.",
+    "invalidTitle": "Ez a link nem működik",
+    "invalid": "A megerősítő link érvénytelen vagy lejárt. Jelentkezz be, és kérj újat.",
+    "failedTitle": "Hiba történt",
+    "failed": "Most nem sikerült megerősíteni az e-mail-címedet. Próbáld újra később.",
+    "continue": "Tovább a BiteWise-ba",
+    "requestNew": "Jelentkezz be új linkért",
+    "bannerTitle": "Erősítsd meg az e-mail-címedet",
+    "banner": "Küldtünk egy linket ide: {email}. Nyisd meg a fiókod beállításának befejezéséhez.",
+    "resend": "E-mail újraküldése",
+    "resendIn": "Újraküldés {seconds} mp múlva",
+    "resent": "Megerősítő e-mail elküldve ide: {email}.",
+    "resendThrottled": "Túl sok e-mailt kértél. Várj néhány percet, és próbáld újra."
+  },
   "passwordPolicy": {
     "passwordMinLength": "A jelszónak legalább 8 karakter hosszúnak kell lennie",
     "passwordUppercase": "A jelszónak tartalmaznia kell legalább egy nagybetűt",

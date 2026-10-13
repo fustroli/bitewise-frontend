@@ -30,3 +30,8 @@ export async function updateAvatar(formData: FormData) {
 
   return request<IUser>(`users/me/avatar`, 'POST', body);
 }
+
+/** Mails a fresh Email verification link; a no-op once verified. */
+export async function resendVerification() {
+  return request('auth/resend-verification', 'POST');
+}

@@ -360,6 +360,24 @@
     "passwordFirst": "An account with this email already exists. Sign in with your password first.",
     "oauthFailed": "Google sign-in didn't complete. Please try again."
   },
+  "emailVerification": {
+    "signUpSent": "Account created. We sent a verification email to {email}.",
+    "verifying": "Verifying your email…",
+    "verifiedTitle": "Email verified",
+    "verified": "Thanks, your email address is verified.",
+    "invalidTitle": "This link doesn't work",
+    "invalid": "The verification link is invalid or has expired. Sign in to request a new one.",
+    "failedTitle": "Something went wrong",
+    "failed": "We couldn't verify your email right now. Please try again later.",
+    "continue": "Continue to BiteWise",
+    "requestNew": "Sign in to get a new link",
+    "bannerTitle": "Verify your email address",
+    "banner": "We sent a link to {email}. Open it to finish setting up your account.",
+    "resend": "Resend email",
+    "resendIn": "Resend in {seconds}s",
+    "resent": "Verification email sent to {email}.",
+    "resendThrottled": "You've requested too many emails. Please wait a few minutes and try again."
+  },
   "passwordPolicy": {
     "passwordMinLength": "Password must be at least 8 characters long",
     "passwordUppercase": "Password must contain at least one uppercase letter",

@@ -41,6 +41,8 @@ export interface IBodyStats {
 export interface IUser {
   id: number;
   email: string;
+  /** Whether the User has completed Email verification. */
+  emailVerified?: boolean;
   personalInformation?: IPersonalInformation;
   socialProfiles?: ISocialProfiles;
   notificationSettings?: INotificationSettings;

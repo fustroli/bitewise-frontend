@@ -2,6 +2,7 @@ import AppBar from '@/app/(modules)/[lang]/dashboard/components/AppBar';
 import { AppSidebar } from '@/app/(modules)/[lang]/dashboard/components/AppSidebar';
 import { ComparisonProvider } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/provider';
 import { DictionaryProvider } from '@/app/providers/dictionary-provider';
+import EmailVerificationBanner from '@/app/(modules)/[lang]/dashboard/components/EmailVerificationBanner';
 import { SidebarProvider } from '@/app/components/ui/sidebar';
 import { UserProvider } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/provider';
 import { fetchMe } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/api';
@@ -28,6 +29,7 @@ export default async function DashboardLayout({
             <AppSidebar />
             <main className="w-full">
               <AppBar />
+              <EmailVerificationBanner />
               {children}
             </main>
           </SidebarProvider>

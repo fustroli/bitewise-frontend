@@ -12,6 +12,7 @@ import InputField from '@/app/components/form/InputField';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
 import PasswordInput from '@/app/components/form/PasswordInput';
 import { defaultSignUpValues } from '@/app/(modules)/(auth)/constants';
+import { interpolate } from '@/app/utils/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
 import { useMemo } from 'react';
@@ -22,7 +23,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 const SignUpForm = () => {
   const router = useRouter();
   const { toast } = useToast();
-  const { passwordPolicy } = useDictionary();
+  const { passwordPolicy, emailVerification } = useDictionary();
 
   const signupSchema = useMemo(
     () => createSignupSchema(passwordPolicy),
@@ -37,6 +38,12 @@ const SignUpForm = () => {
   async function onSubmit(values: TSignupSchema) {
     try {
       await api.register(values);
+      toast({
+        variant: 'success',
+        description: interpolate(emailVerification.signUpSent, {
+          email: values.email,
+        }),
+      });
       router.push('/dashboard');
     } catch (error: any) {
       toast({
