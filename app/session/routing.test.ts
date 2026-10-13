@@ -20,6 +20,8 @@ describe('routing decision', () => {
     ['/signout', false, 'en', null],
     ['/signout', true, 'en', null],
     ['/dashboards', false, 'en', null],
+    ['/verify-email', false, 'en', null],
+    ['/verify-email', true, 'en', null],
   ] as const)(
     '%s, token: %s, locale: %s → %s',
     (pathname, hasToken, preferredLocale, expected) => {

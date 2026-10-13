@@ -24,7 +24,7 @@ const isDashboardPath = (pathname: string) =>
  * 1. a dashboard path (with or without locale) and no token → sign-in page;
  * 2. `/` with a token → the dashboard;
  * 3. `/dashboard…` without a locale → the same path under the locale;
- * 4. anything else → continue.
+ * 4. anything else (e.g. `/verify-email`, public either way) → continue.
  */
 export const decideRoute = ({
   pathname,

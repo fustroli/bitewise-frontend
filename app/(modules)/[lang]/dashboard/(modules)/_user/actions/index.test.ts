@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
+  resendVerification,
   updateAvatar,
   updateUser,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/actions';
@@ -68,5 +69,13 @@ describe('updateAvatar', () => {
   ])('rejects %s without calling the backend', async (_, data) => {
     expect(await updateAvatar(data)).toEqual(INVALID);
     expect(request).not.toHaveBeenCalled();
+  });
+});
+
+describe('resendVerification', () => {
+  it('asks the backend for a new link', async () => {
+    await resendVerification();
+
+    expect(request).toHaveBeenCalledWith('auth/resend-verification', 'POST');
   });
 });
