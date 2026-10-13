@@ -5,6 +5,7 @@ import {
   draftStorageKey,
   formatCalorieDelta,
   maintenanceDelta,
+  mealPlanDraft,
   parseDraft,
   resolveDraft,
   serializeDraft,
@@ -143,6 +144,29 @@ describe('resolveDraft', () => {
     expect(
       resolveDraft(draft([line(EDraftLineKind.MEAL, 0, 1)]), SOURCES).removed,
     ).toBe(0);
+  });
+});
+
+describe('mealPlanDraft', () => {
+  it('copies each Meal as one serving into an expanded draft', () => {
+    expect(mealPlanDraft([10, 11])).toEqual({
+      ...EMPTY_DRAFT,
+      collapsed: false,
+      lines: [
+        line(EDraftLineKind.MEAL, 10, 1),
+        line(EDraftLineKind.MEAL, 11, 1),
+      ],
+    });
+  });
+
+  it('counts Meals the draft does not know as removed once resolved', () => {
+    const { draft: resolved, removed } = resolveDraft(
+      mealPlanDraft([10, 99]),
+      SOURCES,
+    );
+
+    expect(resolved.lines).toEqual([line(EDraftLineKind.MEAL, 10, 1)]);
+    expect(removed).toBe(1);
   });
 });
 

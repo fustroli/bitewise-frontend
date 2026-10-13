@@ -17,6 +17,7 @@ const DraftMealPlanSection = async ({ lang }: ILangProps) => {
       meals={meals.data}
       ingredients={ingredients.data}
       profileHref={`/${lang}/dashboard/profile#${PROFILE_SECTION_IDS.bodyStats}`}
+      mealPlansHref={`/${lang}/dashboard/meal-plans`}
     />
   );
 };

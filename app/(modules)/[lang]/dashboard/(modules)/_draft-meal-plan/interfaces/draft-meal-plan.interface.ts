@@ -13,3 +13,10 @@ export interface IResolvedDraft {
   /** How many lines were dropped because their Meal or Ingredient is gone. */
   removed: number;
 }
+
+/** A Meal plan the draft can be loaded from. */
+export interface IDraftMealPlanOption {
+  id: number;
+  name: string;
+  mealIds: number[];
+}

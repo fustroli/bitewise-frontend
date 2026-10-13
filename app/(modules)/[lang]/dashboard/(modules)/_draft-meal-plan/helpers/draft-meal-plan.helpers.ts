@@ -1,4 +1,8 @@
 import {
+  DEFAULT_MEAL_MULTIPLIER,
+  DRAFT_STORAGE_VERSION,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
+import {
   IDraftSources,
   IResolvedDraft,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
@@ -14,7 +18,6 @@ import {
   sumNutrition,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/helpers';
 
-import { DRAFT_STORAGE_VERSION } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { EMPTY_NUTRITION } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
 import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
@@ -44,6 +47,16 @@ export const parseDraft = (raw: string | null): TStoredDraft | null => {
 };
 
 export const serializeDraft = (draft: TStoredDraft) => JSON.stringify(draft);
+
+/** A copy of a Meal plan as a draft: one serving of each of its Meals. */
+export const mealPlanDraft = (mealIds: number[]): TStoredDraft => ({
+  ...EMPTY_DRAFT,
+  lines: mealIds.map((itemId) => ({
+    kind: EDraftLineKind.MEAL,
+    itemId,
+    quantity: DEFAULT_MEAL_MULTIPLIER,
+  })),
+});
 
 const findMeal = (id: number, { meals }: IDraftSources) =>
   meals.find((meal) => meal.id === id);

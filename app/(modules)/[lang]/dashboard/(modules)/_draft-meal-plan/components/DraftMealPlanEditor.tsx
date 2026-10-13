@@ -44,6 +44,7 @@ import DraftLineRow from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal
 import DraftMaintenance from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftMaintenance';
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { Form } from '@/app/components/ui/form';
+import LoadMealPlanDialog from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/LoadMealPlanDialog';
 import { NUTRITION_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
 import { formatNutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
@@ -54,16 +55,20 @@ interface IProps {
   initial: IResolvedDraft;
   sources: IDraftSources;
   profileHref: string;
+  mealPlansHref: string;
   onSave: (draft: TStoredDraft) => void;
   onClear: () => void;
+  onLoad: (draft: TStoredDraft) => void;
 }
 
 const DraftMealPlanEditor = ({
   initial,
   sources,
   profileHref,
+  mealPlansHref,
   onSave,
   onClear,
+  onLoad,
 }: IProps) => {
   const dictionary = useDictionary();
   const { draftMealPlan: labels, resourceTable } = dictionary;
@@ -125,6 +130,11 @@ const DraftMealPlanEditor = ({
           <CardDescription>{labels.description}</CardDescription>
         </div>
         <div className="flex shrink-0 items-center gap-2">
+          <LoadMealPlanDialog
+            lineCount={lines.length}
+            mealPlansHref={mealPlansHref}
+            onLoad={onLoad}
+          />
           <DeleteDialog
             title={labels.clear}
             subtitle={labels.clearConfirm}

@@ -284,7 +284,23 @@
     "validation": {
       "itemRequired": "Choisissez un repas ou un ingrédient",
       "quantityPositive": "La quantité doit être supérieure à 0",
-      "multiplierStep": "Utilisez des pas de 0,5"
+      "multiplierStep": "Utilisez des pas de 0,5",
+      "mealPlanRequired": "Sélectionnez un plan de repas"
+    },
+    "load": {
+      "button": "Charger un plan de repas",
+      "title": "Charger un plan de repas",
+      "description": "Copie les repas d'un plan de repas dans le brouillon, une portion chacun. Le plan de repas lui-même n'est pas modifié.",
+      "mealPlan": "Plan de repas",
+      "placeholder": "Sélectionner un plan de repas...",
+      "replaceWarning": "Ceci remplace les {count} ligne(s) de votre brouillon.",
+      "loading": "Chargement des plans de repas...",
+      "error": "Impossible de charger vos plans de repas.",
+      "retry": "Réessayer",
+      "empty": "Aucun plan de repas pour l'instant.",
+      "goToMealPlans": "Aller aux Plans de repas",
+      "submit": "Charger",
+      "loaded": "{name} chargé"
     }
   },
   "errorBoundary": {

@@ -58,3 +58,17 @@ export const createDraftSchema = ({
   });
 
 export type TDraftSchema = z.infer<ReturnType<typeof createDraftSchema>>;
+
+export const createLoadMealPlanSchema = ({
+  draftMealPlan: { validation },
+}: TDictionary) =>
+  z.object({
+    mealPlanId: z
+      .number()
+      .int()
+      .positive({ message: validation.mealPlanRequired }),
+  });
+
+export type TLoadMealPlanSchema = z.infer<
+  ReturnType<typeof createLoadMealPlanSchema>
+>;
