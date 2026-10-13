@@ -9,6 +9,12 @@ import {
   CALORIE_PACES,
   CM_PER_M,
   HEALTHY_BMI,
+  MACRO_DISPLAY_DECIMALS,
+  MACRO_KCAL_PER_GRAM,
+  MACRO_LIMIT_SHARE,
+  MACRO_PLANS,
+  MACRO_PLAN_ORDER,
+  MACRO_RANGES,
   PLAUSIBLE_BODY_FAT,
   SAFE_MINIMUM_CALORIES,
   US_NAVY,
@@ -27,6 +33,8 @@ import {
   IBodyMetricsInput,
   ICalorieTarget,
   ICalories,
+  IMacroAmount,
+  IMacros,
   TBodyMetricsField,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/interfaces';
 
@@ -153,6 +161,47 @@ const computeCalories = (
   };
 };
 
+/** The Macro plans for `kcal` a day; `weightKg` sets the protein minimum. */
+const computeMacros = (kcal: number, weightKg: number): IMacros => {
+  const { protein, carbs, fat } = MACRO_KCAL_PER_GRAM;
+  const minProtein = MACRO_RANGES.proteinMinGramsPerKg * weightKg;
+  const minFat = (MACRO_RANGES.fatMinShare * kcal) / fat;
+  const maxCarbs = (kcal - minProtein * protein - minFat * fat) / carbs;
+  const range = {
+    protein: {
+      minGrams: minProtein,
+      maxGrams: (MACRO_RANGES.proteinMaxShare * kcal) / protein,
+    },
+    carbs: {
+      minGrams: (MACRO_RANGES.carbsMinShare * kcal) / carbs,
+      maxGrams: maxCarbs,
+    },
+    fat: {
+      minGrams: minFat,
+      maxGrams: (MACRO_RANGES.fatMaxShare * kcal) / fat,
+    },
+  };
+
+  const amount = (macro: keyof typeof range, share: number): IMacroAmount => ({
+    grams: (share * kcal) / MACRO_KCAL_PER_GRAM[macro],
+    kcal: share * kcal,
+    percent: share * PERCENT,
+    ...range[macro],
+  });
+
+  return {
+    kcalPerDay: kcal,
+    plans: MACRO_PLAN_ORDER.map((plan) => ({
+      plan,
+      protein: amount('protein', MACRO_PLANS[plan].protein),
+      carbs: amount('carbs', MACRO_PLANS[plan].carbs),
+      fat: amount('fat', MACRO_PLANS[plan].fat),
+    })),
+    sugarMaxGrams: (MACRO_LIMIT_SHARE * kcal) / carbs,
+    saturatedFatMaxGrams: (MACRO_LIMIT_SHARE * kcal) / fat,
+  };
+};
+
 /**
  * BMI, body fat and Calorie targets from the User's Body stats and date of
  * birth, at
@@ -183,22 +232,25 @@ export const bodyMetrics = ({
 
   if (!heightCm || !weightKg) return { missing };
 
+  const calories =
+    sex && activityLevel && dateOfBirth
+      ? computeCalories(
+          sex,
+          heightCm,
+          weightKg,
+          activityLevel,
+          ageOn(birthDay(dateOfBirth), today),
+        )
+      : undefined;
+
   return {
     bmi: computeBmi(heightCm, weightKg),
     bodyFat:
       sex && neckCm && waistCm
         ? computeBodyFat({ sex, heightCm, weightKg, neckCm, waistCm, hipCm })
         : undefined,
-    calories:
-      sex && activityLevel && dateOfBirth
-        ? computeCalories(
-            sex,
-            heightCm,
-            weightKg,
-            activityLevel,
-            ageOn(birthDay(dateOfBirth), today),
-          )
-        : undefined,
+    calories,
+    macros: calories && computeMacros(calories.maintenance, weightKg),
     missing,
   };
 };
@@ -252,6 +304,10 @@ export const formatCalories = (kcal: number, locale: string) =>
 /** Whole percent, e.g. `90%` */
 export const formatPercent = (percent: number, locale: string) =>
   (percent / PERCENT).toLocaleString(locale, { style: 'percent' });
+
+/** Whole grams, e.g. `159` */
+export const formatGrams = (grams: number, locale: string) =>
+  formatDecimal(grams, MACRO_DISPLAY_DECIMALS, locale);
 
 /** Signed, e.g. `-0.25` or `+1` */
 export const formatKgPerWeek = (kgPerWeek: number, locale: string) =>

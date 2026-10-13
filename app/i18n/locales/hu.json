@@ -78,6 +78,29 @@
         "empty": "Adja meg a nemét, magasságát, testsúlyát és aktivitási szintjét a kalóriák megtekintéséhez.",
         "dateOfBirthMissing": "Adja meg a születési dátumát a kalóriák megtekintéséhez."
       },
+      "macros": {
+        "title": "Makrók",
+        "description": "Napi fehérje, szénhidrát és zsír a fenntartó kalóriád mellett",
+        "foodEnergy": "Tápanyagenergia",
+        "kcalPerDay": "kcal/nap",
+        "gramsPerDay": "gramm/nap",
+        "sugar": "Cukor",
+        "saturatedFat": "Telített zsír",
+        "limit": "<{value} g/nap",
+        "macros": {
+          "protein": "Fehérje",
+          "carbs": "Szénhidrát",
+          "fat": "Zsír"
+        },
+        "plans": {
+          "balanced": "Kiegyensúlyozott",
+          "lowFat": "Alacsony zsírtartalmú",
+          "lowCarb": "Alacsony szénhidráttartalmú",
+          "highProtein": "Magas fehérjetartalmú"
+        },
+        "empty": "Add meg a nemed, magasságod, testsúlyod és aktivitási szinted a makrók megtekintéséhez.",
+        "dateOfBirthMissing": "Add meg a születési dátumod a makrók megtekintéséhez."
+      },
       "addBodyStats": "Testadatok megadása",
       "addDateOfBirth": "Születési dátum megadása"
     }

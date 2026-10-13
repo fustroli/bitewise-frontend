@@ -84,3 +84,7 @@ _Avoid_: TDEE, BMR
 **Calorie target**:
 Maintenance calories shifted for a weekly weight change: lose or gain 0.25, 0.5 or 1 kg.
 _Avoid_: Calorie goal, calorie budget
+
+**Macro plan**:
+A named split of Maintenance calories into protein, carbs and fat: Balanced, Low fat, Low carb or High protein. A target, not a measurement (unlike Nutrition). Shown as grams per day, kcal and share of calories, each with a range.
+_Avoid_: Macro calculator, diet

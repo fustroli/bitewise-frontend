@@ -5,6 +5,7 @@ import {
 import {
   EBmiCategory,
   EBodyFatCategory,
+  EMacroPlan,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
 import {
   ageOn,
@@ -162,6 +163,74 @@ describe('Maintenance calories and Calorie targets', () => {
     // 5 kcal less BMR per year of age.
     expect(on(new Date(2025, 4, 14)) - on(new Date(2025, 4, 15))).toBeCloseTo(
       5 * 1.465,
+    );
+  });
+});
+
+/** calculator.net's macro example: 175 lb, 5'10", 25, moderate → 2,615 kcal. */
+const MACRO_MAN: IBodyStats = {
+  ...MAN,
+  heightCm: 177.8,
+  weightKg: 79.3787,
+};
+
+describe('Macro plans', () => {
+  const macros = () => metrics(MACRO_MAN).macros!;
+  const plan = (name: EMacroPlan) =>
+    macros().plans.find(({ plan }) => plan === name)!;
+
+  it('lists the four plans in order', () => {
+    expect(macros().plans.map(({ plan }) => plan)).toEqual([
+      EMacroPlan.BALANCED,
+      EMacroPlan.LOW_FAT,
+      EMacroPlan.LOW_CARB,
+      EMacroPlan.HIGH_PROTEIN,
+    ]);
+    expect(macros().kcalPerDay).toBeCloseTo(2615, 0);
+  });
+
+  it.each([
+    [EMacroPlan.BALANCED, 159.45, 348.67, 74.29],
+    [EMacroPlan.LOW_FAT, 175.4, 366.1, 59.43],
+    [EMacroPlan.LOW_CARB, 191.34, 278.93, 89.15],
+    [EMacroPlan.HIGH_PROTEIN, 223.23, 296.37, 66.86],
+  ])('reproduces calculator.net for %s', (name, protein, carbs, fat) => {
+    const result = plan(name);
+
+    expect(result.protein.grams).toBeCloseTo(protein, 0);
+    expect(result.carbs.grams).toBeCloseTo(carbs, 0);
+    expect(result.fat.grams).toBeCloseTo(fat, 0);
+  });
+
+  it('splits the calories in full', () => {
+    macros().plans.forEach(({ protein, carbs, fat }) => {
+      expect(protein.kcal + carbs.kcal + fat.kcal).toBeCloseTo(2615, 0);
+      expect(protein.percent + carbs.percent + fat.percent).toBeCloseTo(100);
+    });
+  });
+
+  it('reproduces calculator.net ranges, which are the same for every plan', () => {
+    const { protein, carbs, fat } = plan(EMacroPlan.BALANCED);
+
+    expect([protein.minGrams, protein.maxGrams].map(Math.round)).toEqual([
+      79, 223,
+    ]);
+    expect([carbs.minGrams, carbs.maxGrams].map(Math.round)).toEqual([
+      279, 471,
+    ]);
+    expect([fat.minGrams, fat.maxGrams].map(Math.round)).toEqual([59, 104]);
+    expect(plan(EMacroPlan.LOW_CARB).carbs.minGrams).toBe(carbs.minGrams);
+  });
+
+  it('caps sugar and saturated fat at 10% of calories', () => {
+    expect(Math.round(macros().sugarMaxGrams)).toBe(70);
+    expect(Math.round(macros().saturatedFatMaxGrams)).toBe(30);
+  });
+
+  it('is unset while calories are', () => {
+    expect(metrics(MACRO_MAN, '').macros).toBeUndefined();
+    expect(metrics({ ...MACRO_MAN, activityLevel: null }).macros).toBe(
+      undefined,
     );
   });
 });

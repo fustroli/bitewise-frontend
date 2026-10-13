@@ -6,10 +6,12 @@ import {
   EBmiCategory,
   EBodyFatCategory,
   ECaloriePace,
+  EMacroPlan,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
 import {
   IBmiBand,
   IBodyFatBand,
+  IMacroShares,
   TBodyMetricsField,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/interfaces';
 
@@ -119,3 +121,39 @@ export const BODY_FAT_DISPLAY_DECIMALS = 1;
 export const CALORIE_DISPLAY_DECIMALS = 0;
 
 export const WEIGHT_DISPLAY_DECIMALS = 1;
+
+/** Energy per gram as calculator.net uses it, kcal. */
+export const MACRO_KCAL_PER_GRAM = { protein: 4.1, carbs: 3.75, fat: 8.8 };
+
+/** Each plan's share of calories, as fractions of 1. */
+export const MACRO_PLANS: Record<EMacroPlan, IMacroShares> = {
+  [EMacroPlan.BALANCED]: { protein: 0.25, carbs: 0.5, fat: 0.25 },
+  [EMacroPlan.LOW_FAT]: { protein: 0.275, carbs: 0.525, fat: 0.2 },
+  [EMacroPlan.LOW_CARB]: { protein: 0.3, carbs: 0.4, fat: 0.3 },
+  [EMacroPlan.HIGH_PROTEIN]: { protein: 0.35, carbs: 0.425, fat: 0.225 },
+};
+
+/** Display order of the plans. */
+export const MACRO_PLAN_ORDER: EMacroPlan[] = [
+  EMacroPlan.BALANCED,
+  EMacroPlan.LOW_FAT,
+  EMacroPlan.LOW_CARB,
+  EMacroPlan.HIGH_PROTEIN,
+];
+
+/**
+ * Bounds of each macro's range. Protein starts at 1 g per kg; carbs end where
+ * the minimum protein and fat leave room.
+ */
+export const MACRO_RANGES = {
+  proteinMinGramsPerKg: 1,
+  proteinMaxShare: 0.35,
+  carbsMinShare: 0.4,
+  fatMinShare: 0.2,
+  fatMaxShare: 0.35,
+};
+
+/** Sugar and saturated fat stay under this share of calories. */
+export const MACRO_LIMIT_SHARE = 0.1;
+
+export const MACRO_DISPLAY_DECIMALS = 0;
