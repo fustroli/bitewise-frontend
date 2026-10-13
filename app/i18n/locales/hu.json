@@ -413,7 +413,23 @@
     "validation": {
       "itemRequired": "Válassz ételt vagy alapanyagot",
       "quantityPositive": "A mennyiségnek 0-nál nagyobbnak kell lennie",
-      "multiplierStep": "0,5-ös lépésekben add meg"
+      "multiplierStep": "0,5-ös lépésekben add meg",
+      "mealPlanRequired": "Válassz egy étrendet"
+    },
+    "load": {
+      "button": "Étrend betöltése",
+      "title": "Étrend betöltése",
+      "description": "Egy étrend ételeit másolja a piszkozatba, mindegyikből egy adagot. Maga az étrend nem változik.",
+      "mealPlan": "Étrend",
+      "placeholder": "Válassz étrendet...",
+      "replaceWarning": "Ez lecseréli a piszkozat {count} sorát.",
+      "loading": "Étrendek betöltése...",
+      "error": "Nem sikerült betölteni az étrendjeidet.",
+      "retry": "Újra",
+      "empty": "Még nincs étrended.",
+      "goToMealPlans": "Ugrás az étrendekhez",
+      "submit": "Betöltés",
+      "loaded": "{name} betöltve"
     }
   },
   "errorBoundary": {

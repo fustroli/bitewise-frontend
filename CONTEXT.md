@@ -27,7 +27,7 @@ A named set of distinct Meals; the same Meal cannot appear twice. Its nutrition 
 _Avoid_: Diet, schedule
 
 **Draft meal plan**:
-A User's single scratchpad day outside their Meal plans (e.g. a cheat day): Meals with a multiplier and Ingredients with a quantity, each distinct. Kept only in the User's browser, never on the backend; its nutrition is compared with their Maintenance calories.
+A User's single scratchpad day outside their Meal plans (e.g. a cheat day): Meals with a multiplier and Ingredients with a quantity, each distinct. Kept only in the User's browser, never on the backend; its nutrition is compared with their Maintenance calories. It can be filled from a Meal plan, as a copy.
 _Avoid_: Test plan, cheat plan
 
 **Comparison**:

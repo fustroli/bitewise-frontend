@@ -413,7 +413,23 @@
     "validation": {
       "itemRequired": "Select a meal or ingredient",
       "quantityPositive": "Quantity must be greater than 0",
-      "multiplierStep": "Use steps of 0.5"
+      "multiplierStep": "Use steps of 0.5",
+      "mealPlanRequired": "Select a meal plan"
+    },
+    "load": {
+      "button": "Load meal plan",
+      "title": "Load a meal plan",
+      "description": "Copy a Meal plan's meals into the draft, one serving each. The Meal plan itself isn't changed.",
+      "mealPlan": "Meal plan",
+      "placeholder": "Select meal plan...",
+      "replaceWarning": "This replaces the {count} line(s) in your draft.",
+      "loading": "Loading meal plans...",
+      "error": "Couldn't load your meal plans.",
+      "retry": "Try again",
+      "empty": "No meal plans yet.",
+      "goToMealPlans": "Go to Meal plans",
+      "submit": "Load",
+      "loaded": "Loaded {name}"
     }
   },
   "errorBoundary": {

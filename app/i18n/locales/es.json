@@ -284,7 +284,23 @@
     "validation": {
       "itemRequired": "Selecciona una comida o un ingrediente",
       "quantityPositive": "La cantidad debe ser mayor que 0",
-      "multiplierStep": "Usa pasos de 0,5"
+      "multiplierStep": "Usa pasos de 0,5",
+      "mealPlanRequired": "Selecciona un plan de comidas"
+    },
+    "load": {
+      "button": "Cargar plan de comidas",
+      "title": "Cargar un plan de comidas",
+      "description": "Copia las comidas de un plan de comidas al borrador, una ración de cada una. El plan de comidas no se modifica.",
+      "mealPlan": "Plan de comidas",
+      "placeholder": "Selecciona un plan de comidas...",
+      "replaceWarning": "Esto reemplaza las {count} línea(s) de tu borrador.",
+      "loading": "Cargando planes de comidas...",
+      "error": "No se pudieron cargar tus planes de comidas.",
+      "retry": "Reintentar",
+      "empty": "Aún no hay planes de comidas.",
+      "goToMealPlans": "Ir a Planes de comidas",
+      "submit": "Cargar",
+      "loaded": "{name} cargado"
     }
   },
   "errorBoundary": {

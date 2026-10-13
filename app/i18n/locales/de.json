@@ -284,7 +284,23 @@
     "validation": {
       "itemRequired": "Wähle eine Mahlzeit oder Zutat",
       "quantityPositive": "Die Menge muss größer als 0 sein",
-      "multiplierStep": "In Schritten von 0,5 angeben"
+      "multiplierStep": "In Schritten von 0,5 angeben",
+      "mealPlanRequired": "Wähle einen Ernährungsplan aus"
+    },
+    "load": {
+      "button": "Ernährungsplan laden",
+      "title": "Ernährungsplan laden",
+      "description": "Kopiert die Mahlzeiten eines Ernährungsplans in den Entwurf, je eine Portion. Der Ernährungsplan selbst bleibt unverändert.",
+      "mealPlan": "Ernährungsplan",
+      "placeholder": "Ernährungsplan auswählen...",
+      "replaceWarning": "Dies ersetzt die {count} Zeile(n) in deinem Entwurf.",
+      "loading": "Ernährungspläne werden geladen...",
+      "error": "Deine Ernährungspläne konnten nicht geladen werden.",
+      "retry": "Erneut versuchen",
+      "empty": "Noch keine Ernährungspläne.",
+      "goToMealPlans": "Zu den Ernährungsplänen",
+      "submit": "Laden",
+      "loaded": "{name} geladen"
     }
   },
   "errorBoundary": {
