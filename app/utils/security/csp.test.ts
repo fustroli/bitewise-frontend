@@ -33,6 +33,17 @@ describe('content security policy', () => {
     );
   });
 
+  it('lets images load from the avatar origin', () => {
+    const policy = contentSecurityPolicy({
+      nonce: 'abc',
+      avatarUrl: 'https://cdn.example.net/',
+    });
+
+    expect(directive(policy, 'img-src')).toBe(
+      "img-src 'self' data: blob: https://cdn.example.net",
+    );
+  });
+
   it('keeps inline styles without a style nonce', () => {
     const policy = contentSecurityPolicy({ nonce: 'abc' });
 

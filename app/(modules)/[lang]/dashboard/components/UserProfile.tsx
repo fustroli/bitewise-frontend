@@ -23,7 +23,7 @@ const UserProfile = () => {
         {user.email}
       </span>
       <Avatar className="size-10 rounded-md">
-        <AvatarImage src="https://github.com/shadcn.png" />
+        <AvatarImage src={user.avatarUrl} />
         <AvatarFallback className="rounded-md">
           {/* Plain img: Radix allows only one AvatarImage per Avatar */}
           <img
