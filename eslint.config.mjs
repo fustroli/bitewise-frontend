@@ -26,7 +26,14 @@ const SHARED = [
 // Which other dashboard modules each module may import. A new module must be
 // registered here, or every file in it fails lint.
 const MODULE_DEPENDENCIES = {
-  'meal-plans': ['meals', '_resource-table', '_nutrition', '_comparison'],
+  'meal-plans': [
+    'meals',
+    '_resource-table',
+    '_nutrition',
+    '_comparison',
+    '_body-metrics',
+    '_user',
+  ],
   meals: ['ingredients', '_resource-table', '_nutrition', '_comparison'],
   ingredients: ['_resource-table', '_comparison'],
   _nutrition: ['ingredients'],

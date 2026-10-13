@@ -332,6 +332,9 @@
       "addTitle": "Add Meal Plan",
       "editTitle": "Edit Meal Plan",
       "deleteTitle": "Delete Meal Plan",
+      "maintenance": "Maintenance",
+      "showMaintenance": "Show Maintenance",
+      "hideMaintenance": "Hide Maintenance",
       "columns": {
         "name": "Name",
         "calories": "Calories",
