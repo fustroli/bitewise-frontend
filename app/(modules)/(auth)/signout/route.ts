@@ -29,8 +29,12 @@ async function signOut(request: NextRequest) {
 
   const target = endSession(cookieStore, { domain: COOKIE_DOMAIN, reason });
 
-  // 303 so a POST continues as a GET to the sign-in page.
-  return NextResponse.redirect(new URL(target, request.url), SEE_OTHER);
+  // 303 so a POST continues as a GET to the sign-in page. Relative Location:
+  // request.url carries the server's bind address (localhost:3000) behind the proxy.
+  return new NextResponse(null, {
+    status: SEE_OTHER,
+    headers: { Location: target },
+  });
 }
 
 export { signOut as GET, signOut as POST };
