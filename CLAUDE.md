@@ -47,6 +47,8 @@ never from the Next server) once, even under Strict Mode, and shows verified /
 invalid-or-expired / failed. While `/users/me` says `emailVerified: false`, the
 dashboard shows `EmailVerificationBanner` with a resend action (429 gets its
 own message; a send or a 429 locks the button for 60 s, client-side only).
+The backend refuses avatar uploads (403) until the email is verified, so
+`BasicInfo` disables its Edit button and says why.
 
 ### Key directories
 

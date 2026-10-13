@@ -10,6 +10,7 @@ import {
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen } from '@testing-library/react';
 
+import BasicInfo from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Profile/BasicInfo';
 import BodyStats from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Profile/BodyStats';
 
 import EmailNotifications from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Notifications/EmailNotifications';
@@ -129,6 +130,29 @@ describe('Profile section cycle', () => {
     });
     expect(screen.queryByRole('button', { name: common.save })).toBeNull();
     expect(screen.getByText('https://facebook.com/changed')).toBeTruthy();
+  });
+});
+
+describe('Avatar', () => {
+  afterEach(cleanup);
+
+  const editButton = () =>
+    screen.getByRole<HTMLButtonElement>('button', { name: common.edit });
+  const lockNotice = () =>
+    screen.queryByText(en.emailVerification.avatarLocked);
+
+  it('is locked until Email verification', () => {
+    renderWithUser(<BasicInfo />, { ...USER, emailVerified: false }, vi.fn());
+
+    expect(editButton().disabled).toBe(true);
+    expect(lockNotice()).not.toBeNull();
+  });
+
+  it('can be edited with a verified email', () => {
+    renderWithUser(<BasicInfo />, { ...USER, emailVerified: true }, vi.fn());
+
+    expect(editButton().disabled).toBe(false);
+    expect(lockNotice()).toBeNull();
   });
 });
 

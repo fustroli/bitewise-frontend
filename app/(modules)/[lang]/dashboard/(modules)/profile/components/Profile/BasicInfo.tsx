@@ -51,8 +51,10 @@ const ImageCropDialog = dynamic(loadImageCropDialog, {
 });
 
 const BasicInfo = () => {
-  const { common, validation } = useDictionary();
+  const { common, validation, emailVerification } = useDictionary();
   const { user, updateAvatar } = useUserContext();
+  // The backend refuses avatars until Email verification; the banner resends.
+  const avatarLocked = user?.emailVerified === false;
 
   const [isEditable, setIsEditable] = useState(false);
   const [imagePreviewUrl, setImagePreviewUrl] = useState<string | null>(null);
@@ -111,6 +113,11 @@ const BasicInfo = () => {
               {user?.personalInformation?.lastName}
             </CardTitle>
             <CardDescription>{user?.email}</CardDescription>
+            {avatarLocked && (
+              <p className="text-sm text-muted-foreground">
+                {emailVerification.avatarLocked}
+              </p>
+            )}
           </CardHeader>
         </div>
       ) : (
@@ -154,7 +161,7 @@ const BasicInfo = () => {
           setImagePreviewUrl(null);
           setIsEditable((prev) => !prev);
         }}
-        disabled={form.formState.isSubmitting}
+        disabled={form.formState.isSubmitting || avatarLocked}
       >
         {!isEditable && <Edit />}
         {isEditable ? common.cancel : common.edit}
