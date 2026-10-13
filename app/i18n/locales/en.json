@@ -78,6 +78,29 @@
         "empty": "Add your sex, height, weight and Activity level to see your calories.",
         "dateOfBirthMissing": "Add your date of birth to see your calories."
       },
+      "macros": {
+        "title": "Macros",
+        "description": "Daily protein, carbs and fat at your maintenance calories",
+        "foodEnergy": "Food energy",
+        "kcalPerDay": "kcal/day",
+        "gramsPerDay": "grams/day",
+        "sugar": "Sugar",
+        "saturatedFat": "Saturated fat",
+        "limit": "<{value} g/day",
+        "macros": {
+          "protein": "Protein",
+          "carbs": "Carbs",
+          "fat": "Fat"
+        },
+        "plans": {
+          "balanced": "Balanced",
+          "lowFat": "Low fat",
+          "lowCarb": "Low carb",
+          "highProtein": "High protein"
+        },
+        "empty": "Add your sex, height, weight and Activity level to see your macros.",
+        "dateOfBirthMissing": "Add your date of birth to see your macros."
+      },
       "addBodyStats": "Add Body stats",
       "addDateOfBirth": "Add date of birth"
     }

@@ -2,6 +2,7 @@ import {
   EBmiCategory,
   EBodyFatCategory,
   ECaloriePace,
+  EMacroPlan,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
 
 import { IBodyStats } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
@@ -68,6 +69,39 @@ export interface ICalories {
   gain: ICalorieTarget[];
 }
 
+/** A macro's share of calories, as a fraction of 1. */
+export interface IMacroShares {
+  protein: number;
+  carbs: number;
+  fat: number;
+}
+
+export interface IMacroAmount {
+  grams: number;
+  kcal: number;
+  percent: number;
+  /** The low end of the macro's range, in grams. */
+  minGrams: number;
+  /** The high end of the macro's range, in grams. */
+  maxGrams: number;
+}
+
+export interface IMacroPlan {
+  plan: EMacroPlan;
+  protein: IMacroAmount;
+  carbs: IMacroAmount;
+  fat: IMacroAmount;
+}
+
+/** The Macro plans for one day of Maintenance calories. */
+export interface IMacros {
+  kcalPerDay: number;
+  plans: IMacroPlan[];
+  /** Grams per day to stay under. */
+  sugarMaxGrams: number;
+  saturatedFatMaxGrams: number;
+}
+
 export interface IBodyMetrics {
   /** Unset while height or weight is missing. */
   bmi?: IBmi;
@@ -78,6 +112,8 @@ export interface IBodyMetrics {
   bodyFat?: IBodyFat;
   /** Unset while any input is missing. */
   calories?: ICalories;
+  /** Unset together with `calories`. */
+  macros?: IMacros;
   /** The inputs still needed, for BMI, body fat and calories alike. */
   missing: TBodyMetricsField[];
 }

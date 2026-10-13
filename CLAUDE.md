@@ -107,9 +107,12 @@ The `_body-metrics` module derives BMI, the BMI category, the healthy weight
 range, Body fat percentage (US Navy), the Body fat category (ACE) with fat and
 lean mass, Maintenance calories (Mifflin-St Jeor × Activity multiplier) and
 Calorie targets (±250/500/1000 kcal) from the User's Body stats, date of
-birth and today, via `bodyMetrics()`, and lists the missing inputs. Body fat
+birth and today, via `bodyMetrics()`, and lists the missing inputs. It also
+splits Maintenance calories into the four Macro plans (Balanced, Low fat, Low
+carb, High protein: grams, kcal, % and range per macro, plus sugar and
+saturated fat caps), using calculator.net's shares and energy per gram. Body fat
 is left unset when the measurements give an implausible result. Nothing is
-stored; the dashboard's BMI, Body fat and Calorie cards read the User from
+stored; the dashboard's BMI, Body fat, Calorie and Macro cards read the User from
 context, so they update after a Profile save, and only format what the module
 returns.
 

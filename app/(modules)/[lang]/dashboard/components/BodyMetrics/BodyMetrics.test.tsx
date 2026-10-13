@@ -3,12 +3,15 @@ import {
   DictionaryProvider,
   TDictionary,
 } from '@/app/providers/dictionary-provider';
+import {
+  EActivityLevel,
+  ESex,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { cleanup, render, screen, within } from '@testing-library/react';
 
 import BodyMetrics from '@/app/(modules)/[lang]/dashboard/components/BodyMetrics';
 import BodyStats from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Profile/BodyStats';
-import { ESex } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 import { IUserActions } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import { ReactNode } from 'react';
@@ -145,5 +148,61 @@ describe('Body fat card', () => {
 
     expect(updateUser).toHaveBeenCalledWith({ bodyStats: { waistCm: 96 } });
     expect(within(bodyFatCard()).getByText('15.7%')).toBeTruthy();
+  });
+});
+
+const macroLabels = en.dashboard.bodyMetrics.macros;
+
+const macroCard = () =>
+  screen
+    .getByText(macroLabels.description)
+    .closest<HTMLElement>('.shadow-soft')!;
+
+describe('Macro card', () => {
+  afterEach(cleanup);
+
+  const WITH_CALORIES = {
+    ...withStats({ activityLevel: EActivityLevel.MODERATE }),
+    personalInformation: { dateOfBirth: '2000-01-15T12:00:00.000Z' },
+  } as IUser;
+
+  it('shows the Balanced plan first and switches plans', async () => {
+    const user = userEvent.setup();
+    renderWithUser(<BodyMetrics />, WITH_CALORIES);
+    const card = within(macroCard());
+
+    expect(card.getByText(macroLabels.sugar)).toBeTruthy();
+    expect(card.getByText(macroLabels.saturatedFat)).toBeTruthy();
+    expect(card.getByText(macroLabels.plans.balanced)).toBeTruthy();
+    const balanced = card.getByRole('tabpanel').textContent;
+
+    await user.click(
+      card.getByRole('tab', { name: macroLabels.plans.highProtein }),
+    );
+
+    expect(card.getByRole('tabpanel').textContent).not.toBe(balanced);
+  });
+
+  it('asks for the Body stats while calories are unavailable', () => {
+    renderWithUser(<BodyMetrics />, MAN);
+    const card = within(macroCard());
+
+    expect(card.getByText(macroLabels.empty)).toBeTruthy();
+    expect(
+      card
+        .getByRole('link', { name: en.dashboard.bodyMetrics.addBodyStats })
+        .getAttribute('href'),
+    ).toBe('/en/dashboard/profile#body-stats');
+  });
+
+  it('asks for the date of birth when only that is missing', () => {
+    renderWithUser(
+      <BodyMetrics />,
+      withStats({ activityLevel: EActivityLevel.MODERATE }),
+    );
+
+    expect(
+      within(macroCard()).getByText(macroLabels.dateOfBirthMissing),
+    ).toBeTruthy();
   });
 });
