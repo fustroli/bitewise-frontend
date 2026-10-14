@@ -189,7 +189,9 @@ describe('Body fat card', () => {
       card(labels.bodyFat.title).getByText(labels.bodyFat.empty),
     ).toBeTruthy();
 
-    await user.click(screen.getByRole('button', { name: en.common.edit }));
+    await user.click(
+      screen.getByRole('button', { name: en.profile.bodyStats.edit }),
+    );
     await user.type(screen.getAllByRole('spinbutton')[3], '96');
     await user.click(screen.getByRole('button', { name: en.common.save }));
 

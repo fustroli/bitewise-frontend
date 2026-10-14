@@ -27,6 +27,8 @@ const PersonalInformation = () => {
     <ProfileSection<TPersonalInfoSchema>
       id={PROFILE_SECTION_IDS.personalInformation}
       title={labels.title}
+      description={labels.description}
+      editLabel={labels.edit}
       createSchema={createSchema}
       toFormValues={toPersonalInfoFormValues}
       toChange={toPersonalInfoChange}

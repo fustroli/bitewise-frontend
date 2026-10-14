@@ -33,6 +33,8 @@ const SocialProfiles = () => {
   return (
     <ProfileSection<TSocialProfilesSchema>
       title={profile.socialProfiles.title}
+      description={profile.socialProfiles.description}
+      editLabel={profile.socialProfiles.edit}
       createSchema={createSchema}
       toFormValues={toSocialProfilesFormValues}
       toChange={toSocialProfilesChange}

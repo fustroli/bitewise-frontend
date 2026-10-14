@@ -203,7 +203,8 @@
     "loading": "Betöltés",
     "profileImage": "Profilkép",
     "crop": "Vágás",
-    "savedSuccessfully": "Sikeres mentés"
+    "savedSuccessfully": "Sikeres mentés",
+    "notSet": "Nincs megadva"
   },
   "validation": {
     "emailInvalid": "Érvénytelen e-mail",
@@ -227,17 +228,22 @@
   "profile": {
     "basic": {
       "cropImage": "Kép vágása",
-      "cropImageDesc": "Állítsa be és vágja le a profilképét"
+      "cropImageDesc": "Állítsa be és vágja le a profilképét",
+      "title": "Profil",
+      "description": "A fotód és a bejelentkezési e-mail-címed.",
+      "email": "E-mail",
+      "changePhoto": "Fotó módosítása"
     },
     "menuOptions": {
-      "profile": "Profilom",
+      "profile": "Profil",
       "security": "Biztonság",
       "preferences": "Beállítások"
     },
     "deleteAccount": {
       "title": "Fiók törlése",
       "description": "Ez a művelet nem vonható vissza. A fiókod véglegesen törlésre kerül, és az adataidat eltávolítjuk a szervereinkről.",
-      "verification": "Biztos vagy benne?"
+      "verification": "Biztos vagy benne?",
+      "rowDescription": "A fiókod és minden adata végleges törlése."
     },
     "personalInformation": {
       "title": "Személyes adatok",
@@ -245,17 +251,19 @@
       "lastName": "Vezetéknév",
       "phoneNumber": "Telefonszám",
       "username": "Felhasználónév",
-      "dob": "Születési dátum"
+      "dob": "Születési dátum",
+      "description": "Nem kötelező adatok rólad.",
+      "edit": "Személyes adatok szerkesztése"
     },
     "bodyStats": {
       "title": "Testadatok",
-      "description": "Ezekből számoljuk a BMI-t és a kalóriákat a vezérlőpulton.",
+      "description": "Ezekből számoljuk a BMI-t, a testzsírt, a kalóriákat és a makrókat a vezérlőpulton.",
       "sex": "Nem (a számításokhoz)",
-      "height": "Magasság (cm)",
-      "weight": "Testsúly (kg)",
-      "neck": "Nyak (cm)",
-      "waist": "Derék (cm)",
-      "hip": "Csípő (cm, nem kötelező)",
+      "height": "Magasság",
+      "weight": "Testsúly",
+      "neck": "Nyak",
+      "waist": "Derék",
+      "hip": "Csípő",
       "hipHint": "Csak nőknél használjuk.",
       "activityLevel": "Aktivitási szint",
       "notSet": "Nincs megadva",
@@ -271,10 +279,17 @@
         "ACTIVE": "Aktív: napi edzés, vagy intenzív edzés heti 3–4 alkalommal",
         "VERY_ACTIVE": "Nagyon aktív: intenzív edzés heti 6–7 alkalommal",
         "EXTRA_ACTIVE": "Rendkívül aktív: nagyon intenzív napi edzés, vagy fizikai munka"
-      }
+      },
+      "viewDashboard": "Vezérlőpult megtekintése",
+      "edit": "Testadatok szerkesztése",
+      "basics": "Alapadatok",
+      "measurements": "Méretek",
+      "womenOnly": "Csak nőknél"
     },
     "socialProfiles": {
-      "title": "Közösségi profilok"
+      "title": "Közösségi profilok",
+      "description": "Linkek a máshol lévő profiljaidhoz.",
+      "edit": "Közösségi profilok szerkesztése"
     },
     "security": {
       "oldPassword": "Régi jelszó",
@@ -282,18 +297,28 @@
       "confirmPassword": "Jelszó megerősítése",
       "changePassword": "Jelszó megváltoztatása",
       "passwordChanged": "Jelszó sikeresen megváltoztatva",
-      "toggleVisibility": "Jelszó láthatóságának váltása"
+      "toggleVisibility": "Jelszó láthatóságának váltása",
+      "emailTitle": "E-mail",
+      "emailDescription": "A cím, amellyel bejelentkezel.",
+      "passwordTitle": "Jelszó",
+      "passwordDescription": "A bejelentkezési jelszavad módosítása."
     },
     "appearance": {
       "language": "Nyelv",
-      "languageDesc": "Alapértelmezett nyelv a vezérlőpult számára",
+      "languageDesc": "A BiteWise nyelve.",
       "english": "Angol",
       "hungarian": "Magyar",
       "theme": "Téma",
-      "themeDesc": "Alapértelmezett téma a vezérlőpult számára",
+      "themeDesc": "Világos, sötét, vagy ahogy az eszközöd be van állítva.",
       "light": "Világos",
       "dark": "Sötét",
       "system": "Rendszer"
+    },
+    "page": {
+      "title": "Fiókbeállítások",
+      "description": "A profilod és a céljaid mögötti adatok kezelése.",
+      "back": "Vissza a vezérlőpultra",
+      "tabs": "Beállítások"
     }
   },
   "resourceTable": {

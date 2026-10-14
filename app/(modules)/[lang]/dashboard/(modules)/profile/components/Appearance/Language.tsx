@@ -1,13 +1,6 @@
 'use client';
 
 import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/app/components/ui/card';
-import {
   LANGUAGE_TEXT_KEYS,
   switchLocalePath,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
@@ -21,6 +14,7 @@ import {
 import { TLocale, locales } from '@/app/i18n/settings';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 
+import SettingsRow from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/SettingsRow';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 
 const Language = () => {
@@ -34,14 +28,16 @@ const Language = () => {
   };
 
   return (
-    <Card>
-      <CardHeader className="space-y-2">
-        <CardTitle>{profile.appearance.language}</CardTitle>
-        <CardDescription>{profile.appearance.languageDesc}</CardDescription>
-      </CardHeader>
-      <CardContent>
+    <SettingsRow
+      title={profile.appearance.language}
+      description={profile.appearance.languageDesc}
+    >
+      <div className="rounded-lg border bg-card p-4 md:p-6">
         <Select value={lang} onValueChange={handleChange}>
-          <SelectTrigger className="w-[180px]">
+          <SelectTrigger
+            className="w-full sm:w-[220px]"
+            aria-label={profile.appearance.language}
+          >
             <SelectValue placeholder={profile.appearance.language} />
           </SelectTrigger>
           <SelectContent>
@@ -52,8 +48,8 @@ const Language = () => {
             ))}
           </SelectContent>
         </Select>
-      </CardContent>
-    </Card>
+      </div>
+    </SettingsRow>
   );
 };
 

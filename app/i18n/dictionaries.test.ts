@@ -22,7 +22,7 @@ describe('isLocale', () => {
 
 describe('getDictionary', () => {
   it.each([
-    ['en', 'Logout'],
+    ['en', 'Sign out'],
     ['hu', 'Kijelentkezés'],
   ])('loads the %s dictionary', async (lang, logout) => {
     const dictionary = await getDictionary(lang);
@@ -37,7 +37,7 @@ describe('getDictionary', () => {
 
       const dictionary = await getDictionary(lang);
 
-      expect(dictionary.dashboard.appbar.logout).toBe('Logout');
+      expect(dictionary.dashboard.appbar.logout).toBe('Sign out');
       expect(warn).not.toHaveBeenCalled();
       warn.mockRestore();
     },

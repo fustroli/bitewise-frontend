@@ -3,7 +3,7 @@ import Theme from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components
 
 const Appearance = () => {
   return (
-    <div className="space-y-8">
+    <div className="flex flex-col">
       <Language />
       <Theme />
     </div>

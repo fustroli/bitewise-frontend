@@ -1,6 +1,5 @@
 'use client';
 
-import { Card, CardContent } from '@/app/components/ui/card';
 import {
   TChangePasswordSchema,
   createChangePasswordSchema,
@@ -11,7 +10,7 @@ import { Form } from '@/app/components/ui/form';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
 import { PASSWORD_RULE_KEYS } from '@/app/utils/password-policy';
 import PasswordInput from '@/app/components/form/PasswordInput';
-import Typography from '@/app/components/Typography';
+import SettingsRow from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/SettingsRow';
 import { changePassword } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { toastResult } from '@/app/utils/helpers/client';
 import { useDictionary } from '@/app/providers/dictionary-provider';
@@ -38,14 +37,17 @@ const ChangePassword = () => {
     if (toastResult(result, profile.security.passwordChanged)) form.reset();
   }
   return (
-    <Card>
-      <CardContent>
+    <SettingsRow
+      title={profile.security.passwordTitle}
+      description={profile.security.passwordDescription}
+    >
+      <div className="rounded-lg border bg-card p-4 md:p-6">
         <Form {...form}>
           <form
-            className="relative flex flex-col gap-8 pt-6 xl:flex-row"
+            className="flex flex-col gap-6 lg:flex-row lg:gap-8"
             onSubmit={form.handleSubmit(onSubmit)}
           >
-            <article className="w-1/2 space-y-6">
+            <article className="flex flex-1 flex-col gap-5">
               <PasswordInput
                 control={form.control}
                 label={profile.security.oldPassword}
@@ -64,21 +66,17 @@ const ChangePassword = () => {
               />
             </article>
 
-            <article className="flex w-1/2 flex-col items-center justify-center">
-              <ul className="list-disc space-y-3">
+            <article className="flex flex-1 flex-col justify-between gap-6">
+              <ul className="list-disc space-y-2 pl-5 text-sm text-secondary-foreground">
                 {PASSWORD_RULE_KEYS.map((key) => (
-                  <li key={key}>
-                    <Typography variant="p" className="font-medium">
-                      {passwordPolicy[key]}
-                    </Typography>
-                  </li>
+                  <li key={key}>{passwordPolicy[key]}</li>
                 ))}
               </ul>
 
               <LoadingButton
                 variant="default"
                 type="submit"
-                className="absolute bottom-0 right-0 flex w-fit justify-end"
+                className="self-end"
                 loading={form.formState.isSubmitting}
               >
                 {profile.security.changePassword}
@@ -86,8 +84,8 @@ const ChangePassword = () => {
             </article>
           </form>
         </Form>
-      </CardContent>
-    </Card>
+      </div>
+    </SettingsRow>
   );
 };
 

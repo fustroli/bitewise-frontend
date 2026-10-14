@@ -3,7 +3,7 @@ import ChangePassword from '@/app/(modules)/[lang]/dashboard/(modules)/profile/c
 
 const Security = () => {
   return (
-    <div className="space-y-8">
+    <div className="flex flex-col">
       <ChangeEmail />
       <ChangePassword />
     </div>

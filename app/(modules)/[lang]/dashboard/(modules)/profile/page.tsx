@@ -5,14 +5,26 @@ import {
   TabsTrigger,
 } from '@/app/components/ui/tabs';
 
+import { ChevronLeft } from 'lucide-react';
 import { EProfileView } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/enum';
 import { IPageProps } from '@/app/utils/interfaces';
+import Link from 'next/link';
 import PageHeader from '@/app/components/layout/PageHeader';
 import Preferences from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Appearance';
 import Profile from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Profile';
 import Security from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Security';
 import SignOutButton from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/SignOutButton';
 import { getDictionary } from '@/app/i18n/dictionaries';
+
+const TABS = [
+  { value: EProfileView.MY_PROFILE, label: 'profile', Content: Profile },
+  { value: EProfileView.SECURITY, label: 'security', Content: Security },
+  {
+    value: EProfileView.PREFERENCES,
+    label: 'preferences',
+    Content: Preferences,
+  },
+] as const;
 
 export default async function Page(props: IPageProps) {
   const { lang } = await props.params;
@@ -21,35 +33,47 @@ export default async function Page(props: IPageProps) {
   return (
     <>
       <PageHeader
-        title={dashboard.sidebar.account}
+        title={profile.page.title}
+        description={profile.page.description}
         actions={<SignOutButton />}
+        mobileActions={null}
+        mobileLeading={
+          <Link
+            href={`/${lang}/dashboard`}
+            aria-label={profile.page.back}
+            className="-ml-2 flex size-11 items-center justify-center rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+          >
+            <ChevronLeft aria-hidden className="size-6" />
+          </Link>
+        }
+        mobileTitle={dashboard.sidebar.account}
       />
-      <section>
-        <Tabs defaultValue={EProfileView.MY_PROFILE}>
-          <TabsList className="">
-            <TabsTrigger value={EProfileView.MY_PROFILE}>
-              {profile.menuOptions.profile}
+      <Tabs defaultValue={EProfileView.MY_PROFILE} className="-mt-4 md:-mt-6">
+        <TabsList
+          aria-label={profile.page.tabs}
+          className="grid h-auto w-full grid-cols-3 gap-1 rounded-md bg-muted p-1 md:flex md:w-auto md:justify-start md:gap-7 md:rounded-none md:border-b md:bg-transparent md:p-0"
+        >
+          {TABS.map(({ value, label }) => (
+            <TabsTrigger
+              key={value}
+              value={value}
+              className="h-9 rounded-[7px] px-2 text-[13px] font-bold text-secondary-foreground data-[state=active]:font-extrabold data-[state=active]:text-foreground data-[state=active]:shadow-sm md:-mb-px md:h-11 md:rounded-none md:border-b-2 md:border-transparent md:px-0.5 md:text-[15px] md:data-[state=active]:border-primary md:data-[state=active]:bg-transparent md:data-[state=active]:shadow-none"
+            >
+              {profile.menuOptions[label]}
             </TabsTrigger>
-            <TabsTrigger value={EProfileView.SECURITY}>
-              {profile.menuOptions.security}
-            </TabsTrigger>
-            <TabsTrigger value={EProfileView.PREFERENCES}>
-              {profile.menuOptions.preferences}
-            </TabsTrigger>
-          </TabsList>
-          <div className="pt-8">
-            <TabsContent value={EProfileView.MY_PROFILE}>
-              <Profile />
-            </TabsContent>
-            <TabsContent value={EProfileView.SECURITY}>
-              <Security />
-            </TabsContent>
-            <TabsContent value={EProfileView.PREFERENCES}>
-              <Preferences />
-            </TabsContent>
-          </div>
-        </Tabs>
-      </section>
+          ))}
+        </TabsList>
+        {TABS.map((tab) => (
+          <TabsContent
+            key={tab.value}
+            value={tab.value}
+            className="mt-8 md:mt-10"
+          >
+            <tab.Content />
+          </TabsContent>
+        ))}
+      </Tabs>
+      <SignOutButton className="md:hidden" />
     </>
   );
 }

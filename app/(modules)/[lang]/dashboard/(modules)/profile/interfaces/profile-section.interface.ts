@@ -3,6 +3,10 @@ import { FieldValues, Path } from 'react-hook-form';
 interface IProfileFieldBase<TValues extends FieldValues> {
   name: Path<TValues>;
   label?: string;
+  /** Fields with the same group are read under its heading. */
+  group?: string;
+  /** Read instead of "Not set" when the value is empty. */
+  emptyText?: string;
 }
 
 interface IProfileTextField<
@@ -26,7 +30,9 @@ interface IProfileNumberField<
   min: number;
   max: number;
   step: number;
-  /** Shown under the label. */
+  /** Read after the value, and shown in the input, e.g. `cm`. */
+  unit?: string;
+  /** Shown under the label while editing. */
   hint?: string;
 }
 

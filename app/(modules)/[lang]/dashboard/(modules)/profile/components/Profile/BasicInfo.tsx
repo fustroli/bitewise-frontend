@@ -1,13 +1,6 @@
 'use client';
 
 import {
-  Card,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '@/app/components/ui/card';
-import { Edit, Upload } from 'lucide-react';
-import {
   TImageSchema,
   createImageSchema,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/validations';
@@ -18,6 +11,8 @@ import { Button } from '@/app/components/ui/button';
 import FileUploadFormField from '@/app/components/form/FileUploadFormField';
 import { Form } from '@/app/components/ui/form';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
+import SettingsRow from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/SettingsRow';
+import { Upload } from 'lucide-react';
 import UserAvatar from '@/app/(modules)/[lang]/dashboard/(modules)/_user/components/UserAvatar';
 import dynamic from 'next/dynamic';
 import { readableAvatarResult } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
@@ -47,7 +42,7 @@ const ImageCropDialog = dynamic(loadImageCropDialog, {
 });
 
 const BasicInfo = () => {
-  const { common, validation, emailVerification } = useDictionary();
+  const { common, validation, emailVerification, profile } = useDictionary();
   const { user, updateAvatar } = useUserContext();
   // The backend refuses avatars until Email verification; the banner resends.
   const avatarLocked = user?.emailVerified === false;
@@ -89,70 +84,80 @@ const BasicInfo = () => {
   };
 
   return (
-    <Card className="relative flex min-h-32 w-full items-center justify-between p-6">
-      {!isEditable ? (
-        <div className="flex items-center">
-          {user && <UserAvatar user={user} className="size-16" />}
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between font-medium">
-              {user?.personalInformation?.firstName}{' '}
-              {user?.personalInformation?.lastName}
-            </CardTitle>
-            <CardDescription>{user?.email}</CardDescription>
-            {avatarLocked && (
-              <p className="text-sm text-muted-foreground">
-                {emailVerification.avatarLocked}
-              </p>
-            )}
-          </CardHeader>
-        </div>
-      ) : (
-        <Form {...form}>
-          <form className="relative" onSubmit={form.handleSubmit(onSubmit)}>
-            <div className="flex items-end gap-4">
-              <FileUploadFormField
-                name="file"
-                control={form.control}
-                label={common.profileImage}
-                accept={ACCEPTED_IMAGE_TYPES.join(',')}
-                changeHandler={handleImageChange}
-              />
-              <LoadingButton
-                type={'submit'}
-                disabled={!imagePreviewUrl}
-                loading={form.formState.isSubmitting}
-              >
-                <Upload /> {common.upload}
-              </LoadingButton>
-              {imagePreviewUrl && (
-                <ImageCropDialog
-                  file={imagePreviewUrl}
-                  onSave={(croppedFile) => {
-                    form.setValue('file', croppedFile);
-                    setImagePreviewUrl(URL.createObjectURL(croppedFile));
-                  }}
-                />
+    <SettingsRow
+      title={profile.basic.title}
+      description={profile.basic.description}
+    >
+      <div className="flex flex-wrap items-center gap-5 rounded-lg border bg-card p-4 md:p-6">
+        {!isEditable ? (
+          <>
+            <UserAvatar user={user} className="size-16 rounded-full text-2xl" />
+            <div className="flex min-w-0 flex-[1_1_200px] flex-col gap-1">
+              <span className="text-[13px] font-bold text-muted-foreground">
+                {profile.basic.email}
+              </span>
+              <span className="break-all text-base font-bold">
+                {user.email}
+              </span>
+              {avatarLocked && (
+                <p className="text-sm text-muted-foreground">
+                  {emailVerification.avatarLocked}
+                </p>
               )}
             </div>
-          </form>
-        </Form>
-      )}
+          </>
+        ) : (
+          <Form {...form}>
+            <form
+              className="flex-[1_1_280px]"
+              onSubmit={form.handleSubmit(onSubmit)}
+            >
+              <div className="flex flex-wrap items-end gap-4">
+                <FileUploadFormField
+                  name="file"
+                  control={form.control}
+                  label={common.profileImage}
+                  accept={ACCEPTED_IMAGE_TYPES.join(',')}
+                  changeHandler={handleImageChange}
+                />
+                <LoadingButton
+                  type={'submit'}
+                  disabled={!imagePreviewUrl}
+                  loading={form.formState.isSubmitting}
+                >
+                  <Upload /> {common.upload}
+                </LoadingButton>
+                {imagePreviewUrl && (
+                  <ImageCropDialog
+                    file={imagePreviewUrl}
+                    onSave={(croppedFile) => {
+                      form.setValue('file', croppedFile);
+                      setImagePreviewUrl(URL.createObjectURL(croppedFile));
+                    }}
+                  />
+                )}
+              </div>
+            </form>
+          </Form>
+        )}
 
-      <Button
-        variant="outline"
-        type={'button'}
-        onClick={() => {
-          // Fetch the cropper while the user picks a file.
-          if (!isEditable) void loadImageCropDialog();
-          setImagePreviewUrl(null);
-          setIsEditable((prev) => !prev);
-        }}
-        disabled={form.formState.isSubmitting || avatarLocked}
-      >
-        {!isEditable && <Edit />}
-        {isEditable ? common.cancel : common.edit}
-      </Button>
-    </Card>
+        <Button
+          variant="outline"
+          size="sm"
+          className="h-10 px-3.5 text-[13px]"
+          type={'button'}
+          onClick={() => {
+            // Fetch the cropper while the user picks a file.
+            if (!isEditable) void loadImageCropDialog();
+            setImagePreviewUrl(null);
+            setIsEditable((prev) => !prev);
+          }}
+          disabled={form.formState.isSubmitting || avatarLocked}
+        >
+          {isEditable ? common.cancel : profile.basic.changePhoto}
+        </Button>
+      </div>
+    </SettingsRow>
   );
 };
 

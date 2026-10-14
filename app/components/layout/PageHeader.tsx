@@ -7,11 +7,14 @@ interface IProps {
   actions?: ReactNode;
   /**
    * Phone width: a 60px app bar with the title and these (icon) actions
-   * replaces the desktop header. Leave out to show `actions` there too.
+   * replaces the desktop header. Leave out to show `actions` there too;
+   * `null` for none.
    */
   mobileActions?: ReactNode;
   /** Phone width: shown before the title, e.g. a back link. */
   mobileLeading?: ReactNode;
+  /** Phone width: a shorter title, e.g. "Account" for "Account settings". */
+  mobileTitle?: string;
 }
 
 /**
@@ -25,17 +28,18 @@ const PageHeader = ({
   actions,
   mobileActions,
   mobileLeading,
+  mobileTitle,
 }: IProps) => (
   <>
     <div className="sticky top-0 z-30 order-first -mx-4 -mt-4 flex h-[60px] items-center justify-between gap-2 border-b bg-card pl-4 pr-2 md:hidden">
       <div className="flex min-w-0 items-center gap-1">
         {mobileLeading}
         <h1 className="truncate text-xl font-extrabold tracking-tight">
-          {title}
+          {mobileTitle ?? title}
         </h1>
       </div>
       <div className="flex shrink-0 items-center gap-1">
-        {mobileActions ?? actions}
+        {mobileActions === undefined ? actions : mobileActions}
       </div>
     </div>
     <header className="order-first hidden flex-wrap items-end justify-between gap-4 md:flex">

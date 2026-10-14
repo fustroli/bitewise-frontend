@@ -1,7 +1,7 @@
 {
   "dashboard": {
     "appbar": {
-      "logout": "Logout"
+      "logout": "Sign out"
     },
     "sidebar": {
       "dashboard": "Dashboard",
@@ -203,7 +203,8 @@
     "loading": "Loading",
     "profileImage": "Profile Image",
     "crop": "Crop",
-    "savedSuccessfully": "Saved successfully"
+    "savedSuccessfully": "Saved successfully",
+    "notSet": "Not set"
   },
   "validation": {
     "emailInvalid": "Invalid email",
@@ -227,37 +228,44 @@
   "profile": {
     "basic": {
       "cropImage": "Crop Image",
-      "cropImageDesc": "Adjust and crop your profile image"
+      "cropImageDesc": "Adjust and crop your profile image",
+      "title": "Profile",
+      "description": "Your photo and sign-in email.",
+      "email": "Email",
+      "changePhoto": "Change photo"
     },
     "menuOptions": {
-      "profile": "My Profile",
+      "profile": "Profile",
       "security": "Security",
       "preferences": "Preferences"
     },
     "deleteAccount": {
-      "title": "Delete Account",
+      "title": "Delete account",
       "description": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
-      "verification": "Are you absolutely sure?"
+      "verification": "Are you absolutely sure?",
+      "rowDescription": "Permanently remove your account and all its data."
     },
     "personalInformation": {
-      "title": "Personal Information",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "phoneNumber": "Phone Number",
+      "title": "Personal information",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phoneNumber": "Phone number",
       "username": "Username",
-      "dob": "Date of Birth"
+      "dob": "Date of birth",
+      "description": "Optional details about you.",
+      "edit": "Edit personal info"
     },
     "bodyStats": {
-      "title": "Body Stats",
-      "description": "Used for your BMI and calories on the dashboard.",
+      "title": "Body stats",
+      "description": "Used for BMI, body fat, calories and macros on your dashboard.",
       "sex": "Sex (for calculations)",
-      "height": "Height (cm)",
-      "weight": "Weight (kg)",
-      "neck": "Neck (cm)",
-      "waist": "Waist (cm)",
-      "hip": "Hip (cm, optional)",
+      "height": "Height",
+      "weight": "Weight",
+      "neck": "Neck",
+      "waist": "Waist",
+      "hip": "Hip",
       "hipHint": "Only used for women.",
-      "activityLevel": "Activity Level",
+      "activityLevel": "Activity level",
       "notSet": "Not set",
       "select": "Select",
       "sexes": {
@@ -271,10 +279,17 @@
         "ACTIVE": "Active: daily exercise, or intense exercise 3–4 times/week",
         "VERY_ACTIVE": "Very active: intense exercise 6–7 times/week",
         "EXTRA_ACTIVE": "Extra active: very intense exercise daily, or a physical job"
-      }
+      },
+      "viewDashboard": "View dashboard",
+      "edit": "Edit body stats",
+      "basics": "Basics",
+      "measurements": "Measurements",
+      "womenOnly": "Women only"
     },
     "socialProfiles": {
-      "title": "Social Profiles"
+      "title": "Social profiles",
+      "description": "Links to your profiles elsewhere.",
+      "edit": "Edit social profiles"
     },
     "security": {
       "oldPassword": "Old Password",
@@ -282,18 +297,28 @@
       "confirmPassword": "Confirm Password",
       "changePassword": "Change Password",
       "passwordChanged": "Password changed successfully",
-      "toggleVisibility": "Toggle password visibility"
+      "toggleVisibility": "Toggle password visibility",
+      "emailTitle": "Email",
+      "emailDescription": "The address you sign in with.",
+      "passwordTitle": "Password",
+      "passwordDescription": "Change the password you sign in with."
     },
     "appearance": {
       "language": "Language",
-      "languageDesc": "Default language for dashboard",
+      "languageDesc": "The language of BiteWise.",
       "english": "English",
       "hungarian": "Hungarian",
       "theme": "Theme",
-      "themeDesc": "Default theme for dashboard",
+      "themeDesc": "Light, dark, or as your device is set.",
       "light": "Light",
       "dark": "Dark",
       "system": "System"
+    },
+    "page": {
+      "title": "Account settings",
+      "description": "Manage your profile and the stats behind your targets.",
+      "back": "Back to dashboard",
+      "tabs": "Settings"
     }
   },
   "resourceTable": {
