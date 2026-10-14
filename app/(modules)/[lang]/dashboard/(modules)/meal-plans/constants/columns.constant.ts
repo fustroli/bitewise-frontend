@@ -1,10 +1,6 @@
 import { IResourceColumn } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
 
+/** Meal plans show as cards; only the name can be sorted by (via the URL). */
 export const MEAL_PLAN_COLUMNS: IResourceColumn[] = [
-  { id: 'name', sortable: true, align: 'justify-start' },
-  { id: 'calories', sortable: false, align: 'justify-end' },
-  { id: 'protein', sortable: false, align: 'justify-end' },
-  { id: 'totalFat', sortable: false, align: 'justify-end' },
-  { id: 'totalCarbohydrates', sortable: false, align: 'justify-end' },
-  { id: 'dietaryFiber', sortable: false, align: 'justify-end' },
+  { id: 'name', sortable: true },
 ];

@@ -1,7 +1,7 @@
 import DraftMealPlan from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftMealPlan';
 import { ILangProps } from '@/app/utils/interfaces';
 import { MAX_LIST_LIMIT } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/constants';
-import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
+import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/constants';
 import { fetchIngredients } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/api';
 import { fetchMeals } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/api';
 

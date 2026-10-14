@@ -9,7 +9,7 @@ import {
 import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
-import { DRAFT_FROM_MEAL_PLAN_PARAM } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
+import { DRAFT_FROM_MEAL_PLAN_PARAM } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/constants';
 import { DraftMealPlanContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/context';
 import { IDraftMealPlanContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
 import LoadMealPlanDialog from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/LoadMealPlanDialog';

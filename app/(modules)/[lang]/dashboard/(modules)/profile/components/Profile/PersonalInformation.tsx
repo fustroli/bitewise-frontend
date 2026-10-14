@@ -13,7 +13,7 @@ import {
   toPersonalInfoFormValues,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
 
-import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
+import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/constants';
 import ProfileSection from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/ProfileSection';
 
 const createSchema = (dictionary: TDictionary) =>

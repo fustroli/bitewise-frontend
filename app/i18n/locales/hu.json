@@ -433,16 +433,8 @@
       "addTitle": "Étrend hozzáadása",
       "editTitle": "Étrend szerkesztése",
       "deleteTitle": "Étrend törlése",
-      "maintenance": "Fenntartó",
-      "showMaintenance": "Fenntartó értékek mutatása",
-      "hideMaintenance": "Fenntartó értékek elrejtése",
       "columns": {
-        "name": "Név",
-        "calories": "Kalória",
-        "protein": "Fehérje",
-        "totalFat": "Zsír (telített)",
-        "totalCarbohydrates": "Szénhidrát (cukor)",
-        "dietaryFiber": "Rost"
+        "name": "Név"
       },
       "fields": {
         "name": "Étrend neve",
@@ -454,7 +446,28 @@
         "mealsRequired": "Legalább egy étel szükséges"
       },
       "description": "Minden étrend egy nap, a napi céljaidhoz mérve.",
-      "compare": "Étrendek összehasonlítása"
+      "compare": "Étrendek összehasonlítása",
+      "card": {
+        "meals": {
+          "one": "{count} étel",
+          "other": "{count} étel"
+        },
+        "openAsDraft": "Megnyitás vázlatként",
+        "calories": "Kalória",
+        "ofKcal": "/ {value} kcal",
+        "ofGrams": "/ {value} g",
+        "onTarget": "Célon belül ({diff} kcal)",
+        "under": "{value} kcal-val a fenntartó alatt",
+        "over": "{value} kcal-val a fenntartó felett",
+        "show": {
+          "one": "{count} étel mutatása",
+          "other": "{count} étel mutatása"
+        },
+        "hide": "Ételek elrejtése",
+        "macros": "F {protein} · Sz {carbs} · Zs {fat}",
+        "noTargets": "Add meg a testadataidat, hogy az étrendeket a napi céljaidhoz mérhesd."
+      },
+      "targets": "Célok: {kcal} kcal · {plan} elosztás"
     }
   },
   "auth": {

@@ -1,10 +1,6 @@
 'use client';
 
 import {
-  BODY_STATS_LIMITS,
-  PROFILE_SECTION_IDS,
-} from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
-import {
   EActivityLevel,
   ESex,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
@@ -17,6 +13,8 @@ import {
   toBodyStatsFormValues,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
 
+import { BODY_STATS_LIMITS } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
+import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/constants';
 import ProfileSection from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/ProfileSection';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 

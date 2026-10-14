@@ -5,7 +5,7 @@ import BmiCard from '@/app/(modules)/[lang]/dashboard/components/Overview/BmiCar
 import BodyFatCard from '@/app/(modules)/[lang]/dashboard/components/Overview/BodyFatCard';
 import CaloriesByGoalCard from '@/app/(modules)/[lang]/dashboard/components/Overview/CaloriesByGoalCard';
 import MacrosCard from '@/app/(modules)/[lang]/dashboard/components/Overview/MacrosCard';
-import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
+import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/constants';
 import Section from '@/app/components/layout/Section';
 import SetupTargets from '@/app/(modules)/[lang]/dashboard/components/Overview/SetupTargets';
 import SummaryTiles from '@/app/(modules)/[lang]/dashboard/components/Overview/SummaryTiles';
