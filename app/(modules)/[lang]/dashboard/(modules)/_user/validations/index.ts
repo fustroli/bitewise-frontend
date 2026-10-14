@@ -35,15 +35,6 @@ export const userChangeSchema = z.object({
     })
     .partial()
     .optional(),
-  notificationSettings: z
-    .object({
-      defaultEmailAddress: z.email(),
-      communicationEmail: z.boolean(),
-      marketingEmail: z.boolean(),
-      securityEmail: z.boolean(),
-    })
-    .partial()
-    .optional(),
   bodyStats: z
     .object({
       sex: z.enum(ESex).nullable(),

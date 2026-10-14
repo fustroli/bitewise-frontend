@@ -149,7 +149,6 @@
     "menuOptions": {
       "profile": "My Profile",
       "security": "Security",
-      "notifications": "Notifications",
       "preferences": "Preferences"
     },
     "deleteAccount": {
@@ -212,19 +211,6 @@
       "light": "Light",
       "dark": "Dark",
       "system": "System"
-    },
-    "notifications": {
-      "defaultEmail": "Default Email Notifications",
-      "defaultEmailDesc": "Choose where you'd like emails to be sent.",
-      "emailNotifications": "Email Notifications",
-      "emailNotificationsDesc": "Get emails to find out what's going on when you're not online.",
-      "communicationEmail": "Communications Email",
-      "communicationEmailDesc": "Receive emails about your account activity.",
-      "marketingEmail": "Marketing Email",
-      "marketingEmailDesc": "Receive emails about new products, features, and more.",
-      "securityEmail": "Security Email",
-      "securityEmailDesc": "Receive emails about your account activity and security.",
-      "updateSuccess": "Notifications updated successfully"
     }
   },
   "resourceTable": {

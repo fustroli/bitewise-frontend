@@ -19,14 +19,6 @@ export interface ISocialProfiles {
   linkedin?: string;
 }
 
-export interface INotificationSettings {
-  /** Where emails are sent; the sign-in email when unset. */
-  defaultEmailAddress?: string;
-  communicationEmail?: boolean;
-  marketingEmail?: boolean;
-  securityEmail?: boolean;
-}
-
 /** Metric, as currently recorded; any field may be unset. */
 export interface IBodyStats {
   sex: ESex | null;
@@ -51,7 +43,6 @@ export interface IUser {
   pendingEmailExpiresAt?: string | null;
   personalInformation?: IPersonalInformation;
   socialProfiles?: ISocialProfiles;
-  notificationSettings?: INotificationSettings;
   bodyStats?: IBodyStats;
   avatarUrl?: string;
 }
@@ -60,7 +51,6 @@ export interface IUser {
 export interface IUserChange {
   personalInformation?: IPersonalInformation;
   socialProfiles?: ISocialProfiles;
-  notificationSettings?: INotificationSettings;
   bodyStats?: Partial<IBodyStats>;
 }
 

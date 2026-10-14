@@ -149,7 +149,6 @@
     "menuOptions": {
       "profile": "Profilom",
       "security": "Biztonság",
-      "notifications": "Értesítések",
       "preferences": "Beállítások"
     },
     "deleteAccount": {
@@ -212,19 +211,6 @@
       "light": "Világos",
       "dark": "Sötét",
       "system": "Rendszer"
-    },
-    "notifications": {
-      "defaultEmail": "Alapértelmezett e-mail értesítések",
-      "defaultEmailDesc": "Válassza ki, hova szeretné, hogy az e-maileket küldjük.",
-      "emailNotifications": "E-mail értesítések",
-      "emailNotificationsDesc": "Kapjon e-maileket, hogy tájékozódjon az online nem elérhető eseményekről.",
-      "communicationEmail": "Kommunikációs e-mail",
-      "communicationEmailDesc": "Kapjon e-maileket a fiókja tevékenységéről.",
-      "marketingEmail": "Marketing e-mail",
-      "marketingEmailDesc": "Kapjon e-maileket az új termékekről, funkciókról és még sok másról.",
-      "securityEmail": "Biztonsági e-mail",
-      "securityEmailDesc": "Kapjon e-maileket a fiókja tevékenységéről és biztonságáról.",
-      "updateSuccess": "Értesítések sikeresen frissítve"
     }
   },
   "resourceTable": {

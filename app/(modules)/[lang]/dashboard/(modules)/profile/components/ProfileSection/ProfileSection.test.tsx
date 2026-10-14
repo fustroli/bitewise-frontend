@@ -12,8 +12,6 @@ import { cleanup, render, screen } from '@testing-library/react';
 
 import BasicInfo from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Profile/BasicInfo';
 import BodyStats from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Profile/BodyStats';
-
-import EmailNotifications from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/Notifications/EmailNotifications';
 import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 import { IUserActions } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 import { ReactNode } from 'react';
@@ -158,38 +156,6 @@ describe('Avatar', () => {
 
     expect(editButton().disabled).toBe(false);
     expect(lockNotice()).toBeNull();
-  });
-});
-
-describe('Email notifications', () => {
-  beforeEach(() => {
-    // Radix Switch measures itself; jsdom has no ResizeObserver.
-    vi.stubGlobal(
-      'ResizeObserver',
-      class {
-        observe() {}
-        unobserve() {}
-        disconnect() {}
-      },
-    );
-  });
-
-  afterEach(() => {
-    cleanup();
-    vi.unstubAllGlobals();
-  });
-
-  it('renders a stored securityEmail: false as off', () => {
-    renderWithUser(
-      <EmailNotifications />,
-      { ...USER, notificationSettings: { securityEmail: false } },
-      vi.fn(),
-    );
-
-    const securitySwitch = screen.getByRole('switch', {
-      name: en.profile.notifications.securityEmail,
-    });
-    expect(securitySwitch.getAttribute('aria-checked')).toBe('false');
   });
 });
 

@@ -45,11 +45,8 @@ A person with a BiteWise account, identified by their sign-in email. Owns their 
 _Avoid_: Account (for the person), member
 
 **Profile**:
-What a User says about themselves: personal information, social profiles, avatar, Body stats, and Notification settings.
+What a User says about themselves: personal information, social profiles, avatar and Body stats.
 _Avoid_: Settings (for the whole page)
-
-**Notification settings**:
-Which kinds of email a User receives, and the default email address they are sent to (the sign-in email unless changed).
 
 **Email verification**:
 Proof that a User controls their sign-in email: opening a single-use link mailed to it (valid 24 hours), or signing in with Google when Google has verified that email. Requesting a new link invalidates earlier ones. Unverified Users can still sign in and use BiteWise.

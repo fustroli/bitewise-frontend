@@ -54,7 +54,6 @@
     "menuOptions": {
       "profile": "Mon Profil",
       "security": "Sécurité",
-      "notifications": "Notifications",
       "preferences": "Préférences"
     },
     "deleteAccount": {
