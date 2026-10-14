@@ -383,14 +383,7 @@
       "editTitle": "Edit meal",
       "deleteTitle": "Delete meal",
       "columns": {
-        "name": "Name",
-        "calories": "Calories",
-        "protein": "Protein",
-        "totalFat": "Fat (Saturated)",
-        "totalCarbohydrates": "Carbs (Sugar)",
-        "dietaryFiber": "Fiber",
-        "quantity": "Quantity",
-        "unit": "Unit"
+        "name": "Name"
       },
       "fields": {
         "name": "Meal name",
@@ -410,7 +403,27 @@
         "ingredientDuplicate": "Each ingredient can be added only once"
       },
       "description": "Totals are calculated from each meal’s ingredients.",
-      "compare": "Compare meals"
+      "compare": "Compare meals",
+      "card": {
+        "ingredients": {
+          "one": "{count} ingredient",
+          "other": "{count} ingredients"
+        },
+        "fiber": "{value} g fiber",
+        "show": {
+          "one": "Show {count} ingredient",
+          "other": "Show {count} ingredients"
+        },
+        "hide": "Hide ingredients",
+        "grams": "{value} g",
+        "pieces": {
+          "one": "{count} piece",
+          "other": "{count} pieces"
+        },
+        "macros": "P {protein} · C {carbs} · F {fat}",
+        "sugar": "sugar {value} g",
+        "saturated": "saturated {value} g"
+      }
     },
     "mealPlans": {
       "title": "Meal plans",

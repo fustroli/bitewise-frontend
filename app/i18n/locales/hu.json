@@ -383,14 +383,7 @@
       "editTitle": "Étel szerkesztése",
       "deleteTitle": "Étel törlése",
       "columns": {
-        "name": "Név",
-        "calories": "Kalória",
-        "protein": "Fehérje",
-        "totalFat": "Zsír (telített)",
-        "totalCarbohydrates": "Szénhidrát (cukor)",
-        "dietaryFiber": "Rost",
-        "quantity": "Mennyiség",
-        "unit": "Egység"
+        "name": "Név"
       },
       "fields": {
         "name": "Étel neve",
@@ -410,7 +403,27 @@
         "ingredientDuplicate": "Minden hozzávaló csak egyszer adható hozzá"
       },
       "description": "Az összesítést az ételek hozzávalóiból számoljuk.",
-      "compare": "Ételek összehasonlítása"
+      "compare": "Ételek összehasonlítása",
+      "card": {
+        "ingredients": {
+          "one": "{count} hozzávaló",
+          "other": "{count} hozzávaló"
+        },
+        "fiber": "{value} g rost",
+        "show": {
+          "one": "{count} hozzávaló mutatása",
+          "other": "{count} hozzávaló mutatása"
+        },
+        "hide": "Hozzávalók elrejtése",
+        "grams": "{value} g",
+        "pieces": {
+          "one": "{count} db",
+          "other": "{count} db"
+        },
+        "macros": "F {protein} · Sz {carbs} · Zs {fat}",
+        "sugar": "cukor {value} g",
+        "saturated": "telített {value} g"
+      }
     },
     "mealPlans": {
       "title": "Étrendek",

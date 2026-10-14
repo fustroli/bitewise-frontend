@@ -42,8 +42,7 @@ const ExpandableCard = ({
       )}
     >
       <div className="flex-1">{header}</div>
-      <CollapsibleContent className="border-t">{children}</CollapsibleContent>
-      <CollapsibleTrigger className="flex min-h-11 w-full items-center justify-center gap-1.5 border-t text-sm font-bold text-primary transition-colors hover:bg-surface-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring">
+      <CollapsibleTrigger className="flex min-h-12 w-full items-center justify-between gap-2 border-t px-5 text-sm font-bold text-primary transition-colors hover:bg-surface-subtle focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring">
         {open ? hideLabel : showLabel}
         <ChevronDown
           aria-hidden
@@ -53,6 +52,7 @@ const ExpandableCard = ({
           )}
         />
       </CollapsibleTrigger>
+      <CollapsibleContent>{children}</CollapsibleContent>
     </Collapsible>
   );
 };
