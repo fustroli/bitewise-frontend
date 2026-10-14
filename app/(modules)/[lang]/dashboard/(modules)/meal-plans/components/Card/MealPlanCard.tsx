@@ -1,4 +1,4 @@
-import { formatAmount, interpolate, pluralize } from '@/app/utils/helpers';
+import { formatAmount, pluralize } from '@/app/utils/helpers';
 import {
   mealNutrition,
   mealPlanNutrition,
@@ -10,6 +10,7 @@ import ExpandableCard from '@/app/components/ExpandableCard';
 import { IMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
 import { IResourceRowContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
 import Link from 'next/link';
+import MacroAmounts from '@/app/components/nutrition/MacroAmounts';
 import MealPlanTargets from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/Card/MealPlanTargets';
 
 interface IProps extends IResourceRowContext {
@@ -26,6 +27,7 @@ const MealPlanCard = ({
   bodyStatsHref,
 }: IProps) => {
   const labels = dictionary.resources.mealPlans.card;
+  const macroNames = dictionary.dashboard.bodyMetrics.macros.macros;
   const count = mealPlan.meals.length;
   const amount = (value: number) => formatAmount(value, lang);
   const mealsHref = `/${lang}/dashboard/meals`;
@@ -89,13 +91,14 @@ const MealPlanCard = ({
                 </Link>
               </span>
               <span className="flex items-center gap-4">
-                <span className="text-xs text-muted-foreground">
-                  {interpolate(labels.macros, {
+                <MacroAmounts
+                  amounts={{
                     protein: amount(nutrition.protein),
                     carbs: amount(nutrition.totalCarbohydrates),
                     fat: amount(nutrition.totalFat),
-                  })}
-                </span>
+                  }}
+                  names={macroNames}
+                />
                 <span className="min-w-[76px] text-right font-extrabold">
                   {formatAmount(nutrition.calories, lang, 0)} kcal
                 </span>

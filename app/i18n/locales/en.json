@@ -502,7 +502,6 @@
           "other": "Show {count} meals"
         },
         "hide": "Hide meals",
-        "macros": "P {protein} · C {carbs} · F {fat}",
         "noTargets": "Add your body stats to compare plans with your daily targets."
       },
       "targets": "Targets: {kcal} kcal ({target}) · {plan} split"

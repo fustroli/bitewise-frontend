@@ -502,7 +502,6 @@
           "other": "{count} étel mutatása"
         },
         "hide": "Ételek elrejtése",
-        "macros": "F {protein} · Sz {carbs} · Zs {fat}",
         "noTargets": "Add meg a testadataidat, hogy az étrendeket a napi céljaidhoz mérhesd."
       },
       "targets": "Célok: {kcal} kcal ({target}) · {plan} elosztás"
