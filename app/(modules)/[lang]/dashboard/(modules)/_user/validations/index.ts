@@ -4,6 +4,8 @@ import {
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/constants';
 import {
   EActivityLevel,
+  ECalorieTarget,
+  EMacroPlan,
   ESex,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 
@@ -44,6 +46,13 @@ export const userChangeSchema = z.object({
       waistCm: measurement,
       hipCm: measurement,
       activityLevel: z.enum(EActivityLevel).nullable(),
+    })
+    .partial()
+    .optional(),
+  targets: z
+    .object({
+      calorieTarget: z.enum(ECalorieTarget).nullable(),
+      macroPlan: z.enum(EMacroPlan).nullable(),
     })
     .partial()
     .optional(),

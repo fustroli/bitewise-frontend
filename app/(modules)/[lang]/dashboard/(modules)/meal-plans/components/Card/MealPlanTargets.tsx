@@ -14,10 +14,11 @@ import { MacroSwatch } from '@/app/components/nutrition/MacroLegend';
 import MacroValue from '@/app/components/nutrition/MacroValue';
 import ProgressVsTarget from '@/app/components/display/ProgressVsTarget';
 import { calorieGap } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/helpers';
+import { calorieTargetName } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/helpers';
 import { cn } from '@/app/lib';
 import { progressPercent } from '@/app/utils/helpers';
+import { useDailyTargets } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/hooks';
 import { useDictionary } from '@/app/providers/dictionary-provider';
-import { useMaintenanceTargets } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/hooks';
 
 const MACROS = [
   { macro: 'protein', nutrient: 'protein', bar: 'bg-protein' },
@@ -33,13 +34,14 @@ interface IProps {
 
 /**
  * A Meal plan's day against the User's targets: calories (green within
- * ±150 kcal of Maintenance) and each macro. Plain totals without targets.
+ * ±150 kcal of the Calorie target) and each macro. Plain totals without
+ * targets.
  */
 const MealPlanTargets = ({ total, lang, bodyStatsHref }: IProps) => {
   const { resources, dashboard } = useDictionary();
   const labels = resources.mealPlans.card;
   const macroNames = dashboard.bodyMetrics.macros.macros;
-  const targets = useMaintenanceTargets();
+  const targets = useDailyTargets();
   const grams = (value: number) => formatAmount(value, lang, 0);
   const kcal = grams(total.calories);
 
@@ -103,7 +105,16 @@ const MealPlanTargets = ({ total, lang, bodyStatsHref }: IProps) => {
           signDisplay: 'exceptZero',
         }),
       })
-    : interpolate(diff < 0 ? labels.under : labels.over, { value: gap });
+    : targets.target.kgPerWeek === 0
+      ? interpolate(diff < 0 ? labels.under : labels.over, { value: gap })
+      : interpolate(diff < 0 ? labels.underTarget : labels.overTarget, {
+          value: gap,
+          target: calorieTargetName(
+            targets.target,
+            dashboard.bodyMetrics.calories.targetNames,
+            lang,
+          ),
+        });
 
   return (
     <div className="flex flex-wrap gap-x-8 gap-y-6">

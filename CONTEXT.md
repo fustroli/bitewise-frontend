@@ -27,7 +27,7 @@ A named set of distinct Meals; the same Meal cannot appear twice. Its nutrition 
 _Avoid_: Diet, schedule
 
 **Draft meal plan**:
-A User's single scratchpad day outside their Meal plans (e.g. a cheat day): Meals with a multiplier and Ingredients with a quantity, each distinct. Kept only in the User's browser, never on the backend; its nutrition is compared with their Maintenance calories. It can be filled from a Meal plan, as a copy.
+A User's single scratchpad day outside their Meal plans (e.g. a cheat day): Meals with a multiplier and Ingredients with a quantity, each distinct. Kept only in the User's browser, never on the backend; its nutrition is compared with their Calorie target. It can be filled from a Meal plan, as a copy.
 _Avoid_: Test plan, cheat plan
 
 **Comparison**:
@@ -83,9 +83,9 @@ The daily calories that keep a User's weight stable, given their Body stats, age
 _Avoid_: TDEE, BMR
 
 **Calorie target**:
-Maintenance calories shifted for a weekly weight change: lose or gain 0.25, 0.5 or 1 kg.
-_Avoid_: Calorie goal, calorie budget
+Maintenance calories shifted for a weekly weight change: lose or gain 0.25, 0.5 or 1 kg, or Maintenance itself (no offset). A User picks one; it is stored on the backend and defaults to Maintenance. Meal plans, the Draft meal plan and the dashboard compare a day's calories with it.
+_Avoid_: Calorie goal, calorie budget, benchmark
 
 **Macro plan**:
-A named split of Maintenance calories into protein, carbs and fat: Balanced, Low fat, Low carb or High protein. A target, not a measurement (unlike Nutrition). Shown as grams per day, kcal and share of calories, each with a range.
+A named split of the User's Calorie target into protein, carbs and fat: Balanced, Low fat, Low carb or High protein. A target, not a measurement (unlike Nutrition). Shown as grams per day, kcal and share of calories, each with a range. A User picks one; it is stored on the backend and defaults to Balanced.
 _Avoid_: Macro calculator, diet

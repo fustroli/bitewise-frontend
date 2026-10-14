@@ -35,6 +35,14 @@
           "average": "Moyenne",
           "obese": "Obésité"
         }
+      },
+      "calories": {
+        "targetNames": {
+          "maintenance": "Maintien",
+          "lose": "Perdre {kg} kg/sem",
+          "gain": "Prendre {kg} kg/sem"
+        },
+        "belowSafeMinimum": "Sous le minimum sûr de {min} kcal/jour"
       }
     }
   },
@@ -315,6 +323,7 @@
     "maintenance": {
       "kcal": "kcal",
       "comparedWith": "par rapport à vos calories de maintien ({maintenance} kcal/jour)",
+      "comparedWithTarget": "par rapport à votre objectif calorique, {target} ({kcal} kcal/jour)",
       "missing": "Ajoutez vos données corporelles et votre date de naissance pour comparer le brouillon à vos calories de maintien.",
       "completeProfile": "Compléter le profil"
     },

@@ -1,4 +1,4 @@
-/** A plan's calories this close to Maintenance count as on target, kcal. */
+/** A day's calories this close to the Calorie target count as on target, kcal. */
 export const ON_TARGET_KCAL = 150;
 
 /**

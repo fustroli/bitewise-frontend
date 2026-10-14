@@ -1,5 +1,6 @@
 import {
   IEmailChangeRequest,
+  ITargets,
   IUser,
   IUserChange,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
@@ -19,6 +20,11 @@ export interface IUserActions {
 /** On a successful update, `user` becomes the updated User. */
 export interface IUserContext extends IUserActions {
   user: IUser;
+  /**
+   * Saves a pick of targets, applied to `user` at once and undone if the
+   * save fails.
+   */
+  updateTargets: (change: Partial<ITargets>) => Promise<TApiResult<IUser>>;
 }
 
 export const UserContext = React.createContext<IUserContext | null>(null);

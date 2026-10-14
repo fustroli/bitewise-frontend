@@ -63,10 +63,13 @@
       },
       "calories": {
         "title": "Kalória cél szerint",
+        "pick": "Kattints egy sorra a kalóriacélod beállításához.",
         "kcalPerDay": "kcal/nap",
         "kgPerWeek": "{value} kg/hét",
         "lose": "Fogyás",
         "gain": "Hízás",
+        "maintenance": "Fenntartó",
+        "maintenanceHint": "Megtartja a jelenlegi testsúlyodat",
         "loseTargets": {
           "mild": "Enyhe fogyás",
           "normal": "Fogyás",
@@ -77,6 +80,12 @@
           "normal": "Hízás",
           "fast": "Gyors hízás"
         },
+        "targetNames": {
+          "maintenance": "Fenntartó",
+          "lose": "Fogyás {kg} kg/hét",
+          "gain": "Hízás {kg} kg/hét"
+        },
+        "picked": "A célod",
         "belowSafeMinimum": "A biztonságos minimum ({min} kcal/nap) alatt",
         "empty": "Adja meg a nemét, magasságát, testsúlyát és aktivitási szintjét a kalóriák megtekintéséhez.",
         "dateOfBirthMissing": "Adja meg a születési dátumát a kalóriák megtekintéséhez.",
@@ -86,6 +95,7 @@
       },
       "macros": {
         "title": "Makrók fenntartó kalórián",
+        "titleAtTarget": "Makrók a célodon ({target})",
         "gramsPerDay": "g/nap",
         "limit": "< {value} g/nap",
         "macros": {
@@ -95,9 +105,9 @@
         },
         "plans": {
           "balanced": "Kiegyensúlyozott",
-          "lowFat": "Alacsony zsírtartalmú",
-          "lowCarb": "Alacsony szénhidráttartalmú",
-          "highProtein": "Magas fehérjetartalmú"
+          "low_fat": "Alacsony zsírtartalmú",
+          "low_carb": "Alacsony szénhidráttartalmú",
+          "high_protein": "Magas fehérjetartalmú"
         },
         "empty": "Add meg a nemed, magasságod, testsúlyod és aktivitási szinted a makrók megtekintéséhez.",
         "dateOfBirthMissing": "Add meg a születési dátumod a makrók megtekintéséhez.",
@@ -117,6 +127,7 @@
       "pending": "Megjelenik, amint megadod a testadataidat.",
       "maintenance": "Fenntartó kalória",
       "maintenanceHint": "Megtartja a jelenlegi testsúlyodat",
+      "calorieTarget": "Kalóriacél",
       "protein": "Fehérjecél",
       "proteinHint": "{plan} makróelosztás",
       "gramsPerDay": "g/nap",
@@ -484,6 +495,8 @@
         "onTarget": "Célon belül ({diff} kcal)",
         "under": "{value} kcal-val a fenntartó alatt",
         "over": "{value} kcal-val a fenntartó felett",
+        "underTarget": "{value} kcal-val a cél alatt ({target})",
+        "overTarget": "{value} kcal-val a cél felett ({target})",
         "show": {
           "one": "{count} étel mutatása",
           "other": "{count} étel mutatása"
@@ -492,7 +505,7 @@
         "macros": "F {protein} · Sz {carbs} · Zs {fat}",
         "noTargets": "Add meg a testadataidat, hogy az étrendeket a napi céljaidhoz mérhesd."
       },
-      "targets": "Célok: {kcal} kcal · {plan} elosztás"
+      "targets": "Célok: {kcal} kcal ({target}) · {plan} elosztás"
     }
   },
   "auth": {
@@ -588,6 +601,7 @@
     "maintenance": {
       "kcal": "kcal",
       "comparedWith": "a szinttartó kalóriádhoz képest ({maintenance} kcal/nap)",
+      "comparedWithTarget": "a kalóriacélodhoz képest, {target} ({kcal} kcal/nap)",
       "missing": "Add meg a testadataidat és a születési dátumodat, hogy összevethesd a vázlatot a szinttartó kalóriáddal.",
       "completeProfile": "Profil kiegészítése"
     },

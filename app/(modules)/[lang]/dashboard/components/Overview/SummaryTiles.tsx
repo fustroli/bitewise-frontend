@@ -3,6 +3,7 @@ import {
   IMacroPlan,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/interfaces';
 import {
+  calorieTargetName,
   formatBmi,
   formatBodyFat,
   formatCalories,
@@ -10,6 +11,7 @@ import {
   formatWeight,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/helpers';
 
+import BelowSafeMinimum from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/components/BelowSafeMinimum';
 import PlaceholderTile from '@/app/components/display/PlaceholderTile';
 import StatTile from '@/app/components/display/StatTile';
 import { interpolate } from '@/app/utils/helpers';
@@ -24,7 +26,10 @@ interface IProps {
 export const SUMMARY_GRID_CLASS =
   'grid grid-cols-2 gap-2.5 md:grid-cols-[repeat(auto-fit,minmax(230px,1fr))] md:gap-4';
 
-/** Maintenance, protein, BMI and body fat; a dashed tile for each unknown. */
+/**
+ * The Calorie target, protein, BMI and body fat; a dashed tile for each
+ * unknown.
+ */
 const SummaryTiles = ({ metrics, plan, locale }: IProps) => {
   const { dashboard } = useDictionary();
   const labels = dashboard.summary;
@@ -35,10 +40,31 @@ const SummaryTiles = ({ metrics, plan, locale }: IProps) => {
     <div className={SUMMARY_GRID_CLASS}>
       {calories ? (
         <StatTile
-          label={labels.maintenance}
-          value={formatCalories(calories.maintenance, locale)}
+          label={
+            calories.target.kgPerWeek === 0
+              ? labels.maintenance
+              : labels.calorieTarget
+          }
+          value={formatCalories(calories.target.kcalPerDay, locale)}
           unit={bodyMetrics.calories.kcalPerDay}
-          hint={labels.maintenanceHint}
+          hint={
+            <span className="flex flex-col gap-1.5">
+              {calories.target.kgPerWeek === 0
+                ? labels.maintenanceHint
+                : calorieTargetName(
+                    calories.target,
+                    bodyMetrics.calories.targetNames,
+                    locale,
+                  )}
+              {calories.target.belowSafeMinimum && (
+                <BelowSafeMinimum
+                  as="span"
+                  safeMinimum={calories.safeMinimum}
+                  locale={locale}
+                />
+              )}
+            </span>
+          }
         />
       ) : (
         <PlaceholderTile

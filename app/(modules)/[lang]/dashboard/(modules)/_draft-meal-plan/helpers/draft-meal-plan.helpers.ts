@@ -21,7 +21,6 @@ import {
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { EMPTY_NUTRITION } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
 import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
-import { ICalories } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/interfaces';
 import { INutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/interfaces';
 import { formatCalories } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/helpers';
 
@@ -120,11 +119,7 @@ export const draftNutrition = (
 ): INutrition =>
   sumNutrition(lines.map((line) => draftLineNutrition(line, sources)));
 
-/** kcal over (positive) or under (negative) Maintenance calories; unset without them. */
-export const maintenanceDelta = (kcal: number, calories?: ICalories) =>
-  calories ? kcal - calories.maintenance : undefined;
-
-/** Signed and rounded like Maintenance calories, e.g. `+620` or `-150`. */
+/** Signed and rounded like a Calorie target, e.g. `+620` or `-150`. */
 export const formatCalorieDelta = (delta: number, locale: string) => {
   const rounded = Math.round(delta);
   return `${rounded > 0 ? '+' : ''}${formatCalories(rounded, locale)}`;

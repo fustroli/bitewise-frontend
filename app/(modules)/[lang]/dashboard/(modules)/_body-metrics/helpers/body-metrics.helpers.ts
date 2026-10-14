@@ -22,6 +22,7 @@ import {
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/constants';
 import {
   EActivityLevel,
+  ECalorieTarget,
   ESex,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import {
@@ -35,12 +36,17 @@ import {
   ICalories,
   IMacroAmount,
   IMacros,
+  IPacedCalorieTarget,
   TBodyMetricsField,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/interfaces';
+
+import { interpolate } from '@/app/utils/helpers';
 
 const PERCENT = 100;
 
 const DIRECTION = { lose: -1, gain: 1 } as const;
+
+type TDirection = keyof typeof DIRECTION;
 
 /** Whole years from `dateOfBirth` to `today`, both as local calendar days. */
 export const ageOn = (dateOfBirth: Date, today: Date) => {
@@ -129,6 +135,7 @@ const computeCalories = (
   weightKg: number,
   activityLevel: EActivityLevel,
   age: number,
+  picked: ECalorieTarget,
 ): ICalories => {
   const bmr =
     BMR.perKg * weightKg +
@@ -138,26 +145,45 @@ const computeCalories = (
   const maintenance = bmr * ACTIVITY_MULTIPLIERS[activityLevel];
   const safeMinimum = SAFE_MINIMUM_CALORIES[sex];
 
-  const targets = (
-    direction: (typeof DIRECTION)[keyof typeof DIRECTION],
-  ): ICalorieTarget[] =>
-    CALORIE_PACES.map(({ pace, kgPerWeek, kcalPerDay }) => {
-      const target = maintenance + direction * kcalPerDay;
+  const calorieTarget = (
+    target: ECalorieTarget,
+    kgPerWeek: number,
+    kcalPerDay: number,
+  ): ICalorieTarget => ({
+    target,
+    kgPerWeek,
+    kcalPerDay,
+    percentOfMaintenance: (kcalPerDay / maintenance) * PERCENT,
+    belowSafeMinimum: kcalPerDay < safeMinimum,
+  });
 
-      return {
-        pace,
-        kgPerWeek: direction * kgPerWeek,
-        kcalPerDay: target,
-        percentOfMaintenance: (target / maintenance) * PERCENT,
-        belowSafeMinimum: target < safeMinimum,
-      };
-    });
+  const targets = (direction: TDirection): IPacedCalorieTarget[] =>
+    CALORIE_PACES.map((pace) => ({
+      pace: pace.pace,
+      ...calorieTarget(
+        pace[direction],
+        DIRECTION[direction] * pace.kgPerWeek,
+        maintenance + DIRECTION[direction] * pace.kcalPerDay,
+      ),
+    }));
+
+  const maintenanceTarget = calorieTarget(
+    ECalorieTarget.MAINTENANCE,
+    0,
+    maintenance,
+  );
+  const lose = targets('lose');
+  const gain = targets('gain');
 
   return {
     maintenance,
     safeMinimum,
-    lose: targets(DIRECTION.lose),
-    gain: targets(DIRECTION.gain),
+    maintenanceTarget,
+    lose,
+    gain,
+    target:
+      [...lose, ...gain].find(({ target }) => target === picked) ??
+      maintenanceTarget,
   };
 };
 
@@ -204,13 +230,14 @@ const computeMacros = (kcal: number, weightKg: number): IMacros => {
 
 /**
  * BMI, body fat and Calorie targets from the User's Body stats and date of
- * birth, at
- * full precision. Whatever can't be computed yet is left unset and its
- * inputs are listed in `missing`.
+ * birth, at full precision, with the Macro plans at the picked Calorie
+ * target. Whatever can't be computed yet is left unset and its inputs are
+ * listed in `missing`.
  */
 export const bodyMetrics = ({
   bodyStats = {},
   dateOfBirth,
+  calorieTarget,
   today,
 }: IBodyMetricsInput): IBodyMetrics => {
   const { sex, heightCm, weightKg, neckCm, waistCm, hipCm, activityLevel } =
@@ -240,6 +267,7 @@ export const bodyMetrics = ({
           weightKg,
           activityLevel,
           ageOn(birthDay(dateOfBirth), today),
+          calorieTarget ?? ECalorieTarget.MAINTENANCE,
         )
       : undefined;
 
@@ -250,7 +278,7 @@ export const bodyMetrics = ({
         ? computeBodyFat({ sex, heightCm, weightKg, neckCm, waistCm, hipCm })
         : undefined,
     calories,
-    macros: calories && computeMacros(calories.maintenance, weightKg),
+    macros: calories && computeMacros(calories.target.kcalPerDay, weightKg),
     missing,
   };
 };
@@ -312,3 +340,15 @@ export const formatGrams = (grams: number, locale: string) =>
 /** Signed, e.g. `-0.25` or `+1` */
 export const formatKgPerWeek = (kgPerWeek: number, locale: string) =>
   kgPerWeek.toLocaleString(locale, { signDisplay: 'always' });
+
+/** A Calorie target's name in copy, e.g. `Maintenance` or `Lose 0.5 kg/wk`. */
+export const calorieTargetName = (
+  { kgPerWeek }: ICalorieTarget,
+  names: { maintenance: string; lose: string; gain: string },
+  locale: string,
+) => {
+  if (kgPerWeek === 0) return names.maintenance;
+  return interpolate(kgPerWeek < 0 ? names.lose : names.gain, {
+    kg: Math.abs(kgPerWeek).toLocaleString(locale),
+  });
+};

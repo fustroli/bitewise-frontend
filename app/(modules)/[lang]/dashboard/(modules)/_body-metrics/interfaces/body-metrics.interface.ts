@@ -2,8 +2,11 @@ import {
   EBmiCategory,
   EBodyFatCategory,
   ECaloriePace,
-  EMacroPlan,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
+import {
+  ECalorieTarget,
+  EMacroPlan,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 
 import { IBodyStats } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 
@@ -12,6 +15,8 @@ export interface IBodyMetricsInput {
   bodyStats?: Partial<IBodyStats>;
   /** ISO date-time; only its UTC calendar date is meaningful. */
   dateOfBirth?: string;
+  /** The User's pick; Maintenance when unset. */
+  calorieTarget?: ECalorieTarget | null;
   today: Date;
 }
 
@@ -53,20 +58,29 @@ export interface IBmi {
 }
 
 export interface ICalorieTarget {
-  pace: ECaloriePace;
-  /** Signed: negative to lose weight, positive to gain it. */
+  target: ECalorieTarget;
+  /** Signed: negative to lose weight, positive to gain it; 0 for Maintenance. */
   kgPerWeek: number;
   kcalPerDay: number;
   percentOfMaintenance: number;
   belowSafeMinimum: boolean;
 }
 
+/** A Calorie target that loses or gains weight. */
+export interface IPacedCalorieTarget extends ICalorieTarget {
+  pace: ECaloriePace;
+}
+
 export interface ICalories {
   maintenance: number;
   /** The safe minimum for the User's sex, in kcal/day. */
   safeMinimum: number;
-  lose: ICalorieTarget[];
-  gain: ICalorieTarget[];
+  /** Maintenance calories as a Calorie target, with no offset. */
+  maintenanceTarget: ICalorieTarget;
+  lose: IPacedCalorieTarget[];
+  gain: IPacedCalorieTarget[];
+  /** The User's picked Calorie target. */
+  target: ICalorieTarget;
 }
 
 /** A macro's share of calories, as a fraction of 1. */
@@ -93,7 +107,7 @@ export interface IMacroPlan {
   fat: IMacroAmount;
 }
 
-/** The Macro plans for one day of Maintenance calories. */
+/** The Macro plans for one day at the picked Calorie target. */
 export interface IMacros {
   kcalPerDay: number;
   plans: IMacroPlan[];

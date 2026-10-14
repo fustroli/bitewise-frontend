@@ -1,6 +1,7 @@
 'use client';
 
 import {
+  ICalories,
   IMacroPlan,
   IMacros,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/interfaces';
@@ -15,13 +16,15 @@ import {
   SelectValue,
 } from '@/app/components/ui/select';
 import {
+  calorieTargetName,
   formatGrams,
   formatPercent,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/helpers';
 
+import BelowSafeMinimum from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/components/BelowSafeMinimum';
 import { Card } from '@/app/components/ui/card';
 import CardHeading from '@/app/(modules)/[lang]/dashboard/components/Overview/CardHeading';
-import { EMacroPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
+import { EMacroPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import MacroBar from '@/app/components/nutrition/MacroBar';
 import { MacroSwatch } from '@/app/components/nutrition/MacroLegend';
 import SubtleStat from '@/app/components/display/SubtleStat';
@@ -34,6 +37,8 @@ const PERCENT = 100;
 
 interface IProps {
   macros?: IMacros;
+  /** Holds the Calorie target `macros` split; set whenever `macros` is. */
+  calories?: ICalories;
   /** The picked plan; set whenever `macros` is. */
   plan?: IMacroPlan;
   onPlanChange: (plan: EMacroPlan) => void;
@@ -41,16 +46,22 @@ interface IProps {
   locale: string;
 }
 
-/** The picked Macro plan at Maintenance calories, with the sugar and fat caps. */
+/**
+ * The picked Macro plan at the picked Calorie target, with the sugar and fat
+ * caps.
+ */
 const MacrosCard = ({
   macros,
+  calories,
   plan,
   onPlanChange,
   missing,
   locale,
 }: IProps) => {
-  const labels = useDictionary().dashboard.bodyMetrics.macros;
+  const { macros: labels, calories: calorieLabels } =
+    useDictionary().dashboard.bodyMetrics;
   const selectId = useId();
+  const target = calories?.target;
 
   const ofEnergy = (percent: number) =>
     interpolate(labels.ofEnergy, { percent: formatPercent(percent, locale) });
@@ -60,7 +71,17 @@ const MacrosCard = ({
   return (
     <Card className="flex flex-col gap-4 p-4 md:gap-5 md:p-6">
       <CardHeading
-        title={labels.title}
+        title={
+          target && target.kgPerWeek !== 0
+            ? interpolate(labels.titleAtTarget, {
+                target: calorieTargetName(
+                  target,
+                  calorieLabels.targetNames,
+                  locale,
+                ),
+              })
+            : labels.title
+        }
         aside={
           macros &&
           plan && (
@@ -95,6 +116,12 @@ const MacrosCard = ({
       />
       {macros && plan ? (
         <>
+          {calories?.target.belowSafeMinimum && (
+            <BelowSafeMinimum
+              safeMinimum={calories.safeMinimum}
+              locale={locale}
+            />
+          )}
           <MacroBar
             heightClassName="h-3 md:h-3.5"
             shares={{

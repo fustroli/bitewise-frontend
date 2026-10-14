@@ -4,7 +4,6 @@ import {
   draftNutrition,
   draftStorageKey,
   formatCalorieDelta,
-  maintenanceDelta,
   mealPlanDraft,
   parseDraft,
   resolveDraft,
@@ -20,7 +19,6 @@ import { describe, expect, it } from 'vitest';
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { EMPTY_NUTRITION } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
 import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
-import { ICalories } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/interfaces';
 import { IDraftSources } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
@@ -212,19 +210,6 @@ describe('draftNutrition', () => {
 
   it('is all zeros without lines', () => {
     expect(draftNutrition([], SOURCES)).toEqual(EMPTY_NUTRITION);
-  });
-});
-
-describe('maintenanceDelta', () => {
-  const calories = { maintenance: 2200 } as ICalories;
-
-  it('is the kcal over or under Maintenance calories', () => {
-    expect(maintenanceDelta(2820, calories)).toBe(620);
-    expect(maintenanceDelta(2050, calories)).toBe(-150);
-  });
-
-  it('is unset without Maintenance calories', () => {
-    expect(maintenanceDelta(2820)).toBeUndefined();
   });
 });
 

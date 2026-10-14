@@ -35,6 +35,14 @@
           "average": "Durchschnitt",
           "obese": "Adipös"
         }
+      },
+      "calories": {
+        "targetNames": {
+          "maintenance": "Erhaltung",
+          "lose": "{kg} kg/Woche abnehmen",
+          "gain": "{kg} kg/Woche zunehmen"
+        },
+        "belowSafeMinimum": "Unter dem sicheren Minimum von {min} kcal/Tag"
       }
     }
   },
@@ -315,6 +323,7 @@
     "maintenance": {
       "kcal": "kcal",
       "comparedWith": "im Vergleich zu deinem Erhaltungsbedarf ({maintenance} kcal/Tag)",
+      "comparedWithTarget": "im Vergleich zu deinem Kalorienziel, {target} ({kcal} kcal/Tag)",
       "missing": "Gib deine Körperdaten und dein Geburtsdatum an, um den Entwurf mit deinem Erhaltungsbedarf zu vergleichen.",
       "completeProfile": "Profil vervollständigen"
     },

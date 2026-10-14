@@ -1,5 +1,10 @@
 'use client';
 
+import {
+  useBodyMetrics,
+  useTargets,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/hooks';
+
 import { BODY_FAT_FIELDS } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/constants';
 import BmiCard from '@/app/(modules)/[lang]/dashboard/components/Overview/BmiCard';
 import BodyFatCard from '@/app/(modules)/[lang]/dashboard/components/Overview/BodyFatCard';
@@ -9,9 +14,7 @@ import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/
 import Section from '@/app/components/layout/Section';
 import SetupTargets from '@/app/(modules)/[lang]/dashboard/components/Overview/SetupTargets';
 import SummaryTiles from '@/app/(modules)/[lang]/dashboard/components/Overview/SummaryTiles';
-import { bodyMetrics } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
-import { useMacroPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/hooks';
 import { useParams } from 'next/navigation';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 
@@ -27,16 +30,12 @@ const Overview = () => {
   const { lang } = useParams<{ lang: string }>();
   const { dashboard } = useDictionary();
   const labels = dashboard.bodyMetrics;
-  const [planName, setPlanName] = useMacroPlan();
+  const { macroPlan, pick } = useTargets();
 
   const dateOfBirth = user.personalInformation?.dateOfBirth;
-  const metrics = bodyMetrics({
-    bodyStats: user.bodyStats,
-    dateOfBirth,
-    today: new Date(),
-  });
+  const metrics = useBodyMetrics();
   const { bmi, bodyFat, calories, macros, missing } = metrics;
-  const plan = macros?.plans.find((option) => option.plan === planName);
+  const plan = macros?.plans.find((option) => option.plan === macroPlan);
 
   const profileHref = (sectionId: string) =>
     `/${lang}/dashboard/profile#${sectionId}`;
@@ -101,13 +100,15 @@ const Overview = () => {
         <div className={PAIRED_GRID_CLASS}>
           <CaloriesByGoalCard
             calories={calories}
+            onPick={(calorieTarget) => pick({ calorieTarget })}
             missing={caloriesMissing(labels.calories)}
             locale={lang}
           />
           <MacrosCard
             macros={macros}
+            calories={calories}
             plan={plan}
-            onPlanChange={setPlanName}
+            onPlanChange={(macroPlan) => pick({ macroPlan })}
             missing={caloriesMissing(labels.macros)}
             locale={lang}
           />

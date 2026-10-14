@@ -1,5 +1,7 @@
 import {
   EActivityLevel,
+  ECalorieTarget,
+  EMacroPlan,
   ESex,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 
@@ -30,6 +32,12 @@ export interface IBodyStats {
   activityLevel: EActivityLevel | null;
 }
 
+/** What the User aims for; unset means Maintenance and Balanced. */
+export interface ITargets {
+  calorieTarget: ECalorieTarget | null;
+  macroPlan: EMacroPlan | null;
+}
+
 export interface IUser {
   id: number;
   email: string;
@@ -44,6 +52,7 @@ export interface IUser {
   personalInformation?: IPersonalInformation;
   socialProfiles?: ISocialProfiles;
   bodyStats?: IBodyStats;
+  targets?: ITargets;
   avatarUrl?: string;
 }
 
@@ -52,6 +61,7 @@ export interface IUserChange {
   personalInformation?: IPersonalInformation;
   socialProfiles?: ISocialProfiles;
   bodyStats?: Partial<IBodyStats>;
+  targets?: Partial<ITargets>;
 }
 
 export interface IEmailChangeRequest {
