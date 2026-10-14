@@ -379,6 +379,25 @@
     "resendThrottled": "Túl sok e-mailt kértél. Várj néhány percet, és próbáld újra.",
     "avatarLocked": "Erősítsd meg az e-mail-címedet, hogy profilképet tölthess fel."
   },
+  "passwordReset": {
+    "forgotLink": "Elfelejtett jelszó?",
+    "forgotTitle": "Elfelejtetted a jelszavad?",
+    "forgotIntro": "Add meg az e-mail-címed, és küldünk egy linket a visszaállításhoz.",
+    "email": "E-mail-cím",
+    "sendLink": "Link küldése",
+    "sent": "Ha létezik fiók ezzel a címmel, elküldtük a visszaállító linket.",
+    "throttled": "Túl sok kérés, próbáld újra később.",
+    "failed": "Hiba történt. Kérjük, próbáld újra később.",
+    "backToSignIn": "Vissza a bejelentkezéshez",
+    "resetTitle": "Új jelszó megadása",
+    "newPassword": "Új jelszó",
+    "confirmPassword": "Jelszó megerősítése",
+    "updatePassword": "Jelszó módosítása",
+    "updated": "Jelszó módosítva, jelentkezz be.",
+    "invalidTitle": "Érvénytelen vagy lejárt link",
+    "invalid": "Ez a visszaállító link érvénytelen vagy lejárt.",
+    "requestNew": "Új link kérése"
+  },
   "passwordPolicy": {
     "passwordMinLength": "A jelszónak legalább 8 karakter hosszúnak kell lennie",
     "passwordUppercase": "A jelszónak tartalmaznia kell legalább egy nagybetűt",
