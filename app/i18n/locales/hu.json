@@ -1,10 +1,5 @@
 {
   "dashboard": {
-    "statistics": {
-      "totalIngredients": "Összes hozzávaló",
-      "totalMeals": "Összes étel",
-      "totalMealPlans": "Összes étrend"
-    },
     "appbar": {
       "logout": "Kijelentkezés"
     },
@@ -23,12 +18,8 @@
     "bodyMetrics": {
       "bmi": {
         "title": "BMI",
-        "description": "Testtömegindex, felnőtt WHO-táblázat",
-        "yourBmi": "Az Ön BMI-je",
-        "range": "BMI",
-        "category": "Kategória",
+        "description": "Felnőtt WHO-besorolás",
         "healthyWeight": "Egészséges testsúly az Ön magasságához: {min} – {max} kg",
-        "empty": "Adja meg a magasságát és a testsúlyát a BMI-je megtekintéséhez.",
         "categories": {
           "severeThinness": "Súlyos soványság",
           "moderateThinness": "Mérsékelt soványság",
@@ -38,14 +29,20 @@
           "obeseClassI": "I. fokú elhízás",
           "obeseClassII": "II. fokú elhízás",
           "obeseClassIII": "III. fokú elhízás"
-        }
+        },
+        "zones": {
+          "under": "Sovány",
+          "normal": "Normál",
+          "over": "Túlsúly",
+          "obese": "Elhízás"
+        },
+        "showTable": "WHO-táblázat megjelenítése",
+        "hideTable": "WHO-táblázat elrejtése",
+        "marker": "A BMI-d: {value}"
       },
       "bodyFat": {
         "title": "Testzsír",
-        "description": "US Navy módszer, ACE kategóriák",
-        "yourBodyFat": "Az Ön testzsírja",
-        "category": "Kategória",
-        "range": "Testzsír",
+        "description": "US Navy módszer · ACE-kategóriák",
         "fatMass": "Zsírtömeg",
         "leanMass": "Zsírmentes tömeg",
         "kg": "{value} kg",
@@ -59,12 +56,13 @@
           "fitness": "Fitnesz",
           "average": "Átlagos",
           "obese": "Elhízott"
-        }
+        },
+        "showTable": "Kategóriák megjelenítése",
+        "hideTable": "Kategóriák elrejtése",
+        "marker": "A testzsírod: {value}"
       },
       "calories": {
-        "title": "Kalória",
-        "description": "Napi kalória a heti testsúlyváltozás szerint",
-        "maintenance": "Fenntartó kalória",
+        "title": "Kalória cél szerint",
         "kcalPerDay": "kcal/nap",
         "kgPerWeek": "{value} kg/hét",
         "lose": "Fogyás",
@@ -81,17 +79,15 @@
         },
         "belowSafeMinimum": "A biztonságos minimum ({min} kcal/nap) alatt",
         "empty": "Adja meg a nemét, magasságát, testsúlyát és aktivitási szintjét a kalóriák megtekintéséhez.",
-        "dateOfBirthMissing": "Adja meg a születési dátumát a kalóriák megtekintéséhez."
+        "dateOfBirthMissing": "Adja meg a születési dátumát a kalóriák megtekintéséhez.",
+        "goal": "Cél",
+        "ofMaintenance": "a fenntartó {percent}-a",
+        "tickNote": "Jelölés = fenntartó kalória ({kcal} kcal/nap)."
       },
       "macros": {
-        "title": "Makrók",
-        "description": "Napi fehérje, szénhidrát és zsír a fenntartó kalóriád mellett",
-        "foodEnergy": "Tápanyagenergia",
-        "kcalPerDay": "kcal/nap",
-        "gramsPerDay": "gramm/nap",
-        "sugar": "Cukor",
-        "saturatedFat": "Telített zsír",
-        "limit": "<{value} g/nap",
+        "title": "Makrók fenntartó kalórián",
+        "gramsPerDay": "g/nap",
+        "limit": "< {value} g/nap",
         "macros": {
           "protein": "Fehérje",
           "carbs": "Szénhidrát",
@@ -104,10 +100,92 @@
           "highProtein": "Magas fehérjetartalmú"
         },
         "empty": "Add meg a nemed, magasságod, testsúlyod és aktivitási szinted a makrók megtekintéséhez.",
-        "dateOfBirthMissing": "Add meg a születési dátumod a makrók megtekintéséhez."
+        "dateOfBirthMissing": "Add meg a születési dátumod a makrók megtekintéséhez.",
+        "split": "Elosztás",
+        "ofEnergy": "az energia {percent}-a",
+        "sugarLimit": "Cukor felső határ",
+        "saturatedFatLimit": "Telített zsír felső határ"
       },
       "addBodyStats": "Testadatok megadása",
-      "addDateOfBirth": "Születési dátum megadása"
+      "addDateOfBirth": "Születési dátum megadása",
+      "you": "{label} · te"
+    },
+    "description": "Napi céljaid és testadataid egy pillantásra.",
+    "summary": {
+      "title": "Mai összefoglaló",
+      "description": "A testadataid alapján. A profilodban frissítheted őket.",
+      "pending": "Megjelenik, amint megadod a testadataidat.",
+      "maintenance": "Fenntartó kalória",
+      "maintenanceHint": "Megtartja a jelenlegi testsúlyodat",
+      "protein": "Fehérjecél",
+      "proteinHint": "{plan} makróelosztás",
+      "gramsPerDay": "g/nap",
+      "healthyWeight": "Egészséges testsúly: {min}–{max} kg",
+      "masses": "{fat} kg zsír · {lean} kg zsírmentes",
+      "needs": {
+        "maintenance": "Kell hozzá: nem, magasság, testsúly, aktivitási szint és születési dátum",
+        "protein": "Kell hozzá: fenntartó kalória",
+        "bmi": "Kell hozzá: magasság és testsúly",
+        "bodyFat": "Kell hozzá: nem, nyak és derék (nőknél csípő is)"
+      }
+    },
+    "nutrition": {
+      "title": "Táplálkozás",
+      "description": "Napi kalória a célodhoz, és hogyan oszd el."
+    },
+    "body": {
+      "title": "Test",
+      "description": "Hol állsz a szokásos referencia-tartományokban."
+    },
+    "setup": {
+      "title": "Állítsd be a céljaidat",
+      "description": "A BiteWise a testadataidból számolja a BMI-t, a testzsírt, a napi kalóriát és a makrókat.",
+      "progress": "Haladás",
+      "progressCount": "{done} / {total}",
+      "done": "Kész",
+      "steps": {
+        "bodyStats": {
+          "title": "Add meg a testadataidat",
+          "description": "Nem, magasság és testsúly",
+          "unlocks": "Feloldja: BMI"
+        },
+        "activity": {
+          "title": "Állítsd be az aktivitási szintedet",
+          "description": "Mennyire vagy aktív egy átlagos héten, és a születési dátumod",
+          "unlocks": "Feloldja: kalória és makrók"
+        },
+        "measurements": {
+          "title": "Add meg a méreteidet",
+          "description": "Nyak és derék, nőknél csípő is",
+          "unlocks": "Feloldja: testzsír"
+        }
+      }
+    },
+    "library": {
+      "title": "A könyvtárad",
+      "description": "Hozzávalókból ételeket, ételekből étrendeket állíthatsz össze.",
+      "buildTitle": "Építsd fel a könyvtáradat",
+      "buildDescription": "Minden lépés az előzőre épül.",
+      "step": "{n}. lépés",
+      "steps": {
+        "ingredients": {
+          "title": "Adj hozzá hozzávalókat",
+          "description": "Tápérték 100 g-onként vagy darabonként.",
+          "action": "Hozzávaló hozzáadása"
+        },
+        "meals": {
+          "title": "Állíts össze belőlük ételeket",
+          "description": "Az összesítést kiszámoljuk helyetted.",
+          "action": "Étel hozzáadása",
+          "needs": "Kell hozzá 1 hozzávaló"
+        },
+        "mealPlans": {
+          "title": "Tervezd meg a napjaidat",
+          "description": "Vesd össze az étrendeket a céljaiddal.",
+          "action": "Étrend hozzáadása",
+          "needs": "Kell hozzá 1 étel"
+        }
+      }
     }
   },
   "common": {
@@ -459,6 +537,12 @@
       "goToMealPlans": "Ugrás az étrendekhez",
       "submit": "Betöltés",
       "loaded": "{name} betöltve"
+    },
+    "header": {
+      "startDay": "Vázlatnap indítása",
+      "openDraft": "Ugrás a vázlathoz",
+      "cardTitle": "Tervezz meg egy napot",
+      "loadShort": "Étrend betöltése"
     }
   },
   "errorBoundary": {

@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/components/ui/card';
-import { ChevronDown, ChevronUp, Trash2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, Download, Trash2 } from 'lucide-react';
 import {
   DEFAULT_MEAL_MULTIPLIER,
   DRAFT_STORAGE_VERSION,
@@ -44,10 +44,10 @@ import DraftLineRow from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal
 import DraftMaintenance from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftMaintenance';
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { Form } from '@/app/components/ui/form';
-import LoadMealPlanDialog from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/LoadMealPlanDialog';
 import { NUTRITION_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
 import { formatNutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
+import { useDraftMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 interface IProps {
@@ -55,22 +55,19 @@ interface IProps {
   initial: IResolvedDraft;
   sources: IDraftSources;
   profileHref: string;
-  mealPlansHref: string;
   onSave: (draft: TStoredDraft) => void;
   onClear: () => void;
-  onLoad: (draft: TStoredDraft) => void;
 }
 
 const DraftMealPlanEditor = ({
   initial,
   sources,
   profileHref,
-  mealPlansHref,
   onSave,
   onClear,
-  onLoad,
 }: IProps) => {
   const dictionary = useDictionary();
+  const { openLoad } = useDraftMealPlan();
   const { draftMealPlan: labels, resourceTable } = dictionary;
 
   const [removed] = useState(initial.removed);
@@ -130,11 +127,10 @@ const DraftMealPlanEditor = ({
           <CardDescription>{labels.description}</CardDescription>
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          <LoadMealPlanDialog
-            lineCount={lines.length}
-            mealPlansHref={mealPlansHref}
-            onLoad={onLoad}
-          />
+          <Button type="button" variant="outline" onClick={() => openLoad()}>
+            <Download aria-hidden />
+            <span className="sr-only sm:not-sr-only">{labels.load.button}</span>
+          </Button>
           <DeleteDialog
             title={labels.clear}
             subtitle={labels.clearConfirm}
@@ -231,7 +227,7 @@ const DraftMealPlanEditor = ({
           <div className="flex flex-wrap gap-2">
             <Button
               type="button"
-              variant="tinted"
+              variant="secondary"
               onClick={() =>
                 append({
                   kind: EDraftLineKind.MEAL,
@@ -244,7 +240,7 @@ const DraftMealPlanEditor = ({
             </Button>
             <Button
               type="button"
-              variant="tinted"
+              variant="secondary"
               onClick={() =>
                 append({
                   kind: EDraftLineKind.INGREDIENT,

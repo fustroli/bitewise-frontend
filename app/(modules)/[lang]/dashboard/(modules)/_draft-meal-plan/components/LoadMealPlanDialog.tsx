@@ -6,7 +6,6 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-  DialogTrigger,
 } from '@/app/components/ui/dialog';
 import {
   TLoadMealPlanSchema,
@@ -14,11 +13,10 @@ import {
   createLoadMealPlanSchema,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/validations';
 import { convertToOptions, interpolate } from '@/app/utils/helpers';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import { Button } from '@/app/components/ui/button';
 import ComboboxField from '@/app/components/form/ComboboxField';
-import { Download } from 'lucide-react';
 import { Form } from '@/app/components/ui/form';
 import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 import { IDraftMealPlanOption } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
@@ -31,6 +29,10 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 interface IProps {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+  /** Picked when the dialog opens, e.g. from a Meal plan's "Open as draft". */
+  initialMealPlanId?: number;
   /** Lines the load would replace; 0 for no warning. */
   lineCount: number;
   mealPlansHref: string;
@@ -41,12 +43,18 @@ interface IProps {
 type TMealPlans = IDraftMealPlanOption[] | null | undefined;
 
 /** Replaces the draft with a copy of a Meal plan; nothing is saved on the backend. */
-const LoadMealPlanDialog = ({ lineCount, mealPlansHref, onLoad }: IProps) => {
+const LoadMealPlanDialog = ({
+  open,
+  onOpenChange,
+  initialMealPlanId,
+  lineCount,
+  mealPlansHref,
+  onLoad,
+}: IProps) => {
   const dictionary = useDictionary();
   const { draftMealPlan, resourceTable } = dictionary;
   const labels = draftMealPlan.load;
 
-  const [isOpen, setIsOpen] = useState(false);
   const [mealPlans, setMealPlans] = useState<TMealPlans>();
 
   const schema = useMemo(
@@ -55,30 +63,34 @@ const LoadMealPlanDialog = ({ lineCount, mealPlansHref, onLoad }: IProps) => {
   );
   const form = useForm<TLoadMealPlanSchema>({
     resolver: zodResolver(schema),
-    defaultValues: { mealPlanId: 0 },
+    defaultValues: { mealPlanId: initialMealPlanId ?? 0 },
   });
 
-  // Fresh plans on every open.
-  const load = async () => {
+  const retry = async () => {
     setMealPlans(undefined);
     const result = await fetchDraftMealPlans();
     setMealPlans(result.ok ? result.data : null);
   };
 
-  const handleOpenChange = (open: boolean) => {
-    setIsOpen(open);
-    if (open) {
-      form.reset();
-      void load();
-    }
-  };
+  // Mounted afresh for every opening (see the provider), so this runs once
+  // per opening: fresh plans each time.
+  useEffect(() => {
+    if (!open) return;
+    let isCurrent = true;
+    void fetchDraftMealPlans().then((result) => {
+      if (isCurrent) setMealPlans(result.ok ? result.data : null);
+    });
+    return () => {
+      isCurrent = false;
+    };
+  }, [open]);
 
   const onSubmit = ({ mealPlanId }: TLoadMealPlanSchema) => {
     const mealPlan = mealPlans?.find(({ id }) => id === mealPlanId);
     if (!mealPlan) return;
 
     onLoad(mealPlanDraft(mealPlan.mealIds));
-    setIsOpen(false);
+    onOpenChange(false);
     toast({
       variant: 'success',
       description: interpolate(labels.loaded, { name: mealPlan.name }),
@@ -94,7 +106,7 @@ const LoadMealPlanDialog = ({ lineCount, mealPlansHref, onLoad }: IProps) => {
       return (
         <div className="flex flex-col items-start gap-3 py-4">
           <p className="text-destructive">{labels.error}</p>
-          <Button type="button" variant="outline" onClick={() => void load()}>
+          <Button type="button" variant="outline" onClick={() => void retry()}>
             {labels.retry}
           </Button>
         </div>
@@ -132,7 +144,7 @@ const LoadMealPlanDialog = ({ lineCount, mealPlansHref, onLoad }: IProps) => {
           )}
           <FormDialogFooter
             form={form}
-            onClose={() => setIsOpen(false)}
+            onClose={() => onOpenChange(false)}
             submitLabel={labels.submit}
             closeLabel={resourceTable.cancel}
           />
@@ -142,13 +154,7 @@ const LoadMealPlanDialog = ({ lineCount, mealPlansHref, onLoad }: IProps) => {
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      <DialogTrigger asChild>
-        <Button type="button" variant="outline">
-          <Download />
-          <span className="sr-only sm:not-sr-only">{labels.button}</span>
-        </Button>
-      </DialogTrigger>
+    <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{labels.title}</DialogTitle>

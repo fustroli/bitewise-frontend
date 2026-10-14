@@ -1,10 +1,5 @@
 {
   "dashboard": {
-    "statistics": {
-      "totalIngredients": "Total Ingredients",
-      "totalMeals": "Total Meals",
-      "totalMealPlans": "Total Meal Plans"
-    },
     "appbar": {
       "logout": "Logout"
     },
@@ -23,12 +18,8 @@
     "bodyMetrics": {
       "bmi": {
         "title": "BMI",
-        "description": "Body mass index, adult WHO table",
-        "yourBmi": "Your BMI",
-        "range": "BMI",
-        "category": "Category",
+        "description": "Adult WHO classification",
         "healthyWeight": "Healthy weight for your height: {min} – {max} kg",
-        "empty": "Add your height and weight to see your BMI.",
         "categories": {
           "severeThinness": "Severe thinness",
           "moderateThinness": "Moderate thinness",
@@ -38,14 +29,20 @@
           "obeseClassI": "Obese class I",
           "obeseClassII": "Obese class II",
           "obeseClassIII": "Obese class III"
-        }
+        },
+        "zones": {
+          "under": "Underweight",
+          "normal": "Normal",
+          "over": "Overweight",
+          "obese": "Obese"
+        },
+        "showTable": "Show WHO table",
+        "hideTable": "Hide WHO table",
+        "marker": "Your BMI: {value}"
       },
       "bodyFat": {
         "title": "Body fat",
-        "description": "US Navy method, ACE categories",
-        "yourBodyFat": "Your body fat",
-        "category": "Category",
-        "range": "Body fat",
+        "description": "US Navy method · ACE categories",
         "fatMass": "Fat mass",
         "leanMass": "Lean mass",
         "kg": "{value} kg",
@@ -59,12 +56,13 @@
           "fitness": "Fitness",
           "average": "Average",
           "obese": "Obese"
-        }
+        },
+        "showTable": "Show categories",
+        "hideTable": "Hide categories",
+        "marker": "Your body fat: {value}"
       },
       "calories": {
-        "title": "Calories",
-        "description": "Daily calories by weekly weight change",
-        "maintenance": "Maintenance calories",
+        "title": "Calories by goal",
         "kcalPerDay": "kcal/day",
         "kgPerWeek": "{value} kg/week",
         "lose": "Lose",
@@ -81,17 +79,15 @@
         },
         "belowSafeMinimum": "Below the safe minimum of {min} kcal/day",
         "empty": "Add your sex, height, weight and Activity level to see your calories.",
-        "dateOfBirthMissing": "Add your date of birth to see your calories."
+        "dateOfBirthMissing": "Add your date of birth to see your calories.",
+        "goal": "Goal",
+        "ofMaintenance": "{percent} of maintenance",
+        "tickNote": "Tick mark = maintenance ({kcal} kcal/day)."
       },
       "macros": {
-        "title": "Macros",
-        "description": "Daily protein, carbs and fat at your maintenance calories",
-        "foodEnergy": "Food energy",
-        "kcalPerDay": "kcal/day",
-        "gramsPerDay": "grams/day",
-        "sugar": "Sugar",
-        "saturatedFat": "Saturated fat",
-        "limit": "<{value} g/day",
+        "title": "Macros at maintenance",
+        "gramsPerDay": "g/day",
+        "limit": "< {value} g/day",
         "macros": {
           "protein": "Protein",
           "carbs": "Carbs",
@@ -104,10 +100,92 @@
           "highProtein": "High protein"
         },
         "empty": "Add your sex, height, weight and Activity level to see your macros.",
-        "dateOfBirthMissing": "Add your date of birth to see your macros."
+        "dateOfBirthMissing": "Add your date of birth to see your macros.",
+        "split": "Split",
+        "ofEnergy": "{percent} of energy",
+        "sugarLimit": "Sugar limit",
+        "saturatedFatLimit": "Saturated fat limit"
       },
       "addBodyStats": "Add Body stats",
-      "addDateOfBirth": "Add date of birth"
+      "addDateOfBirth": "Add date of birth",
+      "you": "{label} · you"
+    },
+    "description": "Your daily targets and body stats at a glance.",
+    "summary": {
+      "title": "Today’s summary",
+      "description": "Based on your body stats. Update them in your profile.",
+      "pending": "Appears once your body stats are added.",
+      "maintenance": "Maintenance calories",
+      "maintenanceHint": "Keeps your current weight",
+      "protein": "Protein target",
+      "proteinHint": "{plan} macro split",
+      "gramsPerDay": "g/day",
+      "healthyWeight": "Healthy weight {min}–{max} kg",
+      "masses": "{fat} kg fat · {lean} kg lean",
+      "needs": {
+        "maintenance": "Needs sex, height, weight, activity level and date of birth",
+        "protein": "Needs maintenance calories",
+        "bmi": "Needs height and weight",
+        "bodyFat": "Needs sex, neck and waist (+ hip for women)"
+      }
+    },
+    "nutrition": {
+      "title": "Nutrition",
+      "description": "Daily calories for your goal and how to split them."
+    },
+    "body": {
+      "title": "Body",
+      "description": "Where you sit on standard reference ranges."
+    },
+    "setup": {
+      "title": "Set up your targets",
+      "description": "BiteWise uses your body stats to calculate BMI, body fat, daily calories and macros.",
+      "progress": "Progress",
+      "progressCount": "{done} of {total}",
+      "done": "Done",
+      "steps": {
+        "bodyStats": {
+          "title": "Add body stats",
+          "description": "Sex, height and weight",
+          "unlocks": "Unlocks BMI"
+        },
+        "activity": {
+          "title": "Set your activity level",
+          "description": "How active a typical week is, and your date of birth",
+          "unlocks": "Unlocks calories & macros"
+        },
+        "measurements": {
+          "title": "Add measurements",
+          "description": "Neck and waist, plus hip for women",
+          "unlocks": "Unlocks body fat"
+        }
+      }
+    },
+    "library": {
+      "title": "Your library",
+      "description": "Build meals from ingredients, then combine meals into plans.",
+      "buildTitle": "Build your library",
+      "buildDescription": "Each step builds on the one before.",
+      "step": "Step {n}",
+      "steps": {
+        "ingredients": {
+          "title": "Add ingredients",
+          "description": "Nutrition per 100 g or per piece.",
+          "action": "Add ingredient"
+        },
+        "meals": {
+          "title": "Combine them into meals",
+          "description": "Totals are calculated for you.",
+          "action": "Add meal",
+          "needs": "Needs 1 ingredient"
+        },
+        "mealPlans": {
+          "title": "Plan your days",
+          "description": "Compare each plan to your targets.",
+          "action": "Add meal plan",
+          "needs": "Needs 1 meal"
+        }
+      }
     }
   },
   "common": {
@@ -459,6 +537,12 @@
       "goToMealPlans": "Go to Meal plans",
       "submit": "Load",
       "loaded": "Loaded {name}"
+    },
+    "header": {
+      "startDay": "Start draft day",
+      "openDraft": "Go to draft",
+      "cardTitle": "Draft a day",
+      "loadShort": "Load plan"
     }
   },
   "errorBoundary": {
