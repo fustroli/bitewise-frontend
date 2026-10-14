@@ -34,7 +34,7 @@ interface IProps<T extends FieldValues> extends IFieldProps<T> {
   removeLabel: (option: IOption) => string;
 }
 
-/** Picks a set of distinct options; the field value is their `value`s. */
+/** Picks a set of distinct options; the field value is their `value`s, in the order picked. */
 const MultiSelectField = <T extends FieldValues>({
   control,
   name,
@@ -57,8 +57,9 @@ const MultiSelectField = <T extends FieldValues>({
               : [...selected, value],
           );
 
-        const selectedOptions = options.filter((option) =>
-          selected.includes(option.value),
+        // In the order picked, not the options' order.
+        const selectedOptions = selected.flatMap((value) =>
+          options.filter((option) => option.value === value),
         );
 
         return (
