@@ -456,7 +456,6 @@
           "one": "{count} piece",
           "other": "{count} pieces"
         },
-        "macros": "P {protein} · C {carbs} · F {fat}",
         "sugar": "sugar {value} g",
         "saturated": "saturated {value} g"
       }

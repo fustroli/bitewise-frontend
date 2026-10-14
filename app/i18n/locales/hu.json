@@ -456,7 +456,6 @@
           "one": "{count} db",
           "other": "{count} db"
         },
-        "macros": "F {protein} · Sz {carbs} · Zs {fat}",
         "sugar": "cukor {value} g",
         "saturated": "telített {value} g"
       }

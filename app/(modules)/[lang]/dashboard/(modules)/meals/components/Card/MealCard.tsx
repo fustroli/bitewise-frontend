@@ -13,6 +13,7 @@ import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/en
 import ExpandableCard from '@/app/components/ExpandableCard';
 import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
 import { IResourceRowContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
+import MacroAmounts from '@/app/components/nutrition/MacroAmounts';
 import MacroBar from '@/app/components/nutrition/MacroBar';
 import MacroValue from '@/app/components/nutrition/MacroValue';
 
@@ -107,13 +108,15 @@ const MealCard = ({ meal, actions, dictionary, lang }: IProps) => {
                 <span className="font-extrabold">
                   {kcal(nutrition.calories)} kcal
                 </span>
-                <span className="text-xs text-muted-foreground">
-                  {interpolate(labels.macros, {
+                <MacroAmounts
+                  amounts={{
                     protein: amount(nutrition.protein),
                     carbs: amount(nutrition.totalCarbohydrates),
                     fat: amount(nutrition.totalFat),
-                  })}
-                </span>
+                  }}
+                  names={macroNames}
+                  className="justify-end"
+                />
               </span>
             </li>
           );
