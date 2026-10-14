@@ -8,7 +8,7 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/components/ui/card';
-import { ChevronDown, ChevronUp, Download, Trash2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, Download, Plus, Trash2 } from 'lucide-react';
 import {
   DEFAULT_MEAL_MULTIPLIER,
   DRAFT_STORAGE_VERSION,
@@ -215,7 +215,7 @@ const DraftMealPlanEditor = ({
           <div className="flex flex-wrap gap-2">
             <Button
               type="button"
-              variant="secondary"
+              variant="tinted"
               onClick={() =>
                 append({
                   kind: EDraftLineKind.MEAL,
@@ -224,11 +224,12 @@ const DraftMealPlanEditor = ({
                 })
               }
             >
+              <Plus aria-hidden />
               {labels.addMeal}
             </Button>
             <Button
               type="button"
-              variant="secondary"
+              variant="tinted"
               onClick={() =>
                 append({
                   kind: EDraftLineKind.INGREDIENT,
@@ -237,6 +238,7 @@ const DraftMealPlanEditor = ({
                 })
               }
             >
+              <Plus aria-hidden />
               {labels.addIngredient}
             </Button>
           </div>
