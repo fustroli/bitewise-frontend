@@ -28,10 +28,13 @@ export default async function Page(props: IPageProps) {
         actions={<DraftActions />}
         mobileActions={<UserMenuLink />}
       />
-      <Suspense fallback={<DraftMealPlanSkeleton />}>
-        <DraftMealPlanSection lang={lang} />
-      </Suspense>
-      <Overview />
+      <Overview
+        afterSummary={
+          <Suspense fallback={<DraftMealPlanSkeleton />}>
+            <DraftMealPlanSection lang={lang} />
+          </Suspense>
+        }
+      />
       <Suspense fallback={<Library />}>
         <LibrarySection />
       </Suspense>

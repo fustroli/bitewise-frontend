@@ -11,6 +11,7 @@ import BodyFatCard from '@/app/(modules)/[lang]/dashboard/components/Overview/Bo
 import CaloriesByGoalCard from '@/app/(modules)/[lang]/dashboard/components/Overview/CaloriesByGoalCard';
 import MacrosCard from '@/app/(modules)/[lang]/dashboard/components/Overview/MacrosCard';
 import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/constants';
+import { ReactNode } from 'react';
 import Section from '@/app/components/layout/Section';
 import SetupTargets from '@/app/(modules)/[lang]/dashboard/components/Overview/SetupTargets';
 import SummaryTiles from '@/app/(modules)/[lang]/dashboard/components/Overview/SummaryTiles';
@@ -21,11 +22,16 @@ import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user
 const PAIRED_GRID_CLASS =
   'grid items-start gap-4 md:grid-cols-[repeat(auto-fit,minmax(380px,1fr))]';
 
+interface IProps {
+  /** Goes between Today's summary and Nutrition, e.g. the Draft meal plan. */
+  afterSummary?: ReactNode;
+}
+
 /**
  * Today's summary, Nutrition and Body, live from the User's Profile. Until
  * there is a BMI (height and weight), the setup steps and empty tiles instead.
  */
-const Overview = () => {
+const Overview = ({ afterSummary }: IProps) => {
   const { user } = useUserContext();
   const { lang } = useParams<{ lang: string }>();
   const { dashboard } = useDictionary();
@@ -60,6 +66,7 @@ const Overview = () => {
         >
           <SummaryTiles metrics={metrics} locale={lang} />
         </Section>
+        {afterSummary}
       </>
     );
   }
@@ -92,6 +99,7 @@ const Overview = () => {
       >
         <SummaryTiles metrics={metrics} plan={plan} locale={lang} />
       </Section>
+      {afterSummary}
       <Section
         id="nutrition"
         title={dashboard.nutrition.title}
