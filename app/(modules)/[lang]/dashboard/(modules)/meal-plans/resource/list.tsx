@@ -16,6 +16,8 @@ import { fetchMeals } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/api
 export const mealPlanList: IResourceList<IMealPlan, IMeal[]> = {
   resourceKey: 'mealPlans',
   fetch: fetchMealPlans,
+  layout: 'table',
+  compareType: 'plans',
   columns: MEAL_PLAN_COLUMNS,
   searchable: true,
   loadFormData: async () => (await fetchMeals({ limit: MAX_LIST_LIMIT })).data,

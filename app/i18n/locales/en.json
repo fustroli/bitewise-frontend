@@ -321,25 +321,27 @@
     "updated": "Updated successfully!",
     "deleted": "Deleted successfully.",
     "positiveNumber": "{field} must be a positive number",
-    "nameTaken": "This name is already in use"
+    "nameTaken": "This name is already in use",
+    "showing": "Showing {from}–{to} of {total}",
+    "rowActions": "Actions for {name}",
+    "compare": "Compare"
   },
   "resources": {
     "ingredients": {
       "title": "Ingredients",
-      "empty": "No ingredients available",
+      "empty": "No ingredients yet",
       "noMatch": "No ingredients match \"{term}\"",
-      "searchPlaceholder": "Search ingredients...",
-      "addTitle": "Add Ingredient",
-      "editTitle": "Edit Ingredient",
-      "deleteTitle": "Delete Ingredient",
+      "searchPlaceholder": "Search ingredients",
+      "addTitle": "Add ingredient",
+      "editTitle": "Edit ingredient",
+      "deleteTitle": "Delete ingredient",
       "columns": {
-        "name": "Name",
+        "name": "Ingredient",
         "calories": "Calories",
         "protein": "Protein",
-        "totalFat": "Fat (Saturated)",
-        "totalCarbohydrates": "Carbs (Sugar)",
-        "dietaryFiber": "Fiber",
-        "unit": "Unit"
+        "totalCarbohydrates": "Carbs",
+        "totalFat": "Fat",
+        "dietaryFiber": "Fiber"
       },
       "fields": {
         "name": "Name",
@@ -355,16 +357,31 @@
       },
       "validation": {
         "nameRequired": "Name is required"
+      },
+      "description": "Nutrition values per 100 g or per piece.",
+      "compare": "Compare ingredients",
+      "units": {
+        "100g": "per 100 g",
+        "piece": "per piece"
+      },
+      "list": {
+        "sugar": "sugar {value} g",
+        "saturated": "saturated {value} g",
+        "sugarLabel": "Sugar",
+        "saturatedLabel": "Sat. fat",
+        "fiberLabel": "Fiber",
+        "macros": "P {protein} · C {carbs} · F {fat}",
+        "details": "Details for {name}"
       }
     },
     "meals": {
       "title": "Meals",
-      "empty": "No meals available",
+      "empty": "No meals yet",
       "noMatch": "No meals match \"{term}\"",
-      "searchPlaceholder": "Search meals...",
-      "addTitle": "Add Meal",
-      "editTitle": "Edit Meal",
-      "deleteTitle": "Delete Meal",
+      "searchPlaceholder": "Search meals",
+      "addTitle": "Add meal",
+      "editTitle": "Edit meal",
+      "deleteTitle": "Delete meal",
       "columns": {
         "name": "Name",
         "calories": "Calories",
@@ -391,16 +408,18 @@
         "ingredientRequired": "Select an ingredient",
         "quantityPositive": "Quantity must be greater than 0",
         "ingredientDuplicate": "Each ingredient can be added only once"
-      }
+      },
+      "description": "Totals are calculated from each meal’s ingredients.",
+      "compare": "Compare meals"
     },
     "mealPlans": {
-      "title": "Meal Plans",
-      "empty": "No meal plans available",
+      "title": "Meal plans",
+      "empty": "No meal plans yet",
       "noMatch": "No meal plans match \"{term}\"",
-      "searchPlaceholder": "Search meal plans...",
-      "addTitle": "Add Meal Plan",
-      "editTitle": "Edit Meal Plan",
-      "deleteTitle": "Delete Meal Plan",
+      "searchPlaceholder": "Search meal plans",
+      "addTitle": "Add meal plan",
+      "editTitle": "Edit meal plan",
+      "deleteTitle": "Delete meal plan",
       "maintenance": "Maintenance",
       "showMaintenance": "Show Maintenance",
       "hideMaintenance": "Hide Maintenance",
@@ -420,7 +439,9 @@
       "validation": {
         "nameRequired": "Name is required",
         "mealsRequired": "At least one meal is required"
-      }
+      },
+      "description": "Each plan is one day, compared with your daily targets.",
+      "compare": "Compare plans"
     }
   },
   "auth": {

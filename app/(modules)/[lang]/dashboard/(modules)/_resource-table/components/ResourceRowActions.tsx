@@ -1,6 +1,5 @@
 'use client';
 
-import { Ellipsis, Trash2 } from 'lucide-react';
 import {
   IResourceForm,
   IResourceRecord,
@@ -13,6 +12,7 @@ import {
   MenubarSeparator,
   MenubarTrigger,
 } from '@/app/components/ui/menubar';
+import { MoreHorizontal, Trash2 } from 'lucide-react';
 
 import DeleteDialog from '@/app/components/DeleteDialog';
 import { FieldValues } from 'react-hook-form';
@@ -58,10 +58,10 @@ function ResourceRowActions<
     <Menubar className="ml-auto w-fit border-none bg-transparent p-0 shadow-none">
       <MenubarMenu>
         <MenubarTrigger
-          aria-label={t.actions}
-          className="size-9 justify-center rounded-md p-0 text-muted-foreground hover:cursor-pointer hover:bg-muted hover:text-foreground data-[state=open]:bg-muted data-[state=open]:text-foreground"
+          aria-label={interpolate(t.rowActions, { name: record.name })}
+          className="size-10 justify-center rounded-md p-0 text-secondary-foreground hover:cursor-pointer hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-[state=open]:bg-muted data-[state=open]:text-foreground"
         >
-          <Ellipsis />
+          <MoreHorizontal aria-hidden className="size-[18px]" />
         </MenubarTrigger>
         <MenubarContent
           align="end"

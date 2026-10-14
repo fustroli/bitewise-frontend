@@ -38,11 +38,19 @@ export interface IResourceForm<
   useAfterRemove?: () => (id: number) => void;
 }
 
+/**
+ * How a dialog's trigger looks: a primary button (Add), a 44px icon button
+ * (Add, phone app bar), a row-actions menu entry or an outline button (Edit,
+ * phone rows). Defaults: `button` for Add, `menu` with a record.
+ */
+export type TResourceDialogTrigger = 'button' | 'icon' | 'menu' | 'outline';
+
 export interface IResourceDialogProps<TRecord, TFormData> {
   record?: TRecord;
   /** With a `record`: Add dialog prefilled from it instead of Edit. */
   duplicate?: boolean;
   formData: TFormData;
+  trigger?: TResourceDialogTrigger;
 }
 
 export interface IResourceRowActionsProps<TRecord, TFormData> {

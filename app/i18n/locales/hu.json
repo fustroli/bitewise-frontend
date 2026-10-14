@@ -321,25 +321,27 @@
     "updated": "Sikeresen frissítve!",
     "deleted": "Sikeresen törölve.",
     "positiveNumber": "{field}: pozitív szám kell legyen",
-    "nameTaken": "Ez a név már foglalt"
+    "nameTaken": "Ez a név már foglalt",
+    "showing": "{from}–{to} / {total}",
+    "rowActions": "Műveletek: {name}",
+    "compare": "Összehasonlítás"
   },
   "resources": {
     "ingredients": {
       "title": "Hozzávalók",
-      "empty": "Nincsenek hozzávalók",
+      "empty": "Még nincsenek hozzávalók",
       "noMatch": "Nincs a(z) „{term}” keresésnek megfelelő hozzávaló",
-      "searchPlaceholder": "Hozzávalók keresése...",
+      "searchPlaceholder": "Hozzávalók keresése",
       "addTitle": "Hozzávaló hozzáadása",
       "editTitle": "Hozzávaló szerkesztése",
       "deleteTitle": "Hozzávaló törlése",
       "columns": {
-        "name": "Név",
+        "name": "Hozzávaló",
         "calories": "Kalória",
         "protein": "Fehérje",
-        "totalFat": "Zsír (telített)",
-        "totalCarbohydrates": "Szénhidrát (cukor)",
-        "dietaryFiber": "Rost",
-        "unit": "Egység"
+        "totalCarbohydrates": "Szénhidrát",
+        "totalFat": "Zsír",
+        "dietaryFiber": "Rost"
       },
       "fields": {
         "name": "Név",
@@ -355,13 +357,28 @@
       },
       "validation": {
         "nameRequired": "A név megadása kötelező"
+      },
+      "description": "Tápértékek 100 g-onként vagy darabonként.",
+      "compare": "Hozzávalók összehasonlítása",
+      "units": {
+        "100g": "100 g-onként",
+        "piece": "darabonként"
+      },
+      "list": {
+        "sugar": "cukor {value} g",
+        "saturated": "telített {value} g",
+        "sugarLabel": "Cukor",
+        "saturatedLabel": "Telített zsír",
+        "fiberLabel": "Rost",
+        "macros": "F {protein} · Sz {carbs} · Zs {fat}",
+        "details": "{name} részletei"
       }
     },
     "meals": {
       "title": "Ételek",
-      "empty": "Nincsenek ételek",
+      "empty": "Még nincsenek ételek",
       "noMatch": "Nincs a(z) „{term}” keresésnek megfelelő étel",
-      "searchPlaceholder": "Ételek keresése...",
+      "searchPlaceholder": "Ételek keresése",
       "addTitle": "Étel hozzáadása",
       "editTitle": "Étel szerkesztése",
       "deleteTitle": "Étel törlése",
@@ -391,13 +408,15 @@
         "ingredientRequired": "Válassz hozzávalót",
         "quantityPositive": "A mennyiségnek nagyobbnak kell lennie 0-nál",
         "ingredientDuplicate": "Minden hozzávaló csak egyszer adható hozzá"
-      }
+      },
+      "description": "Az összesítést az ételek hozzávalóiból számoljuk.",
+      "compare": "Ételek összehasonlítása"
     },
     "mealPlans": {
       "title": "Étrendek",
-      "empty": "Nincsenek étrendek",
+      "empty": "Még nincsenek étrendek",
       "noMatch": "Nincs a(z) „{term}” keresésnek megfelelő étrend",
-      "searchPlaceholder": "Étrendek keresése...",
+      "searchPlaceholder": "Étrendek keresése",
       "addTitle": "Étrend hozzáadása",
       "editTitle": "Étrend szerkesztése",
       "deleteTitle": "Étrend törlése",
@@ -420,7 +439,9 @@
       "validation": {
         "nameRequired": "A név megadása kötelező",
         "mealsRequired": "Legalább egy étel szükséges"
-      }
+      },
+      "description": "Minden étrend egy nap, a napi céljaidhoz mérve.",
+      "compare": "Étrendek összehasonlítása"
     }
   },
   "auth": {
