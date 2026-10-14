@@ -379,6 +379,25 @@
     "resendThrottled": "You've requested too many emails. Please wait a few minutes and try again.",
     "avatarLocked": "Verify your email address to upload a profile image."
   },
+  "passwordReset": {
+    "forgotLink": "Forgot password?",
+    "forgotTitle": "Forgot your password?",
+    "forgotIntro": "Enter your email and we'll send you a link to reset it.",
+    "email": "Email Address",
+    "sendLink": "Send reset link",
+    "sent": "If an account exists for this address, we sent a reset link.",
+    "throttled": "Too many requests, try again later.",
+    "failed": "Something went wrong. Please try again later.",
+    "backToSignIn": "Back to sign in",
+    "resetTitle": "Set a new password",
+    "newPassword": "New Password",
+    "confirmPassword": "Confirm Password",
+    "updatePassword": "Update password",
+    "updated": "Password updated, sign in.",
+    "invalidTitle": "Link invalid or expired",
+    "invalid": "This reset link is invalid or has expired.",
+    "requestNew": "Request a new link"
+  },
   "passwordPolicy": {
     "passwordMinLength": "Password must be at least 8 characters long",
     "passwordUppercase": "Password must contain at least one uppercase letter",

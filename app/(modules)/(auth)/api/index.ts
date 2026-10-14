@@ -64,3 +64,43 @@ export const verifyEmail = async (
       : EVerifyEmailStatus.FAILED;
   }
 };
+
+const HTTP_TOO_MANY_REQUESTS = 429;
+
+export type TPasswordResetRequest = 'sent' | 'throttled' | 'failed';
+export type TPasswordResetConfirm = 'done' | 'invalid' | 'failed';
+
+/**
+ * Asks for a password reset link. The backend answers the same for known and
+ * unknown addresses, so `sent` says nothing about the account.
+ */
+export const requestPasswordReset = async (
+  email: string,
+): Promise<TPasswordResetRequest> => {
+  try {
+    await axiosInstance.post(`${API_URL}/auth/password-reset`, { email });
+    return 'sent';
+  } catch (error) {
+    return axios.isAxiosError(error) &&
+      error.response?.status === HTTP_TOO_MANY_REQUESTS
+      ? 'throttled'
+      : 'failed';
+  }
+};
+
+/** Sets the new password with the link's token; 400 is a bad or used token. */
+export const confirmPasswordReset = async (body: {
+  token: string;
+  password: string;
+  passwordConfirm: string;
+}): Promise<TPasswordResetConfirm> => {
+  try {
+    await axiosInstance.post(`${API_URL}/auth/password-reset/confirm`, body);
+    return 'done';
+  } catch (error) {
+    return axios.isAxiosError(error) &&
+      error.response?.status === HTTP_BAD_REQUEST
+      ? 'invalid'
+      : 'failed';
+  }
+};

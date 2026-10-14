@@ -242,6 +242,25 @@
     "resendThrottled": "Has solicitado demasiados correos. Espera unos minutos e inténtalo de nuevo.",
     "avatarLocked": "Verifica tu dirección de correo electrónico para subir una imagen de perfil."
   },
+  "passwordReset": {
+    "forgotLink": "¿Olvidaste tu contraseña?",
+    "forgotTitle": "¿Olvidaste tu contraseña?",
+    "forgotIntro": "Introduce tu correo y te enviaremos un enlace para restablecerla.",
+    "email": "Correo electrónico",
+    "sendLink": "Enviar enlace",
+    "sent": "Si existe una cuenta con esta dirección, hemos enviado un enlace para restablecerla.",
+    "throttled": "Demasiadas solicitudes, inténtalo más tarde.",
+    "failed": "Algo salió mal. Inténtalo de nuevo más tarde.",
+    "backToSignIn": "Volver a iniciar sesión",
+    "resetTitle": "Establece una nueva contraseña",
+    "newPassword": "Nueva contraseña",
+    "confirmPassword": "Confirmar contraseña",
+    "updatePassword": "Actualizar contraseña",
+    "updated": "Contraseña actualizada, inicia sesión.",
+    "invalidTitle": "Enlace no válido o caducado",
+    "invalid": "Este enlace de restablecimiento no es válido o ha caducado.",
+    "requestNew": "Solicitar un nuevo enlace"
+  },
   "passwordPolicy": {
     "passwordMinLength": "La contraseña debe tener al menos 8 caracteres",
     "passwordUppercase": "La contraseña debe contener al menos una letra mayúscula",

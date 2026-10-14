@@ -13,10 +13,12 @@ import { ESignInSteps } from '@/app/(modules)/(auth)/enum';
 import { Form } from '@/app/components/ui/form';
 import { ISignIn } from '@/app/(modules)/(auth)/interfaces';
 import InputField from '@/app/components/form/InputField';
+import Link from 'next/link';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
 import PasswordInput from '@/app/components/form/PasswordInput';
 import { PencilIcon } from 'lucide-react';
 import { defaultSignInValues } from '@/app/(modules)/(auth)/constants';
+import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/app/hooks/use-toast';
@@ -24,6 +26,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 
 const SignInForm = () => {
   const router = useRouter();
+  const { passwordReset } = useDictionary();
   const { toast } = useToast();
   const [step, setStep] = useState<ESignInSteps>(ESignInSteps.STEP_0);
   const emailRef = useRef<HTMLInputElement>(null);
@@ -36,6 +39,7 @@ const SignInForm = () => {
     defaultValues: defaultSignInValues,
   });
 
+  const email = form.watch('email');
   const isFirstStep = step === ESignInSteps.STEP_0;
 
   useEffect(() => {
@@ -110,6 +114,17 @@ const SignInForm = () => {
             />
           </>
         )}
+
+        <Link
+          href={
+            email
+              ? `/forgot-password?email=${encodeURIComponent(email)}`
+              : '/forgot-password'
+          }
+          className="self-end text-sm underline"
+        >
+          {passwordReset.forgotLink}
+        </Link>
 
         <LoadingButton
           variant="default"
