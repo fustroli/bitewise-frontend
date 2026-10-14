@@ -2,6 +2,7 @@ import BodyMetrics from '@/app/(modules)/[lang]/dashboard/components/BodyMetrics
 import DraftMealPlanSection from '@/app/(modules)/[lang]/dashboard/components/DraftMealPlan';
 import DraftMealPlanSkeleton from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftMealPlanSkeleton';
 import { IPageProps } from '@/app/utils/interfaces';
+import PageHeader from '@/app/components/layout/PageHeader';
 import Statistics from '@/app/(modules)/[lang]/dashboard/components/Statistics';
 import StatisticsCards from '@/app/(modules)/[lang]/dashboard/components/Statistics/StatisticsCards';
 import { Suspense } from 'react';
@@ -14,10 +15,12 @@ import { getDictionary } from '@/app/i18n/dictionaries';
  */
 export default async function Page(props: IPageProps) {
   const { lang } = await props.params;
-  const labels = (await getDictionary(lang)).dashboard.statistics;
+  const { dashboard } = await getDictionary(lang);
+  const labels = dashboard.statistics;
 
   return (
-    <div className="space-y-6 px-4 pb-8 md:px-8">
+    <>
+      <PageHeader title={dashboard.sidebar.dashboard} />
       <Suspense fallback={<StatisticsCards labels={labels} />}>
         <Statistics labels={labels} />
       </Suspense>
@@ -25,6 +28,6 @@ export default async function Page(props: IPageProps) {
         <DraftMealPlanSection lang={lang} />
       </Suspense>
       <BodyMetrics />
-    </div>
+    </>
   );
 }

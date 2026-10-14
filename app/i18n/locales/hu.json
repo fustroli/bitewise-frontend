@@ -9,11 +9,16 @@
       "logout": "Kijelentkezés"
     },
     "sidebar": {
-      "app": "Alkalmazás",
       "dashboard": "Vezérlőpult",
       "ingredients": "Hozzávalók",
       "meals": "Ételek",
-      "mealPlans": "Étrendek"
+      "mealPlans": "Étrendek",
+      "compare": "Összehasonlítás",
+      "account": "Fiók",
+      "mainNavigation": "Fő navigáció",
+      "home": "Kezdőlap",
+      "plans": "Étrendek",
+      "homeLink": "BiteWise kezdőlap"
     },
     "bodyMetrics": {
       "bmi": {
@@ -488,6 +493,10 @@
       "dietaryFiber": "Rost",
       "unit": "Egység",
       "actions": "Műveletek"
+    },
+    "page": {
+      "title": "Összehasonlítás",
+      "description": "Legfeljebb három tételt tehetsz egymás mellé. Az első az alap."
     }
   },
   "emailChange": {

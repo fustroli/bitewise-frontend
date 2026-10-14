@@ -27,7 +27,7 @@ const PageHeader = ({
   mobileLeading,
 }: IProps) => (
   <>
-    <div className="sticky top-0 z-30 -mx-4 -mt-4 flex h-[60px] items-center justify-between gap-2 border-b bg-card pl-4 pr-2 md:hidden">
+    <div className="sticky top-0 z-30 order-first -mx-4 -mt-4 flex h-[60px] items-center justify-between gap-2 border-b bg-card pl-4 pr-2 md:hidden">
       <div className="flex min-w-0 items-center gap-1">
         {mobileLeading}
         <h1 className="truncate text-xl font-extrabold tracking-tight">
@@ -38,7 +38,7 @@ const PageHeader = ({
         {mobileActions ?? actions}
       </div>
     </div>
-    <header className="hidden flex-wrap items-end justify-between gap-4 md:flex">
+    <header className="order-first hidden flex-wrap items-end justify-between gap-4 md:flex">
       <div className="flex flex-col gap-1.5">
         <h1 className="text-[30px] font-extrabold leading-tight tracking-tight">
           {title}

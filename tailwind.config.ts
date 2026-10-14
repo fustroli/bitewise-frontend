@@ -66,17 +66,6 @@ const config: Config = {
           over: hsl('zone-over'),
           obese: hsl('zone-obese'),
         },
-        // The shadcn sidebar's own names, until the app shell drops it.
-        sidebar: {
-          DEFAULT: hsl('card'),
-          foreground: hsl('secondary-foreground'),
-          primary: hsl('primary'),
-          'primary-foreground': hsl('primary-foreground'),
-          accent: hsl('accent'),
-          'accent-foreground': hsl('accent-foreground'),
-          border: hsl('border'),
-          ring: hsl('ring'),
-        },
         compare: {
           '1': hsl('compare-1'),
           '2': hsl('compare-2'),

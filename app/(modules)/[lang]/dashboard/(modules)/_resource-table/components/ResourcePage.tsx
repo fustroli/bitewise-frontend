@@ -14,6 +14,7 @@ import {
 
 import { DEFAULT_PAGE_SIZE } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/constants';
 import { IPageProps } from '@/app/utils/interfaces';
+import PageHeader from '@/app/components/layout/PageHeader';
 import ResourceSearch from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/components/ResourceSearch';
 import ResourceTable from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/components/ResourceTable';
 import ResourceTableSkeleton from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/components/ResourceTableSkeleton';
@@ -41,8 +42,11 @@ async function ResourcePage<TRecord extends IResourceRecord, TFormData>({
   const pageSize = resource.pageSize ?? DEFAULT_PAGE_SIZE;
   const { sort, search } = toListQuery(query, resource.columns, pageSize);
 
+  const labels = getResourceLabels(dictionary, resource.resourceKey);
+
   return (
-    <div className="px-4 pb-8 md:px-8">
+    <>
+      <PageHeader title={labels.title} />
       <ResourceSearchProvider search={search} sort={sort}>
         <section className="flex flex-col gap-4">
           {resource.searchable && (
@@ -54,7 +58,7 @@ async function ResourcePage<TRecord extends IResourceRecord, TFormData>({
               fallback={
                 <ResourceTableSkeleton
                   columns={resource.columns}
-                  labels={getResourceLabels(dictionary, resource.resourceKey)}
+                  labels={labels}
                   sort={sort}
                   search={search}
                   pageSize={pageSize}
@@ -70,7 +74,7 @@ async function ResourcePage<TRecord extends IResourceRecord, TFormData>({
           </ResourceSearchPending>
         </section>
       </ResourceSearchProvider>
-    </div>
+    </>
   );
 }
 

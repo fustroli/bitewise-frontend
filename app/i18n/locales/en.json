@@ -9,11 +9,16 @@
       "logout": "Logout"
     },
     "sidebar": {
-      "app": "Application",
       "dashboard": "Dashboard",
       "ingredients": "Ingredients",
       "meals": "Meals",
-      "mealPlans": "Meal Plans"
+      "mealPlans": "Meal plans",
+      "compare": "Compare",
+      "account": "Account",
+      "mainNavigation": "Main",
+      "home": "Home",
+      "plans": "Plans",
+      "homeLink": "BiteWise home"
     },
     "bodyMetrics": {
       "bmi": {
@@ -488,6 +493,10 @@
       "dietaryFiber": "Fiber",
       "unit": "Unit",
       "actions": "Actions"
+    },
+    "page": {
+      "title": "Compare",
+      "description": "Put up to three items side by side. The first one is the baseline."
     }
   },
   "emailChange": {
