@@ -1,1 +1,0 @@
-export const BREADCRUMBS_STARTING_INDEX = 2;

@@ -1,0 +1,63 @@
+'use client';
+
+import {
+  COMPARE_NAV_ITEM,
+  NAV_ITEMS,
+} from '@/app/(modules)/[lang]/dashboard/constants';
+import { useParams, usePathname } from 'next/navigation';
+
+import Link from 'next/link';
+import { cn } from '@/app/lib';
+import { isNavItemActive } from '@/app/(modules)/[lang]/dashboard/components/AppNav/nav.helpers';
+import { useDictionary } from '@/app/providers/dictionary-provider';
+
+const TABS = [...NAV_ITEMS, COMPARE_NAV_ITEM];
+
+/** The fixed bottom tab bar below `md`. */
+const MobileTabBar = () => {
+  const { lang } = useParams<{ lang: string }>();
+  const pathname = usePathname();
+  const labels = useDictionary().dashboard.sidebar;
+  const base = `/${lang}/dashboard`;
+
+  return (
+    <nav
+      aria-label={labels.mainNavigation}
+      className="fixed inset-x-0 bottom-0 z-40 border-t bg-card px-1 pb-[max(env(safe-area-inset-bottom),0.25rem)] pt-1 md:hidden"
+    >
+      <ul className="flex">
+        {TABS.map((item) => {
+          const href = `${base}${item.route}`;
+          const isActive = isNavItemActive(pathname, href, item.route);
+
+          return (
+            <li key={item.route} className="flex-1">
+              <Link
+                href={href}
+                aria-current={isActive ? 'page' : undefined}
+                className={cn(
+                  'flex min-h-14 flex-col items-center justify-center gap-1 rounded-md text-[11px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ring',
+                  isActive
+                    ? 'font-extrabold text-accent-foreground'
+                    : 'font-bold text-muted-foreground',
+                )}
+              >
+                <span
+                  className={cn(
+                    'flex h-7 w-[52px] items-center justify-center rounded-full',
+                    isActive && 'bg-accent',
+                  )}
+                >
+                  <item.icon aria-hidden className="size-5" />
+                </span>
+                {labels[item.mobileLabel]}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
+  );
+};
+
+export default MobileTabBar;

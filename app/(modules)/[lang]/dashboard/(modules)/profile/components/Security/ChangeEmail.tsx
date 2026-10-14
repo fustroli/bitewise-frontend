@@ -1,6 +1,5 @@
 'use client';
 
-import { Card, CardContent } from '@/app/components/ui/card';
 import {
   TEmailChangeSchema,
   createEmailChangeSchema,
@@ -12,6 +11,7 @@ import { Form } from '@/app/components/ui/form';
 import InputField from '@/app/components/form/InputField';
 import LoadingButton from '@/app/components/buttons/LoadingButton';
 import PasswordInput from '@/app/components/form/PasswordInput';
+import SettingsRow from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/SettingsRow';
 import Typography from '@/app/components/Typography';
 import { interpolate } from '@/app/utils/helpers';
 import { toastResult } from '@/app/utils/helpers/client';
@@ -27,7 +27,7 @@ const formatExpiry = (iso: string) =>
   `${new Date(iso).toISOString().slice(0, MINUTES_END).replace('T', ' ')} UTC`;
 
 const ChangeEmail = () => {
-  const { emailChange: text, validation } = useDictionary();
+  const { emailChange: text, validation, profile } = useDictionary();
   const { user, requestEmailChange, cancelEmailChange } = useUserContext();
   const [resending, setResending] = useState(false);
   const [cancelling, setCancelling] = useState(false);
@@ -74,20 +74,26 @@ const ChangeEmail = () => {
 
   if (user.hasPassword === false) {
     return (
-      <Card>
-        <CardContent className="space-y-2 pt-6">
+      <SettingsRow
+        title={profile.security.emailTitle}
+        description={profile.security.emailDescription}
+      >
+        <div className="space-y-2 rounded-lg border bg-card p-4 md:p-6">
           <Typography variant="p" className="font-medium">
             {user.email}
           </Typography>
           <Typography variant="p">{text.managedByGoogle}</Typography>
-        </CardContent>
-      </Card>
+        </div>
+      </SettingsRow>
     );
   }
 
   return (
-    <Card>
-      <CardContent className="space-y-6 pt-6">
+    <SettingsRow
+      title={profile.security.emailTitle}
+      description={profile.security.emailDescription}
+    >
+      <div className="space-y-6 rounded-lg border bg-card p-4 md:p-6">
         <Typography variant="p" className="font-medium">
           {interpolate(text.current, { email: user.email })}
         </Typography>
@@ -143,8 +149,8 @@ const ChangeEmail = () => {
             </form>
           </Form>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </SettingsRow>
   );
 };
 

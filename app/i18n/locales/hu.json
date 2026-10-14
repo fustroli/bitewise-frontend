@@ -1,29 +1,25 @@
 {
   "dashboard": {
-    "statistics": {
-      "totalIngredients": "Összes hozzávaló",
-      "totalMeals": "Összes étel",
-      "totalMealPlans": "Összes étrend"
-    },
     "appbar": {
       "logout": "Kijelentkezés"
     },
     "sidebar": {
-      "app": "Alkalmazás",
       "dashboard": "Vezérlőpult",
       "ingredients": "Hozzávalók",
       "meals": "Ételek",
-      "mealPlans": "Étrendek"
+      "mealPlans": "Étrendek",
+      "compare": "Összehasonlítás",
+      "account": "Fiók",
+      "mainNavigation": "Fő navigáció",
+      "home": "Kezdőlap",
+      "plans": "Étrendek",
+      "homeLink": "BiteWise kezdőlap"
     },
     "bodyMetrics": {
       "bmi": {
         "title": "BMI",
-        "description": "Testtömegindex, felnőtt WHO-táblázat",
-        "yourBmi": "Az Ön BMI-je",
-        "range": "BMI",
-        "category": "Kategória",
+        "description": "Felnőtt WHO-besorolás",
         "healthyWeight": "Egészséges testsúly az Ön magasságához: {min} – {max} kg",
-        "empty": "Adja meg a magasságát és a testsúlyát a BMI-je megtekintéséhez.",
         "categories": {
           "severeThinness": "Súlyos soványság",
           "moderateThinness": "Mérsékelt soványság",
@@ -33,14 +29,20 @@
           "obeseClassI": "I. fokú elhízás",
           "obeseClassII": "II. fokú elhízás",
           "obeseClassIII": "III. fokú elhízás"
-        }
+        },
+        "zones": {
+          "under": "Sovány",
+          "normal": "Normál",
+          "over": "Túlsúly",
+          "obese": "Elhízás"
+        },
+        "showTable": "WHO-táblázat megjelenítése",
+        "hideTable": "WHO-táblázat elrejtése",
+        "marker": "A BMI-d: {value}"
       },
       "bodyFat": {
         "title": "Testzsír",
-        "description": "US Navy módszer, ACE kategóriák",
-        "yourBodyFat": "Az Ön testzsírja",
-        "category": "Kategória",
-        "range": "Testzsír",
+        "description": "US Navy módszer · ACE-kategóriák",
         "fatMass": "Zsírtömeg",
         "leanMass": "Zsírmentes tömeg",
         "kg": "{value} kg",
@@ -54,12 +56,13 @@
           "fitness": "Fitnesz",
           "average": "Átlagos",
           "obese": "Elhízott"
-        }
+        },
+        "showTable": "Kategóriák megjelenítése",
+        "hideTable": "Kategóriák elrejtése",
+        "marker": "A testzsírod: {value}"
       },
       "calories": {
-        "title": "Kalória",
-        "description": "Napi kalória a heti testsúlyváltozás szerint",
-        "maintenance": "Fenntartó kalória",
+        "title": "Kalória cél szerint",
         "kcalPerDay": "kcal/nap",
         "kgPerWeek": "{value} kg/hét",
         "lose": "Fogyás",
@@ -76,17 +79,15 @@
         },
         "belowSafeMinimum": "A biztonságos minimum ({min} kcal/nap) alatt",
         "empty": "Adja meg a nemét, magasságát, testsúlyát és aktivitási szintjét a kalóriák megtekintéséhez.",
-        "dateOfBirthMissing": "Adja meg a születési dátumát a kalóriák megtekintéséhez."
+        "dateOfBirthMissing": "Adja meg a születési dátumát a kalóriák megtekintéséhez.",
+        "goal": "Cél",
+        "ofMaintenance": "a fenntartó {percent}-a",
+        "tickNote": "Jelölés = fenntartó kalória ({kcal} kcal/nap)."
       },
       "macros": {
-        "title": "Makrók",
-        "description": "Napi fehérje, szénhidrát és zsír a fenntartó kalóriád mellett",
-        "foodEnergy": "Tápanyagenergia",
-        "kcalPerDay": "kcal/nap",
-        "gramsPerDay": "gramm/nap",
-        "sugar": "Cukor",
-        "saturatedFat": "Telített zsír",
-        "limit": "<{value} g/nap",
+        "title": "Makrók fenntartó kalórián",
+        "gramsPerDay": "g/nap",
+        "limit": "< {value} g/nap",
         "macros": {
           "protein": "Fehérje",
           "carbs": "Szénhidrát",
@@ -99,10 +100,92 @@
           "highProtein": "Magas fehérjetartalmú"
         },
         "empty": "Add meg a nemed, magasságod, testsúlyod és aktivitási szinted a makrók megtekintéséhez.",
-        "dateOfBirthMissing": "Add meg a születési dátumod a makrók megtekintéséhez."
+        "dateOfBirthMissing": "Add meg a születési dátumod a makrók megtekintéséhez.",
+        "split": "Elosztás",
+        "ofEnergy": "az energia {percent}-a",
+        "sugarLimit": "Cukor felső határ",
+        "saturatedFatLimit": "Telített zsír felső határ"
       },
       "addBodyStats": "Testadatok megadása",
-      "addDateOfBirth": "Születési dátum megadása"
+      "addDateOfBirth": "Születési dátum megadása",
+      "you": "{label} · te"
+    },
+    "description": "Napi céljaid és testadataid egy pillantásra.",
+    "summary": {
+      "title": "Mai összefoglaló",
+      "description": "A testadataid alapján. A profilodban frissítheted őket.",
+      "pending": "Megjelenik, amint megadod a testadataidat.",
+      "maintenance": "Fenntartó kalória",
+      "maintenanceHint": "Megtartja a jelenlegi testsúlyodat",
+      "protein": "Fehérjecél",
+      "proteinHint": "{plan} makróelosztás",
+      "gramsPerDay": "g/nap",
+      "healthyWeight": "Egészséges testsúly: {min}–{max} kg",
+      "masses": "{fat} kg zsír · {lean} kg zsírmentes",
+      "needs": {
+        "maintenance": "Kell hozzá: nem, magasság, testsúly, aktivitási szint és születési dátum",
+        "protein": "Kell hozzá: fenntartó kalória",
+        "bmi": "Kell hozzá: magasság és testsúly",
+        "bodyFat": "Kell hozzá: nem, nyak és derék (nőknél csípő is)"
+      }
+    },
+    "nutrition": {
+      "title": "Táplálkozás",
+      "description": "Napi kalória a célodhoz, és hogyan oszd el."
+    },
+    "body": {
+      "title": "Test",
+      "description": "Hol állsz a szokásos referencia-tartományokban."
+    },
+    "setup": {
+      "title": "Állítsd be a céljaidat",
+      "description": "A BiteWise a testadataidból számolja a BMI-t, a testzsírt, a napi kalóriát és a makrókat.",
+      "progress": "Haladás",
+      "progressCount": "{done} / {total}",
+      "done": "Kész",
+      "steps": {
+        "bodyStats": {
+          "title": "Add meg a testadataidat",
+          "description": "Nem, magasság és testsúly",
+          "unlocks": "Feloldja: BMI"
+        },
+        "activity": {
+          "title": "Állítsd be az aktivitási szintedet",
+          "description": "Mennyire vagy aktív egy átlagos héten, és a születési dátumod",
+          "unlocks": "Feloldja: kalória és makrók"
+        },
+        "measurements": {
+          "title": "Add meg a méreteidet",
+          "description": "Nyak és derék, nőknél csípő is",
+          "unlocks": "Feloldja: testzsír"
+        }
+      }
+    },
+    "library": {
+      "title": "A könyvtárad",
+      "description": "Hozzávalókból ételeket, ételekből étrendeket állíthatsz össze.",
+      "buildTitle": "Építsd fel a könyvtáradat",
+      "buildDescription": "Minden lépés az előzőre épül.",
+      "step": "{n}. lépés",
+      "steps": {
+        "ingredients": {
+          "title": "Adj hozzá hozzávalókat",
+          "description": "Tápérték 100 g-onként vagy darabonként.",
+          "action": "Hozzávaló hozzáadása"
+        },
+        "meals": {
+          "title": "Állíts össze belőlük ételeket",
+          "description": "Az összesítést kiszámoljuk helyetted.",
+          "action": "Étel hozzáadása",
+          "needs": "Kell hozzá 1 hozzávaló"
+        },
+        "mealPlans": {
+          "title": "Tervezd meg a napjaidat",
+          "description": "Vesd össze az étrendeket a céljaiddal.",
+          "action": "Étrend hozzáadása",
+          "needs": "Kell hozzá 1 étel"
+        }
+      }
     }
   },
   "common": {
@@ -120,7 +203,8 @@
     "loading": "Betöltés",
     "profileImage": "Profilkép",
     "crop": "Vágás",
-    "savedSuccessfully": "Sikeres mentés"
+    "savedSuccessfully": "Sikeres mentés",
+    "notSet": "Nincs megadva"
   },
   "validation": {
     "emailInvalid": "Érvénytelen e-mail",
@@ -144,17 +228,22 @@
   "profile": {
     "basic": {
       "cropImage": "Kép vágása",
-      "cropImageDesc": "Állítsa be és vágja le a profilképét"
+      "cropImageDesc": "Állítsa be és vágja le a profilképét",
+      "title": "Profil",
+      "description": "A fotód és a bejelentkezési e-mail-címed.",
+      "email": "E-mail",
+      "changePhoto": "Fotó módosítása"
     },
     "menuOptions": {
-      "profile": "Profilom",
+      "profile": "Profil",
       "security": "Biztonság",
       "preferences": "Beállítások"
     },
     "deleteAccount": {
       "title": "Fiók törlése",
       "description": "Ez a művelet nem vonható vissza. A fiókod véglegesen törlésre kerül, és az adataidat eltávolítjuk a szervereinkről.",
-      "verification": "Biztos vagy benne?"
+      "verification": "Biztos vagy benne?",
+      "rowDescription": "A fiókod és minden adata végleges törlése."
     },
     "personalInformation": {
       "title": "Személyes adatok",
@@ -162,17 +251,19 @@
       "lastName": "Vezetéknév",
       "phoneNumber": "Telefonszám",
       "username": "Felhasználónév",
-      "dob": "Születési dátum"
+      "dob": "Születési dátum",
+      "description": "Nem kötelező adatok rólad.",
+      "edit": "Személyes adatok szerkesztése"
     },
     "bodyStats": {
       "title": "Testadatok",
-      "description": "Ezekből számoljuk a BMI-t és a kalóriákat a vezérlőpulton.",
+      "description": "Ezekből számoljuk a BMI-t, a testzsírt, a kalóriákat és a makrókat a vezérlőpulton.",
       "sex": "Nem (a számításokhoz)",
-      "height": "Magasság (cm)",
-      "weight": "Testsúly (kg)",
-      "neck": "Nyak (cm)",
-      "waist": "Derék (cm)",
-      "hip": "Csípő (cm, nem kötelező)",
+      "height": "Magasság",
+      "weight": "Testsúly",
+      "neck": "Nyak",
+      "waist": "Derék",
+      "hip": "Csípő",
       "hipHint": "Csak nőknél használjuk.",
       "activityLevel": "Aktivitási szint",
       "notSet": "Nincs megadva",
@@ -188,10 +279,17 @@
         "ACTIVE": "Aktív: napi edzés, vagy intenzív edzés heti 3–4 alkalommal",
         "VERY_ACTIVE": "Nagyon aktív: intenzív edzés heti 6–7 alkalommal",
         "EXTRA_ACTIVE": "Rendkívül aktív: nagyon intenzív napi edzés, vagy fizikai munka"
-      }
+      },
+      "viewDashboard": "Vezérlőpult megtekintése",
+      "edit": "Testadatok szerkesztése",
+      "basics": "Alapadatok",
+      "measurements": "Méretek",
+      "womenOnly": "Csak nőknél"
     },
     "socialProfiles": {
-      "title": "Közösségi profilok"
+      "title": "Közösségi profilok",
+      "description": "Linkek a máshol lévő profiljaidhoz.",
+      "edit": "Közösségi profilok szerkesztése"
     },
     "security": {
       "oldPassword": "Régi jelszó",
@@ -199,18 +297,28 @@
       "confirmPassword": "Jelszó megerősítése",
       "changePassword": "Jelszó megváltoztatása",
       "passwordChanged": "Jelszó sikeresen megváltoztatva",
-      "toggleVisibility": "Jelszó láthatóságának váltása"
+      "toggleVisibility": "Jelszó láthatóságának váltása",
+      "emailTitle": "E-mail",
+      "emailDescription": "A cím, amellyel bejelentkezel.",
+      "passwordTitle": "Jelszó",
+      "passwordDescription": "A bejelentkezési jelszavad módosítása."
     },
     "appearance": {
       "language": "Nyelv",
-      "languageDesc": "Alapértelmezett nyelv a vezérlőpult számára",
+      "languageDesc": "A BiteWise nyelve.",
       "english": "Angol",
       "hungarian": "Magyar",
       "theme": "Téma",
-      "themeDesc": "Alapértelmezett téma a vezérlőpult számára",
+      "themeDesc": "Világos, sötét, vagy ahogy az eszközöd be van állítva.",
       "light": "Világos",
       "dark": "Sötét",
       "system": "Rendszer"
+    },
+    "page": {
+      "title": "Fiókbeállítások",
+      "description": "A profilod és a céljaid mögötti adatok kezelése.",
+      "back": "Vissza a vezérlőpultra",
+      "tabs": "Beállítások"
     }
   },
   "resourceTable": {
@@ -238,25 +346,27 @@
     "updated": "Sikeresen frissítve!",
     "deleted": "Sikeresen törölve.",
     "positiveNumber": "{field}: pozitív szám kell legyen",
-    "nameTaken": "Ez a név már foglalt"
+    "nameTaken": "Ez a név már foglalt",
+    "showing": "{from}–{to} / {total}",
+    "rowActions": "Műveletek: {name}",
+    "compare": "Összehasonlítás"
   },
   "resources": {
     "ingredients": {
       "title": "Hozzávalók",
-      "empty": "Nincsenek hozzávalók",
+      "empty": "Még nincsenek hozzávalók",
       "noMatch": "Nincs a(z) „{term}” keresésnek megfelelő hozzávaló",
-      "searchPlaceholder": "Hozzávalók keresése...",
+      "searchPlaceholder": "Hozzávalók keresése",
       "addTitle": "Hozzávaló hozzáadása",
       "editTitle": "Hozzávaló szerkesztése",
       "deleteTitle": "Hozzávaló törlése",
       "columns": {
-        "name": "Név",
+        "name": "Hozzávaló",
         "calories": "Kalória",
         "protein": "Fehérje",
-        "totalFat": "Zsír (telített)",
-        "totalCarbohydrates": "Szénhidrát (cukor)",
-        "dietaryFiber": "Rost",
-        "unit": "Egység"
+        "totalCarbohydrates": "Szénhidrát",
+        "totalFat": "Zsír",
+        "dietaryFiber": "Rost"
       },
       "fields": {
         "name": "Név",
@@ -272,25 +382,33 @@
       },
       "validation": {
         "nameRequired": "A név megadása kötelező"
+      },
+      "description": "Tápértékek 100 g-onként vagy darabonként.",
+      "compare": "Hozzávalók összehasonlítása",
+      "units": {
+        "100g": "100 g-onként",
+        "piece": "darabonként"
+      },
+      "list": {
+        "sugar": "cukor {value} g",
+        "saturated": "telített {value} g",
+        "sugarLabel": "Cukor",
+        "saturatedLabel": "Telített zsír",
+        "fiberLabel": "Rost",
+        "macros": "F {protein} · Sz {carbs} · Zs {fat}",
+        "details": "{name} részletei"
       }
     },
     "meals": {
       "title": "Ételek",
-      "empty": "Nincsenek ételek",
+      "empty": "Még nincsenek ételek",
       "noMatch": "Nincs a(z) „{term}” keresésnek megfelelő étel",
-      "searchPlaceholder": "Ételek keresése...",
+      "searchPlaceholder": "Ételek keresése",
       "addTitle": "Étel hozzáadása",
       "editTitle": "Étel szerkesztése",
       "deleteTitle": "Étel törlése",
       "columns": {
-        "name": "Név",
-        "calories": "Kalória",
-        "protein": "Fehérje",
-        "totalFat": "Zsír (telített)",
-        "totalCarbohydrates": "Szénhidrát (cukor)",
-        "dietaryFiber": "Rost",
-        "quantity": "Mennyiség",
-        "unit": "Egység"
+        "name": "Név"
       },
       "fields": {
         "name": "Étel neve",
@@ -308,26 +426,40 @@
         "ingredientRequired": "Válassz hozzávalót",
         "quantityPositive": "A mennyiségnek nagyobbnak kell lennie 0-nál",
         "ingredientDuplicate": "Minden hozzávaló csak egyszer adható hozzá"
+      },
+      "description": "Az összesítést az ételek hozzávalóiból számoljuk.",
+      "compare": "Ételek összehasonlítása",
+      "card": {
+        "ingredients": {
+          "one": "{count} hozzávaló",
+          "other": "{count} hozzávaló"
+        },
+        "fiber": "{value} g rost",
+        "show": {
+          "one": "{count} hozzávaló mutatása",
+          "other": "{count} hozzávaló mutatása"
+        },
+        "hide": "Hozzávalók elrejtése",
+        "grams": "{value} g",
+        "pieces": {
+          "one": "{count} db",
+          "other": "{count} db"
+        },
+        "macros": "F {protein} · Sz {carbs} · Zs {fat}",
+        "sugar": "cukor {value} g",
+        "saturated": "telített {value} g"
       }
     },
     "mealPlans": {
       "title": "Étrendek",
-      "empty": "Nincsenek étrendek",
+      "empty": "Még nincsenek étrendek",
       "noMatch": "Nincs a(z) „{term}” keresésnek megfelelő étrend",
-      "searchPlaceholder": "Étrendek keresése...",
+      "searchPlaceholder": "Étrendek keresése",
       "addTitle": "Étrend hozzáadása",
       "editTitle": "Étrend szerkesztése",
       "deleteTitle": "Étrend törlése",
-      "maintenance": "Fenntartó",
-      "showMaintenance": "Fenntartó értékek mutatása",
-      "hideMaintenance": "Fenntartó értékek elrejtése",
       "columns": {
-        "name": "Név",
-        "calories": "Kalória",
-        "protein": "Fehérje",
-        "totalFat": "Zsír (telített)",
-        "totalCarbohydrates": "Szénhidrát (cukor)",
-        "dietaryFiber": "Rost"
+        "name": "Név"
       },
       "fields": {
         "name": "Étrend neve",
@@ -337,7 +469,30 @@
       "validation": {
         "nameRequired": "A név megadása kötelező",
         "mealsRequired": "Legalább egy étel szükséges"
-      }
+      },
+      "description": "Minden étrend egy nap, a napi céljaidhoz mérve.",
+      "compare": "Étrendek összehasonlítása",
+      "card": {
+        "meals": {
+          "one": "{count} étel",
+          "other": "{count} étel"
+        },
+        "openAsDraft": "Megnyitás vázlatként",
+        "calories": "Kalória",
+        "ofKcal": "/ {value} kcal",
+        "ofGrams": "/ {value} g",
+        "onTarget": "Célon belül ({diff} kcal)",
+        "under": "{value} kcal-val a fenntartó alatt",
+        "over": "{value} kcal-val a fenntartó felett",
+        "show": {
+          "one": "{count} étel mutatása",
+          "other": "{count} étel mutatása"
+        },
+        "hide": "Ételek elrejtése",
+        "macros": "F {protein} · Sz {carbs} · Zs {fat}",
+        "noTargets": "Add meg a testadataidat, hogy az étrendeket a napi céljaidhoz mérhesd."
+      },
+      "targets": "Célok: {kcal} kcal · {plan} elosztás"
     }
   },
   "auth": {
@@ -413,9 +568,11 @@
       "quantity": "Mennyiség",
       "calories": "Kalória",
       "protein": "Fehérje",
-      "totalFat": "Zsír (telített)",
-      "totalCarbohydrates": "Szénhidrát (cukor)",
-      "dietaryFiber": "Rost"
+      "totalFat": "Zsír",
+      "totalCarbohydrates": "Szénhidrát",
+      "dietaryFiber": "Rost",
+      "sugar": "cukor {value} g",
+      "saturatedFat": "telített {value} g"
     },
     "fields": {
       "meal": "Étel",
@@ -454,6 +611,11 @@
       "goToMealPlans": "Ugrás az étrendekhez",
       "submit": "Betöltés",
       "loaded": "{name} betöltve"
+    },
+    "header": {
+      "startDay": "Vázlatnap indítása",
+      "cardTitle": "Tervezz meg egy napot",
+      "loadShort": "Étrend betöltése"
     }
   },
   "errorBoundary": {
@@ -463,31 +625,72 @@
     "tryAgain": "Próbálja újra"
   },
   "comparison": {
-    "title": {
-      "ingredients": "Hozzávalók összehasonlítása",
-      "meals": "Ételek összehasonlítása",
-      "mealPlans": "Étrendek összehasonlítása"
+    "page": {
+      "title": "Összehasonlítás",
+      "description": "Legfeljebb három tételt tehetsz egymás mellé. Az első az alap."
     },
-    "description": "Egyszerre legfeljebb 3.",
-    "empty": "Még nincs mit összehasonlítani. Használd az „Hozzáadás az összehasonlításhoz” menüpontot egy sor műveleti menüjében.",
-    "addMore": "Adj hozzá legalább még egyet az összehasonlításhoz.",
-    "loading": "Betöltés...",
-    "clearAll": "Összes törlése",
-    "removeItem": "{name} eltávolítása az összehasonlításból",
-    "add": "Hozzáadás az összehasonlításhoz",
-    "remove": "Eltávolítás az összehasonlításból",
-    "full": "Az összehasonlítás megtelt",
-    "columns": {
-      "name": "Név",
-      "calories": "Kalória",
-      "protein": "Fehérje",
-      "totalFat": "Zsír",
-      "saturatedFat": "Telített zsír",
-      "totalCarbohydrates": "Szénhidrát",
-      "sugar": "Cukor",
-      "dietaryFiber": "Rost",
-      "unit": "Egység",
-      "actions": "Műveletek"
+    "kindLabel": "Mit hasonlítasz össze",
+    "kinds": {
+      "ingredients": "Hozzávalók",
+      "meals": "Ételek",
+      "plans": "Étrendek"
+    },
+    "chooseTitle": {
+      "ingredients": "Válassz hozzávalókat",
+      "meals": "Válassz ételeket",
+      "plans": "Válassz étrendeket"
+    },
+    "baseline": "Alap",
+    "item": "{n}. tétel",
+    "none": "Nincs",
+    "placeholder": "Válassz…",
+    "pickPrompt": "Válassz egy alapot az összehasonlításhoz.",
+    "overview": {
+      "title": "Áttekintés",
+      "description": {
+        "ingredients": "Minden hozzávaló úgy, ahogy rögzítetted: 100 g-onként vagy darabonként.",
+        "meals": "Minden ételből egy adag.",
+        "plans": "Minden étrendből egy nap."
+      }
+    },
+    "basis": {
+      "100g": "100 g-onként",
+      "piece": "darabonként",
+      "meals": {
+        "one": "1 adag · {count} hozzávaló",
+        "other": "1 adag · {count} hozzávaló"
+      },
+      "plans": {
+        "one": "1 nap · {count} étel",
+        "other": "1 nap · {count} étel"
+      }
+    },
+    "ofTarget": "A {kcal} kcal-os célod {percent}-a",
+    "nutrients": {
+      "title": "Tápanyagonként",
+      "description": "A sávok soronként a legnagyobb értékhez igazodnak. A különbségek ehhez képest: {name}.",
+      "nutrient": "Tápanyag",
+      "showDifferences": "Különbségek mutatása",
+      "same": "azonos",
+      "rows": {
+        "calories": "Kalória",
+        "protein": "Fehérje",
+        "totalCarbohydrates": "Szénhidrát",
+        "sugar": "ebből cukor",
+        "totalFat": "Zsír",
+        "saturatedFat": "ebből telített",
+        "dietaryFiber": "Rost"
+      }
+    },
+    "empty": {
+      "ingredients": "Legalább két hozzávaló kell az összehasonlításhoz.",
+      "meals": "Legalább két étel kell az összehasonlításhoz.",
+      "plans": "Legalább két étrend kell az összehasonlításhoz.",
+      "action": {
+        "ingredients": "Ugrás a hozzávalókhoz",
+        "meals": "Ugrás az ételekhez",
+        "plans": "Ugrás az étrendekhez"
+      }
     }
   },
   "emailChange": {

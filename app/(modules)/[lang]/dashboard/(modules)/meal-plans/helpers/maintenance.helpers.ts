@@ -1,27 +1,18 @@
-import {
-  MAINTENANCE_MACRO_PLAN,
-  NO_TARGET,
-} from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/constants';
-import {
-  formatCalories,
-  formatGrams,
-} from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/helpers';
-
+import { EMacroPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
 import { IBodyMetrics } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/interfaces';
 import { IMaintenanceTargets } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
-import { INutritionColumn } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/interfaces';
+import { ON_TARGET_KCAL } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/constants';
 
 /** Unset while Maintenance can't be computed. */
-export const maintenanceTargets = ({
-  calories,
-  macros,
-}: IBodyMetrics): IMaintenanceTargets | undefined => {
-  const plan = macros?.plans.find(
-    ({ plan }) => plan === MAINTENANCE_MACRO_PLAN,
-  );
+export const maintenanceTargets = (
+  { calories, macros }: IBodyMetrics,
+  planName: EMacroPlan = EMacroPlan.BALANCED,
+): IMaintenanceTargets | undefined => {
+  const plan = macros?.plans.find((option) => option.plan === planName);
   if (!calories || !macros || !plan) return undefined;
 
   return {
+    plan: planName,
     calories: calories.maintenance,
     protein: plan.protein.grams,
     totalFat: plan.fat.grams,
@@ -31,22 +22,8 @@ export const maintenanceTargets = ({
   };
 };
 
-/** Rounds only for display, e.g. `74 (<30) g`, `2,615 kcal` or `–`. */
-export const formatMaintenanceTarget = (
-  targets: IMaintenanceTargets,
-  { nutrient, subNutrient, unit }: INutritionColumn,
-  locale: string,
-) => {
-  if (!(nutrient in targets)) return NO_TARGET;
-
-  const key = nutrient as keyof IMaintenanceTargets;
-  const amount =
-    key === 'calories'
-      ? formatCalories(targets[key], locale)
-      : formatGrams(targets[key], locale);
-  const cap =
-    subNutrient &&
-    `(<${formatGrams(targets[subNutrient as keyof IMaintenanceTargets], locale)})`;
-
-  return [amount, cap, unit].filter(Boolean).join(' ');
+/** A day's calories against Maintenance: the signed gap, and if it's close. */
+export const calorieGap = (kcal: number, maintenance: number) => {
+  const diff = kcal - maintenance;
+  return { diff, onTarget: Math.abs(Math.round(diff)) <= ON_TARGET_KCAL };
 };

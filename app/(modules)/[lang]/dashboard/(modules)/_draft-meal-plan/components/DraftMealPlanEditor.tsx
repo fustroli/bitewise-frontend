@@ -8,11 +8,14 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/components/ui/card';
-import { ChevronDown, ChevronUp, Trash2 } from 'lucide-react';
+import { ChevronDown, ChevronUp, Download, Plus, Trash2 } from 'lucide-react';
 import {
   DEFAULT_MEAL_MULTIPLIER,
   DRAFT_STORAGE_VERSION,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
+import DraftNutritionCells, {
+  DraftNutritionHeads,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftNutritionCells';
 import {
   IDraftSources,
   IResolvedDraft,
@@ -44,10 +47,8 @@ import DraftLineRow from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal
 import DraftMaintenance from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftMaintenance';
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { Form } from '@/app/components/ui/form';
-import LoadMealPlanDialog from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/LoadMealPlanDialog';
-import { NUTRITION_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
-import { formatNutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
+import { useDraftMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/context';
 import { zodResolver } from '@hookform/resolvers/zod';
 
 interface IProps {
@@ -55,22 +56,19 @@ interface IProps {
   initial: IResolvedDraft;
   sources: IDraftSources;
   profileHref: string;
-  mealPlansHref: string;
   onSave: (draft: TStoredDraft) => void;
   onClear: () => void;
-  onLoad: (draft: TStoredDraft) => void;
 }
 
 const DraftMealPlanEditor = ({
   initial,
   sources,
   profileHref,
-  mealPlansHref,
   onSave,
   onClear,
-  onLoad,
 }: IProps) => {
   const dictionary = useDictionary();
+  const { openLoad } = useDraftMealPlan();
   const { draftMealPlan: labels, resourceTable } = dictionary;
 
   const [removed] = useState(initial.removed);
@@ -119,22 +117,19 @@ const DraftMealPlanEditor = ({
     );
 
   const total = draftNutrition(lines, sources);
-  const columnLabel = (nutrient: string) =>
-    labels.columns[nutrient as keyof typeof labels.columns];
 
   return (
-    <Card className="w-full border-none shadow-soft">
+    <Card className="w-full">
       <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
         <div className="space-y-1.5">
           <CardTitle>{labels.title}</CardTitle>
           <CardDescription>{labels.description}</CardDescription>
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          <LoadMealPlanDialog
-            lineCount={lines.length}
-            mealPlansHref={mealPlansHref}
-            onLoad={onLoad}
-          />
+          <Button type="button" variant="outline" onClick={() => openLoad()}>
+            <Download aria-hidden />
+            <span className="sr-only sm:not-sr-only">{labels.load.button}</span>
+          </Button>
           <DeleteDialog
             title={labels.clear}
             subtitle={labels.clearConfirm}
@@ -177,11 +172,7 @@ const DraftMealPlanEditor = ({
                   <TableRow>
                     <TableHead>{labels.columns.item}</TableHead>
                     <TableHead>{labels.columns.quantity}</TableHead>
-                    {NUTRITION_COLUMNS.map(({ nutrient }) => (
-                      <TableHead key={nutrient} className="whitespace-nowrap">
-                        {columnLabel(nutrient)}
-                      </TableHead>
-                    ))}
+                    <DraftNutritionHeads />
                     <TableHead>
                       <span className="sr-only">{resourceTable.actions}</span>
                     </TableHead>
@@ -211,14 +202,7 @@ const DraftMealPlanEditor = ({
                     <TableCell colSpan={2} className="font-semibold">
                       {labels.total}
                     </TableCell>
-                    {NUTRITION_COLUMNS.map((column) => (
-                      <TableCell
-                        key={column.nutrient}
-                        className="whitespace-nowrap font-semibold"
-                      >
-                        {formatNutrition(total, column)}
-                      </TableCell>
-                    ))}
+                    <DraftNutritionCells nutrition={total} isTotal />
                     <TableCell />
                   </TableRow>
                 </TableFooter>
@@ -240,6 +224,7 @@ const DraftMealPlanEditor = ({
                 })
               }
             >
+              <Plus aria-hidden />
               {labels.addMeal}
             </Button>
             <Button
@@ -253,6 +238,7 @@ const DraftMealPlanEditor = ({
                 })
               }
             >
+              <Plus aria-hidden />
               {labels.addIngredient}
             </Button>
           </div>

@@ -1,6 +1,5 @@
 'use client';
 
-import { Ellipsis, Trash2 } from 'lucide-react';
 import {
   IResourceForm,
   IResourceRecord,
@@ -9,13 +8,16 @@ import {
 import {
   Menubar,
   MenubarContent,
+  MenubarItem,
   MenubarMenu,
   MenubarSeparator,
   MenubarTrigger,
 } from '@/app/components/ui/menubar';
+import { MoreHorizontal, Scale, Trash2 } from 'lucide-react';
 
 import DeleteDialog from '@/app/components/DeleteDialog';
 import { FieldValues } from 'react-hook-form';
+import Link from 'next/link';
 import { ROW_ACTION_ITEM_CLASS } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/constants';
 import ResourceFormDialog from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/components/ResourceFormDialog';
 import { cn } from '@/app/lib/utils';
@@ -23,6 +25,7 @@ import { getResourceLabels } from '@/app/(modules)/[lang]/dashboard/(modules)/_r
 import { interpolate } from '@/app/utils/helpers';
 import { toastResult } from '@/app/utils/helpers/client';
 import { useDictionary } from '@/app/providers/dictionary-provider';
+import { useParams } from 'next/navigation';
 
 interface IProps<
   TRecord extends IResourceRecord,
@@ -32,9 +35,7 @@ interface IProps<
   config: IResourceForm<TRecord, TValues, TFormData>;
 }
 
-const useNoAfterRemove = () => () => {};
-
-/** Edit, Duplicate, then a delete confirmation naming the record. */
+/** Edit, Duplicate, Compare, then a delete confirmation naming the record. */
 function ResourceRowActions<
   TRecord extends IResourceRecord,
   TValues extends FieldValues,
@@ -44,24 +45,22 @@ function ResourceRowActions<
   const t = dictionary.resourceTable;
   const labels = getResourceLabels(dictionary, config.resourceKey);
 
-  const RowMenuItem = config.rowMenuItem;
-  const useAfterRemove = config.useAfterRemove ?? useNoAfterRemove;
-  const afterRemove = useAfterRemove();
+  const { lang } = useParams<{ lang: string }>();
+  const compareHref = `/${lang}/dashboard/compare?type=${config.compareType}&ids=${record.id}`;
 
   const handleOnDelete = async () => {
     const result = await config.remove(record.id);
     toastResult(result, t.deleted);
-    if (result.ok) afterRemove(record.id);
   };
 
   return (
     <Menubar className="ml-auto w-fit border-none bg-transparent p-0 shadow-none">
       <MenubarMenu>
         <MenubarTrigger
-          aria-label={t.actions}
-          className="size-9 justify-center rounded-md p-0 text-muted-foreground hover:cursor-pointer hover:bg-muted hover:text-foreground data-[state=open]:bg-muted data-[state=open]:text-foreground"
+          aria-label={interpolate(t.rowActions, { name: record.name })}
+          className="size-10 justify-center rounded-md p-0 text-secondary-foreground hover:cursor-pointer hover:bg-muted hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-[state=open]:bg-muted data-[state=open]:text-foreground"
         >
-          <Ellipsis />
+          <MoreHorizontal aria-hidden className="size-[18px]" />
         </MenubarTrigger>
         <MenubarContent
           align="end"
@@ -80,7 +79,12 @@ function ResourceRowActions<
             formData={formData}
             duplicate
           />
-          {RowMenuItem && <RowMenuItem record={record} />}
+          <MenubarItem asChild className={ROW_ACTION_ITEM_CLASS}>
+            <Link href={compareHref}>
+              <Scale />
+              {t.compare}
+            </Link>
+          </MenubarItem>
           <MenubarSeparator className="mx-0 my-1.5" />
           <DeleteDialog
             onConfirm={handleOnDelete}

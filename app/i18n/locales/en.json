@@ -1,29 +1,25 @@
 {
   "dashboard": {
-    "statistics": {
-      "totalIngredients": "Total Ingredients",
-      "totalMeals": "Total Meals",
-      "totalMealPlans": "Total Meal Plans"
-    },
     "appbar": {
-      "logout": "Logout"
+      "logout": "Sign out"
     },
     "sidebar": {
-      "app": "Application",
       "dashboard": "Dashboard",
       "ingredients": "Ingredients",
       "meals": "Meals",
-      "mealPlans": "Meal Plans"
+      "mealPlans": "Meal plans",
+      "compare": "Compare",
+      "account": "Account",
+      "mainNavigation": "Main",
+      "home": "Home",
+      "plans": "Plans",
+      "homeLink": "BiteWise home"
     },
     "bodyMetrics": {
       "bmi": {
         "title": "BMI",
-        "description": "Body mass index, adult WHO table",
-        "yourBmi": "Your BMI",
-        "range": "BMI",
-        "category": "Category",
+        "description": "Adult WHO classification",
         "healthyWeight": "Healthy weight for your height: {min} – {max} kg",
-        "empty": "Add your height and weight to see your BMI.",
         "categories": {
           "severeThinness": "Severe thinness",
           "moderateThinness": "Moderate thinness",
@@ -33,14 +29,20 @@
           "obeseClassI": "Obese class I",
           "obeseClassII": "Obese class II",
           "obeseClassIII": "Obese class III"
-        }
+        },
+        "zones": {
+          "under": "Underweight",
+          "normal": "Normal",
+          "over": "Overweight",
+          "obese": "Obese"
+        },
+        "showTable": "Show WHO table",
+        "hideTable": "Hide WHO table",
+        "marker": "Your BMI: {value}"
       },
       "bodyFat": {
         "title": "Body fat",
-        "description": "US Navy method, ACE categories",
-        "yourBodyFat": "Your body fat",
-        "category": "Category",
-        "range": "Body fat",
+        "description": "US Navy method · ACE categories",
         "fatMass": "Fat mass",
         "leanMass": "Lean mass",
         "kg": "{value} kg",
@@ -54,12 +56,13 @@
           "fitness": "Fitness",
           "average": "Average",
           "obese": "Obese"
-        }
+        },
+        "showTable": "Show categories",
+        "hideTable": "Hide categories",
+        "marker": "Your body fat: {value}"
       },
       "calories": {
-        "title": "Calories",
-        "description": "Daily calories by weekly weight change",
-        "maintenance": "Maintenance calories",
+        "title": "Calories by goal",
         "kcalPerDay": "kcal/day",
         "kgPerWeek": "{value} kg/week",
         "lose": "Lose",
@@ -76,17 +79,15 @@
         },
         "belowSafeMinimum": "Below the safe minimum of {min} kcal/day",
         "empty": "Add your sex, height, weight and Activity level to see your calories.",
-        "dateOfBirthMissing": "Add your date of birth to see your calories."
+        "dateOfBirthMissing": "Add your date of birth to see your calories.",
+        "goal": "Goal",
+        "ofMaintenance": "{percent} of maintenance",
+        "tickNote": "Tick mark = maintenance ({kcal} kcal/day)."
       },
       "macros": {
-        "title": "Macros",
-        "description": "Daily protein, carbs and fat at your maintenance calories",
-        "foodEnergy": "Food energy",
-        "kcalPerDay": "kcal/day",
-        "gramsPerDay": "grams/day",
-        "sugar": "Sugar",
-        "saturatedFat": "Saturated fat",
-        "limit": "<{value} g/day",
+        "title": "Macros at maintenance",
+        "gramsPerDay": "g/day",
+        "limit": "< {value} g/day",
         "macros": {
           "protein": "Protein",
           "carbs": "Carbs",
@@ -99,10 +100,92 @@
           "highProtein": "High protein"
         },
         "empty": "Add your sex, height, weight and Activity level to see your macros.",
-        "dateOfBirthMissing": "Add your date of birth to see your macros."
+        "dateOfBirthMissing": "Add your date of birth to see your macros.",
+        "split": "Split",
+        "ofEnergy": "{percent} of energy",
+        "sugarLimit": "Sugar limit",
+        "saturatedFatLimit": "Saturated fat limit"
       },
       "addBodyStats": "Add Body stats",
-      "addDateOfBirth": "Add date of birth"
+      "addDateOfBirth": "Add date of birth",
+      "you": "{label} · you"
+    },
+    "description": "Your daily targets and body stats at a glance.",
+    "summary": {
+      "title": "Today’s summary",
+      "description": "Based on your body stats. Update them in your profile.",
+      "pending": "Appears once your body stats are added.",
+      "maintenance": "Maintenance calories",
+      "maintenanceHint": "Keeps your current weight",
+      "protein": "Protein target",
+      "proteinHint": "{plan} macro split",
+      "gramsPerDay": "g/day",
+      "healthyWeight": "Healthy weight {min}–{max} kg",
+      "masses": "{fat} kg fat · {lean} kg lean",
+      "needs": {
+        "maintenance": "Needs sex, height, weight, activity level and date of birth",
+        "protein": "Needs maintenance calories",
+        "bmi": "Needs height and weight",
+        "bodyFat": "Needs sex, neck and waist (+ hip for women)"
+      }
+    },
+    "nutrition": {
+      "title": "Nutrition",
+      "description": "Daily calories for your goal and how to split them."
+    },
+    "body": {
+      "title": "Body",
+      "description": "Where you sit on standard reference ranges."
+    },
+    "setup": {
+      "title": "Set up your targets",
+      "description": "BiteWise uses your body stats to calculate BMI, body fat, daily calories and macros.",
+      "progress": "Progress",
+      "progressCount": "{done} of {total}",
+      "done": "Done",
+      "steps": {
+        "bodyStats": {
+          "title": "Add body stats",
+          "description": "Sex, height and weight",
+          "unlocks": "Unlocks BMI"
+        },
+        "activity": {
+          "title": "Set your activity level",
+          "description": "How active a typical week is, and your date of birth",
+          "unlocks": "Unlocks calories & macros"
+        },
+        "measurements": {
+          "title": "Add measurements",
+          "description": "Neck and waist, plus hip for women",
+          "unlocks": "Unlocks body fat"
+        }
+      }
+    },
+    "library": {
+      "title": "Your library",
+      "description": "Build meals from ingredients, then combine meals into plans.",
+      "buildTitle": "Build your library",
+      "buildDescription": "Each step builds on the one before.",
+      "step": "Step {n}",
+      "steps": {
+        "ingredients": {
+          "title": "Add ingredients",
+          "description": "Nutrition per 100 g or per piece.",
+          "action": "Add ingredient"
+        },
+        "meals": {
+          "title": "Combine them into meals",
+          "description": "Totals are calculated for you.",
+          "action": "Add meal",
+          "needs": "Needs 1 ingredient"
+        },
+        "mealPlans": {
+          "title": "Plan your days",
+          "description": "Compare each plan to your targets.",
+          "action": "Add meal plan",
+          "needs": "Needs 1 meal"
+        }
+      }
     }
   },
   "common": {
@@ -120,7 +203,8 @@
     "loading": "Loading",
     "profileImage": "Profile Image",
     "crop": "Crop",
-    "savedSuccessfully": "Saved successfully"
+    "savedSuccessfully": "Saved successfully",
+    "notSet": "Not set"
   },
   "validation": {
     "emailInvalid": "Invalid email",
@@ -144,37 +228,44 @@
   "profile": {
     "basic": {
       "cropImage": "Crop Image",
-      "cropImageDesc": "Adjust and crop your profile image"
+      "cropImageDesc": "Adjust and crop your profile image",
+      "title": "Profile",
+      "description": "Your photo and sign-in email.",
+      "email": "Email",
+      "changePhoto": "Change photo"
     },
     "menuOptions": {
-      "profile": "My Profile",
+      "profile": "Profile",
       "security": "Security",
       "preferences": "Preferences"
     },
     "deleteAccount": {
-      "title": "Delete Account",
+      "title": "Delete account",
       "description": "This action cannot be undone. This will permanently delete your account and remove your data from our servers.",
-      "verification": "Are you absolutely sure?"
+      "verification": "Are you absolutely sure?",
+      "rowDescription": "Permanently remove your account and all its data."
     },
     "personalInformation": {
-      "title": "Personal Information",
-      "firstName": "First Name",
-      "lastName": "Last Name",
-      "phoneNumber": "Phone Number",
+      "title": "Personal information",
+      "firstName": "First name",
+      "lastName": "Last name",
+      "phoneNumber": "Phone number",
       "username": "Username",
-      "dob": "Date of Birth"
+      "dob": "Date of birth",
+      "description": "Optional details about you.",
+      "edit": "Edit personal info"
     },
     "bodyStats": {
-      "title": "Body Stats",
-      "description": "Used for your BMI and calories on the dashboard.",
+      "title": "Body stats",
+      "description": "Used for BMI, body fat, calories and macros on your dashboard.",
       "sex": "Sex (for calculations)",
-      "height": "Height (cm)",
-      "weight": "Weight (kg)",
-      "neck": "Neck (cm)",
-      "waist": "Waist (cm)",
-      "hip": "Hip (cm, optional)",
+      "height": "Height",
+      "weight": "Weight",
+      "neck": "Neck",
+      "waist": "Waist",
+      "hip": "Hip",
       "hipHint": "Only used for women.",
-      "activityLevel": "Activity Level",
+      "activityLevel": "Activity level",
       "notSet": "Not set",
       "select": "Select",
       "sexes": {
@@ -188,10 +279,17 @@
         "ACTIVE": "Active: daily exercise, or intense exercise 3–4 times/week",
         "VERY_ACTIVE": "Very active: intense exercise 6–7 times/week",
         "EXTRA_ACTIVE": "Extra active: very intense exercise daily, or a physical job"
-      }
+      },
+      "viewDashboard": "View dashboard",
+      "edit": "Edit body stats",
+      "basics": "Basics",
+      "measurements": "Measurements",
+      "womenOnly": "Women only"
     },
     "socialProfiles": {
-      "title": "Social Profiles"
+      "title": "Social profiles",
+      "description": "Links to your profiles elsewhere.",
+      "edit": "Edit social profiles"
     },
     "security": {
       "oldPassword": "Old Password",
@@ -199,18 +297,28 @@
       "confirmPassword": "Confirm Password",
       "changePassword": "Change Password",
       "passwordChanged": "Password changed successfully",
-      "toggleVisibility": "Toggle password visibility"
+      "toggleVisibility": "Toggle password visibility",
+      "emailTitle": "Email",
+      "emailDescription": "The address you sign in with.",
+      "passwordTitle": "Password",
+      "passwordDescription": "Change the password you sign in with."
     },
     "appearance": {
       "language": "Language",
-      "languageDesc": "Default language for dashboard",
+      "languageDesc": "The language of BiteWise.",
       "english": "English",
       "hungarian": "Hungarian",
       "theme": "Theme",
-      "themeDesc": "Default theme for dashboard",
+      "themeDesc": "Light, dark, or as your device is set.",
       "light": "Light",
       "dark": "Dark",
       "system": "System"
+    },
+    "page": {
+      "title": "Account settings",
+      "description": "Manage your profile and the stats behind your targets.",
+      "back": "Back to dashboard",
+      "tabs": "Settings"
     }
   },
   "resourceTable": {
@@ -238,25 +346,27 @@
     "updated": "Updated successfully!",
     "deleted": "Deleted successfully.",
     "positiveNumber": "{field} must be a positive number",
-    "nameTaken": "This name is already in use"
+    "nameTaken": "This name is already in use",
+    "showing": "Showing {from}–{to} of {total}",
+    "rowActions": "Actions for {name}",
+    "compare": "Compare"
   },
   "resources": {
     "ingredients": {
       "title": "Ingredients",
-      "empty": "No ingredients available",
+      "empty": "No ingredients yet",
       "noMatch": "No ingredients match \"{term}\"",
-      "searchPlaceholder": "Search ingredients...",
-      "addTitle": "Add Ingredient",
-      "editTitle": "Edit Ingredient",
-      "deleteTitle": "Delete Ingredient",
+      "searchPlaceholder": "Search ingredients",
+      "addTitle": "Add ingredient",
+      "editTitle": "Edit ingredient",
+      "deleteTitle": "Delete ingredient",
       "columns": {
-        "name": "Name",
+        "name": "Ingredient",
         "calories": "Calories",
         "protein": "Protein",
-        "totalFat": "Fat (Saturated)",
-        "totalCarbohydrates": "Carbs (Sugar)",
-        "dietaryFiber": "Fiber",
-        "unit": "Unit"
+        "totalCarbohydrates": "Carbs",
+        "totalFat": "Fat",
+        "dietaryFiber": "Fiber"
       },
       "fields": {
         "name": "Name",
@@ -272,25 +382,33 @@
       },
       "validation": {
         "nameRequired": "Name is required"
+      },
+      "description": "Nutrition values per 100 g or per piece.",
+      "compare": "Compare ingredients",
+      "units": {
+        "100g": "per 100 g",
+        "piece": "per piece"
+      },
+      "list": {
+        "sugar": "sugar {value} g",
+        "saturated": "saturated {value} g",
+        "sugarLabel": "Sugar",
+        "saturatedLabel": "Sat. fat",
+        "fiberLabel": "Fiber",
+        "macros": "P {protein} · C {carbs} · F {fat}",
+        "details": "Details for {name}"
       }
     },
     "meals": {
       "title": "Meals",
-      "empty": "No meals available",
+      "empty": "No meals yet",
       "noMatch": "No meals match \"{term}\"",
-      "searchPlaceholder": "Search meals...",
-      "addTitle": "Add Meal",
-      "editTitle": "Edit Meal",
-      "deleteTitle": "Delete Meal",
+      "searchPlaceholder": "Search meals",
+      "addTitle": "Add meal",
+      "editTitle": "Edit meal",
+      "deleteTitle": "Delete meal",
       "columns": {
-        "name": "Name",
-        "calories": "Calories",
-        "protein": "Protein",
-        "totalFat": "Fat (Saturated)",
-        "totalCarbohydrates": "Carbs (Sugar)",
-        "dietaryFiber": "Fiber",
-        "quantity": "Quantity",
-        "unit": "Unit"
+        "name": "Name"
       },
       "fields": {
         "name": "Meal name",
@@ -308,26 +426,40 @@
         "ingredientRequired": "Select an ingredient",
         "quantityPositive": "Quantity must be greater than 0",
         "ingredientDuplicate": "Each ingredient can be added only once"
+      },
+      "description": "Totals are calculated from each meal’s ingredients.",
+      "compare": "Compare meals",
+      "card": {
+        "ingredients": {
+          "one": "{count} ingredient",
+          "other": "{count} ingredients"
+        },
+        "fiber": "{value} g fiber",
+        "show": {
+          "one": "Show {count} ingredient",
+          "other": "Show {count} ingredients"
+        },
+        "hide": "Hide ingredients",
+        "grams": "{value} g",
+        "pieces": {
+          "one": "{count} piece",
+          "other": "{count} pieces"
+        },
+        "macros": "P {protein} · C {carbs} · F {fat}",
+        "sugar": "sugar {value} g",
+        "saturated": "saturated {value} g"
       }
     },
     "mealPlans": {
-      "title": "Meal Plans",
-      "empty": "No meal plans available",
+      "title": "Meal plans",
+      "empty": "No meal plans yet",
       "noMatch": "No meal plans match \"{term}\"",
-      "searchPlaceholder": "Search meal plans...",
-      "addTitle": "Add Meal Plan",
-      "editTitle": "Edit Meal Plan",
-      "deleteTitle": "Delete Meal Plan",
-      "maintenance": "Maintenance",
-      "showMaintenance": "Show Maintenance",
-      "hideMaintenance": "Hide Maintenance",
+      "searchPlaceholder": "Search meal plans",
+      "addTitle": "Add meal plan",
+      "editTitle": "Edit meal plan",
+      "deleteTitle": "Delete meal plan",
       "columns": {
-        "name": "Name",
-        "calories": "Calories",
-        "protein": "Protein",
-        "totalFat": "Fat (Saturated)",
-        "totalCarbohydrates": "Carbs (Sugar)",
-        "dietaryFiber": "Fiber"
+        "name": "Name"
       },
       "fields": {
         "name": "Meal plan name",
@@ -337,7 +469,30 @@
       "validation": {
         "nameRequired": "Name is required",
         "mealsRequired": "At least one meal is required"
-      }
+      },
+      "description": "Each plan is one day, compared with your daily targets.",
+      "compare": "Compare plans",
+      "card": {
+        "meals": {
+          "one": "{count} meal",
+          "other": "{count} meals"
+        },
+        "openAsDraft": "Open as draft",
+        "calories": "Calories",
+        "ofKcal": "/ {value} kcal",
+        "ofGrams": "/ {value} g",
+        "onTarget": "On target ({diff} kcal)",
+        "under": "{value} kcal under maintenance",
+        "over": "{value} kcal over maintenance",
+        "show": {
+          "one": "Show {count} meal",
+          "other": "Show {count} meals"
+        },
+        "hide": "Hide meals",
+        "macros": "P {protein} · C {carbs} · F {fat}",
+        "noTargets": "Add your body stats to compare plans with your daily targets."
+      },
+      "targets": "Targets: {kcal} kcal · {plan} split"
     }
   },
   "auth": {
@@ -413,9 +568,11 @@
       "quantity": "Quantity",
       "calories": "Calories",
       "protein": "Protein",
-      "totalFat": "Fat (Saturated)",
-      "totalCarbohydrates": "Carbs (Sugar)",
-      "dietaryFiber": "Fiber"
+      "totalFat": "Fat",
+      "totalCarbohydrates": "Carbs",
+      "dietaryFiber": "Fiber",
+      "sugar": "sugar {value} g",
+      "saturatedFat": "saturated {value} g"
     },
     "fields": {
       "meal": "Meal",
@@ -454,6 +611,11 @@
       "goToMealPlans": "Go to Meal plans",
       "submit": "Load",
       "loaded": "Loaded {name}"
+    },
+    "header": {
+      "startDay": "Start draft day",
+      "cardTitle": "Draft a day",
+      "loadShort": "Load plan"
     }
   },
   "errorBoundary": {
@@ -463,31 +625,72 @@
     "tryAgain": "Try again"
   },
   "comparison": {
-    "title": {
-      "ingredients": "Compare ingredients",
-      "meals": "Compare meals",
-      "mealPlans": "Compare meal plans"
+    "page": {
+      "title": "Compare",
+      "description": "Put up to three items side by side. The first one is the baseline."
     },
-    "description": "Up to 3 at a time.",
-    "empty": "Nothing to compare yet. Use \"Add to comparison\" in a row's actions menu.",
-    "addMore": "Add at least one more to compare.",
-    "loading": "Loading...",
-    "clearAll": "Clear all",
-    "removeItem": "Remove {name} from comparison",
-    "add": "Add to comparison",
-    "remove": "Remove from comparison",
-    "full": "Comparison full",
-    "columns": {
-      "name": "Name",
-      "calories": "Calories",
-      "protein": "Protein",
-      "totalFat": "Fat",
-      "saturatedFat": "Saturated fat",
-      "totalCarbohydrates": "Carbs",
-      "sugar": "Sugar",
-      "dietaryFiber": "Fiber",
-      "unit": "Unit",
-      "actions": "Actions"
+    "kindLabel": "What to compare",
+    "kinds": {
+      "ingredients": "Ingredients",
+      "meals": "Meals",
+      "plans": "Meal plans"
+    },
+    "chooseTitle": {
+      "ingredients": "Choose ingredients",
+      "meals": "Choose meals",
+      "plans": "Choose meal plans"
+    },
+    "baseline": "Baseline",
+    "item": "Item {n}",
+    "none": "None",
+    "placeholder": "Select…",
+    "pickPrompt": "Pick a baseline to start comparing.",
+    "overview": {
+      "title": "Overview",
+      "description": {
+        "ingredients": "Each ingredient as recorded: per 100 g or per piece.",
+        "meals": "One serving of each meal.",
+        "plans": "One day of each meal plan."
+      }
+    },
+    "basis": {
+      "100g": "per 100 g",
+      "piece": "per piece",
+      "meals": {
+        "one": "1 serving · {count} ingredient",
+        "other": "1 serving · {count} ingredients"
+      },
+      "plans": {
+        "one": "1 day · {count} meal",
+        "other": "1 day · {count} meals"
+      }
+    },
+    "ofTarget": "{percent} of your {kcal} kcal target",
+    "nutrients": {
+      "title": "Nutrient by nutrient",
+      "description": "Bars are scaled to the largest value in each row. Differences are vs. {name}.",
+      "nutrient": "Nutrient",
+      "showDifferences": "Show differences",
+      "same": "same",
+      "rows": {
+        "calories": "Calories",
+        "protein": "Protein",
+        "totalCarbohydrates": "Carbs",
+        "sugar": "of which sugar",
+        "totalFat": "Fat",
+        "saturatedFat": "of which saturated",
+        "dietaryFiber": "Fiber"
+      }
+    },
+    "empty": {
+      "ingredients": "Add at least two ingredients to compare them.",
+      "meals": "Add at least two meals to compare them.",
+      "plans": "Add at least two meal plans to compare them.",
+      "action": {
+        "ingredients": "Go to ingredients",
+        "meals": "Go to meals",
+        "plans": "Go to meal plans"
+      }
     }
   },
   "emailChange": {

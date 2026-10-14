@@ -1,2 +1,1 @@
-export * from './menu-items.constant';
-export * from './variables.constants';
+export * from './nav-items.constant';

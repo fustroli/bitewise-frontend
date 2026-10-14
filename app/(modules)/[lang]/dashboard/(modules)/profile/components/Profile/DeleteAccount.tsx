@@ -13,6 +13,7 @@ import {
 } from '@/app/components/ui/alert-dialog';
 
 import { Button } from '@/app/components/ui/button';
+import SettingsRow from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/SettingsRow';
 import { deleteUser } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/actions';
 import { toast } from '@/app/hooks/use-toast';
 import { useDictionary } from '@/app/providers/dictionary-provider';
@@ -30,27 +31,39 @@ const DeleteAccount = () => {
   };
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <Button variant="destructive">{profile.deleteAccount.title}</Button>
-      </AlertDialogTrigger>
-      <AlertDialogContent>
-        <AlertDialogHeader>
-          <AlertDialogTitle>
-            {profile.deleteAccount.verification}
-          </AlertDialogTitle>
-          <AlertDialogDescription>
-            {profile.deleteAccount.description}
-          </AlertDialogDescription>
-        </AlertDialogHeader>
-        <AlertDialogFooter>
-          <AlertDialogCancel>{common.cancel}</AlertDialogCancel>
-          <AlertDialogAction onClick={handleDeleteUser}>
-            {common.continue}
-          </AlertDialogAction>
-        </AlertDialogFooter>
-      </AlertDialogContent>
-    </AlertDialog>
+    <SettingsRow
+      title={profile.deleteAccount.title}
+      description={profile.deleteAccount.rowDescription}
+    >
+      <div className="flex justify-end rounded-lg border bg-card p-4 md:p-6">
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <Button
+              variant="outline"
+              className="border-destructive/40 text-destructive hover:bg-destructive/10 hover:text-destructive"
+            >
+              {profile.deleteAccount.title}
+            </Button>
+          </AlertDialogTrigger>
+          <AlertDialogContent>
+            <AlertDialogHeader>
+              <AlertDialogTitle>
+                {profile.deleteAccount.verification}
+              </AlertDialogTitle>
+              <AlertDialogDescription>
+                {profile.deleteAccount.description}
+              </AlertDialogDescription>
+            </AlertDialogHeader>
+            <AlertDialogFooter>
+              <AlertDialogCancel>{common.cancel}</AlertDialogCancel>
+              <AlertDialogAction onClick={handleDeleteUser}>
+                {common.continue}
+              </AlertDialogAction>
+            </AlertDialogFooter>
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
+    </SettingsRow>
   );
 };
 

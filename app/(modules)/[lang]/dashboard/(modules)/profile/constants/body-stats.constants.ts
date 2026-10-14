@@ -9,9 +9,3 @@ export const BODY_STATS_LIMITS = {
 
 /** The ages the adult BMI table and calorie formulas apply to. */
 export const AGE_LIMITS = { min: 18, max: 100 };
-
-/** Anchors of Profile sections, for links from elsewhere. */
-export const PROFILE_SECTION_IDS = {
-  personalInformation: 'personal-information',
-  bodyStats: 'body-stats',
-};

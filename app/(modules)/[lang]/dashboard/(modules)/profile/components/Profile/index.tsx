@@ -6,7 +6,7 @@ import SocialProfiles from '@/app/(modules)/[lang]/dashboard/(modules)/profile/c
 
 const Profile = () => {
   return (
-    <div className="space-y-8">
+    <div className="flex flex-col">
       <BasicInfo />
       <PersonalInformation />
       <BodyStats />

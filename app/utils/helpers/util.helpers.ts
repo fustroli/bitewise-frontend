@@ -11,3 +11,21 @@ export const interpolate = (
   template.replace(/\{(\w+)\}/g, (match, key: string) =>
     key in values ? String(values[key]) : match,
   );
+
+export interface IPluralForms {
+  one: string;
+  other: string;
+}
+
+/** The form for `count` in the locale (e.g. "1 ingredient" / "3 ingredients"). */
+export const pluralize = (
+  count: number,
+  forms: IPluralForms,
+  locale: string,
+): string =>
+  interpolate(
+    new Intl.PluralRules(locale).select(count) === 'one'
+      ? forms.one
+      : forms.other,
+    { count },
+  );

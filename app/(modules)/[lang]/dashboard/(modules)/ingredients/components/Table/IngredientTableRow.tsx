@@ -1,61 +1,59 @@
+import { TableCell, TableRow } from '@/app/components/ui/table';
+import { formatAmount, interpolate } from '@/app/utils/helpers';
+
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { IResourceRowContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
-import IngredientTableCell from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/Table/IngredientTableCell';
-import { TableRow } from '@/app/components/ui/table';
-import Unit from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/Unit';
+import MacroValue from '@/app/components/nutrition/MacroValue';
 
 interface IProps extends IResourceRowContext {
   row: IIngredient;
 }
 
-const IngredientTableRow = ({ row, labels, tableLabels, actions }: IProps) => {
-  const { columns } = labels;
+const cellClass = 'px-4 py-3.5 text-right align-middle text-[15px]';
+
+/** One Ingredient's table row, from `md` up. */
+const IngredientTableRow = ({ row, actions, lang, dictionary }: IProps) => {
+  const labels = dictionary.resources.ingredients;
+  const amount = (value: number) => formatAmount(value, lang);
 
   return (
-    <TableRow className="block border-b text-left last:border-b-0 lg:table-row lg:border-none">
-      <IngredientTableCell
-        rowName={columns.name}
-        className="lg:text-left lg:font-semibold"
-        rowValue={row.name}
-      />
-      <IngredientTableCell
-        rowName={columns.calories}
-        rowValue={`${row.calories} kcal`}
-      />
-
-      <IngredientTableCell
-        rowName={columns.protein}
-        rowValue={`${row.protein} g`}
-      />
-
-      <IngredientTableCell
-        rowName={columns.totalFat}
-        rowValue={`${row.totalFat} (${row.saturatedFat}) g`}
-      />
-
-      <IngredientTableCell
-        rowName={columns.totalCarbohydrates}
-        rowValue={`${row.totalCarbohydrates} (${row.sugar}) g`}
-      />
-
-      <IngredientTableCell
-        rowName={columns.dietaryFiber}
-        rowValue={`${row.dietaryFiber} g`}
-      />
-      <IngredientTableCell
-        rowName={columns.unit}
-        className="flex items-center gap-1"
-        rowValue={
-          <div className="block justify-end lg:flex">
-            <Unit unit={row.unit} />
-          </div>
-        }
-      />
-      <IngredientTableCell
-        rowName={tableLabels.actions}
-        className="flex justify-end text-right"
-        rowValue={actions}
-      />
+    <TableRow className="hover:bg-surface-subtle/60">
+      <TableCell className="px-5 py-3.5 align-middle">
+        <div className="flex flex-col gap-1">
+          <span className="text-[15px] font-extrabold">{row.name}</span>
+          <span className="text-xs font-bold text-muted-foreground">
+            {labels.units[row.unit]}
+          </span>
+        </div>
+      </TableCell>
+      <TableCell className={cellClass}>
+        <MacroValue value={amount(row.calories)} unit="kcal" align="end" />
+      </TableCell>
+      <TableCell className={cellClass}>
+        <MacroValue value={amount(row.protein)} align="end" />
+      </TableCell>
+      <TableCell className={cellClass}>
+        <MacroValue
+          value={amount(row.totalCarbohydrates)}
+          sub={interpolate(labels.list.sugar, { value: amount(row.sugar) })}
+          align="end"
+        />
+      </TableCell>
+      <TableCell className={cellClass}>
+        <MacroValue
+          value={amount(row.totalFat)}
+          sub={interpolate(labels.list.saturated, {
+            value: amount(row.saturatedFat),
+          })}
+          align="end"
+        />
+      </TableCell>
+      <TableCell className={cellClass}>
+        <MacroValue value={amount(row.dietaryFiber)} align="end" />
+      </TableCell>
+      <TableCell className="py-2 pl-2 pr-4 text-right align-middle">
+        {actions}
+      </TableCell>
     </TableRow>
   );
 };

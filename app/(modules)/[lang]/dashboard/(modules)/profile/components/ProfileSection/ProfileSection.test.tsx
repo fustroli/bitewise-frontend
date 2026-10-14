@@ -23,6 +23,7 @@ import userEvent from '@testing-library/user-event';
 
 vi.mock('@/app/(modules)/[lang]/dashboard/(modules)/_user/actions', () => ({}));
 vi.mock('@/app/hooks/use-toast', () => ({ toast: vi.fn() }));
+vi.mock('next/navigation', () => ({ useParams: () => ({ lang: 'en' }) }));
 
 const { common } = en;
 
@@ -66,14 +67,18 @@ describe('Profile section cycle', () => {
     const user = userEvent.setup();
     renderWithUser(<SocialProfiles />, USER, vi.fn());
 
-    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.click(
+      screen.getByRole('button', { name: en.profile.socialProfiles.edit }),
+    );
     await user.clear(facebookInput());
     await user.type(facebookInput(), 'https://facebook.com/changed');
     await user.click(screen.getByRole('button', { name: common.cancel }));
 
     expect(screen.getByText('https://facebook.com/original')).toBeTruthy();
 
-    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.click(
+      screen.getByRole('button', { name: en.profile.socialProfiles.edit }),
+    );
     expect((facebookInput() as HTMLInputElement).value).toBe(
       'https://facebook.com/original',
     );
@@ -88,7 +93,9 @@ describe('Profile section cycle', () => {
     });
     renderWithUser(<SocialProfiles />, USER, updateUser);
 
-    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.click(
+      screen.getByRole('button', { name: en.profile.socialProfiles.edit }),
+    );
     await user.clear(facebookInput());
     await user.type(facebookInput(), 'https://facebook.com/changed');
     await user.click(screen.getByRole('button', { name: common.save }));
@@ -114,7 +121,9 @@ describe('Profile section cycle', () => {
     });
     renderWithUser(<SocialProfiles />, USER, updateUser);
 
-    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.click(
+      screen.getByRole('button', { name: en.profile.socialProfiles.edit }),
+    );
     await user.clear(facebookInput());
     await user.type(facebookInput(), 'https://facebook.com/changed');
     await user.click(screen.getByRole('button', { name: common.save }));
@@ -140,7 +149,9 @@ describe('Avatar', () => {
   afterEach(cleanup);
 
   const editButton = () =>
-    screen.getByRole<HTMLButtonElement>('button', { name: common.edit });
+    screen.getByRole<HTMLButtonElement>('button', {
+      name: en.profile.basic.changePhoto,
+    });
   const lockNotice = () =>
     screen.queryByText(en.emailVerification.avatarLocked);
 
@@ -198,11 +209,12 @@ describe('Body stats', () => {
     renderWithUser(<BodyStats />, BODY_USER, vi.fn());
 
     expect(screen.getByText(labels.sexes.MALE)).toBeTruthy();
-    expect(screen.getByText('180')).toBeTruthy();
-    expect(screen.getByText('80.5')).toBeTruthy();
-    expect(screen.getByText('85.5')).toBeTruthy();
+    expect(screen.getByText('180 cm')).toBeTruthy();
+    expect(screen.getByText('80.5 kg')).toBeTruthy();
+    expect(screen.getByText('85.5 cm')).toBeTruthy();
     expect(screen.getByText(labels.hip)).toBeTruthy();
-    expect(screen.getByText(labels.hipHint)).toBeTruthy();
+    // A man's empty hip isn't missing.
+    expect(screen.getByText(labels.womenOnly)).toBeTruthy();
     expect(screen.getByText(labels.activityLevels.MODERATE)).toBeTruthy();
   });
 
@@ -215,7 +227,9 @@ describe('Body stats', () => {
     });
     renderWithUser(<BodyStats />, BODY_USER, updateUser);
 
-    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.click(
+      screen.getByRole('button', { name: en.profile.bodyStats.edit }),
+    );
     await user.clear(heightInput());
     await user.type(heightInput(), '175');
     await user.click(sexSelect());
@@ -226,7 +240,7 @@ describe('Body stats', () => {
       bodyStats: { sex: ESex.FEMALE, heightCm: 175 },
     });
     expect(screen.getByText(labels.sexes.FEMALE)).toBeTruthy();
-    expect(screen.getByText('175')).toBeTruthy();
+    expect(screen.getByText('175 cm')).toBeTruthy();
   });
 
   it('submits an emptied number and a cleared select as null', async () => {
@@ -238,7 +252,9 @@ describe('Body stats', () => {
     });
     renderWithUser(<BodyStats />, BODY_USER, updateUser);
 
-    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.click(
+      screen.getByRole('button', { name: en.profile.bodyStats.edit }),
+    );
     await user.clear(weightInput());
     await user.click(activitySelect());
     await user.click(screen.getByRole('option', { name: labels.notSet }));
@@ -254,7 +270,9 @@ describe('Body stats', () => {
     const updateUser = vi.fn();
     renderWithUser(<BodyStats />, BODY_USER, updateUser);
 
-    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.click(
+      screen.getByRole('button', { name: en.profile.bodyStats.edit }),
+    );
     await user.clear(heightInput());
     await user.type(heightInput(), '90');
     await user.click(screen.getByRole('button', { name: common.save }));
@@ -274,7 +292,9 @@ describe('Body stats', () => {
     });
     renderWithUser(<BodyStats />, BODY_USER, updateUser);
 
-    await user.click(screen.getByRole('button', { name: common.edit }));
+    await user.click(
+      screen.getByRole('button', { name: en.profile.bodyStats.edit }),
+    );
     await user.clear(neckInput());
     await user.type(neckInput(), '45');
     await user.clear(waistInput());

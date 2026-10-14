@@ -1,7 +1,8 @@
-import { EMacroPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
+/** A plan's calories this close to Maintenance count as on target, kcal. */
+export const ON_TARGET_KCAL = 150;
 
-/** The Macro plan whose macros the Maintenance line shows. */
-export const MAINTENANCE_MACRO_PLAN = EMacroPlan.BALANCED;
-
-/** What a column shows when Maintenance has no target for it. */
-export const NO_TARGET = '–';
+/**
+ * The dashboard query param a Meal plan's "Open as draft" sets: the Draft
+ * meal plan then offers to load that plan.
+ */
+export const DRAFT_FROM_MEAL_PLAN_PARAM = 'draft';

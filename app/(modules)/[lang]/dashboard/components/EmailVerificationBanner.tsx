@@ -55,16 +55,17 @@ const EmailVerificationBanner = () => {
   };
 
   return (
-    <div className="mb-6 px-4 md:px-8">
+    // `-order-1`: right under the page's header, though rendered after the page.
+    <div className="-order-1">
       <div
         role="alert"
-        className="flex flex-wrap items-center gap-4 rounded-lg border-2 border-primary bg-primary/10 p-4 shadow-soft"
+        className="flex flex-wrap items-center gap-4 rounded-lg border bg-card p-4"
       >
-        <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
+        <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-accent text-accent-foreground">
           <MailWarning className="size-5" />
         </div>
         <div className="flex-1">
-          <p className="font-semibold">{text.bannerTitle}</p>
+          <p className="font-bold">{text.bannerTitle}</p>
           <p className="text-sm text-muted-foreground">
             {interpolate(text.banner, { email: user.email })}
           </p>

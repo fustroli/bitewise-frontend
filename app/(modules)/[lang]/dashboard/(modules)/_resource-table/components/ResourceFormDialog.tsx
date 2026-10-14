@@ -59,6 +59,7 @@ function ResourceFormDialog<
   record,
   duplicate,
   formData,
+  trigger,
 }: IProps<TRecord, TValues, TFormData>) {
   const { fields: Fields } = config;
   const dictionary = useDictionary();
@@ -109,21 +110,44 @@ function ResourceFormDialog<
     }
   };
 
-  return (
-    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
-      {record ? (
+  const triggerKind = trigger ?? (record ? 'menu' : 'button');
+  const triggerText = isEdit
+    ? t.edit
+    : duplicate
+      ? t.duplicate
+      : labels.addTitle;
+
+  const renderTrigger = () => {
+    if (triggerKind === 'menu') {
+      return (
         <DialogTrigger className={ROW_ACTION_ITEM_CLASS}>
           {duplicate ? <Copy /> : <Pencil />}
-          {duplicate ? t.duplicate : t.edit}
+          {triggerText}
         </DialogTrigger>
-      ) : (
+      );
+    }
+    if (triggerKind === 'icon') {
+      return (
         <DialogTrigger asChild>
-          <Button className="shadow-primary">
-            <Plus />
-            {t.add}
+          <Button size="icon" className="size-11" aria-label={triggerText}>
+            <Plus aria-hidden className="!size-5" />
           </Button>
         </DialogTrigger>
-      )}
+      );
+    }
+    return (
+      <DialogTrigger asChild>
+        <Button variant={triggerKind === 'outline' ? 'outline' : 'default'}>
+          {triggerKind === 'button' && <Plus aria-hidden />}
+          {triggerText}
+        </Button>
+      </DialogTrigger>
+    );
+  };
+
+  return (
+    <Dialog open={isOpen} onOpenChange={handleOpenChange}>
+      {renderTrigger()}
       <DialogContent>
         <Form {...form}>
           <form

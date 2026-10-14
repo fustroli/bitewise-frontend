@@ -40,6 +40,7 @@ const config: IResourceForm<IResourceRecord, TValues> = {
   create,
   update,
   remove: vi.fn(),
+  compareType: 'ingredients',
 };
 
 const renderDialog = (record?: IResourceRecord, duplicate?: boolean) =>
@@ -53,6 +54,9 @@ const renderDialog = (record?: IResourceRecord, duplicate?: boolean) =>
       />
     </DictionaryProvider>,
   );
+
+/** The Add dialog's trigger; its submit button is plain "Add". */
+const ADD_TRIGGER = en.resources.ingredients.addTitle;
 
 const nameInput = () => screen.getByRole<HTMLInputElement>('textbox');
 
@@ -68,7 +72,7 @@ describe('ResourceFormDialog', () => {
     create.mockResolvedValue(OK);
     renderDialog();
 
-    await user.click(screen.getByRole('button', { name: 'Add' }));
+    await user.click(screen.getByRole('button', { name: ADD_TRIGGER }));
     await user.type(nameInput(), 'Oats');
     await user.click(screen.getByRole('button', { name: 'Add' }));
 
@@ -79,7 +83,7 @@ describe('ResourceFormDialog', () => {
     });
     expect(screen.queryByRole('dialog')).toBeNull();
 
-    await user.click(screen.getByRole('button', { name: 'Add' }));
+    await user.click(screen.getByRole('button', { name: ADD_TRIGGER }));
     expect(nameInput().value).toBe('');
   });
 
@@ -113,7 +117,7 @@ describe('ResourceFormDialog', () => {
     create.mockResolvedValue(FAILED);
     renderDialog();
 
-    await user.click(screen.getByRole('button', { name: 'Add' }));
+    await user.click(screen.getByRole('button', { name: ADD_TRIGGER }));
     await user.type(nameInput(), 'Oats');
     await user.click(screen.getByRole('button', { name: 'Add' }));
 
@@ -130,7 +134,7 @@ describe('ResourceFormDialog', () => {
     create.mockResolvedValue({ ...FAILED, status: 409 });
     renderDialog();
 
-    await user.click(screen.getByRole('button', { name: 'Add' }));
+    await user.click(screen.getByRole('button', { name: ADD_TRIGGER }));
     await user.type(nameInput(), 'Oats');
     await user.click(screen.getByRole('button', { name: 'Add' }));
 

@@ -16,13 +16,8 @@ import {
 
 import { EComparisonKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/enums';
 import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
-import MealPlanComparisonAction from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/MealPlanComparisonAction';
 import MealPlanFields from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/MealPlanFields';
 import { createResourceForm } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/components/createResourceForm';
-import { useComparisonRemoval } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/context';
-
-const useMealPlanRemoval = () =>
-  useComparisonRemoval(EComparisonKind.MEAL_PLANS);
 
 const mealPlanForm = createResourceForm<IMealPlan, TMealPlanSchema, IMeal[]>({
   resourceKey: 'mealPlans',
@@ -36,8 +31,7 @@ const mealPlanForm = createResourceForm<IMealPlan, TMealPlanSchema, IMeal[]>({
   create: createMealPlan,
   update: (values, id) => updateMealPlan(values as ICreateMealPlan, id),
   remove: deleteMealPlan,
-  rowMenuItem: MealPlanComparisonAction,
-  useAfterRemove: useMealPlanRemoval,
+  compareType: EComparisonKind.MEAL_PLANS,
 });
 
 export const MealPlanDialog = mealPlanForm.Dialog;

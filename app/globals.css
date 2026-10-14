@@ -3,77 +3,100 @@
 @tailwind utilities;
 @layer base {
   :root {
-    --background: 240 9% 97%;
-    --foreground: 240 6% 12%;
+    --background: 80 13% 95%;
+    --foreground: 147 16% 11%;
     --card: 0 0% 100%;
-    --card-foreground: 240 6% 12%;
+    --card-foreground: 147 16% 11%;
     --popover: 0 0% 100%;
-    --popover-foreground: 240 6% 12%;
-    --primary: 41 95% 53%;
-    --primary-foreground: 240 6% 12%;
-    --secondary: 42 90% 95%;
-    --secondary-foreground: 38 80% 32%;
-    --muted: 240 7% 95%;
-    --muted-foreground: 240 3% 42%;
-    --accent: 42 90% 95%;
-    --accent-foreground: 240 6% 12%;
-    --destructive: 0 76% 63%;
+    --popover-foreground: 147 16% 11%;
+    --primary: 152 56% 27%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 90 13% 94%;
+    --secondary-foreground: 142 7% 31%;
+    --muted: 90 13% 94%;
+    --muted-foreground: 142 6% 38%;
+    --accent: 142 28% 92%;
+    --accent-foreground: 152 59% 22%;
+    --destructive: 4 76% 40%;
     --destructive-foreground: 0 0% 100%;
-    --success: 88 50% 53%;
+    --success: 152 56% 27%;
     --success-foreground: 0 0% 100%;
-    --border: 240 6% 93%;
-    --input: 240 6% 90%;
-    --ring: 41 95% 53%;
-    --chart-1: 41 95% 53%;
-    --chart-2: 0 76% 63%;
-    --chart-3: 88 50% 53%;
-    --chart-4: 43 96% 75%;
-    --chart-5: 25 90% 60%;
+    --border: 90 11% 89%;
+    --input: 103 9% 84%;
+    --ring: 152 56% 27%;
     --radius: 0.875rem;
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 240 3% 42%;
-    --sidebar-primary: 41 95% 53%;
-    --sidebar-primary-foreground: 240 6% 12%;
-    --sidebar-accent: 42 90% 95%;
-    --sidebar-accent-foreground: 240 6% 12%;
-    --sidebar-border: 240 6% 93%;
-    --sidebar-ring: 41 95% 53%;
+
+    /* Nutrition: the same colour always means the same nutrient. */
+    --protein: 222 63% 50%;
+    /* Fill only; text uses --carbs-text. */
+    --carbs: 37 75% 56%;
+    --carbs-text: 37 81% 33%;
+    --fat: 336 50% 48%;
+    --fiber: 152 56% 27%;
+    --warning: 17 88% 40%;
+    --surface-subtle: 80 16% 96%;
+
+    /* Range scale zones (BMI, body fat). */
+    --zone-low: 214 61% 87%;
+    --zone-athletes: 143 39% 84%;
+    --zone-normal: 144 39% 73%;
+    --zone-over: 39 79% 78%;
+    --zone-obese: 9 70% 81%;
+
+    /* Toast fills: deep in both themes, so their light text always reads. */
+    --toast-success: 152 56% 27%;
+    --toast-error: 4 76% 40%;
+    --toast-warning: 17 88% 40%;
+    --toast-info: 147 16% 11%;
+    --toast-foreground: 0 0% 100%;
+
+    /* Compare slots: baseline, item 2, item 3. */
+    --compare-1: 147 16% 11%;
+    --compare-2: 152 56% 27%;
+    --compare-3: 143 6% 51%;
   }
   .dark {
-    --background: 240 6% 7%;
-    --foreground: 0 0% 96%;
-    --card: 240 5% 11%;
-    --card-foreground: 0 0% 96%;
-    --popover: 240 5% 11%;
-    --popover-foreground: 0 0% 96%;
-    --primary: 41 95% 53%;
-    --primary-foreground: 240 6% 12%;
-    --secondary: 41 40% 16%;
-    --secondary-foreground: 42 90% 70%;
-    --muted: 240 4% 17%;
-    --muted-foreground: 240 4% 65%;
-    --accent: 41 40% 16%;
-    --accent-foreground: 0 0% 96%;
-    --destructive: 0 65% 52%;
+    --background: 150 12% 7%;
+    --foreground: 90 12% 94%;
+    --card: 150 10% 10%;
+    --card-foreground: 90 12% 94%;
+    --popover: 150 10% 10%;
+    --popover-foreground: 90 12% 94%;
+    --primary: 150 48% 52%;
+    --primary-foreground: 150 40% 8%;
+    --secondary: 150 8% 15%;
+    --secondary-foreground: 100 6% 76%;
+    --muted: 150 8% 15%;
+    --muted-foreground: 100 6% 68%;
+    --accent: 152 32% 18%;
+    --accent-foreground: 145 45% 78%;
+    --destructive: 4 72% 62%;
     --destructive-foreground: 0 0% 100%;
-    --success: 88 45% 45%;
-    --success-foreground: 0 0% 100%;
-    --border: 240 4% 19%;
-    --input: 240 4% 22%;
-    --ring: 41 95% 53%;
-    --chart-1: 41 95% 53%;
-    --chart-2: 0 70% 60%;
-    --chart-3: 88 45% 50%;
-    --chart-4: 43 90% 70%;
-    --chart-5: 25 85% 58%;
-    --sidebar-background: 240 5% 11%;
-    --sidebar-foreground: 240 4% 65%;
-    --sidebar-primary: 41 95% 53%;
-    --sidebar-primary-foreground: 240 6% 12%;
-    --sidebar-accent: 41 40% 16%;
-    --sidebar-accent-foreground: 0 0% 96%;
-    --sidebar-border: 240 4% 19%;
-    --sidebar-ring: 41 95% 53%;
+    --success: 150 48% 52%;
+    --success-foreground: 150 40% 8%;
+    --border: 150 7% 19%;
+    --input: 150 7% 25%;
+    --ring: 150 48% 52%;
+
+    --protein: 222 80% 68%;
+    --carbs: 37 80% 58%;
+    --carbs-text: 37 85% 64%;
+    --fat: 336 65% 68%;
+    --fiber: 150 48% 52%;
+    --warning: 20 88% 60%;
+    --surface-subtle: 150 9% 13%;
+
+    --zone-low: 214 35% 38%;
+    --zone-athletes: 143 25% 34%;
+    --zone-normal: 144 32% 40%;
+    --zone-over: 39 45% 40%;
+    --zone-obese: 9 40% 42%;
+
+    --toast-info: 150 8% 24%;
+
+    --compare-1: 90 12% 94%;
+    --compare-2: 150 48% 52%;
+    --compare-3: 143 6% 55%;
   }
 }
 @layer base {
@@ -81,7 +104,7 @@
     @apply border-border;
   }
   body {
-    @apply bg-background text-foreground;
+    @apply bg-background text-[15px] tabular-nums text-foreground;
   }
 }
 

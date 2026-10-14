@@ -13,7 +13,7 @@ import {
   toPersonalInfoFormValues,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/helpers';
 
-import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/profile/constants';
+import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/constants';
 import ProfileSection from '@/app/(modules)/[lang]/dashboard/(modules)/profile/components/ProfileSection';
 
 const createSchema = (dictionary: TDictionary) =>
@@ -27,6 +27,8 @@ const PersonalInformation = () => {
     <ProfileSection<TPersonalInfoSchema>
       id={PROFILE_SECTION_IDS.personalInformation}
       title={labels.title}
+      description={labels.description}
+      editLabel={labels.edit}
       createSchema={createSchema}
       toFormValues={toPersonalInfoFormValues}
       toChange={toPersonalInfoChange}

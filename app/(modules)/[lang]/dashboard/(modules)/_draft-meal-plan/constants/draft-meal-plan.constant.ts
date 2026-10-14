@@ -5,3 +5,6 @@ export const DRAFT_STORAGE_VERSION = 1;
 export const MEAL_MULTIPLIER_STEP = 0.5;
 
 export const DEFAULT_MEAL_MULTIPLIER = 1;
+
+/** The dashboard section the editor sits in. */
+export const DRAFT_SECTION_ID = 'draft';

@@ -1,6 +1,6 @@
 "use client"
 
-import { CircleAlert, CircleCheck } from "lucide-react"
+import { CircleAlert, CircleCheck, Info, TriangleAlert } from "lucide-react"
 
 import { useToast } from "@/app/hooks/use-toast"
 import {
@@ -21,10 +21,17 @@ export function Toaster() {
         return (
           <Toast key={id} {...props}>
             {props.variant === "success" && (
-              <CircleCheck className="size-5 shrink-0 text-success" />
+              <CircleCheck aria-hidden className="size-5 shrink-0" />
             )}
-            {props.variant === "error" && (
-              <CircleAlert className="size-5 shrink-0 text-destructive" />
+            {(props.variant === "error" ||
+              props.variant === "destructive") && (
+              <CircleAlert aria-hidden className="size-5 shrink-0" />
+            )}
+            {props.variant === "warning" && (
+              <TriangleAlert aria-hidden className="size-5 shrink-0" />
+            )}
+            {(!props.variant || props.variant === "default") && (
+              <Info aria-hidden className="size-5 shrink-0" />
             )}
             <div className="grid flex-1 gap-1">
               {title && <ToastTitle>{title}</ToastTitle>}
