@@ -104,3 +104,37 @@ export const confirmPasswordReset = async (body: {
       : 'failed';
   }
 };
+
+const HTTP_CONFLICT = 409;
+
+export type TEmailChangeConfirm = 'done' | 'invalid' | 'taken' | 'failed';
+export type TEmailChangeCancel = 'done' | 'invalid' | 'failed';
+
+const statusOf = (error: unknown) =>
+  axios.isAxiosError(error) ? error.response?.status : undefined;
+
+/** Swaps the sign-in email with the new-address mail's token. */
+export const confirmEmailChange = async (
+  token: string,
+): Promise<TEmailChangeConfirm> => {
+  try {
+    await axiosInstance.post(`${API_URL}/auth/email-change/confirm`, { token });
+    return 'done';
+  } catch (error) {
+    const status = statusOf(error);
+    if (status === HTTP_BAD_REQUEST) return 'invalid';
+    return status === HTTP_CONFLICT ? 'taken' : 'failed';
+  }
+};
+
+/** Cancels the change with the old-address mail's token; clears the password. */
+export const cancelEmailChange = async (
+  token: string,
+): Promise<TEmailChangeCancel> => {
+  try {
+    await axiosInstance.post(`${API_URL}/auth/email-change/cancel`, { token });
+    return 'done';
+  } catch (error) {
+    return statusOf(error) === HTTP_BAD_REQUEST ? 'invalid' : 'failed';
+  }
+};

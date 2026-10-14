@@ -43,7 +43,12 @@ const renderRow = (user: IUser) =>
     <DictionaryProvider dictionary={en as TDictionary}>
       <UserProvider
         authUser={user}
-        actions={{ updateUser: vi.fn(), updateAvatar: vi.fn() }}
+        actions={{
+          updateUser: vi.fn(),
+          updateAvatar: vi.fn(),
+          requestEmailChange: vi.fn(),
+          cancelEmailChange: vi.fn(),
+        }}
       >
         <Table>
           <TableBody>

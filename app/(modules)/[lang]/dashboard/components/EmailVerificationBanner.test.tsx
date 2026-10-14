@@ -26,7 +26,12 @@ const renderBanner = (user: IUser = USER) =>
     <DictionaryProvider dictionary={en}>
       <UserProvider
         authUser={user}
-        actions={{ updateUser: vi.fn(), updateAvatar: vi.fn() }}
+        actions={{
+          updateUser: vi.fn(),
+          updateAvatar: vi.fn(),
+          requestEmailChange: vi.fn(),
+          cancelEmailChange: vi.fn(),
+        }}
       >
         <EmailVerificationBanner />
       </UserProvider>

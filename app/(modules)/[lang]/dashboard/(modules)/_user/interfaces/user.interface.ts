@@ -43,6 +43,12 @@ export interface IUser {
   email: string;
   /** Whether the User has completed Email verification. */
   emailVerified?: boolean;
+  /** False for a User who only signs in with Google; they can't change email. */
+  hasPassword?: boolean;
+  /** The unconfirmed new address of a pending Email change. */
+  pendingEmail?: string | null;
+  /** ISO date-time the pending Email change expires. */
+  pendingEmailExpiresAt?: string | null;
   personalInformation?: IPersonalInformation;
   socialProfiles?: ISocialProfiles;
   notificationSettings?: INotificationSettings;
@@ -56,4 +62,9 @@ export interface IUserChange {
   socialProfiles?: ISocialProfiles;
   notificationSettings?: INotificationSettings;
   bodyStats?: Partial<IBodyStats>;
+}
+
+export interface IEmailChangeRequest {
+  newEmail: string;
+  password: string;
 }
