@@ -58,7 +58,7 @@ const EmailVerificationBanner = () => {
     <div className="mb-6 px-4 md:px-8">
       <div
         role="alert"
-        className="flex flex-wrap items-center gap-4 rounded-lg border-2 border-primary bg-primary/10 p-4 shadow-soft"
+        className="flex flex-wrap items-center gap-4 rounded-lg border-2 border-primary bg-primary/10 p-4"
       >
         <div className="flex size-10 shrink-0 items-center justify-center rounded-full bg-primary text-primary-foreground">
           <MailWarning className="size-5" />

@@ -67,7 +67,7 @@ const renderWithUser = (
   );
 
 const bodyFatCard = () =>
-  screen.getByText(labels.description).closest<HTMLElement>('.shadow-soft')!;
+  screen.getByText(labels.description).closest<HTMLElement>('.rounded-lg')!;
 
 describe('Body fat card', () => {
   afterEach(cleanup);
@@ -161,7 +161,7 @@ const macroLabels = en.dashboard.bodyMetrics.macros;
 const macroCard = () =>
   screen
     .getByText(macroLabels.description)
-    .closest<HTMLElement>('.shadow-soft')!;
+    .closest<HTMLElement>('.rounded-lg')!;
 
 describe('Macro card', () => {
   afterEach(cleanup);

@@ -24,7 +24,7 @@ interface IProps extends IPageMetadata {
 
 const disabledClasses =
   'pointer-events-none bg-muted text-muted-foreground opacity-60';
-const idleClasses = 'bg-card text-foreground shadow-soft hover:bg-accent';
+const idleClasses = 'border bg-card text-foreground hover:bg-muted';
 
 const ResourcePagination = (props: IProps) => {
   const { page, totalPages, hasNextPage, sort, search, labels } = props;
@@ -59,7 +59,7 @@ const ResourcePagination = (props: IProps) => {
               className={cn(
                 'rounded-md px-4 py-2 transition-colors',
                 pageNumber === currentPage
-                  ? 'bg-primary font-semibold text-primary-foreground shadow-primary hover:bg-primary hover:text-primary-foreground'
+                  ? 'bg-primary font-semibold text-primary-foreground hover:bg-primary hover:text-primary-foreground'
                   : idleClasses,
               )}
             >

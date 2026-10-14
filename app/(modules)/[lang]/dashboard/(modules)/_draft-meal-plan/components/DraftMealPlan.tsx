@@ -73,7 +73,7 @@ const DraftMealPlan = ({
 
   if (!resolved) {
     return (
-      <Card className="w-full border-none shadow-soft">
+      <Card className="w-full">
         <CardHeader>
           <CardTitle>{labels.title}</CardTitle>
           <CardDescription>{labels.startDescription}</CardDescription>

@@ -123,7 +123,7 @@ const DraftMealPlanEditor = ({
     labels.columns[nutrient as keyof typeof labels.columns];
 
   return (
-    <Card className="w-full border-none shadow-soft">
+    <Card className="w-full">
       <CardHeader className="flex flex-row items-start justify-between gap-4 space-y-0">
         <div className="space-y-1.5">
           <CardTitle>{labels.title}</CardTitle>

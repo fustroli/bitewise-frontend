@@ -15,7 +15,7 @@ const SocialLogin = ({ children, url }: IProps) => {
   return (
     <Button
       variant="outline"
-      className="w-full bg-card shadow-soft [&_svg]:fill-current"
+      className="w-full border bg-card [&_svg]:fill-current"
       onClick={handleGoogleLogin}
     >
       {children}

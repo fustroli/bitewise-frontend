@@ -10,7 +10,7 @@ interface IProps {
 }
 const StatisticsCard = ({ title, value, icon }: IProps) => {
   return (
-    <Card className="w-full border-none shadow-soft">
+    <Card className="w-full">
       <CardContent className="flex items-center gap-4 p-6">
         <div className="flex size-12 shrink-0 items-center justify-center rounded-md bg-secondary text-secondary-foreground [&>svg]:size-6">
           {icon}

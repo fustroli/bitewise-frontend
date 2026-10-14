@@ -1,6 +1,8 @@
 import type { Config } from 'tailwindcss';
 import tailwindcssAnimate from 'tailwindcss-animate';
 
+const hsl = (token: string) => `hsl(var(--${token}))`;
+
 const config: Config = {
   darkMode: ['class'],
   content: [
@@ -11,94 +13,91 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        dark: '#1d1d21',
-        light: '#f7f7f8',
-        custom: '#8a8a8f',
-        'custom-gray': '#f7f7f8',
-        'mui-primary': '#f9b115',
-        background: 'hsl(var(--background))',
-        foreground: 'hsl(var(--foreground))',
+        background: hsl('background'),
+        foreground: hsl('foreground'),
         card: {
-          DEFAULT: 'hsl(var(--card))',
-          foreground: 'hsl(var(--card-foreground))',
+          DEFAULT: hsl('card'),
+          foreground: hsl('card-foreground'),
         },
         popover: {
-          DEFAULT: 'hsl(var(--popover))',
-          foreground: 'hsl(var(--popover-foreground))',
+          DEFAULT: hsl('popover'),
+          foreground: hsl('popover-foreground'),
         },
         primary: {
-          DEFAULT: 'hsl(var(--primary))',
-          foreground: 'hsl(var(--primary-foreground))',
+          DEFAULT: hsl('primary'),
+          foreground: hsl('primary-foreground'),
         },
         secondary: {
-          DEFAULT: 'hsl(var(--secondary))',
-          foreground: 'hsl(var(--secondary-foreground))',
+          DEFAULT: hsl('secondary'),
+          foreground: hsl('secondary-foreground'),
         },
         muted: {
-          DEFAULT: 'hsl(var(--muted))',
-          foreground: 'hsl(var(--muted-foreground))',
+          DEFAULT: hsl('muted'),
+          foreground: hsl('muted-foreground'),
         },
         accent: {
-          DEFAULT: 'hsl(var(--accent))',
-          foreground: 'hsl(var(--accent-foreground))',
+          DEFAULT: hsl('accent'),
+          foreground: hsl('accent-foreground'),
         },
         destructive: {
-          DEFAULT: 'hsl(var(--destructive))',
-          foreground: 'hsl(var(--destructive-foreground))',
+          DEFAULT: hsl('destructive'),
+          foreground: hsl('destructive-foreground'),
         },
         success: {
-          DEFAULT: 'hsl(var(--success))',
-          foreground: 'hsl(var(--success-foreground))',
+          DEFAULT: hsl('success'),
+          foreground: hsl('success-foreground'),
         },
-        border: 'hsl(var(--border))',
-        input: 'hsl(var(--input))',
-        ring: 'hsl(var(--ring))',
-        chart: {
-          '1': 'hsl(var(--chart-1))',
-          '2': 'hsl(var(--chart-2))',
-          '3': 'hsl(var(--chart-3))',
-          '4': 'hsl(var(--chart-4))',
-          '5': 'hsl(var(--chart-5))',
+        border: hsl('border'),
+        input: hsl('input'),
+        ring: hsl('ring'),
+        protein: hsl('protein'),
+        carbs: {
+          DEFAULT: hsl('carbs'),
+          text: hsl('carbs-text'),
         },
+        fat: hsl('fat'),
+        fiber: hsl('fiber'),
+        warning: hsl('warning'),
+        'surface-subtle': hsl('surface-subtle'),
+        zone: {
+          low: hsl('zone-low'),
+          athletes: hsl('zone-athletes'),
+          normal: hsl('zone-normal'),
+          over: hsl('zone-over'),
+          obese: hsl('zone-obese'),
+        },
+        // The shadcn sidebar's own names, until the app shell drops it.
         sidebar: {
-          DEFAULT: 'hsl(var(--sidebar-background))',
-          foreground: 'hsl(var(--sidebar-foreground))',
-          primary: 'hsl(var(--sidebar-primary))',
-          'primary-foreground': 'hsl(var(--sidebar-primary-foreground))',
-          accent: 'hsl(var(--sidebar-accent))',
-          'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
-          border: 'hsl(var(--sidebar-border))',
-          ring: 'hsl(var(--sidebar-ring))',
+          DEFAULT: hsl('card'),
+          foreground: hsl('secondary-foreground'),
+          primary: hsl('primary'),
+          'primary-foreground': hsl('primary-foreground'),
+          accent: hsl('accent'),
+          'accent-foreground': hsl('accent-foreground'),
+          border: hsl('border'),
+          ring: hsl('ring'),
         },
-      },
-      backgroundImage: {
-        'menu-item-active': 'linear-gradient(195deg, #fbc54a, #f9b115)',
-        'primary-gradient': 'linear-gradient(195deg, #fbc54a, #f9b115)',
-        'green-gradient': 'linear-gradient(195deg, #a3d16b, #8bc34a)',
-        'dark-gradient': 'linear-gradient(195deg, #3a3a40, #1d1d21)',
-        'pink-gradient': 'linear-gradient(195deg, #f07a7a, #e85a5a)',
-      },
-      boxShadow: {
-        'table-header': '0 0.5rem 1.25rem -0.25rem rgba(249, 177, 21, 0.45)',
-        'statistics-card': '0 0.25rem 1.5rem rgba(17, 17, 26, 0.05)',
-        soft: '0 0.25rem 1.5rem rgba(17, 17, 26, 0.05)',
-        primary: '0 0.5rem 1.25rem -0.25rem rgba(249, 177, 21, 0.45)',
+        compare: {
+          '1': hsl('compare-1'),
+          '2': hsl('compare-2'),
+          '3': hsl('compare-3'),
+        },
       },
       borderRadius: {
         lg: 'var(--radius)',
-        md: 'calc(var(--radius) - 2px)',
-        sm: 'calc(var(--radius) - 4px)',
+        md: 'calc(var(--radius) - 4px)',
+        sm: 'calc(var(--radius) - 6px)',
       },
       fontFamily: {
         sans: [
-          'var(--font-poppins)',
+          'var(--font-manrope)',
           'ui-sans-serif',
           'system-ui',
           'sans-serif',
         ],
       },
-      padding: {
-        '4.5': '1.12rem',
+      spacing: {
+        '18': '4.5rem',
       },
     },
   },

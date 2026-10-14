@@ -35,7 +35,7 @@ export default function ErrorFallback({
     process.env.NODE_ENV === 'development' && Boolean(error.message);
 
   return (
-    <div className="max-w-md rounded-lg bg-card p-6 shadow-soft">
+    <div className="max-w-md rounded-lg border bg-card p-6">
       <h2 className="mb-4 text-2xl font-semibold text-destructive">
         {texts.title}
       </h2>

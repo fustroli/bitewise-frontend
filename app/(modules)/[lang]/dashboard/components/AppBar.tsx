@@ -12,7 +12,7 @@ import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useState } from 'react';
 
 const iconButtonClasses =
-  'size-10 rounded-md bg-card text-muted-foreground shadow-soft hover:bg-accent hover:text-foreground';
+  'size-10 rounded-md bg-card text-muted-foreground hover:bg-accent hover:text-foreground';
 
 const AppBar = () => {
   const dict = useDictionary();

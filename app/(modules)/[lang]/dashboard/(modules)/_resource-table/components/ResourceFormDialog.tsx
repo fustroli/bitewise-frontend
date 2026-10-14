@@ -118,7 +118,7 @@ function ResourceFormDialog<
         </DialogTrigger>
       ) : (
         <DialogTrigger asChild>
-          <Button className="shadow-primary">
+          <Button>
             <Plus />
             {t.add}
           </Button>

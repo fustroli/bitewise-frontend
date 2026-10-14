@@ -33,7 +33,7 @@ const MenuItem = ({ item, route }: IProps) => {
         className={cn(
           'h-11 gap-3 rounded-md px-4 font-medium text-sidebar-foreground transition-all duration-150 [&>svg]:size-5',
           isActive &&
-            'bg-primary text-primary-foreground shadow-primary hover:bg-primary hover:text-primary-foreground',
+            'bg-primary text-primary-foreground hover:bg-primary hover:text-primary-foreground',
         )}
       >
         <Link href={route}>

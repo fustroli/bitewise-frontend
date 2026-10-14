@@ -55,7 +55,7 @@ const MacroCard = ({ macros, missing, locale }: IProps) => {
   );
 
   return (
-    <Card className="w-full border-none shadow-soft">
+    <Card className="w-full">
       <CardHeader>
         <CardTitle>{labels.title}</CardTitle>
         <CardDescription>{labels.description}</CardDescription>
