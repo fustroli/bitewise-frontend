@@ -65,7 +65,20 @@ describe('mealNutrition', () => {
       mealIngredients: [amount(EUnit.HUNDRED_GRAMS, 200, { calories: 100 })],
     });
 
-    expect(formatNutrition(nutrition, CALORIES)).toBe('200 kcal');
+    expect(formatNutrition(nutrition, CALORIES, 'en').value).toBe('200');
+  });
+
+  it('rounds for display in the locale', () => {
+    const nutrition = mealNutrition({
+      mealIngredients: [
+        amount(EUnit.PIECE, 1, { totalFat: 1234.56, saturatedFat: 0.04 }),
+      ],
+    });
+
+    expect(formatNutrition(nutrition, FAT, 'en')).toEqual({
+      value: '1,234.6',
+      sub: '0',
+    });
   });
 
   it('totals unrounded values', () => {
@@ -75,7 +88,7 @@ describe('mealNutrition', () => {
       ),
     });
 
-    expect(formatNutrition(nutrition, PROTEIN)).toBe('0.2 g');
+    expect(formatNutrition(nutrition, PROTEIN, 'en').value).toBe('0.2');
   });
 
   it('is all zeros without Meal ingredients, displayed as 0', () => {
@@ -83,8 +96,16 @@ describe('mealNutrition', () => {
 
     expect(nutrition).toEqual(EMPTY_NUTRITION);
     expect(
-      NUTRITION_COLUMNS.map((column) => formatNutrition(nutrition, column)),
-    ).toEqual(['0 kcal', '0 g', '0 (0) g', '0 (0) g', '0 g']);
+      NUTRITION_COLUMNS.map((column) =>
+        formatNutrition(nutrition, column, 'en'),
+      ),
+    ).toEqual([
+      { value: '0', sub: undefined },
+      { value: '0', sub: undefined },
+      { value: '0', sub: '0' },
+      { value: '0', sub: '0' },
+      { value: '0', sub: undefined },
+    ]);
   });
 });
 
@@ -107,12 +128,13 @@ describe('mealPlanNutrition', () => {
 });
 
 describe('formatNutrition', () => {
-  it('rounds to one decimal and shows the sub-nutrient in brackets', () => {
+  it('rounds to one decimal, the sub-nutrient too', () => {
     expect(
       formatNutrition(
         { ...EMPTY_NUTRITION, totalFat: 12.46, saturatedFat: 3.14 },
         FAT,
+        'en',
       ),
-    ).toBe('12.5 (3.1) g');
+    ).toEqual({ value: '12.5', sub: '3.1' });
   });
 });

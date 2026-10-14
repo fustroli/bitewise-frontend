@@ -31,8 +31,18 @@ export const DISPLAY_DECIMALS = 1;
 
 export const NUTRITION_COLUMNS: INutritionColumn[] = [
   { nutrient: 'calories', unit: 'kcal' },
-  { nutrient: 'protein', unit: 'g' },
-  { nutrient: 'totalFat', subNutrient: 'saturatedFat', unit: 'g' },
-  { nutrient: 'totalCarbohydrates', subNutrient: 'sugar', unit: 'g' },
+  { nutrient: 'protein', unit: 'g', swatch: 'protein' },
+  {
+    nutrient: 'totalCarbohydrates',
+    subNutrient: 'sugar',
+    unit: 'g',
+    swatch: 'carbs',
+  },
+  {
+    nutrient: 'totalFat',
+    subNutrient: 'saturatedFat',
+    unit: 'g',
+    swatch: 'fat',
+  },
   { nutrient: 'dietaryFiber', unit: 'g' },
 ];

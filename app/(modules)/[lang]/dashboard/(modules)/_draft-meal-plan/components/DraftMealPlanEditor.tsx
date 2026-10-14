@@ -13,6 +13,9 @@ import {
   DEFAULT_MEAL_MULTIPLIER,
   DRAFT_STORAGE_VERSION,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
+import DraftNutritionCells, {
+  DraftNutritionHeads,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftNutritionCells';
 import {
   IDraftSources,
   IResolvedDraft,
@@ -44,8 +47,6 @@ import DraftLineRow from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal
 import DraftMaintenance from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftMaintenance';
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { Form } from '@/app/components/ui/form';
-import { NUTRITION_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
-import { formatNutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useDraftMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/context';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -116,8 +117,6 @@ const DraftMealPlanEditor = ({
     );
 
   const total = draftNutrition(lines, sources);
-  const columnLabel = (nutrient: string) =>
-    labels.columns[nutrient as keyof typeof labels.columns];
 
   return (
     <Card className="w-full">
@@ -173,11 +172,7 @@ const DraftMealPlanEditor = ({
                   <TableRow>
                     <TableHead>{labels.columns.item}</TableHead>
                     <TableHead>{labels.columns.quantity}</TableHead>
-                    {NUTRITION_COLUMNS.map(({ nutrient }) => (
-                      <TableHead key={nutrient} className="whitespace-nowrap">
-                        {columnLabel(nutrient)}
-                      </TableHead>
-                    ))}
+                    <DraftNutritionHeads />
                     <TableHead>
                       <span className="sr-only">{resourceTable.actions}</span>
                     </TableHead>
@@ -207,14 +202,7 @@ const DraftMealPlanEditor = ({
                     <TableCell colSpan={2} className="font-semibold">
                       {labels.total}
                     </TableCell>
-                    {NUTRITION_COLUMNS.map((column) => (
-                      <TableCell
-                        key={column.nutrient}
-                        className="whitespace-nowrap font-semibold"
-                      >
-                        {formatNutrition(total, column)}
-                      </TableCell>
-                    ))}
+                    <DraftNutritionCells nutrition={total} isTotal />
                     <TableCell />
                   </TableRow>
                 </TableFooter>

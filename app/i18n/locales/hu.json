@@ -568,9 +568,11 @@
       "quantity": "Mennyiség",
       "calories": "Kalória",
       "protein": "Fehérje",
-      "totalFat": "Zsír (telített)",
-      "totalCarbohydrates": "Szénhidrát (cukor)",
-      "dietaryFiber": "Rost"
+      "totalFat": "Zsír",
+      "totalCarbohydrates": "Szénhidrát",
+      "dietaryFiber": "Rost",
+      "sugar": "cukor {value} g",
+      "saturatedFat": "telített {value} g"
     },
     "fields": {
       "meal": "Étel",

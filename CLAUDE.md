@@ -57,7 +57,7 @@ The backend refuses avatar uploads (403) until the email is verified, so
 | `app/(modules)/[lang]/`        | Locale-aware routes (dashboard, etc.)                |
 | `app/(modules)/(auth)/`        | Auth routes (sign in / sign up, `/signout`)          |
 | `app/session/`                 | Session module (cookies, routing decision, sign-out) |
-| `app/components/`              | Shared components (`ui/`, `form/`, `Table/`, `buttons/`, `dialogs/`, `icons/`, `Typography/`) |
+| `app/components/`              | Shared components (`ui/`, `form/`, `layout/`, `display/`, `nutrition/`, `buttons/`, `dialogs/`, `icons/`, `Typography/`) |
 | `app/utils/`                   | Shared config, helpers, constants, enums, interfaces |
 | `app/hooks/`                   | Shared custom hooks                                  |
 | `app/providers/`                | React context providers (theme, dictionary)          |
@@ -80,19 +80,36 @@ helpers/
 ```
 
 Nested feature modules live under a route's own `(modules)/` folder, e.g.
-`app/(modules)/[lang]/dashboard/(modules)/{profile,ingredients,meals,meal-plans,_user,_resource-table,_nutrition}/`.
+`app/(modules)/[lang]/dashboard/(modules)/{profile,ingredients,meals,meal-plans,_user,_resource-table,_nutrition,_comparison,_body-metrics,_draft-meal-plan}/`.
+
+### App shell
+
+`dashboard/layout.tsx` puts a fixed sidebar (`components/AppNav/`) beside
+the page from `md` up and a bottom tab bar below it; there is no top bar.
+Each page renders straight into the layout's column, a `PageHeader`
+(`app/components/layout/`) first: from `md` up the h1, description and
+actions; below it the sticky 60px app bar (`mobileActions`, `mobileLeading`).
+Sections use `Section`; shared display pieces (`StatTile`, `RangeScale`,
+`MacroBar`, `ExpandableCard`, `SegmentedControl`, …) live in
+`app/components/`. Colours are tokens in `globals.css` (light and dark),
+including the nutrient colours (`bg-protein`, `bg-carbs` with
+`text-carbs-text` for text, `bg-fat`): use them wherever a macro appears.
 
 ### Resource tables
 
 Ingredients, Meals and Meal plans list pages go through the `_resource-table`
-module (list page, sort, paging, row-actions menu, add/edit dialog). Each
-resource keeps two halves in its `resource/` folder: `list.tsx` (server:
-fetch, columns, row renderer, page size, form-data loader) and `form.ts`
-(`'use client'`: schema, defaults, fields, server actions, bound via
-`createResourceForm`). They are split because Next can't pass functions from
-server to client. `searchable: true` adds a name search bar (`?search=`,
-outside the Suspense boundary; search is left out of the Suspense key, so
-old rows stay dimmed while results load). Table/dialog strings live under `resourceTable` and
+module (page header with Compare and Add, search, list, row-actions menu,
+add/edit dialog, "Showing a–b of n" with Previous / Next). Each resource
+keeps two halves in its `resource/` folder: `list.tsx` (server: fetch,
+`layout` — `table` with sortable `columns` and an optional phone
+`renderMobileRow`, or `cards` with `gridClassName` — the row renderer, an
+optional toolbar, the form-data loader) and `form.ts` (`'use client'`:
+schema, defaults, fields, server actions, bound via `createResourceForm`).
+They are split because Next can't pass functions from server to client.
+Rows get the dictionary, locale, a phone Edit button and a Compare link.
+`searchable: true` adds a name search bar (`?search=`, outside the Suspense
+boundary; search is left out of the Suspense key, so old rows stay dimmed
+while results load). Table/dialog strings live under `resourceTable` and
 `resources.<key>` in the dictionaries.
 
 ### Nutrition
@@ -123,12 +140,13 @@ splits Maintenance calories into the four Macro plans (Balanced, Low fat, Low
 carb, High protein: grams, kcal, % and range per macro, plus sugar and
 saturated fat caps), using calculator.net's shares and energy per gram. Body fat
 is left unset when the measurements give an implausible result. Nothing is
-stored; the dashboard's BMI, Body fat, Calorie and Macro cards read the User from
-context, so they update after a Profile save, and only format what the module
-returns. The Meal plans list has a light green Maintenance line under each
-plan's totals (Maintenance calories, Balanced plan macros, sugar and saturated
-fat caps), shut until the row's + toggle opens it, and hidden while
-Maintenance can't be computed.
+stored but the picked Macro plan (`useMacroPlan()`, localStorage per User);
+the dashboard's summary, Nutrition and Body cards read the User from context,
+so they update after a Profile save, and only format what the module
+returns. Until there is a BMI the dashboard shows setup steps instead. Each
+Meal plan card compares its day with Maintenance calories (on target within
+±150 kcal) and the picked plan's macros (`useMaintenanceTargets()`), and
+shows plain totals while Maintenance can't be computed.
 
 ### API layer
 

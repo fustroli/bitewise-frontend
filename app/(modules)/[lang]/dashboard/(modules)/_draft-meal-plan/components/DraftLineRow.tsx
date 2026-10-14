@@ -10,6 +10,7 @@ import { Button } from '@/app/components/ui/button';
 import ComboboxField from '@/app/components/form/ComboboxField';
 import { Control } from 'react-hook-form';
 import { Delete } from 'lucide-react';
+import DraftNutritionCells from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftNutritionCells';
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
 import { IDraftSources } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
@@ -17,9 +18,7 @@ import { INutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutritio
 import { IOption } from '@/app/utils/interfaces';
 import InputField from '@/app/components/form/InputField';
 import { MEAL_MULTIPLIER_STEP } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
-import { NUTRITION_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
 import { draftLineUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
-import { formatNutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/helpers';
 import { interpolate } from '@/app/utils/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 
@@ -92,11 +91,7 @@ const DraftLineRow = ({
           }
         />
       </TableCell>
-      {NUTRITION_COLUMNS.map((column) => (
-        <TableCell key={column.nutrient} className="whitespace-nowrap pt-4">
-          {formatNutrition(nutrition, column)}
-        </TableCell>
-      ))}
+      <DraftNutritionCells nutrition={nutrition} />
       <TableCell className="text-right">
         <Button
           type="button"

@@ -17,11 +17,11 @@ import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useParams } from 'next/navigation';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 
-/** Tints by where the rounded delta lands: over, at or under Maintenance. */
+/** Colours the delta by where it rounds to: over, at or under Maintenance. */
 const DELTA_CLASSES: Record<string, string> = {
-  '1': 'border-destructive/40 bg-destructive/15',
-  '0': 'border-primary/40 bg-primary/15',
-  '-1': 'border-success/40 bg-success/15',
+  '1': 'text-warning',
+  '0': 'text-primary',
+  '-1': 'text-primary',
 };
 
 // `Math.sign(-0)` is `-0`, which `String()` still makes `'0'`.
@@ -51,7 +51,7 @@ const DraftMaintenance = ({ kcal, profileHref }: IProps) => {
     return (
       <div className="flex flex-col items-start gap-4">
         <p className="text-sm text-muted-foreground">{labels.missing}</p>
-        <Button asChild>
+        <Button asChild variant="outline">
           <Link href={profileHref}>{labels.completeProfile}</Link>
         </Button>
       </div>
@@ -59,13 +59,13 @@ const DraftMaintenance = ({ kcal, profileHref }: IProps) => {
   }
 
   return (
-    <div
-      className={cn(
-        'flex flex-col gap-1 rounded-lg border p-4 shadow-sm',
-        deltaClass(delta),
-      )}
-    >
-      <p className="text-2xl font-bold text-foreground">
+    <div className="flex flex-col gap-1 rounded-md bg-surface-subtle p-4">
+      <p
+        className={cn(
+          'text-2xl font-extrabold tracking-tight',
+          deltaClass(delta),
+        )}
+      >
         {formatCalorieDelta(delta, lang)}{' '}
         <span className="text-base font-medium text-muted-foreground">
           {labels.kcal}

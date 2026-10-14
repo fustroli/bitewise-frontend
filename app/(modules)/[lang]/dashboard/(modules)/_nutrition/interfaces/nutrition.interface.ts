@@ -26,9 +26,11 @@ export interface INutritionMealPlan {
   meals: INutritionMeal[];
 }
 
-/** One displayed Nutrition column, e.g. `totalFat (saturatedFat) g`. */
+/** One displayed Nutrition column, e.g. fat with saturated fat under it. */
 export interface INutritionColumn {
   nutrient: TNutrient;
-  subNutrient?: TNutrient;
+  subNutrient?: 'sugar' | 'saturatedFat';
   unit: string;
+  /** The macro colour square on its header. */
+  swatch?: 'protein' | 'carbs' | 'fat';
 }

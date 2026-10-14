@@ -14,6 +14,7 @@ import {
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/interfaces';
 
 import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
+import { formatAmount } from '@/app/utils/helpers';
 
 const mapNutrition = (value: (nutrient: TNutrient) => number): INutrition =>
   NUTRIENTS.reduce(
@@ -48,18 +49,17 @@ export const mealNutrition = (meal: INutritionMeal): INutrition =>
 export const mealPlanNutrition = (mealPlan: INutritionMealPlan): INutrition =>
   sumNutrition(mealPlan.meals.map(mealNutrition));
 
-const formatAmount = (value: number) =>
-  String(Number(value.toFixed(DISPLAY_DECIMALS)));
-
-/** Rounds only for display, e.g. `12.5 (3.1) g` or `450 kcal`. */
+/**
+ * A column's amounts, rounded only for display (up to one decimal, in the
+ * locale): e.g. `{ value: '12.5', sub: '3.1' }` for fat and saturated fat.
+ */
 export const formatNutrition = (
   nutrition: INutrition,
-  { nutrient, subNutrient, unit }: INutritionColumn,
-) =>
-  [
-    formatAmount(nutrition[nutrient]),
-    subNutrient && `(${formatAmount(nutrition[subNutrient])})`,
-    unit,
-  ]
-    .filter(Boolean)
-    .join(' ');
+  { nutrient, subNutrient }: INutritionColumn,
+  locale: string,
+) => ({
+  value: formatAmount(nutrition[nutrient], locale, DISPLAY_DECIMALS),
+  sub:
+    subNutrient &&
+    formatAmount(nutrition[subNutrient], locale, DISPLAY_DECIMALS),
+});

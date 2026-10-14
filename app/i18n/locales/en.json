@@ -568,9 +568,11 @@
       "quantity": "Quantity",
       "calories": "Calories",
       "protein": "Protein",
-      "totalFat": "Fat (Saturated)",
-      "totalCarbohydrates": "Carbs (Sugar)",
-      "dietaryFiber": "Fiber"
+      "totalFat": "Fat",
+      "totalCarbohydrates": "Carbs",
+      "dietaryFiber": "Fiber",
+      "sugar": "sugar {value} g",
+      "saturatedFat": "saturated {value} g"
     },
     "fields": {
       "meal": "Meal",
