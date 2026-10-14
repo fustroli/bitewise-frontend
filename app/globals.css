@@ -43,6 +43,13 @@
     --zone-over: 39 79% 78%;
     --zone-obese: 9 70% 81%;
 
+    /* Toast fills: deep in both themes, so their light text always reads. */
+    --toast-success: 152 56% 27%;
+    --toast-error: 4 76% 40%;
+    --toast-warning: 17 88% 40%;
+    --toast-info: 147 16% 11%;
+    --toast-foreground: 0 0% 100%;
+
     /* Compare slots: baseline, item 2, item 3. */
     --compare-1: 147 16% 11%;
     --compare-2: 152 56% 27%;
@@ -84,6 +91,8 @@
     --zone-normal: 144 32% 40%;
     --zone-over: 39 45% 40%;
     --zone-obese: 9 40% 42%;
+
+    --toast-info: 150 8% 24%;
 
     --compare-1: 90 12% 94%;
     --compare-2: 150 48% 52%;

@@ -66,6 +66,13 @@ const config: Config = {
           over: hsl('zone-over'),
           obese: hsl('zone-obese'),
         },
+        toast: {
+          success: hsl('toast-success'),
+          error: hsl('toast-error'),
+          warning: hsl('toast-warning'),
+          info: hsl('toast-info'),
+          foreground: hsl('toast-foreground'),
+        },
         compare: {
           '1': hsl('compare-1'),
           '2': hsl('compare-2'),
