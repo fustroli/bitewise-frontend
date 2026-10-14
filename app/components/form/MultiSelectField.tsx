@@ -106,7 +106,7 @@ const MultiSelectField = <T extends FieldValues>({
               </PopoverContent>
             </Popover>
             {!!selectedOptions.length && (
-              <div className="flex flex-wrap gap-2">
+              <div className="mt-2 flex flex-wrap gap-2">
                 {selectedOptions.map((option) => (
                   <Badge key={option.value} variant="secondary">
                     {option.label}
