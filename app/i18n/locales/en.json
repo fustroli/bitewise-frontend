@@ -614,7 +614,6 @@
     },
     "header": {
       "startDay": "Start draft day",
-      "openDraft": "Go to draft",
       "cardTitle": "Draft a day",
       "loadShort": "Load plan"
     }
