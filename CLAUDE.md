@@ -104,13 +104,13 @@ cells select and format, never compute.
 
 ### Comparison
 
-The `_comparison` module keeps a User's Comparison ids in localStorage
-(`bitewise:comparison:v1:<userId>`, zod-parsed, unreadable counts as empty)
-behind `ComparisonProvider` (mounted in `dashboard/layout.tsx`). Row menus
-get "Add to comparison" via `IResourceForm.rowMenuItem`, and a deleted record
-leaves it via `useAfterRemove`. The header's modal loads fresh rows with the
-`fetchComparison(kind, ids)` action (backend `ids` filter) and prunes ids the
-backend no longer returns. All three kinds are wired.
+The `/compare` page (`dashboard/compare/`) puts up to three records of one
+kind side by side, the first being the baseline. Its state is only the URL:
+`?type=ingredients|meals|plans&ids=4,,7` (an empty middle slot allowed),
+read and written by the `_comparison` helpers `parseComparisonQuery()` /
+`comparisonSearch()`. The page loads every kind's records once, so each
+kind keeps its picks while switching. Row menus and list headers link
+there (`IResourceForm.compareType`, `IResourceList.compareType`).
 
 ### Body metrics
 

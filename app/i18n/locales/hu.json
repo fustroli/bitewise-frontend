@@ -599,35 +599,72 @@
     "tryAgain": "Próbálja újra"
   },
   "comparison": {
-    "title": {
-      "ingredients": "Hozzávalók összehasonlítása",
-      "meals": "Ételek összehasonlítása",
-      "mealPlans": "Étrendek összehasonlítása"
-    },
-    "description": "Egyszerre legfeljebb 3.",
-    "empty": "Még nincs mit összehasonlítani. Használd az „Hozzáadás az összehasonlításhoz” menüpontot egy sor műveleti menüjében.",
-    "addMore": "Adj hozzá legalább még egyet az összehasonlításhoz.",
-    "loading": "Betöltés...",
-    "clearAll": "Összes törlése",
-    "removeItem": "{name} eltávolítása az összehasonlításból",
-    "add": "Hozzáadás az összehasonlításhoz",
-    "remove": "Eltávolítás az összehasonlításból",
-    "full": "Az összehasonlítás megtelt",
-    "columns": {
-      "name": "Név",
-      "calories": "Kalória",
-      "protein": "Fehérje",
-      "totalFat": "Zsír",
-      "saturatedFat": "Telített zsír",
-      "totalCarbohydrates": "Szénhidrát",
-      "sugar": "Cukor",
-      "dietaryFiber": "Rost",
-      "unit": "Egység",
-      "actions": "Műveletek"
-    },
     "page": {
       "title": "Összehasonlítás",
       "description": "Legfeljebb három tételt tehetsz egymás mellé. Az első az alap."
+    },
+    "kindLabel": "Mit hasonlítasz össze",
+    "kinds": {
+      "ingredients": "Hozzávalók",
+      "meals": "Ételek",
+      "plans": "Étrendek"
+    },
+    "chooseTitle": {
+      "ingredients": "Válassz hozzávalókat",
+      "meals": "Válassz ételeket",
+      "plans": "Válassz étrendeket"
+    },
+    "baseline": "Alap",
+    "item": "{n}. tétel",
+    "none": "Nincs",
+    "placeholder": "Válassz…",
+    "pickPrompt": "Válassz egy alapot az összehasonlításhoz.",
+    "overview": {
+      "title": "Áttekintés",
+      "description": {
+        "ingredients": "Minden hozzávaló úgy, ahogy rögzítetted: 100 g-onként vagy darabonként.",
+        "meals": "Minden ételből egy adag.",
+        "plans": "Minden étrendből egy nap."
+      }
+    },
+    "basis": {
+      "100g": "100 g-onként",
+      "piece": "darabonként",
+      "meals": {
+        "one": "1 adag · {count} hozzávaló",
+        "other": "1 adag · {count} hozzávaló"
+      },
+      "plans": {
+        "one": "1 nap · {count} étel",
+        "other": "1 nap · {count} étel"
+      }
+    },
+    "ofTarget": "A {kcal} kcal-os célod {percent}-a",
+    "nutrients": {
+      "title": "Tápanyagonként",
+      "description": "A sávok soronként a legnagyobb értékhez igazodnak. A különbségek ehhez képest: {name}.",
+      "nutrient": "Tápanyag",
+      "showDifferences": "Különbségek mutatása",
+      "same": "azonos",
+      "rows": {
+        "calories": "Kalória",
+        "protein": "Fehérje",
+        "totalCarbohydrates": "Szénhidrát",
+        "sugar": "ebből cukor",
+        "totalFat": "Zsír",
+        "saturatedFat": "ebből telített",
+        "dietaryFiber": "Rost"
+      }
+    },
+    "empty": {
+      "ingredients": "Legalább két hozzávaló kell az összehasonlításhoz.",
+      "meals": "Legalább két étel kell az összehasonlításhoz.",
+      "plans": "Legalább két étrend kell az összehasonlításhoz.",
+      "action": {
+        "ingredients": "Ugrás a hozzávalókhoz",
+        "meals": "Ugrás az ételekhez",
+        "plans": "Ugrás az étrendekhez"
+      }
     }
   },
   "emailChange": {

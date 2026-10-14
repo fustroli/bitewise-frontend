@@ -16,13 +16,8 @@ import {
 
 import { DEFAULT_INGREDIENT_VALUES } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/constants';
 import { EComparisonKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/enums';
-import IngredientComparisonAction from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/IngredientComparisonAction';
 import IngredientFields from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/components/IngredientFields';
 import { createResourceForm } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/components/createResourceForm';
-import { useComparisonRemoval } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/context';
-
-const useIngredientRemoval = () =>
-  useComparisonRemoval(EComparisonKind.INGREDIENTS);
 
 const ingredientForm = createResourceForm<IIngredient, TIngredientSchema>({
   resourceKey: 'ingredients',
@@ -43,8 +38,7 @@ const ingredientForm = createResourceForm<IIngredient, TIngredientSchema>({
   create: (values) => createIngredient(values as ICreateIngredient),
   update: (values, id) => updateIngredient(values as ICreateIngredient, id),
   remove: deleteIngredient,
-  rowMenuItem: IngredientComparisonAction,
-  useAfterRemove: useIngredientRemoval,
+  compareType: EComparisonKind.INGREDIENTS,
 });
 
 export const IngredientDialog = ingredientForm.Dialog;

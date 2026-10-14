@@ -1,4 +1,3 @@
-import { ComparisonProvider } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/provider';
 import DesktopSidebar from '@/app/(modules)/[lang]/dashboard/components/AppNav/DesktopSidebar';
 import { DictionaryProvider } from '@/app/providers/dictionary-provider';
 import EmailVerificationBanner from '@/app/(modules)/[lang]/dashboard/components/EmailVerificationBanner';
@@ -27,19 +26,17 @@ export default async function DashboardLayout({
   return (
     <DictionaryProvider dictionary={dictionary}>
       <UserProvider authUser={user}>
-        <ComparisonProvider>
-          <div className="flex min-h-dvh">
-            <DesktopSidebar />
-            <main className="min-w-0 flex-1 px-4 pb-28 pt-4 md:px-10 md:pb-18 md:pt-8">
-              <div className="mx-auto flex max-w-[1180px] flex-col gap-8 md:gap-12">
-                {children}
-                {/* After the page so the phone app bar stays first. */}
-                <EmailVerificationBanner />
-              </div>
-            </main>
-          </div>
-          <MobileTabBar />
-        </ComparisonProvider>
+        <div className="flex min-h-dvh">
+          <DesktopSidebar />
+          <main className="min-w-0 flex-1 px-4 pb-28 pt-4 md:px-10 md:pb-18 md:pt-8">
+            <div className="mx-auto flex max-w-[1180px] flex-col gap-8 md:gap-12">
+              {children}
+              {/* After the page so the phone app bar stays first. */}
+              <EmailVerificationBanner />
+            </div>
+          </main>
+        </div>
+        <MobileTabBar />
       </UserProvider>
     </DictionaryProvider>
   );

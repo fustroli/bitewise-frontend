@@ -31,7 +31,7 @@ A User's single scratchpad day outside their Meal plans (e.g. a cheat day): Meal
 _Avoid_: Test plan, cheat plan
 
 **Comparison**:
-Up to 3 Ingredients, Meals or Meal plans (one list per kind) a User puts side by side to compare their Nutrition. Only the ids are kept, in the User's browser.
+Up to 3 Ingredients, Meals or Meal plans of one kind a User puts side by side to compare their Nutrition, the first being the baseline the others are measured against. Kept only in the page's URL.
 _Avoid_: Compare list, basket
 
 **Nutrition**:

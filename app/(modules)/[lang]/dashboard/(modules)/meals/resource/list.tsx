@@ -4,6 +4,8 @@ import {
   MealDialog,
   MealRowActions,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/resource/form';
+
+import { EComparisonKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/enums';
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
 import { IResourceList } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
@@ -21,7 +23,7 @@ export const mealList: IResourceList<IMeal, IIngredient[]> = {
   gridClassName:
     'grid items-start gap-4 md:grid-cols-[repeat(auto-fill,minmax(340px,1fr))]',
   columns: MEAL_COLUMNS,
-  compareType: 'meals',
+  compareType: EComparisonKind.MEALS,
   searchable: true,
   toolbar: MacroLegendToolbar,
   loadFormData: async () =>

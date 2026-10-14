@@ -4,6 +4,8 @@ import {
   IngredientDialog,
   IngredientRowActions,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/resource/form';
+
+import { EComparisonKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/enums';
 import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { INGREDIENT_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/constants';
 import { IResourceList } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
@@ -16,7 +18,7 @@ export const ingredientList: IResourceList<IIngredient> = {
   fetch: fetchIngredients,
   layout: 'table',
   columns: INGREDIENT_COLUMNS,
-  compareType: 'ingredients',
+  compareType: EComparisonKind.INGREDIENTS,
   searchable: true,
   renderRow: (row, context) => <IngredientTableRow row={row} {...context} />,
   renderMobileRow: (row, { lang, edit, compareHref }) => (

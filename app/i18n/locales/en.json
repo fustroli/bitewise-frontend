@@ -599,35 +599,72 @@
     "tryAgain": "Try again"
   },
   "comparison": {
-    "title": {
-      "ingredients": "Compare ingredients",
-      "meals": "Compare meals",
-      "mealPlans": "Compare meal plans"
-    },
-    "description": "Up to 3 at a time.",
-    "empty": "Nothing to compare yet. Use \"Add to comparison\" in a row's actions menu.",
-    "addMore": "Add at least one more to compare.",
-    "loading": "Loading...",
-    "clearAll": "Clear all",
-    "removeItem": "Remove {name} from comparison",
-    "add": "Add to comparison",
-    "remove": "Remove from comparison",
-    "full": "Comparison full",
-    "columns": {
-      "name": "Name",
-      "calories": "Calories",
-      "protein": "Protein",
-      "totalFat": "Fat",
-      "saturatedFat": "Saturated fat",
-      "totalCarbohydrates": "Carbs",
-      "sugar": "Sugar",
-      "dietaryFiber": "Fiber",
-      "unit": "Unit",
-      "actions": "Actions"
-    },
     "page": {
       "title": "Compare",
       "description": "Put up to three items side by side. The first one is the baseline."
+    },
+    "kindLabel": "What to compare",
+    "kinds": {
+      "ingredients": "Ingredients",
+      "meals": "Meals",
+      "plans": "Meal plans"
+    },
+    "chooseTitle": {
+      "ingredients": "Choose ingredients",
+      "meals": "Choose meals",
+      "plans": "Choose meal plans"
+    },
+    "baseline": "Baseline",
+    "item": "Item {n}",
+    "none": "None",
+    "placeholder": "Select…",
+    "pickPrompt": "Pick a baseline to start comparing.",
+    "overview": {
+      "title": "Overview",
+      "description": {
+        "ingredients": "Each ingredient as recorded: per 100 g or per piece.",
+        "meals": "One serving of each meal.",
+        "plans": "One day of each meal plan."
+      }
+    },
+    "basis": {
+      "100g": "per 100 g",
+      "piece": "per piece",
+      "meals": {
+        "one": "1 serving · {count} ingredient",
+        "other": "1 serving · {count} ingredients"
+      },
+      "plans": {
+        "one": "1 day · {count} meal",
+        "other": "1 day · {count} meals"
+      }
+    },
+    "ofTarget": "{percent} of your {kcal} kcal target",
+    "nutrients": {
+      "title": "Nutrient by nutrient",
+      "description": "Bars are scaled to the largest value in each row. Differences are vs. {name}.",
+      "nutrient": "Nutrient",
+      "showDifferences": "Show differences",
+      "same": "same",
+      "rows": {
+        "calories": "Calories",
+        "protein": "Protein",
+        "totalCarbohydrates": "Carbs",
+        "sugar": "of which sugar",
+        "totalFat": "Fat",
+        "saturatedFat": "of which saturated",
+        "dietaryFiber": "Fiber"
+      }
+    },
+    "empty": {
+      "ingredients": "Add at least two ingredients to compare them.",
+      "meals": "Add at least two meals to compare them.",
+      "plans": "Add at least two meal plans to compare them.",
+      "action": {
+        "ingredients": "Go to ingredients",
+        "meals": "Go to meals",
+        "plans": "Go to meal plans"
+      }
     }
   },
   "emailChange": {

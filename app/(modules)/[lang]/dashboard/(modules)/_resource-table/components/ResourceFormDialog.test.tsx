@@ -40,6 +40,7 @@ const config: IResourceForm<IResourceRecord, TValues> = {
   create,
   update,
   remove: vi.fn(),
+  compareType: 'ingredients',
 };
 
 const renderDialog = (record?: IResourceRecord, duplicate?: boolean) =>

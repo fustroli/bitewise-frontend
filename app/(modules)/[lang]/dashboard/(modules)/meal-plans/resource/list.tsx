@@ -4,6 +4,8 @@ import {
   MealPlanDialog,
   MealPlanRowActions,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/resource/form';
+
+import { EComparisonKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/enums';
 import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
 import { IMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
 import { IResourceList } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
@@ -21,7 +23,7 @@ export const mealPlanList: IResourceList<IMealPlan, IMeal[]> = {
   layout: 'cards',
   gridClassName: 'flex flex-col gap-4',
   columns: MEAL_PLAN_COLUMNS,
-  compareType: 'plans',
+  compareType: EComparisonKind.MEAL_PLANS,
   searchable: true,
   toolbar: MealPlanTargetsNote,
   loadFormData: async () => (await fetchMeals({ limit: MAX_LIST_LIMIT })).data,
