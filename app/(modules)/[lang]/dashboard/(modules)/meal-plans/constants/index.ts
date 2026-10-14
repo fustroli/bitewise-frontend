@@ -1,2 +1,2 @@
 export * from './columns.constant';
-export * from './maintenance.constant';
+export * from './daily-targets.constant';

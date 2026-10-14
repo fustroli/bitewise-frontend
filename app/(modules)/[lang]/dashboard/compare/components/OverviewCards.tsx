@@ -11,6 +11,7 @@ import {
   pluralize,
 } from '@/app/utils/helpers';
 
+import BelowSafeMinimum from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/components/BelowSafeMinimum';
 import { COMPARISON_DECIMALS } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/constants';
 import Chip from '@/app/components/display/Chip';
 import { EComparisonKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/enums';
@@ -18,8 +19,8 @@ import { IComparisonItem } from '@/app/(modules)/[lang]/dashboard/(modules)/_com
 import MacroBar from '@/app/components/nutrition/MacroBar';
 import { cn } from '@/app/lib';
 import { formatDelta } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/helpers';
+import { useDailyTargets } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/hooks';
 import { useDictionary } from '@/app/providers/dictionary-provider';
-import { useMaintenanceTargets } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/hooks';
 
 interface IProps {
   kind: EComparisonKind;
@@ -31,7 +32,7 @@ interface IProps {
 const OverviewCards = ({ kind, chosen, lang }: IProps) => {
   const { comparison: labels, dashboard } = useDictionary();
   const macroNames = dashboard.bodyMetrics.macros.macros;
-  const targets = useMaintenanceTargets();
+  const targets = useDailyTargets();
   const baseline = chosen[0].item;
 
   const basis = (item: IComparisonItem) => {
@@ -126,12 +127,20 @@ const OverviewCards = ({ kind, chosen, lang }: IProps) => {
               </span>
             </p>
             {kind === EComparisonKind.MEAL_PLANS && targets && (
-              <p className="border-t pt-2.5 text-[13px] font-bold text-secondary-foreground">
-                {interpolate(labels.ofTarget, {
-                  percent: percent(item.calories / targets.calories),
-                  kcal: formatAmount(targets.calories, lang, 0),
-                })}
-              </p>
+              <div className="flex flex-col gap-1.5 border-t pt-2.5">
+                <p className="text-[13px] font-bold text-secondary-foreground">
+                  {interpolate(labels.ofTarget, {
+                    percent: percent(item.calories / targets.calories),
+                    kcal: formatAmount(targets.calories, lang, 0),
+                  })}
+                </p>
+                {targets.target.belowSafeMinimum && (
+                  <BelowSafeMinimum
+                    safeMinimum={targets.safeMinimum}
+                    locale={lang}
+                  />
+                )}
+              </div>
             )}
           </li>
         );

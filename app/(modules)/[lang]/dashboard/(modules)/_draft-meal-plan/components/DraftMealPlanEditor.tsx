@@ -43,8 +43,8 @@ import { useEffect, useMemo, useState } from 'react';
 import { useFieldArray, useForm, useWatch } from 'react-hook-form';
 
 import DeleteDialog from '@/app/components/DeleteDialog';
+import DraftCalorieTarget from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftCalorieTarget';
 import DraftLineRow from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftLineRow';
-import DraftMaintenance from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftMaintenance';
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { Form } from '@/app/components/ui/form';
 import { useDictionary } from '@/app/providers/dictionary-provider';
@@ -243,7 +243,7 @@ const DraftMealPlanEditor = ({
             </Button>
           </div>
 
-          <DraftMaintenance kcal={total.calories} profileHref={profileHref} />
+          <DraftCalorieTarget kcal={total.calories} profileHref={profileHref} />
         </CardContent>
       )}
     </Card>

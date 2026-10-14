@@ -1,6 +1,8 @@
 // @vitest-environment jsdom
 import {
   EActivityLevel,
+  ECalorieTarget,
+  EMacroPlan,
   ESex,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import { afterEach, describe, expect, it, vi } from 'vitest';
@@ -8,13 +10,11 @@ import { cleanup, render, screen } from '@testing-library/react';
 
 import { DictionaryProvider } from '@/app/providers/dictionary-provider';
 import { EMPTY_NUTRITION } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
-import { EMacroPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
 import { IUser } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
 import MealPlanTargets from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/Card/MealPlanTargets';
 import { UserProvider } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/provider';
 import { bodyMetrics } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/helpers';
 import en from '@/app/i18n/locales/en.json';
-import { macroPlanStorageKey } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/hooks';
 
 vi.mock('@/app/(modules)/[lang]/dashboard/(modules)/_user/actions', () => ({}));
 
@@ -63,12 +63,9 @@ const renderTargets = (user: IUser, calories: number) =>
   );
 
 describe('MealPlanTargets', () => {
-  afterEach(() => {
-    cleanup();
-    localStorage.clear();
-  });
+  afterEach(cleanup);
 
-  it('is on target within 150 kcal of Maintenance', () => {
+  it('is on target within 150 kcal of Maintenance by default', () => {
     renderTargets(USER, maintenance + 100);
 
     expect(screen.getByText('On target (+100 kcal)')).toBeTruthy();
@@ -81,8 +78,13 @@ describe('MealPlanTargets', () => {
   });
 
   it("uses the dashboard's macro split", () => {
-    localStorage.setItem(macroPlanStorageKey(USER.id), EMacroPlan.LOW_CARB);
-    renderTargets(USER, maintenance);
+    renderTargets(
+      {
+        ...USER,
+        targets: { calorieTarget: null, macroPlan: EMacroPlan.LOW_CARB },
+      },
+      maintenance,
+    );
     const lowCarb = bodyMetrics({
       bodyStats: USER.bodyStats!,
       dateOfBirth: USER.personalInformation!.dateOfBirth,
@@ -91,6 +93,25 @@ describe('MealPlanTargets', () => {
 
     expect(
       screen.getByText(`/ ${Math.round(lowCarb.protein.grams)} g`),
+    ).toBeTruthy();
+  });
+
+  it('measures against the picked Calorie target', () => {
+    renderTargets(
+      {
+        ...USER,
+        targets: { calorieTarget: ECalorieTarget.LOSE_NORMAL, macroPlan: null },
+      },
+      maintenance - 300,
+    );
+
+    expect(
+      screen.getByText('200 kcal over target (Lose 0.5 kg/wk)'),
+    ).toBeTruthy();
+    expect(
+      screen.getByText(
+        `/ ${Math.round(maintenance - 500).toLocaleString('en')} kcal`,
+      ),
     ).toBeTruthy();
   });
 

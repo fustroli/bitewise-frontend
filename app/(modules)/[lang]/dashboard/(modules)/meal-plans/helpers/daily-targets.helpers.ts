@@ -1,19 +1,24 @@
-import { EMacroPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
+import { EMacroPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import { IBodyMetrics } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/interfaces';
-import { IMaintenanceTargets } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
+import { IDailyTargets } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
 import { ON_TARGET_KCAL } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/constants';
 
-/** Unset while Maintenance can't be computed. */
-export const maintenanceTargets = (
+/**
+ * The day's targets at the Calorie target `metrics` were computed for;
+ * unset while it can't be computed.
+ */
+export const dailyTargets = (
   { calories, macros }: IBodyMetrics,
   planName: EMacroPlan = EMacroPlan.BALANCED,
-): IMaintenanceTargets | undefined => {
+): IDailyTargets | undefined => {
   const plan = macros?.plans.find((option) => option.plan === planName);
   if (!calories || !macros || !plan) return undefined;
 
   return {
+    target: calories.target,
+    safeMinimum: calories.safeMinimum,
     plan: planName,
-    calories: calories.maintenance,
+    calories: calories.target.kcalPerDay,
     protein: plan.protein.grams,
     totalFat: plan.fat.grams,
     totalCarbohydrates: plan.carbs.grams,
@@ -22,8 +27,8 @@ export const maintenanceTargets = (
   };
 };
 
-/** A day's calories against Maintenance: the signed gap, and if it's close. */
-export const calorieGap = (kcal: number, maintenance: number) => {
-  const diff = kcal - maintenance;
+/** A day's calories against a target: the signed gap, and if it's close. */
+export const calorieGap = (kcal: number, target: number) => {
+  const diff = kcal - target;
   return { diff, onTarget: Math.abs(Math.round(diff)) <= ON_TARGET_KCAL };
 };

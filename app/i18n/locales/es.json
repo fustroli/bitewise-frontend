@@ -35,6 +35,14 @@
           "average": "Promedio",
           "obese": "Obesidad"
         }
+      },
+      "calories": {
+        "targetNames": {
+          "maintenance": "Mantenimiento",
+          "lose": "Perder {kg} kg/sem",
+          "gain": "Ganar {kg} kg/sem"
+        },
+        "belowSafeMinimum": "Por debajo del mínimo seguro de {min} kcal/día"
       }
     }
   },
@@ -315,6 +323,7 @@
     "maintenance": {
       "kcal": "kcal",
       "comparedWith": "en comparación con tus calorías de mantenimiento ({maintenance} kcal/día)",
+      "comparedWithTarget": "en comparación con tu objetivo de calorías, {target} ({kcal} kcal/día)",
       "missing": "Añade tus datos corporales y tu fecha de nacimiento para comparar el borrador con tus calorías de mantenimiento.",
       "completeProfile": "Completar perfil"
     },

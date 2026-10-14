@@ -1,1 +1,1 @@
-export * from './use-maintenance-targets';
+export * from './use-daily-targets';

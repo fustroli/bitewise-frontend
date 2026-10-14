@@ -2,25 +2,40 @@
 
 import { formatAmount, interpolate } from '@/app/utils/helpers';
 
+import BelowSafeMinimum from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/components/BelowSafeMinimum';
+import { calorieTargetName } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/helpers';
+import { useDailyTargets } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/hooks';
 import { useDictionary } from '@/app/providers/dictionary-provider';
-import { useMaintenanceTargets } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/hooks';
 import { useParams } from 'next/navigation';
 
-/** The list toolbar's "Targets: 2,058 kcal · Balanced split"; hidden without. */
+/**
+ * The list toolbar's "Targets: 2,058 kcal (Maintenance) · Balanced split";
+ * hidden without.
+ */
 const MealPlanTargetsNote = () => {
   const { lang } = useParams<{ lang: string }>();
   const { resources, dashboard } = useDictionary();
-  const targets = useMaintenanceTargets();
+  const targets = useDailyTargets();
 
   if (!targets) return null;
 
   return (
-    <p className="text-[13px] font-semibold text-muted-foreground">
-      {interpolate(resources.mealPlans.targets, {
-        kcal: formatAmount(targets.calories, lang, 0),
-        plan: dashboard.bodyMetrics.macros.plans[targets.plan],
-      })}
-    </p>
+    <div className="flex flex-col gap-1">
+      <p className="text-[13px] font-semibold text-muted-foreground">
+        {interpolate(resources.mealPlans.targets, {
+          kcal: formatAmount(targets.calories, lang, 0),
+          target: calorieTargetName(
+            targets.target,
+            dashboard.bodyMetrics.calories.targetNames,
+            lang,
+          ),
+          plan: dashboard.bodyMetrics.macros.plans[targets.plan],
+        })}
+      </p>
+      {targets.target.belowSafeMinimum && (
+        <BelowSafeMinimum safeMinimum={targets.safeMinimum} locale={lang} />
+      )}
+    </div>
   );
 };
 

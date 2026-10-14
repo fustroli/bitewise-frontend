@@ -1,3 +1,7 @@
+import {
+  ECalorieTarget,
+  ESex,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   resendVerification,
@@ -5,7 +9,6 @@ import {
   updateUser,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/actions';
 
-import { ESex } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import { request } from '@/app/utils/helpers/server';
 
 vi.mock('@/app/utils/helpers/server', async (importOriginal) => ({
@@ -45,6 +48,23 @@ describe('updateUser', () => {
     expect(await updateUser({ bodyStats: { heightCm: '170' } } as any)).toEqual(
       INVALID,
     );
+    expect(request).not.toHaveBeenCalled();
+  });
+
+  it('forwards the targets, null included', async () => {
+    await updateUser({
+      targets: { calorieTarget: ECalorieTarget.LOSE_NORMAL, macroPlan: null },
+    });
+
+    expect(request).toHaveBeenCalledWith('users/me', 'PATCH', {
+      targets: { calorieTarget: ECalorieTarget.LOSE_NORMAL, macroPlan: null },
+    });
+  });
+
+  it('rejects an unknown target without calling the backend', async () => {
+    expect(
+      await updateUser({ targets: { calorieTarget: 'bulk' } } as any),
+    ).toEqual(INVALID);
     expect(request).not.toHaveBeenCalled();
   });
 });

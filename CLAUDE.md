@@ -136,17 +136,23 @@ range, Body fat percentage (US Navy), the Body fat category (ACE) with fat and
 lean mass, Maintenance calories (Mifflin-St Jeor × Activity multiplier) and
 Calorie targets (±250/500/1000 kcal) from the User's Body stats, date of
 birth and today, via `bodyMetrics()`, and lists the missing inputs. It also
-splits Maintenance calories into the four Macro plans (Balanced, Low fat, Low
-carb, High protein: grams, kcal, % and range per macro, plus sugar and
-saturated fat caps), using calculator.net's shares and energy per gram. Body fat
-is left unset when the measurements give an implausible result. Nothing is
-stored but the picked Macro plan (`useMacroPlan()`, localStorage per User);
-the dashboard's summary, Nutrition and Body cards read the User from context,
-so they update after a Profile save, and only format what the module
-returns. Until there is a BMI the dashboard shows setup steps instead. Each
-Meal plan card compares its day with Maintenance calories (on target within
-±150 kcal) and the picked plan's macros (`useMaintenanceTargets()`), and
-shows plain totals while Maintenance can't be computed.
+splits the picked Calorie target into the four Macro plans (Balanced, Low
+fat, Low carb, High protein: grams, kcal, % and range per macro, plus sugar
+and saturated fat caps), using calculator.net's shares and energy per gram.
+Body fat is left unset when the measurements give an implausible result.
+Nothing is stored but the User's picks, on the backend (`targets` on
+`/users/me`): the Calorie target (a row of the "Calories by goal" card) and
+the Macro plan. `useTargets()` reads them and `pick()`s new ones, an
+optimistic update of the user context that a failed save reverts with a
+toast; `useBodyMetrics()` computes at the picked target. The dashboard's
+summary, Nutrition and Body cards read the User from context, so they update
+after a Profile save or a pick, and only format what the module returns.
+Until there is a BMI the dashboard shows setup steps instead. Each Meal plan
+card, the Meal plans toolbar, the Draft meal plan and the compare page
+measure against `useDailyTargets()` (`meal-plans`: the Calorie target, on
+target within ±150 kcal, and the picked plan's macros), naming the target in
+their copy, warn when it is below the safe minimum (`BelowSafeMinimum`), and
+show plain totals while it can't be computed.
 
 ### API layer
 

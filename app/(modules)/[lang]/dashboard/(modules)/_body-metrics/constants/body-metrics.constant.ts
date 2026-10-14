@@ -1,12 +1,13 @@
 import {
   EActivityLevel,
+  ECalorieTarget,
+  EMacroPlan,
   ESex,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import {
   EBmiCategory,
   EBodyFatCategory,
   ECaloriePace,
-  EMacroPlan,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
 import {
   IBmiBand,
@@ -48,11 +49,32 @@ export const ACTIVITY_MULTIPLIERS: Record<EActivityLevel, number> = {
   [EActivityLevel.EXTRA_ACTIVE]: 1.9,
 };
 
-/** Daily offsets from Maintenance calories, as calculator.net uses them. */
+/**
+ * Daily offsets from Maintenance calories, as calculator.net uses them, with
+ * the Calorie target that loses or gains at each pace.
+ */
 export const CALORIE_PACES = [
-  { pace: ECaloriePace.MILD, kgPerWeek: 0.25, kcalPerDay: 250 },
-  { pace: ECaloriePace.NORMAL, kgPerWeek: 0.5, kcalPerDay: 500 },
-  { pace: ECaloriePace.FAST, kgPerWeek: 1, kcalPerDay: 1000 },
+  {
+    pace: ECaloriePace.MILD,
+    kgPerWeek: 0.25,
+    kcalPerDay: 250,
+    lose: ECalorieTarget.LOSE_MILD,
+    gain: ECalorieTarget.GAIN_MILD,
+  },
+  {
+    pace: ECaloriePace.NORMAL,
+    kgPerWeek: 0.5,
+    kcalPerDay: 500,
+    lose: ECalorieTarget.LOSE_NORMAL,
+    gain: ECalorieTarget.GAIN_NORMAL,
+  },
+  {
+    pace: ECaloriePace.FAST,
+    kgPerWeek: 1,
+    kcalPerDay: 1000,
+    lose: ECalorieTarget.LOSE_FAST,
+    gain: ECalorieTarget.GAIN_FAST,
+  },
 ];
 
 /** Calorie targets below these are flagged, kcal/day. */

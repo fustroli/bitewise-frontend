@@ -1,15 +1,17 @@
 import {
   EActivityLevel,
+  ECalorieTarget,
+  EMacroPlan,
   ESex,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import {
   EBmiCategory,
   EBodyFatCategory,
-  EMacroPlan,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/enums';
 import {
   ageOn,
   bodyMetrics,
+  calorieTargetName,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/helpers';
 import { describe, expect, it } from 'vitest';
 
@@ -167,6 +169,80 @@ describe('Maintenance calories and Calorie targets', () => {
   });
 });
 
+describe('the picked Calorie target', () => {
+  const picked = (calorieTarget?: ECalorieTarget | null) =>
+    bodyMetrics({
+      bodyStats: MAN,
+      dateOfBirth: DOB_25,
+      calorieTarget,
+      today: TODAY,
+    }).calories!;
+
+  it('is Maintenance, with no offset, when none is picked', () => {
+    const result = picked();
+
+    expect(result.target).toBe(result.maintenanceTarget);
+    expect(result.target).toEqual({
+      target: ECalorieTarget.MAINTENANCE,
+      kgPerWeek: 0,
+      kcalPerDay: result.maintenance,
+      percentOfMaintenance: 100,
+      belowSafeMinimum: false,
+    });
+    expect(picked(null).target.target).toBe(ECalorieTarget.MAINTENANCE);
+  });
+
+  it.each([
+    [ECalorieTarget.LOSE_MILD, -0.25, -250],
+    [ECalorieTarget.LOSE_NORMAL, -0.5, -500],
+    [ECalorieTarget.LOSE_FAST, -1, -1000],
+    [ECalorieTarget.GAIN_MILD, 0.25, 250],
+    [ECalorieTarget.GAIN_NORMAL, 0.5, 500],
+    [ECalorieTarget.GAIN_FAST, 1, 1000],
+  ])('is %s: %d kg/week, %d kcal/day', (target, kgPerWeek, offset) => {
+    const result = picked(target);
+
+    expect(result.target.target).toBe(target);
+    expect(result.target.kgPerWeek).toBe(kgPerWeek);
+    expect(result.target.kcalPerDay).toBeCloseTo(result.maintenance + offset);
+  });
+
+  it('flags a picked target below the safe minimum', () => {
+    const sedentary = bodyMetrics({
+      bodyStats: { ...MAN, activityLevel: EActivityLevel.SEDENTARY },
+      dateOfBirth: DOB_25,
+      calorieTarget: ECalorieTarget.LOSE_FAST,
+      today: TODAY,
+    }).calories!;
+
+    expect(sedentary.target.belowSafeMinimum).toBe(true);
+  });
+});
+
+describe('calorieTargetName', () => {
+  const names = {
+    maintenance: 'Maintenance',
+    lose: 'Lose {kg} kg/wk',
+    gain: 'Gain {kg} kg/wk',
+  };
+  const target = (calorieTarget: ECalorieTarget) =>
+    bodyMetrics({
+      bodyStats: MAN,
+      dateOfBirth: DOB_25,
+      calorieTarget,
+      today: TODAY,
+    }).calories!.target;
+
+  it.each([
+    [ECalorieTarget.MAINTENANCE, 'en', 'Maintenance'],
+    [ECalorieTarget.LOSE_NORMAL, 'en', 'Lose 0.5 kg/wk'],
+    [ECalorieTarget.GAIN_MILD, 'en', 'Gain 0.25 kg/wk'],
+    [ECalorieTarget.LOSE_MILD, 'hu', 'Lose 0,25 kg/wk'],
+  ])('names %s in %s', (calorieTarget, locale, name) => {
+    expect(calorieTargetName(target(calorieTarget), names, locale)).toBe(name);
+  });
+});
+
 /** calculator.net's macro example: 175 lb, 5'10", 25, moderate → 2,615 kcal. */
 const MACRO_MAN: IBodyStats = {
   ...MAN,
@@ -225,6 +301,25 @@ describe('Macro plans', () => {
   it('caps sugar and saturated fat at 10% of calories', () => {
     expect(Math.round(macros().sugarMaxGrams)).toBe(70);
     expect(Math.round(macros().saturatedFatMaxGrams)).toBe(30);
+  });
+
+  it('splits the picked Calorie target, the caps scaling along', () => {
+    const atTarget = bodyMetrics({
+      bodyStats: MACRO_MAN,
+      dateOfBirth: DOB_25,
+      calorieTarget: ECalorieTarget.LOSE_NORMAL,
+      today: TODAY,
+    }).macros!;
+    const scale = atTarget.kcalPerDay / macros().kcalPerDay;
+
+    expect(atTarget.kcalPerDay).toBeCloseTo(2115, 0);
+    expect(atTarget.plans[0].protein.grams).toBeCloseTo(
+      plan(EMacroPlan.BALANCED).protein.grams * scale,
+    );
+    expect(atTarget.sugarMaxGrams).toBeCloseTo(macros().sugarMaxGrams * scale);
+    expect(atTarget.saturatedFatMaxGrams).toBeCloseTo(
+      macros().saturatedFatMaxGrams * scale,
+    );
   });
 
   it('is unset while calories are', () => {

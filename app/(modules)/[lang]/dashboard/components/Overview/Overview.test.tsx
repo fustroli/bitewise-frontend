@@ -5,6 +5,8 @@ import {
 } from '@/app/providers/dictionary-provider';
 import {
   EActivityLevel,
+  ECalorieTarget,
+  EMacroPlan,
   ESex,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/enums';
 import { afterEach, beforeAll, describe, expect, it, vi } from 'vitest';
@@ -17,6 +19,7 @@ import Overview from '@/app/(modules)/[lang]/dashboard/components/Overview';
 import { ReactNode } from 'react';
 import { UserProvider } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/provider';
 import en from '@/app/i18n/locales/en.json';
+import { toast } from '@/app/hooks/use-toast';
 import userEvent from '@testing-library/user-event';
 
 vi.mock('@/app/(modules)/[lang]/dashboard/(modules)/_user/actions', () => ({}));
@@ -86,10 +89,7 @@ beforeAll(() => {
 });
 
 describe('Overview', () => {
-  afterEach(() => {
-    cleanup();
-    localStorage.clear();
-  });
+  afterEach(cleanup);
 
   it('shows the setup steps until there is a BMI', () => {
     renderWithUser(<Overview />, withStats({ heightCm: null }));
@@ -203,12 +203,13 @@ describe('Body fat card', () => {
 describe('Macros card', () => {
   afterEach(() => {
     cleanup();
-    localStorage.clear();
+    vi.mocked(toast).mockClear();
   });
 
-  it('starts on Balanced, switches plans and keeps the choice', async () => {
+  it('starts on Balanced and saves a switched plan', async () => {
     const user = userEvent.setup();
-    renderWithUser(<Overview />, WITH_CALORIES);
+    const updateUser = vi.fn().mockResolvedValue({ ok: true, data: MAN });
+    renderWithUser(<Overview />, WITH_CALORIES, updateUser);
     const macros = card(labels.macros.title);
     const proteinRow = () =>
       macros.getByText(labels.macros.macros.protein).closest('li')!.textContent;
@@ -218,16 +219,25 @@ describe('Macros card', () => {
 
     await user.click(macros.getByRole('combobox'));
     await user.click(
-      screen.getByRole('option', { name: labels.macros.plans.highProtein }),
+      screen.getByRole('option', { name: labels.macros.plans.high_protein }),
     );
 
+    expect(updateUser).toHaveBeenCalledWith({
+      targets: { macroPlan: EMacroPlan.HIGH_PROTEIN },
+    });
     expect(proteinRow()).toContain('35% of energy');
     expect(
-      screen.getByText(`${labels.macros.plans.highProtein} macro split`),
+      screen.getByText(`${labels.macros.plans.high_protein} macro split`),
     ).toBeTruthy();
+    expect(toast).not.toHaveBeenCalled();
+  });
 
-    cleanup();
-    renderWithUser(<Overview />, WITH_CALORIES);
+  it('starts on the stored plan', () => {
+    renderWithUser(<Overview />, {
+      ...WITH_CALORIES,
+      targets: { calorieTarget: null, macroPlan: EMacroPlan.HIGH_PROTEIN },
+    });
+
     expect(
       card(labels.macros.title)
         .getByText(labels.macros.macros.protein)
@@ -260,7 +270,88 @@ describe('Macros card', () => {
 });
 
 describe('Calories by goal card', () => {
-  afterEach(cleanup);
+  afterEach(() => {
+    cleanup();
+    vi.mocked(toast).mockClear();
+  });
+
+  const row = (name: string) =>
+    card(labels.calories.title).getByRole('button', {
+      name: new RegExp(`^${name}`),
+    });
+
+  it('picks Maintenance until another row is picked', () => {
+    renderWithUser(<Overview />, WITH_CALORIES);
+
+    expect(row(labels.calories.maintenance).getAttribute('aria-pressed')).toBe(
+      'true',
+    );
+    expect(
+      row(labels.calories.loseTargets.normal).getAttribute('aria-pressed'),
+    ).toBe('false');
+  });
+
+  it('saves a picked row and measures everything against it', async () => {
+    const user = userEvent.setup();
+    const updateUser = vi.fn().mockResolvedValue({ ok: true, data: MAN });
+    renderWithUser(<Overview />, WITH_CALORIES, updateUser);
+    const maintenanceTile = screen
+      .getByText(en.dashboard.summary.maintenance)
+      .closest('div')!.textContent;
+
+    await user.click(row(labels.calories.loseTargets.normal));
+
+    expect(updateUser).toHaveBeenCalledWith({
+      targets: { calorieTarget: ECalorieTarget.LOSE_NORMAL },
+    });
+    expect(
+      row(labels.calories.loseTargets.normal).getAttribute('aria-pressed'),
+    ).toBe('true');
+    const tile = screen
+      .getByText(en.dashboard.summary.calorieTarget)
+      .closest('div')!.textContent;
+    expect(tile).toContain('Lose 0.5 kg/wk');
+    expect(tile).not.toBe(maintenanceTile);
+    expect(
+      screen.getByRole('heading', {
+        level: 3,
+        name: 'Macros at target (Lose 0.5 kg/wk)',
+      }),
+    ).toBeTruthy();
+    expect(toast).not.toHaveBeenCalled();
+  });
+
+  it('opens on the side of the stored target', () => {
+    renderWithUser(<Overview />, {
+      ...WITH_CALORIES,
+      targets: { calorieTarget: ECalorieTarget.GAIN_FAST, macroPlan: null },
+    });
+
+    expect(
+      row(labels.calories.gainTargets.fast).getAttribute('aria-pressed'),
+    ).toBe('true');
+  });
+
+  it('switches back and shows the error when the save fails', async () => {
+    const user = userEvent.setup();
+    const updateUser = vi.fn().mockResolvedValue({
+      ok: false,
+      status: 500,
+      message: 'Something went wrong',
+    });
+    renderWithUser(<Overview />, WITH_CALORIES, updateUser);
+
+    await user.click(row(labels.calories.loseTargets.mild));
+
+    expect(toast).toHaveBeenCalledWith({
+      variant: 'error',
+      description: 'Something went wrong',
+    });
+    expect(row(labels.calories.maintenance).getAttribute('aria-pressed')).toBe(
+      'true',
+    );
+    expect(screen.getByText(en.dashboard.summary.maintenance)).toBeTruthy();
+  });
 
   it('flags targets below the safe minimum', async () => {
     const user = userEvent.setup();

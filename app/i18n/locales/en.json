@@ -63,10 +63,13 @@
       },
       "calories": {
         "title": "Calories by goal",
+        "pick": "Pick a row to set your Calorie target.",
         "kcalPerDay": "kcal/day",
         "kgPerWeek": "{value} kg/week",
         "lose": "Lose",
         "gain": "Gain",
+        "maintenance": "Maintenance",
+        "maintenanceHint": "Keeps your current weight",
         "loseTargets": {
           "mild": "Mild weight loss",
           "normal": "Weight loss",
@@ -77,6 +80,12 @@
           "normal": "Weight gain",
           "fast": "Fast weight gain"
         },
+        "targetNames": {
+          "maintenance": "Maintenance",
+          "lose": "Lose {kg} kg/wk",
+          "gain": "Gain {kg} kg/wk"
+        },
+        "picked": "Your target",
         "belowSafeMinimum": "Below the safe minimum of {min} kcal/day",
         "empty": "Add your sex, height, weight and Activity level to see your calories.",
         "dateOfBirthMissing": "Add your date of birth to see your calories.",
@@ -86,6 +95,7 @@
       },
       "macros": {
         "title": "Macros at maintenance",
+        "titleAtTarget": "Macros at target ({target})",
         "gramsPerDay": "g/day",
         "limit": "< {value} g/day",
         "macros": {
@@ -95,9 +105,9 @@
         },
         "plans": {
           "balanced": "Balanced",
-          "lowFat": "Low fat",
-          "lowCarb": "Low carb",
-          "highProtein": "High protein"
+          "low_fat": "Low fat",
+          "low_carb": "Low carb",
+          "high_protein": "High protein"
         },
         "empty": "Add your sex, height, weight and Activity level to see your macros.",
         "dateOfBirthMissing": "Add your date of birth to see your macros.",
@@ -117,6 +127,7 @@
       "pending": "Appears once your body stats are added.",
       "maintenance": "Maintenance calories",
       "maintenanceHint": "Keeps your current weight",
+      "calorieTarget": "Calorie target",
       "protein": "Protein target",
       "proteinHint": "{plan} macro split",
       "gramsPerDay": "g/day",
@@ -484,6 +495,8 @@
         "onTarget": "On target ({diff} kcal)",
         "under": "{value} kcal under maintenance",
         "over": "{value} kcal over maintenance",
+        "underTarget": "{value} kcal under target ({target})",
+        "overTarget": "{value} kcal over target ({target})",
         "show": {
           "one": "Show {count} meal",
           "other": "Show {count} meals"
@@ -492,7 +505,7 @@
         "macros": "P {protein} · C {carbs} · F {fat}",
         "noTargets": "Add your body stats to compare plans with your daily targets."
       },
-      "targets": "Targets: {kcal} kcal · {plan} split"
+      "targets": "Targets: {kcal} kcal ({target}) · {plan} split"
     }
   },
   "auth": {
@@ -588,6 +601,7 @@
     "maintenance": {
       "kcal": "kcal",
       "comparedWith": "compared with your Maintenance calories ({maintenance} kcal/day)",
+      "comparedWithTarget": "compared with your Calorie target, {target} ({kcal} kcal/day)",
       "missing": "Add your Body stats and date of birth to compare the draft with your Maintenance calories.",
       "completeProfile": "Complete Profile"
     },
