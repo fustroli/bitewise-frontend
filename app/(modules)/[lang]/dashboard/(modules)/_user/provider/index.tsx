@@ -36,6 +36,9 @@ export const UserProvider: React.FC<IProps> = ({
       updateUser: async (change) => apply(await actions.updateUser(change)),
       updateAvatar: async (formData) =>
         apply(await actions.updateAvatar(formData)),
+      requestEmailChange: async (change) =>
+        apply(await actions.requestEmailChange(change)),
+      cancelEmailChange: async () => apply(await actions.cancelEmailChange()),
     }),
     [user, actions, apply],
   );

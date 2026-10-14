@@ -503,5 +503,35 @@
       "unit": "Egység",
       "actions": "Műveletek"
     }
+  },
+  "emailChange": {
+    "current": "Jelenlegi e-mail: {email}",
+    "newEmail": "Új e-mail-cím",
+    "currentPassword": "Jelenlegi jelszó",
+    "submit": "E-mail módosítása",
+    "requested": "Megerősítő linket küldtünk ide: {email}, és a jelenlegi címedre.",
+    "pending": "Függőben: {email}, lejár: {expires}",
+    "resend": "Újraküldés",
+    "cancel": "Módosítás törlése",
+    "cancelled": "Az e-mail-módosítás törölve.",
+    "managedByGoogle": "A Google kezeli",
+    "confirming": "Új e-mail-cím megerősítése…",
+    "confirmedTitle": "E-mail-cím módosítva",
+    "confirmedSignedOut": "Az e-mail-cím módosítva, jelentkezz be az új címeddel.",
+    "confirmed": "Az e-mail-címed módosítva. A többi eszközön kijelentkeztettünk.",
+    "returnToSettings": "Vissza a beállításokhoz",
+    "signIn": "Bejelentkezés",
+    "invalidTitle": "Ez a link nem működik",
+    "invalid": "A link érvénytelen vagy lejárt.",
+    "takenTitle": "Foglalt cím",
+    "taken": "Időközben valaki más regisztrálta ezt a címet. Az e-mail-címed nem változott.",
+    "failedTitle": "Valami hiba történt",
+    "failed": "Valami hiba történt. Próbáld újra később.",
+    "cancelTitle": "Törlöd az e-mail-módosítást?",
+    "cancelIntro": "Valaki módosítani kérte a BiteWise-fiókod e-mail-címét. A törlés minden eszközön kijelentkeztet, és törli a jelszavad.",
+    "cancelAction": "Módosítás törlése",
+    "cancelledTitle": "Módosítás törölve",
+    "setPassword": "Új jelszó beállítása",
+    "cancelledDone": "A módosítás törölve, minden eszközön kijelentkeztettünk, és a jelszavad törlődött. Állíts be újat a bejelentkezéshez."
   }
 }

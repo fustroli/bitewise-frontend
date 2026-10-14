@@ -1,4 +1,5 @@
 import {
+  IEmailChangeRequest,
   IUser,
   IUserChange,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/interfaces';
@@ -9,6 +10,10 @@ import { TApiResult } from '@/app/utils/interfaces';
 export interface IUserActions {
   updateUser: (change: IUserChange) => Promise<TApiResult<IUser>>;
   updateAvatar: (formData: FormData) => Promise<TApiResult<IUser>>;
+  requestEmailChange: (
+    request: IEmailChangeRequest,
+  ) => Promise<TApiResult<IUser>>;
+  cancelEmailChange: () => Promise<TApiResult<IUser>>;
 }
 
 /** On a successful update, `user` becomes the updated User. */
