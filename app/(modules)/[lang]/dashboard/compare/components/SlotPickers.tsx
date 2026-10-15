@@ -1,6 +1,10 @@
 'use client';
 
 import {
+  IComparisonOption,
+  SLOT_DOT_CLASSES,
+} from '@/app/(modules)/[lang]/dashboard/compare/components/compare.types';
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -8,8 +12,6 @@ import {
   SelectValue,
 } from '@/app/components/ui/select';
 
-import { IComparisonItem } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/interfaces';
-import { SLOT_DOT_CLASSES } from '@/app/(modules)/[lang]/dashboard/compare/components/compare.types';
 import { cn } from '@/app/lib';
 import { interpolate } from '@/app/utils/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
@@ -19,7 +21,7 @@ import { useMemo } from 'react';
 const NONE = 'none';
 
 interface IProps {
-  items: IComparisonItem[];
+  items: IComparisonOption[];
   ids: (number | null)[];
   onPick: (slot: number, id: number | null) => void;
 }

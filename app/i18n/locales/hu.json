@@ -660,6 +660,8 @@
     "none": "Nincs",
     "placeholder": "Válassz…",
     "pickPrompt": "Válassz egy alapot az összehasonlításhoz.",
+    "loadError": "Nem sikerült betölteni a kiválasztottakat.",
+    "retry": "Újra",
     "overview": {
       "title": "Áttekintés",
       "description": {

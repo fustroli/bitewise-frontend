@@ -7,7 +7,9 @@ import {
 import {
   IChosenItem,
   TComparisonItems,
+  TComparisonOptions,
 } from '@/app/(modules)/[lang]/dashboard/compare/components/compare.types';
+import { useEffect, useMemo, useState } from 'react';
 import { useParams, usePathname, useRouter } from 'next/navigation';
 
 import { Button } from '@/app/components/ui/button';
@@ -21,10 +23,11 @@ import PageHeader from '@/app/components/layout/PageHeader';
 import { Scale } from 'lucide-react';
 import Section from '@/app/components/layout/Section';
 import SegmentedControl from '@/app/components/SegmentedControl';
+import { Skeleton } from '@/app/components/ui/skeleton';
 import SlotPickers from '@/app/(modules)/[lang]/dashboard/compare/components/SlotPickers';
 import { comparisonSearch } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/helpers';
+import { useComparisonItems } from '@/app/(modules)/[lang]/dashboard/compare/hooks/use-comparison-items';
 import { useDictionary } from '@/app/providers/dictionary-provider';
-import { useState } from 'react';
 
 const LIST_ROUTES: Record<EComparisonKind, string> = {
   [EComparisonKind.INGREDIENTS]: '/ingredients',
@@ -36,11 +39,14 @@ const EMPTY_SLOTS = Array<number | null>(COMPARISON_MAX_ITEMS).fill(null);
 
 interface IProps {
   initial: IComparisonQuery;
-  items: TComparisonItems;
+  /** Every record of each kind, for the slot pickers. */
+  options: TComparisonOptions;
+  /** The records of `initial`'s picks, fetched on the server. */
+  items: Partial<TComparisonItems>;
 }
 
 /** The kind switch, the three slots, the overview and the nutrient table. */
-const ComparePage = ({ initial, items }: IProps) => {
+const ComparePage = ({ initial, options, items }: IProps) => {
   const labels = useDictionary().comparison;
   const { lang } = useParams<{ lang: string }>();
   const router = useRouter();
@@ -77,13 +83,77 @@ const ComparePage = ({ initial, items }: IProps) => {
     show(kind, ids);
   };
 
-  const kindItems = items[kind];
+  const caches = useComparisonItems(items);
+  const { records, missing, failed, request, retry } = caches[kind];
+  const kindOptions = options[kind];
+
+  // Picks that aren't among the options (gone, or never the User's) are
+  // empty slots; the rest are fetched in full.
+  const wanted = useMemo(
+    () =>
+      picks[kind].filter(
+        (id): id is number =>
+          id !== null && kindOptions.some((option) => option.id === id),
+      ),
+    [picks, kind, kindOptions],
+  );
+  useEffect(() => request(wanted), [request, wanted]);
+
+  const isLoading = wanted.some(
+    (id) =>
+      !records.some((record) => record.id === id) &&
+      !missing.includes(id) &&
+      !failed.includes(id),
+  );
+  const hasFailed = wanted.some((id) => failed.includes(id));
+
   // An id the backend no longer returns is an empty slot.
   const chosen: IChosenItem[] = picks[kind].flatMap((id, slot) => {
-    const item = kindItems.find((option) => option.id === id);
+    const item = records.find((record) => record.id === id);
     return item ? [{ slot, item }] : [];
   });
   const baseline = chosen.find(({ slot }) => slot === 0);
+
+  const renderComparison = () => {
+    if (hasFailed) {
+      return (
+        <div
+          role="alert"
+          className="flex flex-col items-start gap-3 rounded-lg border bg-card p-4"
+        >
+          <p className="text-sm text-destructive">{labels.loadError}</p>
+          <Button type="button" variant="outline" onClick={retry}>
+            {labels.retry}
+          </Button>
+        </div>
+      );
+    }
+
+    if (isLoading) {
+      return <Skeleton className="h-64 w-full rounded-lg" />;
+    }
+
+    if (!baseline) {
+      return (
+        <div className="rounded-lg border bg-card">
+          <EmptyState icon={Scale} title={labels.pickPrompt} />
+        </div>
+      );
+    }
+
+    return (
+      <>
+        <Section
+          id="overview"
+          title={labels.overview.title}
+          description={labels.overview.description[kind]}
+        >
+          <OverviewCards kind={kind} chosen={chosen} lang={lang} />
+        </Section>
+        <NutrientTable chosen={chosen} lang={lang} />
+      </>
+    );
+  };
 
   const kindSwitch = (className?: string) => (
     <SegmentedControl
@@ -99,7 +169,7 @@ const ComparePage = ({ initial, items }: IProps) => {
   );
 
   const renderBody = () => {
-    if (kindItems.length < 2) {
+    if (kindOptions.length < 2) {
       return (
         <div className="rounded-lg border bg-card">
           <EmptyState
@@ -120,24 +190,9 @@ const ComparePage = ({ initial, items }: IProps) => {
     return (
       <>
         <Section id="choose" title={labels.chooseTitle[kind]}>
-          <SlotPickers items={kindItems} ids={picks[kind]} onPick={pick} />
+          <SlotPickers items={kindOptions} ids={picks[kind]} onPick={pick} />
         </Section>
-        {baseline ? (
-          <>
-            <Section
-              id="overview"
-              title={labels.overview.title}
-              description={labels.overview.description[kind]}
-            >
-              <OverviewCards kind={kind} chosen={chosen} lang={lang} />
-            </Section>
-            <NutrientTable chosen={chosen} lang={lang} />
-          </>
-        ) : (
-          <div className="rounded-lg border bg-card">
-            <EmptyState icon={Scale} title={labels.pickPrompt} />
-          </div>
-        )}
+        {renderComparison()}
       </>
     );
   };

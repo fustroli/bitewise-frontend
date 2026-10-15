@@ -660,6 +660,8 @@
     "none": "None",
     "placeholder": "Select…",
     "pickPrompt": "Pick a baseline to start comparing.",
+    "loadError": "Couldn't load what you picked.",
+    "retry": "Try again",
     "overview": {
       "title": "Overview",
       "description": {

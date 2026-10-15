@@ -9,9 +9,6 @@ export const DEFAULT_SORT: ISortState = {
   orderDirection: EOrderDirection.DESC,
 };
 
-/** The backend's list cap; dialog pickers load this many options. */
-export const MAX_LIST_LIMIT = 100;
-
 /** The backend rejects a longer search term. */
 export const MAX_SEARCH_LENGTH = 100;
 

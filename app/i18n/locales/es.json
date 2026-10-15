@@ -386,7 +386,9 @@
       "dietaryFiber": "Fibra",
       "unit": "Unidad",
       "actions": "Acciones"
-    }
+    },
+    "loadError": "No se pudo cargar lo que elegiste.",
+    "retry": "Reintentar"
   },
   "weekPlan": {
     "title": "Plan semanal",
