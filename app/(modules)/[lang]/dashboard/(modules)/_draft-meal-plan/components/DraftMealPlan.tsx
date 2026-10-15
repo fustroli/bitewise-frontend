@@ -7,6 +7,7 @@ import DraftStartCard from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-me
 import { IDraftSources } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
 import { resolveDraft } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
 import { useDraftMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/context';
+import { useHydrated } from '@/app/hooks/use-hydrated';
 import { useMemo } from 'react';
 
 interface IProps extends IDraftSources {
@@ -27,8 +28,11 @@ const DraftMealPlan = ({ meals, ingredients, profileHref }: IProps) => {
     [stored, sources],
   );
 
-  // Not read until the client has hydrated.
-  if (stored === undefined) return <DraftMealPlanSkeleton />;
+  // This boundary can hydrate after the provider has read the store: until
+  // it has, it shows what the server rendered.
+  const isHydrated = useHydrated();
+
+  if (stored === undefined || !isHydrated) return <DraftMealPlanSkeleton />;
 
   if (!resolved) return <DraftStartCard />;
 
