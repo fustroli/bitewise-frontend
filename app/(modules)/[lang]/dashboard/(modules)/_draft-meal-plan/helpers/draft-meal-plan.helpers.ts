@@ -69,17 +69,23 @@ const lineExists = ({ kind, itemId }: TDraftLine, sources: IDraftSources) =>
     : Boolean(findIngredient(itemId, sources));
 
 /** Drops lines whose Meal or Ingredient no longer exists; unpicked lines stay. */
+export const resolveDraftLines = (
+  lines: TDraftLine[],
+  sources: IDraftSources,
+) => {
+  const kept = lines.filter(
+    (line) => line.itemId === 0 || lineExists(line, sources),
+  );
+  return { lines: kept, removed: lines.length - kept.length };
+};
+
+/** The draft with `resolveDraftLines` applied. */
 export const resolveDraft = (
   draft: TStoredDraft,
   sources: IDraftSources,
 ): IResolvedDraft => {
-  const lines = draft.lines.filter(
-    (line) => line.itemId === 0 || lineExists(line, sources),
-  );
-  return {
-    draft: { ...draft, lines },
-    removed: draft.lines.length - lines.length,
-  };
+  const { lines, removed } = resolveDraftLines(draft.lines, sources);
+  return { draft: { ...draft, lines }, removed };
 };
 
 /** The Unit an Ingredient line's amount is in; unset for a Meal or unpicked line. */

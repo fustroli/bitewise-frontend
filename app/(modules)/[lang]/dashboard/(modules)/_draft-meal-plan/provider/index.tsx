@@ -3,6 +3,7 @@
 import {
   EMPTY_DRAFT,
   draftStorageKey,
+  mealPlanDraft,
   parseDraft,
   serializeDraft,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
@@ -14,6 +15,8 @@ import { DraftMealPlanContext } from '@/app/(modules)/[lang]/dashboard/(modules)
 import { IDraftMealPlanContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
 import LoadMealPlanDialog from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/LoadMealPlanDialog';
 import { TStoredDraft } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/validations';
+import { interpolate } from '@/app/utils/helpers';
+import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useLocalStorage } from '@/app/hooks/use-local-storage';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 
@@ -35,6 +38,7 @@ interface IProps extends PropsWithChildren {
  */
 export const DraftMealPlanProvider = ({ mealPlansHref, children }: IProps) => {
   const { user } = useUserContext();
+  const labels = useDictionary().draftMealPlan.load;
   const [raw, setRaw] = useLocalStorage(draftStorageKey(user.id));
   const [loads, setLoads] = useState(0);
   const [loadDialog, setLoadDialog] = useState<{
@@ -87,6 +91,8 @@ export const DraftMealPlanProvider = ({ mealPlansHref, children }: IProps) => {
     [raw],
   );
 
+  const lineCount = stored?.lines.length ?? 0;
+
   const value = useMemo<IDraftMealPlanContext>(
     () => ({
       stored,
@@ -113,10 +119,15 @@ export const DraftMealPlanProvider = ({ mealPlansHref, children }: IProps) => {
         open={loadDialog.open || paramMealPlanId !== undefined}
         onOpenChange={onLoadOpenChange}
         initialMealPlanId={paramMealPlanId ?? loadDialog.mealPlanId}
-        lineCount={stored?.lines.length ?? 0}
         mealPlansHref={mealPlansHref}
-        onLoad={load}
-      />
+        onLoad={({ mealIds }) => load(mealPlanDraft(mealIds))}
+      >
+        {lineCount > 0 && (
+          <p className="text-sm text-muted-foreground">
+            {interpolate(labels.replaceWarning, { count: lineCount })}
+          </p>
+        )}
+      </LoadMealPlanDialog>
     </DraftMealPlanContext.Provider>
   );
 };

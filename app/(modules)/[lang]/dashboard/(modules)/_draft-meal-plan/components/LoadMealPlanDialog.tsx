@@ -7,13 +7,12 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/app/components/ui/dialog';
+import { ReactNode, useEffect, useMemo, useState } from 'react';
 import {
   TLoadMealPlanSchema,
-  TStoredDraft,
   createLoadMealPlanSchema,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/validations';
 import { convertToOptions, interpolate } from '@/app/utils/helpers';
-import { useEffect, useMemo, useState } from 'react';
 
 import { Button } from '@/app/components/ui/button';
 import ComboboxField from '@/app/components/form/ComboboxField';
@@ -22,7 +21,6 @@ import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
 import { IDraftMealPlanOption } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
 import Link from 'next/link';
 import { fetchDraftMealPlans } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/actions';
-import { mealPlanDraft } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
 import { toast } from '@/app/hooks/use-toast';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
@@ -33,21 +31,31 @@ interface IProps {
   onOpenChange: (open: boolean) => void;
   /** Picked when the dialog opens, e.g. from a Meal plan's "Open as draft". */
   initialMealPlanId?: number;
-  /** Lines the load would replace; 0 for no warning. */
-  lineCount: number;
+  /** Replaces the draft's description, saying where the copy goes. */
+  description?: string;
+  /** Below the Meal plan picker: what else the load needs, what it replaces. */
+  children?: ReactNode;
+  submitLabel?: string;
+  submitDisabled?: boolean;
   mealPlansHref: string;
-  onLoad: (draft: TStoredDraft) => void;
+  onLoad: (mealPlan: IDraftMealPlanOption) => void;
 }
 
 /** `undefined` while loading, `null` when the fetch failed. */
 type TMealPlans = IDraftMealPlanOption[] | null | undefined;
 
-/** Replaces the draft with a copy of a Meal plan; nothing is saved on the backend. */
+/**
+ * Picks one of the User's Meal plans to copy from; the caller puts the copy
+ * where it goes. Nothing is saved on the backend.
+ */
 const LoadMealPlanDialog = ({
   open,
   onOpenChange,
   initialMealPlanId,
-  lineCount,
+  description,
+  children,
+  submitLabel,
+  submitDisabled,
   mealPlansHref,
   onLoad,
 }: IProps) => {
@@ -89,7 +97,7 @@ const LoadMealPlanDialog = ({
     const mealPlan = mealPlans?.find(({ id }) => id === mealPlanId);
     if (!mealPlan) return;
 
-    onLoad(mealPlanDraft(mealPlan.mealIds));
+    onLoad(mealPlan);
     onOpenChange(false);
     toast({
       variant: 'success',
@@ -137,15 +145,12 @@ const LoadMealPlanDialog = ({
             emptyText={resourceTable.notFound}
             className="w-full"
           />
-          {lineCount > 0 && (
-            <p className="text-sm text-muted-foreground">
-              {interpolate(labels.replaceWarning, { count: lineCount })}
-            </p>
-          )}
+          {children}
           <FormDialogFooter
             form={form}
             onClose={() => onOpenChange(false)}
-            submitLabel={labels.submit}
+            submitLabel={submitLabel ?? labels.submit}
+            submitDisabled={submitDisabled}
             closeLabel={resourceTable.cancel}
           />
         </form>
@@ -158,7 +163,9 @@ const LoadMealPlanDialog = ({
       <DialogContent>
         <DialogHeader>
           <DialogTitle>{labels.title}</DialogTitle>
-          <DialogDescription>{labels.description}</DialogDescription>
+          <DialogDescription>
+            {description ?? labels.description}
+          </DialogDescription>
         </DialogHeader>
         {renderBody()}
       </DialogContent>
