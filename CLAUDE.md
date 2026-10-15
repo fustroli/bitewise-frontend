@@ -145,8 +145,10 @@ The `/compare` page (`dashboard/compare/`) puts up to three records of one
 kind side by side, the first being the baseline. Its state is only the URL:
 `?type=ingredients|meals|plans&ids=4,,7` (an empty middle slot allowed),
 read and written by the `_comparison` helpers `parseComparisonQuery()` /
-`comparisonSearch()`. The page loads every kind's records once, so each
-kind keeps its picks while switching. Row menus and list headers link
+`comparisonSearch()`. The page loads every kind's option list once, so each
+kind keeps its picks while switching, plus the URL's picks in full; later
+picks are fetched by id (`useComparisonItems()` over `useRecordCache`), a pick
+not among the options or found gone being an empty slot. Row menus and list headers link
 there (`IResourceForm.compareType`, `IResourceList.compareType`).
 
 ### Body metrics

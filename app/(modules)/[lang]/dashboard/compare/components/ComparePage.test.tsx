@@ -18,6 +18,22 @@ vi.mock('next/navigation', () => ({
   useRouter: () => ({ replace }),
 }));
 vi.mock('@/app/(modules)/[lang]/dashboard/(modules)/_user/actions', () => ({}));
+const fetchIngredientsByIds = vi.fn();
+vi.mock(
+  '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/actions',
+  () => ({
+    fetchIngredientsByIds: (ids: number[]) => fetchIngredientsByIds(ids),
+  }),
+);
+vi.mock('@/app/(modules)/[lang]/dashboard/(modules)/meals/actions', () => ({
+  fetchMealsByIds: vi.fn(),
+}));
+vi.mock(
+  '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/actions',
+  () => ({
+    fetchMealPlansByIds: vi.fn(),
+  }),
+);
 
 const labels = en.comparison;
 
@@ -42,9 +58,18 @@ const ITEMS = {
   [EComparisonKind.MEAL_PLANS]: [],
 };
 
+const OPTIONS = {
+  [EComparisonKind.INGREDIENTS]: ITEMS[EComparisonKind.INGREDIENTS],
+  [EComparisonKind.MEALS]: ITEMS[EComparisonKind.MEALS],
+  [EComparisonKind.MEAL_PLANS]: [],
+};
+
 const USER: IUser = { id: 1, email: 'user@example.com' };
 
-const renderPage = (ids: (number | null)[]) =>
+const renderPage = (
+  ids: (number | null)[],
+  items: Partial<typeof ITEMS> = ITEMS,
+) =>
   render(
     <DictionaryProvider dictionary={en}>
       <UserProvider
@@ -58,11 +83,18 @@ const renderPage = (ids: (number | null)[]) =>
       >
         <ComparePage
           initial={{ kind: EComparisonKind.INGREDIENTS, ids }}
-          items={ITEMS}
+          options={OPTIONS}
+          items={items}
         />
       </UserProvider>
     </DictionaryProvider>,
   );
+
+/** The nutrient table, once its section shows. */
+const shownNutrientTable = async () => {
+  await screen.findByRole('heading', { name: labels.nutrients.title });
+  return nutrientTable();
+};
 
 const nutrientTable = () =>
   within(
@@ -80,6 +112,7 @@ describe('ComparePage', () => {
   afterEach(() => {
     cleanup();
     replace.mockClear();
+    fetchIngredientsByIds.mockReset();
   });
 
   it('asks for a baseline until one is picked', () => {
@@ -148,5 +181,27 @@ describe('ComparePage', () => {
       '/en/dashboard/compare?type=ingredients&ids=1%2C2',
       { scroll: false },
     );
+  });
+
+  it('fetches a picked item it has not loaded yet', async () => {
+    const [oats, , egg] = ITEMS[EComparisonKind.INGREDIENTS];
+    fetchIngredientsByIds.mockResolvedValue({ ok: true, data: [egg] });
+    const user = userEvent.setup();
+    renderPage([1], { [EComparisonKind.INGREDIENTS]: [oats] });
+
+    await user.click(screen.getByRole('combobox', { name: /Item 2/ }));
+    await user.click(screen.getByRole('option', { name: 'Egg' }));
+
+    expect(
+      (await shownNutrientTable()).getAllByText('−307 kcal').length,
+    ).toBeGreaterThan(0);
+    expect(fetchIngredientsByIds).toHaveBeenCalledWith([3]);
+  });
+
+  it('leaves a slot empty when its item is gone', async () => {
+    fetchIngredientsByIds.mockResolvedValue({ ok: true, data: [] });
+    renderPage([2], { [EComparisonKind.INGREDIENTS]: [] });
+
+    expect(await screen.findByText(labels.pickPrompt)).toBeTruthy();
   });
 });

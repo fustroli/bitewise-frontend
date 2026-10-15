@@ -1,8 +1,11 @@
 import 'server-only';
 
+import {
+  IMealPlan,
+  IMealPlanOption,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
 import { request, unwrap } from '@/app/utils/helpers/server';
 
-import { IMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
 import { IQueryParams } from '@/app/utils/interfaces';
 
 export async function fetchMealPlans(params: IQueryParams) {
@@ -14,4 +17,9 @@ export async function fetchMealPlans(params: IQueryParams) {
       params,
     ),
   );
+}
+
+/** Every Meal plan of the User, by name, as a picker offers them. */
+export async function fetchMealPlanOptions() {
+  return unwrap(await request<IMealPlanOption[]>('meal-plan/options', 'GET'));
 }

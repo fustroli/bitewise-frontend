@@ -386,7 +386,9 @@
       "dietaryFiber": "Ballaststoffe",
       "unit": "Einheit",
       "actions": "Aktionen"
-    }
+    },
+    "loadError": "Die Auswahl konnte nicht geladen werden.",
+    "retry": "Erneut versuchen"
   },
   "weekPlan": {
     "title": "Wochenplan",

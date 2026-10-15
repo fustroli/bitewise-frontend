@@ -3,6 +3,14 @@ import { IComparisonItem } from '@/app/(modules)/[lang]/dashboard/(modules)/_com
 
 export type TComparisonItems = Record<EComparisonKind, IComparisonItem[]>;
 
+/** What a slot picker offers. */
+export interface IComparisonOption {
+  id: number;
+  name: string;
+}
+
+export type TComparisonOptions = Record<EComparisonKind, IComparisonOption[]>;
+
 /** A filled slot: its item and its position (0 is the baseline). */
 export interface IChosenItem {
   slot: number;

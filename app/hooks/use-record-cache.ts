@@ -35,13 +35,20 @@ const batches = (ids: number[]) =>
 export const useRecordCache = <T extends { id: number }>(
   fetchByIds: (ids: number[]) => Promise<TApiResult<T[]>>,
   onFailure?: (result: TApiResult<T[]>) => void,
+  /** Records already at hand, e.g. fetched on the server; read once. */
+  initial?: T[],
 ): IRecordCache<T> => {
   const [entries, setEntries] = useState<ReadonlyMap<number, TEntry<T>>>(
-    () => new Map(),
+    () =>
+      new Map(
+        initial?.map((record) => [record.id, { status: 'ready', record }]),
+      ),
   );
   // Each id's status as of the last request, ahead of the next render, so
   // two requests before it don't both fetch an id.
-  const statuses = useRef(new Map<number, TStatus>());
+  const statuses = useRef(
+    new Map<number, TStatus>(initial?.map(({ id }) => [id, 'ready'])),
+  );
 
   const update = useCallback((changes: [number, TEntry<T>][]) => {
     for (const [id, entry] of changes) statuses.current.set(id, entry.status);
