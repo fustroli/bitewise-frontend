@@ -2,12 +2,12 @@
 
 import * as api from '../api';
 
+import { Alert, AlertDescription } from '@/app/components/ui/alert';
 import {
   TForgotPasswordSchema,
   forgotPasswordSchema,
 } from '@/app/(modules)/(auth)/validations';
 
-import { Alert, AlertDescription } from '@/app/components/ui/alert';
 import { Form } from '@/app/components/ui/form';
 import InputField from '@/app/components/form/InputField';
 import Link from 'next/link';

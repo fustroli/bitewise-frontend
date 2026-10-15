@@ -6,6 +6,7 @@ import {
   TResetPasswordSchema,
   createResetPasswordSchema,
 } from '@/app/(modules)/(auth)/validations';
+import { useMemo, useState } from 'react';
 
 import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
@@ -14,7 +15,6 @@ import LoadingButton from '@/app/components/buttons/LoadingButton';
 import PasswordInput from '@/app/components/form/PasswordInput';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useForm } from 'react-hook-form';
-import { useMemo, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { useToast } from '@/app/hooks/use-toast';
 import { zodResolver } from '@hookform/resolvers/zod';
