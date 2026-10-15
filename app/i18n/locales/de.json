@@ -303,6 +303,7 @@
     "collapse": "Ernährungsplan-Entwurf einklappen",
     "expand": "Ernährungsplan-Entwurf ausklappen",
     "removed": "{count} nicht mehr vorhandene Einträge wurden aus dem Entwurf entfernt.",
+    "recordsError": "Die Mahlzeiten und Zutaten konnten nicht geladen werden.",
     "total": "Gesamt",
     "columns": {
       "item": "Mahlzeit oder Zutat",

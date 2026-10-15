@@ -4,6 +4,10 @@ import DraftNutritionCells, {
   DraftNutritionHeads,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftNutritionCells';
 import {
+  IDraftOptions,
+  IDraftSources,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
+import {
   TDraftLine,
   TDraftSchema,
   createDraftSchema,
@@ -19,7 +23,10 @@ import {
 } from '@/app/components/ui/table';
 import {
   draftLineNutrition,
+  draftLineState,
+  draftLineUnit,
   draftNutrition,
+  isDraftSettled,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
 import { useEffect, useMemo } from 'react';
 import { useFieldArray, useForm, useWatch } from 'react-hook-form';
@@ -29,7 +36,6 @@ import { DEFAULT_MEAL_MULTIPLIER } from '@/app/(modules)/[lang]/dashboard/(modul
 import DraftLineRow from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftLineRow';
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { Form } from '@/app/components/ui/form';
-import { IDraftSources } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
 import { Plus } from 'lucide-react';
 import { convertToOptions } from '@/app/utils/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
@@ -38,6 +44,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 interface IProps {
   /** Read once, when the editor mounts; from then on the editor owns the lines. */
   initial: TDraftLine[];
+  /** What the pickers offer. */
+  options: IDraftOptions;
+  /** The picked items' records, fetched by whoever holds the lines. */
   sources: IDraftSources;
   /** Names the table for screen readers. */
   label: string;
@@ -50,7 +59,13 @@ interface IProps {
  * item on one line only, plus Add meal / Add ingredient. Incomplete lines are
  * flagged but still reported.
  */
-const DraftLinesEditor = ({ initial, sources, label, onChange }: IProps) => {
+const DraftLinesEditor = ({
+  initial,
+  options: items,
+  sources,
+  label,
+  onChange,
+}: IProps) => {
   const dictionary = useDictionary();
   const { draftMealPlan: labels, resourceTable } = dictionary;
 
@@ -77,10 +92,10 @@ const DraftLinesEditor = ({ initial, sources, label, onChange }: IProps) => {
 
   const options = useMemo(
     () => ({
-      [EDraftLineKind.MEAL]: convertToOptions(sources.meals),
-      [EDraftLineKind.INGREDIENT]: convertToOptions(sources.ingredients),
+      [EDraftLineKind.MEAL]: convertToOptions(items.meals),
+      [EDraftLineKind.INGREDIENT]: convertToOptions(items.ingredients),
     }),
-    [sources],
+    [items],
   );
 
   // An item appears on one line only: each line offers what no other line
@@ -121,8 +136,12 @@ const DraftLinesEditor = ({ initial, sources, label, onChange }: IProps) => {
                     line={line}
                     control={form.control}
                     options={optionsFor(index, line.kind)}
-                    sources={sources}
-                    nutrition={draftLineNutrition(line, sources)}
+                    unit={draftLineUnit(line, items.ingredients)}
+                    nutrition={
+                      draftLineState(line, sources) === 'pending'
+                        ? undefined
+                        : draftLineNutrition(line, sources)
+                    }
                     onRemove={() => remove(index)}
                   />
                 );
@@ -134,7 +153,11 @@ const DraftLinesEditor = ({ initial, sources, label, onChange }: IProps) => {
                   {labels.total}
                 </TableCell>
                 <DraftNutritionCells
-                  nutrition={draftNutrition(lines, sources)}
+                  nutrition={
+                    isDraftSettled(lines, sources)
+                      ? draftNutrition(lines, sources)
+                      : undefined
+                  }
                   isTotal
                 />
                 <TableCell />

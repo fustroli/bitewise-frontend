@@ -11,6 +11,9 @@ import {
   refreshDashboardOnSuccess,
   request,
 } from '@/app/utils/helpers/server';
+
+import { MAX_IDS_PER_FETCH } from '@/app/utils/constants';
+import { TApiResult } from '@/app/utils/interfaces';
 import { createIngredientSchema } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/validations';
 import { z } from 'zod';
 
@@ -49,4 +52,23 @@ export async function deleteIngredient(ingredientId: number) {
   return refreshDashboardOnSuccess(
     await request(`ingredient/${input.data}`, 'DELETE'),
   );
+}
+
+/** The User's Ingredients among `ids`, in full; ids not returned are gone. */
+export async function fetchIngredientsByIds(
+  ids: number[],
+): Promise<TApiResult<IIngredient[]>> {
+  const input = parseActionInput(
+    z.array(idSchema).min(1).max(MAX_IDS_PER_FETCH),
+    ids,
+  );
+  if (!input.ok) return input;
+
+  const result = await request<{ data: IIngredient[] }>(
+    'ingredient',
+    'GET',
+    undefined,
+    { ids: input.data.join(',') },
+  );
+  return result.ok ? { ok: true, data: result.data.data } : result;
 }

@@ -1,9 +1,12 @@
 import {
   EMPTY_DRAFT,
   draftLineNutrition,
+  draftLineState,
+  draftLineUnit,
   draftNutrition,
   draftStorageKey,
   formatCalorieDelta,
+  isDraftSettled,
   mealPlanDraft,
   parseDraft,
   resolveDraft,
@@ -64,7 +67,13 @@ const PORRIDGE: IMeal = {
   ],
 };
 
-const SOURCES: IDraftSources = { meals: [PORRIDGE], ingredients: [OATS, EGG] };
+// Meal 99 and Ingredient 98 were fetched and found gone; anything else not
+// listed is still loading.
+const SOURCES: IDraftSources = {
+  meals: [PORRIDGE],
+  ingredients: [OATS, EGG],
+  missing: { meals: [99], ingredients: [98] },
+};
 
 const line = (
   kind: EDraftLineKind,
@@ -112,6 +121,66 @@ describe('parseDraft', () => {
   });
 });
 
+describe('draftLineState', () => {
+  it.each([
+    ['a fetched Meal', line(EDraftLineKind.MEAL, 10, 1), 'ready'],
+    ['a fetched Ingredient', line(EDraftLineKind.INGREDIENT, 2, 1), 'ready'],
+    ['an unpicked line', line(EDraftLineKind.MEAL, 0, 1), 'ready'],
+    ['a Meal found gone', line(EDraftLineKind.MEAL, 99, 1), 'missing'],
+    [
+      'an Ingredient found gone',
+      line(EDraftLineKind.INGREDIENT, 98, 1),
+      'missing',
+    ],
+    ['an item not fetched yet', line(EDraftLineKind.MEAL, 50, 1), 'pending'],
+  ])('is %s: %s', (_, draftLine, state) => {
+    expect(draftLineState(draftLine, SOURCES)).toBe(state);
+  });
+
+  it('looks a line up among its own kind', () => {
+    // 1 is a fetched Ingredient id, not a Meal id.
+    expect(draftLineState(line(EDraftLineKind.MEAL, 1, 1), SOURCES)).toBe(
+      'pending',
+    );
+  });
+});
+
+describe('isDraftSettled', () => {
+  it('is settled once every item is fetched or found gone', () => {
+    expect(
+      isDraftSettled(
+        [line(EDraftLineKind.MEAL, 10, 1), line(EDraftLineKind.MEAL, 99, 1)],
+        SOURCES,
+      ),
+    ).toBe(true);
+  });
+
+  it('is not while an item loads', () => {
+    expect(
+      isDraftSettled(
+        [line(EDraftLineKind.MEAL, 10, 1), line(EDraftLineKind.MEAL, 50, 1)],
+        SOURCES,
+      ),
+    ).toBe(false);
+  });
+});
+
+describe('draftLineUnit', () => {
+  it("is a picked Ingredient's Unit, from the options", () => {
+    expect(
+      draftLineUnit(line(EDraftLineKind.INGREDIENT, 2, 1), [
+        { id: 2, name: 'Egg', unit: EUnit.PIECE },
+      ]),
+    ).toBe(EUnit.PIECE);
+  });
+
+  it('is unset for a Meal', () => {
+    expect(
+      draftLineUnit(line(EDraftLineKind.MEAL, 2, 1), SOURCES.ingredients),
+    ).toBeUndefined();
+  });
+});
+
 describe('resolveDraft', () => {
   it('drops lines whose Meal or Ingredient no longer exists', () => {
     const { draft: resolved, removed } = resolveDraft(
@@ -131,11 +200,10 @@ describe('resolveDraft', () => {
     expect(removed).toBe(2);
   });
 
-  it('looks a line up among its own kind', () => {
-    // 1 is an Ingredient id, not a Meal id.
+  it('keeps lines whose item is still loading', () => {
     expect(
-      resolveDraft(draft([line(EDraftLineKind.MEAL, 1, 1)]), SOURCES).removed,
-    ).toBe(1);
+      resolveDraft(draft([line(EDraftLineKind.MEAL, 50, 1)]), SOURCES).removed,
+    ).toBe(0);
   });
 
   it('keeps unpicked lines', () => {

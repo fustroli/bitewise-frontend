@@ -13,12 +13,10 @@ import { Delete } from 'lucide-react';
 import DraftNutritionCells from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftNutritionCells';
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
-import { IDraftSources } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
 import { INutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/interfaces';
 import { IOption } from '@/app/utils/interfaces';
 import InputField from '@/app/components/form/InputField';
 import { MEAL_MULTIPLIER_STEP } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
-import { draftLineUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
 import { interpolate } from '@/app/utils/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 
@@ -28,8 +26,10 @@ interface IProps {
   control: Control<TDraftSchema>;
   /** The items of the line's kind that no other line picked. */
   options: IOption[];
-  sources: IDraftSources;
-  nutrition: INutrition;
+  /** An Ingredient line's Unit, once picked. */
+  unit?: EUnit;
+  /** Unset while the line's item loads. */
+  nutrition?: INutrition;
   onRemove: () => void;
 }
 
@@ -38,7 +38,7 @@ const DraftLineRow = ({
   line,
   control,
   options,
-  sources,
+  unit,
   nutrition,
   onRemove,
 }: IProps) => {
@@ -48,7 +48,6 @@ const DraftLineRow = ({
   } = useDictionary();
 
   const isMeal = line.kind === EDraftLineKind.MEAL;
-  const unit = draftLineUnit(line, sources);
   const unitLabel = isMeal
     ? fields.servings
     : unit && (unit === EUnit.PIECE ? fields.pieces : fields.grams);

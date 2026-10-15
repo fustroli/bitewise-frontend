@@ -575,6 +575,7 @@
     "collapse": "Collapse draft meal plan",
     "expand": "Expand draft meal plan",
     "removed": "Removed {count} item(s) from the draft that no longer exist.",
+    "recordsError": "Couldn't load the meals and ingredients.",
     "total": "Total",
     "columns": {
       "item": "Meal or ingredient",

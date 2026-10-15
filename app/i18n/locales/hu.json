@@ -575,6 +575,7 @@
     "collapse": "Étrendvázlat összecsukása",
     "expand": "Étrendvázlat kinyitása",
     "removed": "{count} már nem létező tételt eltávolítottunk a vázlatból.",
+    "recordsError": "Nem sikerült betölteni az ételeket és az összetevőket.",
     "total": "Összesen",
     "columns": {
       "item": "Étel vagy alapanyag",

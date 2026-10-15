@@ -11,6 +11,9 @@ import {
   refreshDashboardOnSuccess,
   request,
 } from '@/app/utils/helpers/server';
+
+import { MAX_IDS_PER_FETCH } from '@/app/utils/constants';
+import { TApiResult } from '@/app/utils/interfaces';
 import { createMealSchema } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/validations';
 import { z } from 'zod';
 
@@ -45,4 +48,20 @@ export async function deleteMeal(mealId: number) {
   return refreshDashboardOnSuccess(
     await request(`meal/${input.data}`, 'DELETE'),
   );
+}
+
+/** The User's Meals among `ids`, in full; ids not returned are gone. */
+export async function fetchMealsByIds(
+  ids: number[],
+): Promise<TApiResult<IMeal[]>> {
+  const input = parseActionInput(
+    z.array(idSchema).min(1).max(MAX_IDS_PER_FETCH),
+    ids,
+  );
+  if (!input.ok) return input;
+
+  const result = await request<{ data: IMeal[] }>('meal', 'GET', undefined, {
+    ids: input.data.join(','),
+  });
+  return result.ok ? { ok: true, data: result.data.data } : result;
 }
