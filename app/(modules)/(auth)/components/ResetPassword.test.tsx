@@ -10,8 +10,8 @@ import {
 
 import { DictionaryProvider } from '@/app/providers/dictionary-provider';
 import ResetPassword from '@/app/(modules)/(auth)/components/ResetPassword';
-import en from '@/app/i18n/locales/en.json';
 import { confirmPasswordReset } from '@/app/(modules)/(auth)/api';
+import en from '@/app/i18n/locales/en.json';
 
 vi.mock('@/app/(modules)/(auth)/api', () => ({
   confirmPasswordReset: vi.fn(),
