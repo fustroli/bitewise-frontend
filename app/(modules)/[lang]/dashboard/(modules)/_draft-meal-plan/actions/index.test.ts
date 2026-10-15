@@ -13,28 +13,12 @@ beforeEach(() => {
 });
 
 describe('fetchDraftMealPlans', () => {
-  it('returns each Meal plan with the ids of its Meals', async () => {
-    vi.mocked(request).mockResolvedValue({
-      ok: true,
-      data: {
-        data: [
-          {
-            id: 1,
-            name: 'Week 1',
-            mealIds: [],
-            meals: [{ id: 10 }, { id: 11 }],
-          },
-        ],
-      },
-    });
+  it("returns the Meal plan options, every one of the User's", async () => {
+    const options = [{ id: 1, name: 'Week 1', mealIds: [11, 10] }];
+    vi.mocked(request).mockResolvedValue({ ok: true, data: options });
 
-    expect(await fetchDraftMealPlans()).toEqual({
-      ok: true,
-      data: [{ id: 1, name: 'Week 1', mealIds: [10, 11] }],
-    });
-    expect(request).toHaveBeenCalledWith('meal-plan', 'GET', undefined, {
-      limit: 100,
-    });
+    expect(await fetchDraftMealPlans()).toEqual({ ok: true, data: options });
+    expect(request).toHaveBeenCalledWith('meal-plan/options', 'GET');
   });
 
   it('passes a failure through', async () => {

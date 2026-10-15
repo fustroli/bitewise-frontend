@@ -6,19 +6,18 @@ import {
 } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/resource/form';
 
 import { EComparisonKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/enums';
-import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
+import { IMealOption } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
 import { IMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
 import { IResourceList } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
-import { MAX_LIST_LIMIT } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/constants';
 import { MEAL_PLAN_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/constants';
 import MealPlanCard from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/Card/MealPlanCard';
 import MealPlanTargetsNote from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/MealPlanTargetsNote';
 import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/constants';
 import PlansSwitch from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/PlansSwitch';
+import { fetchMealOptions } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/api';
 import { fetchMealPlans } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/api';
-import { fetchMeals } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/api';
 
-export const mealPlanList: IResourceList<IMealPlan, IMeal[]> = {
+export const mealPlanList: IResourceList<IMealPlan, IMealOption[]> = {
   resourceKey: 'mealPlans',
   fetch: fetchMealPlans,
   layout: 'cards',
@@ -28,7 +27,7 @@ export const mealPlanList: IResourceList<IMealPlan, IMeal[]> = {
   searchable: true,
   header: PlansSwitch,
   toolbar: MealPlanTargetsNote,
-  loadFormData: async () => (await fetchMeals({ limit: MAX_LIST_LIMIT })).data,
+  loadFormData: fetchMealOptions,
   renderRow: (row, context) => (
     <MealPlanCard
       mealPlan={row}

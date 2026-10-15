@@ -15,11 +15,15 @@ import {
 } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/actions';
 
 import { EComparisonKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/enums';
-import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
+import { IMealOption } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
 import MealPlanFields from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/MealPlanFields';
 import { createResourceForm } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/components/createResourceForm';
 
-const mealPlanForm = createResourceForm<IMealPlan, TMealPlanSchema, IMeal[]>({
+const mealPlanForm = createResourceForm<
+  IMealPlan,
+  TMealPlanSchema,
+  IMealOption[]
+>({
   resourceKey: 'mealPlans',
   schema: createMealPlanSchema,
   defaultValues: { name: '', mealIds: [] },

@@ -16,11 +16,11 @@ import {
 
 import { DEFAULT_MEAL } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/constants';
 import { EComparisonKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_comparison/enums';
-import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
+import { IIngredientOption } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import MealFields from '@/app/(modules)/[lang]/dashboard/(modules)/meals/components/MealFields';
 import { createResourceForm } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/components/createResourceForm';
 
-const mealForm = createResourceForm<IMeal, TMealSchema, IIngredient[]>({
+const mealForm = createResourceForm<IMeal, TMealSchema, IIngredientOption[]>({
   resourceKey: 'meals',
   schema: createMealSchema,
   defaultValues: DEFAULT_MEAL,
