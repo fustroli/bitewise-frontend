@@ -47,6 +47,12 @@ export const parseDraft = (raw: string | null): TStoredDraft | null => {
 
 export const serializeDraft = (draft: TStoredDraft) => JSON.stringify(draft);
 
+/** A Meal plan id from a query param: a positive integer, else `undefined`. */
+export const toMealPlanId = (value: string | null) => {
+  const id = Number(value);
+  return value && Number.isInteger(id) && id > 0 ? id : undefined;
+};
+
 /** A copy of a Meal plan as a draft: one serving of each of its Meals. */
 export const mealPlanDraft = (mealIds: number[]): TStoredDraft => ({
   ...EMPTY_DRAFT,

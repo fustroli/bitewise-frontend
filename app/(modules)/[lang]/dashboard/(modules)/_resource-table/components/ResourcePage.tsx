@@ -46,6 +46,7 @@ async function ResourcePage<TRecord extends IResourceRecord, TFormData>({
   const labels = getResourceLabels(dictionary, resource.resourceKey);
   const formData = (resource.loadFormData?.() ??
     Promise.resolve(undefined)) as Promise<TFormData>;
+  const Header = resource.header;
   const Toolbar = resource.toolbar;
 
   const headerActions = (variant: 'buttons' | 'icon') => (
@@ -67,6 +68,7 @@ async function ResourcePage<TRecord extends IResourceRecord, TFormData>({
         actions={headerActions('buttons')}
         mobileActions={headerActions('icon')}
       />
+      {Header && <Header />}
       <ResourceSearchProvider search={search} sort={sort}>
         {/* Pulls the list up to the header: a list page is one block. */}
         <section className="-mt-2 flex flex-col gap-4 md:-mt-6">

@@ -12,7 +12,8 @@
       "dashboard": "Tableau de bord",
       "ingredients": "Ingrédients",
       "meals": "Repas",
-      "mealPlans": "Plans de repas"
+      "mealPlans": "Plans de repas",
+      "weekPlan": "Plan de la semaine"
     },
     "bodyMetrics": {
       "bodyFat": {
@@ -221,6 +222,9 @@
       "validation": {
         "nameRequired": "Le nom est obligatoire",
         "mealsRequired": "Au moins un repas est requis"
+      },
+      "card": {
+        "addToWeekPlan": "Ajouter au plan de la semaine"
       }
     }
   },
@@ -381,6 +385,63 @@
       "dietaryFiber": "Fibres",
       "unit": "Unité",
       "actions": "Actions"
+    }
+  },
+  "weekPlan": {
+    "title": "Plan de la semaine",
+    "description": "Un brouillon pour toute une semaine, du lundi au dimanche. Enregistré sur cet appareil uniquement.",
+    "removed": "{count} élément(s) qui n'existent plus ont été retirés de la semaine.",
+    "summary": {
+      "title": "Cette semaine",
+      "average": "Moyenne quotidienne",
+      "averageOf": {
+        "one": "Moyenne de {count} jour planifié",
+        "other": "Moyenne de {count} jours planifiés"
+      },
+      "noPlannedDays": "Aucun jour planifié pour l'instant",
+      "ofKcal": "/ {value} kcal",
+      "onTarget": "Jours dans l'objectif",
+      "within": "à ±{value} kcal près",
+      "emptyOffTarget": "Les jours vides comptent comme hors objectif."
+    },
+    "days": {
+      "label": "Jours de la semaine",
+      "today": "Aujourd'hui",
+      "empty": "Vide",
+      "onTarget": "Dans l'objectif",
+      "offTarget": "{value} kcal de l'objectif"
+    },
+    "day": {
+      "copy": "Copier vers d'autres jours…",
+      "copyShort": "Copier vers…",
+      "clear": "Vider le jour"
+    },
+    "load": {
+      "description": "Copie les repas d'un plan de repas sur les jours choisis, une portion chacun. Le plan de repas lui-même n'est pas modifié.",
+      "days": "Jours",
+      "submit": {
+        "one": "Charger sur {count} jour",
+        "other": "Charger sur {count} jours"
+      }
+    },
+    "copy": {
+      "title": "Copier {day} vers…",
+      "description": "Les jours choisis reçoivent une copie des repas et ingrédients de {day}.",
+      "days": "Copier vers",
+      "submit": {
+        "one": "Copier vers {count} jour",
+        "other": "Copier vers {count} jours"
+      },
+      "copied": "{day} copié"
+    },
+    "replaces": {
+      "one": "Remplace {count} jour planifié : {days}.",
+      "other": "Remplace {count} jours planifiés : {days}."
+    },
+    "clearWeek": {
+      "button": "Vider la semaine",
+      "title": "Vider toute la semaine ?",
+      "confirm": "Cela retire tous les repas et ingrédients des sept jours. C'est irréversible."
     }
   }
 }

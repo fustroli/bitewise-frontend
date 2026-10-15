@@ -12,7 +12,8 @@
       "dashboard": "Tablero de control",
       "ingredients": "Ingredientes",
       "meals": "Comidas",
-      "mealPlans": "Planes de comidas"
+      "mealPlans": "Planes de comidas",
+      "weekPlan": "Plan semanal"
     },
     "bodyMetrics": {
       "bodyFat": {
@@ -221,6 +222,9 @@
       "validation": {
         "nameRequired": "El nombre es obligatorio",
         "mealsRequired": "Se requiere al menos una comida"
+      },
+      "card": {
+        "addToWeekPlan": "Añadir al plan semanal"
       }
     }
   },
@@ -381,6 +385,63 @@
       "dietaryFiber": "Fibra",
       "unit": "Unidad",
       "actions": "Acciones"
+    }
+  },
+  "weekPlan": {
+    "title": "Plan semanal",
+    "description": "Un borrador para una semana entera, de lunes a domingo. Solo se guarda en este dispositivo.",
+    "removed": "Se eliminaron de la semana {count} elemento(s) que ya no existen.",
+    "summary": {
+      "title": "Esta semana",
+      "average": "Media diaria",
+      "averageOf": {
+        "one": "Media de {count} día planificado",
+        "other": "Media de {count} días planificados"
+      },
+      "noPlannedDays": "Aún no hay días planificados",
+      "ofKcal": "/ {value} kcal",
+      "onTarget": "Días en objetivo",
+      "within": "dentro de ±{value} kcal",
+      "emptyOffTarget": "Los días vacíos cuentan como fuera de objetivo."
+    },
+    "days": {
+      "label": "Días de la semana",
+      "today": "Hoy",
+      "empty": "Vacío",
+      "onTarget": "En objetivo",
+      "offTarget": "{value} kcal del objetivo"
+    },
+    "day": {
+      "copy": "Copiar a otros días…",
+      "copyShort": "Copiar a…",
+      "clear": "Vaciar día"
+    },
+    "load": {
+      "description": "Copia las comidas de un plan de comidas en los días que elijas, una ración de cada una. El plan de comidas no cambia.",
+      "days": "Días",
+      "submit": {
+        "one": "Cargar en {count} día",
+        "other": "Cargar en {count} días"
+      }
+    },
+    "copy": {
+      "title": "Copiar {day} a…",
+      "description": "Los días que elijas reciben una copia de las comidas e ingredientes del {day}.",
+      "days": "Copiar a",
+      "submit": {
+        "one": "Copiar a {count} día",
+        "other": "Copiar a {count} días"
+      },
+      "copied": "{day} copiado"
+    },
+    "replaces": {
+      "one": "Sustituye {count} día planificado: {days}.",
+      "other": "Sustituye {count} días planificados: {days}."
+    },
+    "clearWeek": {
+      "button": "Vaciar semana",
+      "title": "¿Vaciar toda la semana?",
+      "confirm": "Esto elimina todas las comidas e ingredientes de los siete días. No se puede deshacer."
     }
   }
 }

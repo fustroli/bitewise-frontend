@@ -12,7 +12,8 @@
       "dashboard": "Dashboard",
       "ingredients": "Zutaten",
       "meals": "Mahlzeiten",
-      "mealPlans": "Essenspläne"
+      "mealPlans": "Essenspläne",
+      "weekPlan": "Wochenplan"
     },
     "bodyMetrics": {
       "bodyFat": {
@@ -221,6 +222,9 @@
       "validation": {
         "nameRequired": "Name ist erforderlich",
         "mealsRequired": "Mindestens eine Mahlzeit ist erforderlich"
+      },
+      "card": {
+        "addToWeekPlan": "Zum Wochenplan hinzufügen"
       }
     }
   },
@@ -381,6 +385,63 @@
       "dietaryFiber": "Ballaststoffe",
       "unit": "Einheit",
       "actions": "Aktionen"
+    }
+  },
+  "weekPlan": {
+    "title": "Wochenplan",
+    "description": "Ein Entwurf für eine ganze Woche, Montag bis Sonntag. Nur auf diesem Gerät gespeichert.",
+    "removed": "{count} Einträge, die es nicht mehr gibt, wurden aus der Woche entfernt.",
+    "summary": {
+      "title": "Diese Woche",
+      "average": "Tagesdurchschnitt",
+      "averageOf": {
+        "one": "Durchschnitt von {count} geplanten Tag",
+        "other": "Durchschnitt von {count} geplanten Tagen"
+      },
+      "noPlannedDays": "Noch keine geplanten Tage",
+      "ofKcal": "/ {value} kcal",
+      "onTarget": "Tage im Ziel",
+      "within": "innerhalb ±{value} kcal",
+      "emptyOffTarget": "Leere Tage zählen als nicht im Ziel."
+    },
+    "days": {
+      "label": "Wochentage",
+      "today": "Heute",
+      "empty": "Leer",
+      "onTarget": "Im Ziel",
+      "offTarget": "{value} kcal vom Ziel"
+    },
+    "day": {
+      "copy": "Auf andere Tage kopieren…",
+      "copyShort": "Kopieren…",
+      "clear": "Tag leeren"
+    },
+    "load": {
+      "description": "Kopiert die Mahlzeiten eines Speiseplans auf die gewählten Tage, je eine Portion. Der Speiseplan selbst bleibt unverändert.",
+      "days": "Tage",
+      "submit": {
+        "one": "Auf {count} Tag laden",
+        "other": "Auf {count} Tage laden"
+      }
+    },
+    "copy": {
+      "title": "{day} kopieren nach…",
+      "description": "Die gewählten Tage erhalten eine Kopie der Mahlzeiten und Zutaten von {day}.",
+      "days": "Kopieren nach",
+      "submit": {
+        "one": "Auf {count} Tag kopieren",
+        "other": "Auf {count} Tage kopieren"
+      },
+      "copied": "{day} kopiert"
+    },
+    "replaces": {
+      "one": "Ersetzt {count} geplanten Tag: {days}.",
+      "other": "Ersetzt {count} geplante Tage: {days}."
+    },
+    "clearWeek": {
+      "button": "Woche leeren",
+      "title": "Die ganze Woche leeren?",
+      "confirm": "Damit werden alle Mahlzeiten und Zutaten aller sieben Tage entfernt. Das kann nicht rückgängig gemacht werden."
     }
   }
 }

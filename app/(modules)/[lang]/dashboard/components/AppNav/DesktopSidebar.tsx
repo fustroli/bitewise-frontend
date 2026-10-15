@@ -4,6 +4,7 @@ import {
   COMPARE_NAV_ITEM,
   NAV_ITEMS,
   PROFILE_ROUTE,
+  WEEK_PLAN_NAV_ITEM,
 } from '@/app/(modules)/[lang]/dashboard/constants';
 import { useParams, usePathname } from 'next/navigation';
 
@@ -16,7 +17,10 @@ import { isNavItemActive } from '@/app/(modules)/[lang]/dashboard/components/App
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 
-/** The fixed left sidebar from `md` up: library, Compare, then the account. */
+/**
+ * The fixed left sidebar from `md` up: library, Week plan, Compare, then the
+ * account.
+ */
 const DesktopSidebar = () => {
   const { lang } = useParams<{ lang: string }>();
   const pathname = usePathname();
@@ -55,6 +59,7 @@ const DesktopSidebar = () => {
       <nav aria-label={labels.mainNavigation}>
         <ul className="flex flex-col gap-1">
           {NAV_ITEMS.map(renderItem)}
+          {renderItem(WEEK_PLAN_NAV_ITEM)}
           <li aria-hidden className="mx-3 my-2 h-px bg-border" />
           {renderItem(COMPARE_NAV_ITEM)}
         </ul>
