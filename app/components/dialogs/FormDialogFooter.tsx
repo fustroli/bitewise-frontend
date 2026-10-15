@@ -9,12 +9,15 @@ interface IProps {
   onClose: () => void;
   submitLabel: string;
   closeLabel: string;
+  /** Blocks submitting, e.g. while a choice outside the form is missing. */
+  submitDisabled?: boolean;
 }
 const FormDialogFooter = ({
   form,
   onClose,
   submitLabel,
   closeLabel,
+  submitDisabled,
 }: IProps) => {
   return (
     <DialogFooter>
@@ -28,6 +31,7 @@ const FormDialogFooter = ({
         loading={form.formState.isSubmitting}
         type="submit"
         variant="default"
+        disabled={submitDisabled}
       >
         {submitLabel}
       </LoadingButton>

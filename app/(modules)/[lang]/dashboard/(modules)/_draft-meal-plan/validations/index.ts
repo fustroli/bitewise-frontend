@@ -7,7 +7,7 @@ import { TDictionary } from '@/app/providers/dictionary-provider';
 import { z } from 'zod';
 
 // `itemId` (a Meal or Ingredient id) is 0 until picked; `quantity` is null while its field is emptied.
-const storedLineSchema = z.object({
+export const storedLineSchema = z.object({
   kind: z.enum(EDraftLineKind),
   itemId: z.number().int().nonnegative(),
   quantity: z.number().nullable(),

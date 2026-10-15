@@ -19,7 +19,7 @@ interface IProps extends IDraftSources {
  * start it; at phone width a card repeats them here.
  */
 const DraftMealPlan = ({ meals, ingredients, profileHref }: IProps) => {
-  const { stored, loads, save, clear } = useDraftMealPlan();
+  const { stored, loads, save, clear, openLoad } = useDraftMealPlan();
 
   const sources = useMemo(() => ({ meals, ingredients }), [meals, ingredients]);
   const resolved = useMemo(
@@ -42,6 +42,7 @@ const DraftMealPlan = ({ meals, ingredients, profileHref }: IProps) => {
         profileHref={profileHref}
         onSave={save}
         onClear={clear}
+        onOpenLoad={() => openLoad()}
       />
     </section>
   );

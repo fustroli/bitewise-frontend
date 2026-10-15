@@ -8,48 +8,24 @@ import {
   CardHeader,
   CardTitle,
 } from '@/app/components/ui/card';
-import { ChevronDown, ChevronUp, Download, Plus, Trash2 } from 'lucide-react';
-import {
-  DEFAULT_MEAL_MULTIPLIER,
-  DRAFT_STORAGE_VERSION,
-} from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
-import DraftNutritionCells, {
-  DraftNutritionHeads,
-} from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftNutritionCells';
+import { ChevronDown, ChevronUp, Download, Trash2 } from 'lucide-react';
 import {
   IDraftSources,
   IResolvedDraft,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
 import {
-  TDraftSchema,
+  TDraftLine,
   TStoredDraft,
-  createDraftSchema,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/validations';
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from '@/app/components/ui/table';
-import { convertToOptions, interpolate } from '@/app/utils/helpers';
-import {
-  draftLineNutrition,
-  draftNutrition,
-} from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
-import { useEffect, useMemo, useState } from 'react';
-import { useFieldArray, useForm, useWatch } from 'react-hook-form';
+import { useEffect, useState } from 'react';
 
+import { DRAFT_STORAGE_VERSION } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
 import DeleteDialog from '@/app/components/DeleteDialog';
 import DraftCalorieTarget from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftCalorieTarget';
-import DraftLineRow from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftLineRow';
-import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
-import { Form } from '@/app/components/ui/form';
+import DraftLinesEditor from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftLinesEditor';
+import { draftNutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
+import { interpolate } from '@/app/utils/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
-import { useDraftMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/context';
-import { zodResolver } from '@hookform/resolvers/zod';
 
 interface IProps {
   /** Read once, when the editor mounts; from then on the editor owns the draft. */
@@ -58,6 +34,7 @@ interface IProps {
   profileHref: string;
   onSave: (draft: TStoredDraft) => void;
   onClear: () => void;
+  onOpenLoad: () => void;
 }
 
 const DraftMealPlanEditor = ({
@@ -66,57 +43,20 @@ const DraftMealPlanEditor = ({
   profileHref,
   onSave,
   onClear,
+  onOpenLoad,
 }: IProps) => {
-  const dictionary = useDictionary();
-  const { openLoad } = useDraftMealPlan();
-  const { draftMealPlan: labels, resourceTable } = dictionary;
+  const { draftMealPlan: labels, resourceTable } = useDictionary();
 
   const [removed] = useState(initial.removed);
   const [collapsed, setCollapsed] = useState(initial.draft.collapsed);
-
-  const schema = useMemo(() => createDraftSchema(dictionary), [dictionary]);
-  const form = useForm<TDraftSchema>({
-    resolver: zodResolver(schema),
-    mode: 'onChange',
-    defaultValues: { lines: initial.draft.lines },
-  });
-  const { fields, append, remove } = useFieldArray({
-    control: form.control,
-    name: 'lines',
-  });
-  const lines = useWatch({ control: form.control, name: 'lines' });
-
-  // Flag what a stored draft left incomplete.
-  useEffect(() => {
-    void form.trigger();
-  }, [form]);
+  // Kept here too, so collapsing (which unmounts the lines) loses nothing.
+  const [lines, setLines] = useState<TDraftLine[]>(initial.draft.lines);
 
   // Every change is saved as is. The first run also writes back a draft
   // whose missing items were just dropped.
   useEffect(() => {
     onSave({ version: DRAFT_STORAGE_VERSION, collapsed, lines });
   }, [collapsed, lines, onSave]);
-
-  const options = useMemo(
-    () => ({
-      [EDraftLineKind.MEAL]: convertToOptions(sources.meals),
-      [EDraftLineKind.INGREDIENT]: convertToOptions(sources.ingredients),
-    }),
-    [sources],
-  );
-
-  // An item appears on one line only: each line offers what no other line
-  // of its kind picked.
-  const optionsFor = (index: number, kind: EDraftLineKind) =>
-    options[kind].filter(
-      ({ value }) =>
-        !lines.some(
-          (line, other) =>
-            other !== index && line.kind === kind && line.itemId === value,
-        ),
-    );
-
-  const total = draftNutrition(lines, sources);
 
   return (
     <Card className="w-full">
@@ -126,7 +66,7 @@ const DraftMealPlanEditor = ({
           <CardDescription>{labels.description}</CardDescription>
         </div>
         <div className="flex shrink-0 items-center gap-2">
-          <Button type="button" variant="outline" onClick={() => openLoad()}>
+          <Button type="button" variant="outline" onClick={onOpenLoad}>
             <Download aria-hidden />
             <span className="sr-only sm:not-sr-only">{labels.load.button}</span>
           </Button>
@@ -165,85 +105,17 @@ const DraftMealPlanEditor = ({
             </p>
           )}
 
-          {fields.length > 0 ? (
-            <Form {...form}>
-              <Table aria-label={labels.title}>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead>{labels.columns.item}</TableHead>
-                    <TableHead>{labels.columns.quantity}</TableHead>
-                    <DraftNutritionHeads />
-                    <TableHead>
-                      <span className="sr-only">{resourceTable.actions}</span>
-                    </TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {fields.map((field, index) => {
-                    // Right after an append, the watched values can be a
-                    // render behind the rows.
-                    const line = lines[index] ?? field;
-                    return (
-                      <DraftLineRow
-                        key={field.id}
-                        index={index}
-                        line={line}
-                        control={form.control}
-                        options={optionsFor(index, line.kind)}
-                        sources={sources}
-                        nutrition={draftLineNutrition(line, sources)}
-                        onRemove={() => remove(index)}
-                      />
-                    );
-                  })}
-                </TableBody>
-                <TableFooter>
-                  <TableRow>
-                    <TableCell colSpan={2} className="font-semibold">
-                      {labels.total}
-                    </TableCell>
-                    <DraftNutritionCells nutrition={total} isTotal />
-                    <TableCell />
-                  </TableRow>
-                </TableFooter>
-              </Table>
-            </Form>
-          ) : (
-            <p className="text-sm text-muted-foreground">{labels.empty}</p>
-          )}
+          <DraftLinesEditor
+            initial={lines}
+            sources={sources}
+            label={labels.title}
+            onChange={setLines}
+          />
 
-          <div className="flex flex-wrap gap-2">
-            <Button
-              type="button"
-              variant="tinted"
-              onClick={() =>
-                append({
-                  kind: EDraftLineKind.MEAL,
-                  itemId: 0,
-                  quantity: DEFAULT_MEAL_MULTIPLIER,
-                })
-              }
-            >
-              <Plus aria-hidden />
-              {labels.addMeal}
-            </Button>
-            <Button
-              type="button"
-              variant="tinted"
-              onClick={() =>
-                append({
-                  kind: EDraftLineKind.INGREDIENT,
-                  itemId: 0,
-                  quantity: null,
-                })
-              }
-            >
-              <Plus aria-hidden />
-              {labels.addIngredient}
-            </Button>
-          </div>
-
-          <DraftCalorieTarget kcal={total.calories} profileHref={profileHref} />
+          <DraftCalorieTarget
+            kcal={draftNutrition(lines, sources).calories}
+            profileHref={profileHref}
+          />
         </CardContent>
       )}
     </Card>
