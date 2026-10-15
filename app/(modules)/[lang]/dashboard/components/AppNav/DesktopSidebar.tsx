@@ -2,7 +2,8 @@
 
 import {
   COMPARE_NAV_ITEM,
-  NAV_ITEMS,
+  LIBRARY_NAV_ITEMS,
+  MEAL_PLANS_NAV_ITEM,
   PROFILE_ROUTE,
   WEEK_PLAN_NAV_ITEM,
 } from '@/app/(modules)/[lang]/dashboard/constants';
@@ -18,8 +19,8 @@ import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
 
 /**
- * The fixed left sidebar from `md` up: library, Week plan, Compare, then the
- * account.
+ * The fixed left sidebar from `md` up: the library, then Meal plans, Week
+ * plan and Compare, then the account.
  */
 const DesktopSidebar = () => {
   const { lang } = useParams<{ lang: string }>();
@@ -58,9 +59,10 @@ const DesktopSidebar = () => {
       <BrandLogo href={base} label={labels.homeLink} />
       <nav aria-label={labels.mainNavigation}>
         <ul className="flex flex-col gap-1">
-          {NAV_ITEMS.map(renderItem)}
-          {renderItem(WEEK_PLAN_NAV_ITEM)}
+          {LIBRARY_NAV_ITEMS.map(renderItem)}
           <li aria-hidden className="mx-3 my-2 h-px bg-border" />
+          {renderItem(MEAL_PLANS_NAV_ITEM)}
+          {renderItem(WEEK_PLAN_NAV_ITEM)}
           {renderItem(COMPARE_NAV_ITEM)}
         </ul>
       </nav>
