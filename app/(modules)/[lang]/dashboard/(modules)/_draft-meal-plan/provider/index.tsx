@@ -6,6 +6,7 @@ import {
   mealPlanDraft,
   parseDraft,
   serializeDraft,
+  toMealPlanId,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
 import { PropsWithChildren, useCallback, useMemo, useState } from 'react';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
@@ -19,12 +20,6 @@ import { interpolate } from '@/app/utils/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useLocalStorage } from '@/app/hooks/use-local-storage';
 import { useUserContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/context';
-
-/** A positive integer id from the query, else `undefined`. */
-const toMealPlanId = (value: string | null) => {
-  const id = Number(value);
-  return value && Number.isInteger(id) && id > 0 ? id : undefined;
-};
 
 interface IProps extends PropsWithChildren {
   mealPlansHref: string;

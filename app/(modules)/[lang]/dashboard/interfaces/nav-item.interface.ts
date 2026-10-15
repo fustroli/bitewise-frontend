@@ -11,4 +11,6 @@ export interface INavItem {
   /** Under `/<lang>/dashboard`; `''` is the dashboard itself. */
   route: string;
   icon: LucideIcon;
+  /** Phone width: other routes its tab stays active on. */
+  phoneRoutes?: string[];
 }

@@ -14,6 +14,7 @@ import { MEAL_PLAN_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/me
 import MealPlanCard from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/Card/MealPlanCard';
 import MealPlanTargetsNote from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/MealPlanTargetsNote';
 import { PROFILE_SECTION_IDS } from '@/app/(modules)/[lang]/dashboard/(modules)/_user/constants';
+import PlansSwitch from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/PlansSwitch';
 import { fetchMealPlans } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/api';
 import { fetchMeals } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/api';
 
@@ -25,6 +26,7 @@ export const mealPlanList: IResourceList<IMealPlan, IMeal[]> = {
   columns: MEAL_PLAN_COLUMNS,
   compareType: EComparisonKind.MEAL_PLANS,
   searchable: true,
+  header: PlansSwitch,
   toolbar: MealPlanTargetsNote,
   loadFormData: async () => (await fetchMeals({ limit: MAX_LIST_LIMIT })).data,
   renderRow: (row, context) => (

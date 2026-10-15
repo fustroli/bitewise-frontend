@@ -30,6 +30,10 @@ _Avoid_: Diet, schedule
 A User's single scratchpad day outside their Meal plans (e.g. a cheat day): Meals with a multiplier and Ingredients with a quantity, each distinct. Kept only in the User's browser, never on the backend; its nutrition is compared with their Calorie target. It can be filled from a Meal plan, as a copy.
 _Avoid_: Test plan, cheat plan
 
+**Week plan**:
+A User's single scratchpad week, Monday to Sunday, each day holding Meals with a multiplier and Ingredients with a quantity, each distinct within its day, like a Draft meal plan. Kept only in the User's browser, never on the backend; it has no dates. Days can be filled from a Meal plan or another day, as a copy.
+_Avoid_: Calendar, weekly schedule
+
 **Comparison**:
 Up to 3 Ingredients, Meals or Meal plans of one kind a User puts side by side to compare their Nutrition, the first being the baseline the others are measured against. Kept only in the page's URL.
 _Avoid_: Compare list, basket
@@ -83,7 +87,7 @@ The daily calories that keep a User's weight stable, given their Body stats, age
 _Avoid_: TDEE, BMR
 
 **Calorie target**:
-Maintenance calories shifted for a weekly weight change: lose or gain 0.25, 0.5 or 1 kg, or Maintenance itself (no offset). A User picks one; it is stored on the backend and defaults to Maintenance. Meal plans, the Draft meal plan and the dashboard compare a day's calories with it.
+Maintenance calories shifted for a weekly weight change: lose or gain 0.25, 0.5 or 1 kg, or Maintenance itself (no offset). A User picks one; it is stored on the backend and defaults to Maintenance. Meal plans, the Draft meal plan, each day of the Week plan and the dashboard compare a day's calories with it.
 _Avoid_: Calorie goal, calorie budget, benchmark
 
 **Macro plan**:

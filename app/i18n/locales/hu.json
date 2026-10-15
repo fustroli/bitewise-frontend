@@ -13,7 +13,8 @@
       "mainNavigation": "Fő navigáció",
       "home": "Kezdőlap",
       "plans": "Étrendek",
-      "homeLink": "BiteWise kezdőlap"
+      "homeLink": "BiteWise kezdőlap",
+      "weekPlan": "Heti terv"
     },
     "bodyMetrics": {
       "bmi": {
@@ -501,7 +502,8 @@
           "other": "{count} étel mutatása"
         },
         "hide": "Ételek elrejtése",
-        "noTargets": "Add meg a testadataidat, hogy az étrendeket a napi céljaidhoz mérhesd."
+        "noTargets": "Add meg a testadataidat, hogy az étrendeket a napi céljaidhoz mérhesd.",
+        "addToWeekPlan": "Hozzáadás a heti tervhez"
       },
       "targets": "Célok: {kcal} kcal ({target}) · {plan} elosztás"
     }
@@ -734,5 +736,62 @@
     "cancelledTitle": "Módosítás törölve",
     "setPassword": "Új jelszó beállítása",
     "cancelledDone": "A módosítás törölve, minden eszközön kijelentkeztettünk, és a jelszavad törlődött. Állíts be újat a bejelentkezéshez."
+  },
+  "weekPlan": {
+    "title": "Heti terv",
+    "description": "Vázlat egy teljes hétre, hétfőtől vasárnapig. Csak ezen az eszközön mentjük.",
+    "removed": "{count} tételt eltávolítottunk a hétből, mert már nem létezik.",
+    "summary": {
+      "title": "Ez a hét",
+      "average": "Napi átlag",
+      "averageOf": {
+        "one": "{count} megtervezett nap átlaga",
+        "other": "{count} megtervezett nap átlaga"
+      },
+      "noPlannedDays": "Még nincs megtervezett nap",
+      "ofKcal": "/ {value} kcal",
+      "onTarget": "Célon belüli napok",
+      "within": "±{value} kcal-on belül",
+      "emptyOffTarget": "Az üres napok célon kívülinek számítanak."
+    },
+    "days": {
+      "label": "A hét napjai",
+      "today": "Ma",
+      "empty": "Üres",
+      "onTarget": "Célon belül",
+      "offTarget": "{value} kcal eltérés a céltól"
+    },
+    "day": {
+      "copy": "Másolás más napokra…",
+      "copyShort": "Másolás…",
+      "clear": "Nap törlése"
+    },
+    "load": {
+      "description": "Egy étrend ételeinek másolása a kiválasztott napokra, mindegyikből egy adag. Magát az étrendet nem módosítjuk.",
+      "days": "Napok",
+      "submit": {
+        "one": "Betöltés {count} napra",
+        "other": "Betöltés {count} napra"
+      }
+    },
+    "copy": {
+      "title": "{day} másolása…",
+      "description": "A kiválasztott napok megkapják a(z) {day} ételeinek és hozzávalóinak másolatát.",
+      "days": "Másolás ide",
+      "submit": {
+        "one": "Másolás {count} napra",
+        "other": "Másolás {count} napra"
+      },
+      "copied": "{day} másolva"
+    },
+    "replaces": {
+      "one": "{count} megtervezett napot lecserél: {days}.",
+      "other": "{count} megtervezett napot lecserél: {days}."
+    },
+    "clearWeek": {
+      "button": "Hét törlése",
+      "title": "Törlöd az egész hetet?",
+      "confirm": "Ez mind a hét nap összes ételét és hozzávalóját eltávolítja. Nem vonható vissza."
+    }
   }
 }

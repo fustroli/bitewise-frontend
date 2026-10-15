@@ -13,7 +13,8 @@
       "mainNavigation": "Main",
       "home": "Home",
       "plans": "Plans",
-      "homeLink": "BiteWise home"
+      "homeLink": "BiteWise home",
+      "weekPlan": "Week plan"
     },
     "bodyMetrics": {
       "bmi": {
@@ -501,7 +502,8 @@
           "other": "Show {count} meals"
         },
         "hide": "Hide meals",
-        "noTargets": "Add your body stats to compare plans with your daily targets."
+        "noTargets": "Add your body stats to compare plans with your daily targets.",
+        "addToWeekPlan": "Add to week plan"
       },
       "targets": "Targets: {kcal} kcal ({target}) · {plan} split"
     }
@@ -734,5 +736,62 @@
     "cancelledTitle": "Change cancelled",
     "setPassword": "Set a new password",
     "cancelledDone": "The change was cancelled, all devices were signed out and your password was cleared. Set a new one to sign in."
+  },
+  "weekPlan": {
+    "title": "Week plan",
+    "description": "A scratchpad for a whole week, Monday to Sunday. Saved on this device only.",
+    "removed": "Removed {count} item(s) from the week that no longer exist.",
+    "summary": {
+      "title": "This week",
+      "average": "Daily average",
+      "averageOf": {
+        "one": "Average of {count} planned day",
+        "other": "Average of {count} planned days"
+      },
+      "noPlannedDays": "No planned days yet",
+      "ofKcal": "/ {value} kcal",
+      "onTarget": "Days on target",
+      "within": "within ±{value} kcal",
+      "emptyOffTarget": "Empty days count as off target."
+    },
+    "days": {
+      "label": "Days of the week",
+      "today": "Today",
+      "empty": "Empty",
+      "onTarget": "On target",
+      "offTarget": "{value} kcal from target"
+    },
+    "day": {
+      "copy": "Copy to other days…",
+      "copyShort": "Copy to…",
+      "clear": "Clear day"
+    },
+    "load": {
+      "description": "Copy a Meal plan's meals onto the days you pick, one serving each. The Meal plan itself isn't changed.",
+      "days": "Days",
+      "submit": {
+        "one": "Load onto {count} day",
+        "other": "Load onto {count} days"
+      }
+    },
+    "copy": {
+      "title": "Copy {day} to…",
+      "description": "The days you pick get a copy of {day}'s meals and ingredients.",
+      "days": "Copy to",
+      "submit": {
+        "one": "Copy to {count} day",
+        "other": "Copy to {count} days"
+      },
+      "copied": "Copied {day}"
+    },
+    "replaces": {
+      "one": "Replaces {count} planned day: {days}.",
+      "other": "Replaces {count} planned days: {days}."
+    },
+    "clearWeek": {
+      "button": "Clear week",
+      "title": "Clear the whole week?",
+      "confirm": "This removes every meal and ingredient from all seven days. It can't be undone."
+    }
   }
 }

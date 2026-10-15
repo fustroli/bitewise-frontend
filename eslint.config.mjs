@@ -49,6 +49,14 @@ const MODULE_DEPENDENCIES = {
     '_resource-table',
     '_user',
   ],
+  '_week-plan': [
+    '_draft-meal-plan',
+    'meal-plans',
+    'meals',
+    'ingredients',
+    '_nutrition',
+    '_user',
+  ],
   _user: [],
   '_resource-table': [],
 };

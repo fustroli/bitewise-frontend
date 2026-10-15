@@ -28,7 +28,9 @@ const MobileTabBar = () => {
       <ul className="flex">
         {TABS.map((item) => {
           const href = `${base}${item.route}`;
-          const isActive = isNavItemActive(pathname, href, item.route);
+          const isActive = [item.route, ...(item.phoneRoutes ?? [])].some(
+            (route) => isNavItemActive(pathname, `${base}${route}`, route),
+          );
 
           return (
             <li key={item.route} className="flex-1">

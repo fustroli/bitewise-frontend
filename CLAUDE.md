@@ -50,6 +50,21 @@ own message; a send or a 429 locks the button for 60 s, client-side only).
 The backend refuses avatar uploads (403) until the email is verified, so
 `BasicInfo` disables its Edit button and says why.
 
+### Week plan
+
+`/week` (`dashboard/week/`, module `_week-plan`) is the Week plan (see
+`CONTEXT.md`): seven days of Draft meal plan lines in localStorage
+(`bitewise:week-plan:v1:<userId>`, always 7 days, another version or shape is
+dropped). It reuses `_draft-meal-plan`'s line layer: `DraftLinesEditor` for
+the selected day, `LoadMealPlanDialog` (plus a day picker) and
+`resolveDraftLines` per day. Load meal plan and Copy day to… replace the
+chosen days and say which planned ones first; only Clear week is confirmed.
+The summary averages planned days only and counts days on target (empty days
+are off). A Meal plan's "Add to week plan" links to `?load=<id>`. On a phone
+Meal plans and Week plan share the Plans tab (`PlansSwitch`). The week renders
+only after its own Suspense boundary hydrates (`useHydrated()`), since the
+provider above may have read localStorage already.
+
 ### Key directories
 
 | Path                          | Purpose                                              |
@@ -80,7 +95,7 @@ helpers/
 ```
 
 Nested feature modules live under a route's own `(modules)/` folder, e.g.
-`app/(modules)/[lang]/dashboard/(modules)/{profile,ingredients,meals,meal-plans,_user,_resource-table,_nutrition,_comparison,_body-metrics,_draft-meal-plan}/`.
+`app/(modules)/[lang]/dashboard/(modules)/{profile,ingredients,meals,meal-plans,_user,_resource-table,_nutrition,_comparison,_body-metrics,_draft-meal-plan,_week-plan}/`.
 
 ### App shell
 

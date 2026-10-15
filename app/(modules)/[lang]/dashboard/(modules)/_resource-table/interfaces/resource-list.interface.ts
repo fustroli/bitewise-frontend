@@ -75,6 +75,8 @@ export interface IResourceList<
   renderMobileRow?: (row: TRecord, context: IResourceRowContext) => ReactNode;
   /** `cards` only: the grid's classes. */
   gridClassName?: string;
+  /** Right under the page header, e.g. a phone-only switch to a sibling page. */
+  header?: ComponentType;
   /** Next to the search bar, e.g. a legend. */
   toolbar?: ComponentType;
   /** The Compare page's `type` for this resource. */

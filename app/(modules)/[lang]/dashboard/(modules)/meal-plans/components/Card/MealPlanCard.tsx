@@ -1,3 +1,7 @@
+import {
+  DRAFT_FROM_MEAL_PLAN_PARAM,
+  WEEK_PLAN_FROM_MEAL_PLAN_PARAM,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/constants';
 import { formatAmount, pluralize } from '@/app/utils/helpers';
 import {
   mealNutrition,
@@ -5,7 +9,6 @@ import {
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/helpers';
 
 import { Button } from '@/app/components/ui/button';
-import { DRAFT_FROM_MEAL_PLAN_PARAM } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/constants';
 import ExpandableCard from '@/app/components/ExpandableCard';
 import { IMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
 import { IResourceRowContext } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
@@ -41,7 +44,14 @@ const MealPlanCard = ({
             {pluralize(count, labels.meals, lang)}
           </p>
         </div>
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
+          <Button asChild variant="outline" size="sm" className="h-10 px-3.5">
+            <Link
+              href={`/${lang}/dashboard/week?${WEEK_PLAN_FROM_MEAL_PLAN_PARAM}=${mealPlan.id}`}
+            >
+              {labels.addToWeekPlan}
+            </Link>
+          </Button>
           <Button asChild variant="outline" size="sm" className="h-10 px-3.5">
             <Link
               href={`/${lang}/dashboard?${DRAFT_FROM_MEAL_PLAN_PARAM}=${mealPlan.id}`}
