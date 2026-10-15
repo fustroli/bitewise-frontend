@@ -2,7 +2,8 @@
 
 import {
   COMPARE_NAV_ITEM,
-  NAV_ITEMS,
+  LIBRARY_NAV_ITEMS,
+  MEAL_PLANS_NAV_ITEM,
 } from '@/app/(modules)/[lang]/dashboard/constants';
 import { useParams, usePathname } from 'next/navigation';
 
@@ -11,7 +12,7 @@ import { cn } from '@/app/lib';
 import { isNavItemActive } from '@/app/(modules)/[lang]/dashboard/components/AppNav/nav.helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 
-const TABS = [...NAV_ITEMS, COMPARE_NAV_ITEM];
+const TABS = [...LIBRARY_NAV_ITEMS, MEAL_PLANS_NAV_ITEM, COMPARE_NAV_ITEM];
 
 /** The fixed bottom tab bar below `md`. */
 const MobileTabBar = () => {

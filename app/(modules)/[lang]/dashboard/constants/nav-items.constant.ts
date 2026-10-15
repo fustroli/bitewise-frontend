@@ -11,8 +11,8 @@ import { INavItem } from '@/app/(modules)/[lang]/dashboard/interfaces';
 
 export const WEEK_PLAN_ROUTE = '/week';
 
-/** The library: the sidebar's first group, and the tab bar's first tabs. */
-export const NAV_ITEMS: INavItem[] = [
+/** Dashboard and the library: the sidebar's first group, the first tabs. */
+export const LIBRARY_NAV_ITEMS: INavItem[] = [
   { label: 'dashboard', mobileLabel: 'home', route: '', icon: LayoutGrid },
   {
     label: 'ingredients',
@@ -21,17 +21,19 @@ export const NAV_ITEMS: INavItem[] = [
     icon: Leaf,
   },
   { label: 'meals', mobileLabel: 'meals', route: '/meals', icon: Utensils },
-  {
-    label: 'mealPlans',
-    mobileLabel: 'plans',
-    route: '/meal-plans',
-    icon: CalendarDays,
-    // Its tab leads to the Week plan too, through a switch.
-    phoneRoutes: [WEEK_PLAN_ROUTE],
-  },
 ];
 
-/** After the library in the sidebar; behind the Plans tab on a phone. */
+/** Opens the sidebar's second group, after a divider. */
+export const MEAL_PLANS_NAV_ITEM: INavItem = {
+  label: 'mealPlans',
+  mobileLabel: 'plans',
+  route: '/meal-plans',
+  icon: CalendarDays,
+  // Its tab leads to the Week plan too, through a switch.
+  phoneRoutes: [WEEK_PLAN_ROUTE],
+};
+
+/** After Meal plans in the sidebar; behind the Plans tab on a phone. */
 export const WEEK_PLAN_NAV_ITEM: INavItem = {
   label: 'weekPlan',
   mobileLabel: 'weekPlan',
@@ -39,7 +41,7 @@ export const WEEK_PLAN_NAV_ITEM: INavItem = {
   icon: CalendarRange,
 };
 
-/** After a divider in the sidebar, the last tab on a phone. */
+/** Last in the sidebar's second group, the last tab on a phone. */
 export const COMPARE_NAV_ITEM: INavItem = {
   label: 'compare',
   mobileLabel: 'compare',
