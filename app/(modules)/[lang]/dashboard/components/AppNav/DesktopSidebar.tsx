@@ -60,8 +60,8 @@ const DesktopSidebar = () => {
       <nav aria-label={labels.mainNavigation}>
         <ul className="flex flex-col gap-1">
           {LIBRARY_NAV_ITEMS.map(renderItem)}
-          <li aria-hidden className="mx-3 my-2 h-px bg-border" />
           {renderItem(MEAL_PLANS_NAV_ITEM)}
+          <li aria-hidden className="mx-3 my-2 h-px bg-border" />
           {renderItem(WEEK_PLAN_NAV_ITEM)}
           {renderItem(COMPARE_NAV_ITEM)}
         </ul>
