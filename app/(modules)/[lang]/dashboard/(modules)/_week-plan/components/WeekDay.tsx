@@ -1,11 +1,14 @@
 'use client';
 
 import { Copy, Eraser } from 'lucide-react';
+import {
+  IDraftOptions,
+  IDraftSources,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
 
 import { Button } from '@/app/components/ui/button';
 import { Card } from '@/app/components/ui/card';
 import DraftLinesEditor from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftLinesEditor';
-import { IDraftSources } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
 import { INutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/interfaces';
 import MealPlanTargets from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/components/Card/MealPlanTargets';
 import { TDraftLine } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/validations';
@@ -19,6 +22,7 @@ interface IProps {
   isToday: boolean;
   lines: TDraftLine[];
   total: INutrition;
+  options: IDraftOptions;
   sources: IDraftSources;
   bodyStatsHref: string;
   lang: string;
@@ -31,6 +35,7 @@ const WeekDay = ({
   isToday,
   lines,
   total,
+  options,
   sources,
   bodyStatsHref,
   lang,
@@ -88,6 +93,7 @@ const WeekDay = ({
         <DraftLinesEditor
           key={`${day}-${revision}`}
           initial={lines}
+          options={options}
           sources={sources}
           label={name}
           onChange={onChange}

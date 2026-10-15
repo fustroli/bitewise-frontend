@@ -303,6 +303,7 @@
     "collapse": "Réduire le brouillon de plan de repas",
     "expand": "Développer le brouillon de plan de repas",
     "removed": "{count} élément(s) qui n'existent plus ont été retirés du brouillon.",
+    "recordsError": "Impossible de charger les repas et les ingrédients.",
     "total": "Total",
     "columns": {
       "item": "Repas ou ingrédient",

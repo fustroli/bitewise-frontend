@@ -1,16 +1,24 @@
 'use client';
 
+import {
+  isDraftSettled,
+  resolveDraft,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
+import { useEffect, useMemo, useState } from 'react';
+
 import { DRAFT_SECTION_ID } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
 import DraftMealPlanEditor from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftMealPlanEditor';
 import DraftMealPlanSkeleton from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftMealPlanSkeleton';
+import DraftRecordsError from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftRecordsError';
 import DraftStartCard from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftStartCard';
-import { IDraftSources } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
-import { resolveDraft } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
+import { IDraftOptions } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
+import { Skeleton } from '@/app/components/ui/skeleton';
 import { useDraftMealPlan } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/context';
+import { useDraftRecords } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/hooks';
 import { useHydrated } from '@/app/hooks/use-hydrated';
-import { useMemo } from 'react';
 
-interface IProps extends IDraftSources {
+interface IProps {
+  options: IDraftOptions;
   /** Where to complete the Body stats that Maintenance calories need. */
   profileHref: string;
 }
@@ -19,14 +27,25 @@ interface IProps extends IDraftSources {
  * The draft's editor once there is a draft. Without one the header's buttons
  * start it; at phone width a card repeats them here.
  */
-const DraftMealPlan = ({ meals, ingredients, profileHref }: IProps) => {
+const DraftMealPlan = ({ options, profileHref }: IProps) => {
   const { stored, loads, save, clear, openLoad } = useDraftMealPlan();
+  const { sources, request, hasFailed, retry } = useDraftRecords();
 
-  const sources = useMemo(() => ({ meals, ingredients }), [meals, ingredients]);
+  // Every line's item is fetched by id: the stored ones, and each new pick.
+  useEffect(() => {
+    if (stored) request(stored.lines);
+  }, [stored, request]);
+
   const resolved = useMemo(
     () => stored && resolveDraft(stored, sources),
     [stored, sources],
   );
+
+  // The editor reads its draft once, so it mounts (and, per load, remounts)
+  // only once the draft's items are in: what's gone is dropped first.
+  const [readyLoads, setReadyLoads] = useState<number>();
+  if (stored && isDraftSettled(stored.lines, sources) && readyLoads !== loads)
+    setReadyLoads(loads);
 
   // This boundary can hydrate after the provider has read the store: until
   // it has, it shows what the server rendered.
@@ -36,12 +55,20 @@ const DraftMealPlan = ({ meals, ingredients, profileHref }: IProps) => {
 
   if (!resolved) return <DraftStartCard />;
 
+  if (readyLoads !== loads) {
+    return hasFailed ? (
+      <DraftRecordsError onRetry={retry} />
+    ) : (
+      <Skeleton className="h-[136px] w-full rounded-lg" />
+    );
+  }
+
   return (
     <section id={DRAFT_SECTION_ID} className="scroll-mt-20">
-      {/* The editor reads its draft once on mount, so a load remounts it. */}
       <DraftMealPlanEditor
         key={loads}
         initial={resolved}
+        options={options}
         sources={sources}
         profileHref={profileHref}
         onSave={save}

@@ -10,6 +10,7 @@ import {
 } from '@/app/components/ui/card';
 import { ChevronDown, ChevronUp, Download, Trash2 } from 'lucide-react';
 import {
+  IDraftOptions,
   IDraftSources,
   IResolvedDraft,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
@@ -17,19 +18,24 @@ import {
   TDraftLine,
   TStoredDraft,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/validations';
+import {
+  draftNutrition,
+  isDraftSettled,
+} from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
 import { useEffect, useState } from 'react';
 
 import { DRAFT_STORAGE_VERSION } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/constants';
 import DeleteDialog from '@/app/components/DeleteDialog';
 import DraftCalorieTarget from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftCalorieTarget';
 import DraftLinesEditor from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/DraftLinesEditor';
-import { draftNutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/helpers';
 import { interpolate } from '@/app/utils/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
+import { useSettledValue } from '@/app/hooks/use-settled-value';
 
 interface IProps {
   /** Read once, when the editor mounts; from then on the editor owns the draft. */
   initial: IResolvedDraft;
+  options: IDraftOptions;
   sources: IDraftSources;
   profileHref: string;
   onSave: (draft: TStoredDraft) => void;
@@ -39,6 +45,7 @@ interface IProps {
 
 const DraftMealPlanEditor = ({
   initial,
+  options,
   sources,
   profileHref,
   onSave,
@@ -51,6 +58,12 @@ const DraftMealPlanEditor = ({
   const [collapsed, setCollapsed] = useState(initial.draft.collapsed);
   // Kept here too, so collapsing (which unmounts the lines) loses nothing.
   const [lines, setLines] = useState<TDraftLine[]>(initial.draft.lines);
+
+  // While a new pick loads, the target compares the total from before it.
+  const kcal = useSettledValue(
+    draftNutrition(lines, sources).calories,
+    isDraftSettled(lines, sources),
+  );
 
   // Every change is saved as is. The first run also writes back a draft
   // whose missing items were just dropped.
@@ -107,15 +120,13 @@ const DraftMealPlanEditor = ({
 
           <DraftLinesEditor
             initial={lines}
+            options={options}
             sources={sources}
             label={labels.title}
             onChange={setLines}
           />
 
-          <DraftCalorieTarget
-            kcal={draftNutrition(lines, sources).calories}
-            profileHref={profileHref}
-          />
+          <DraftCalorieTarget kcal={kcal ?? 0} profileHref={profileHref} />
         </CardContent>
       )}
     </Card>

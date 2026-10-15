@@ -6,6 +6,7 @@ import { INutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutritio
 import { MacroSwatch } from '@/app/components/nutrition/MacroLegend';
 import MacroValue from '@/app/components/nutrition/MacroValue';
 import { NUTRITION_COLUMNS } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
+import { Skeleton } from '@/app/components/ui/skeleton';
 import { cn } from '@/app/lib';
 import { formatNutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/helpers';
 import { interpolate } from '@/app/utils/helpers';
@@ -27,7 +28,8 @@ export const DraftNutritionHeads = () => {
 };
 
 interface IProps {
-  nutrition: INutrition;
+  /** Unset while the line's item (or, for the total, any line's) loads. */
+  nutrition?: INutrition;
   /** The total row: bold amounts. */
   isTotal?: boolean;
 }
@@ -36,6 +38,14 @@ interface IProps {
 const DraftNutritionCells = ({ nutrition, isTotal }: IProps) => {
   const { columns } = useDictionary().draftMealPlan;
   const { lang } = useParams<{ lang: string }>();
+
+  if (!nutrition) {
+    return NUTRITION_COLUMNS.map(({ nutrient }) => (
+      <TableCell key={nutrient} className="pt-4">
+        <Skeleton className="ml-auto h-5 w-12" />
+      </TableCell>
+    ));
+  }
 
   return NUTRITION_COLUMNS.map((column) => {
     const { value, sub } = formatNutrition(nutrition, column, lang);

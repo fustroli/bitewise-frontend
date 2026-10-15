@@ -57,7 +57,12 @@ The backend refuses avatar uploads (403) until the email is verified, so
 (`bitewise:week-plan:v1:<userId>`, always 7 days, another version or shape is
 dropped). It reuses `_draft-meal-plan`'s line layer: `DraftLinesEditor` for
 the selected day, `LoadMealPlanDialog` (plus a day picker) and
-`resolveDraftLines` per day. Load meal plan and Copy day to… replace the
+`resolveDraftLines` per day. Like the Draft meal plan, its pickers get option
+lists (id, name, unit) from the server, and the full Meals and Ingredients the
+lines pick are fetched by id on the client (`useDraftRecords()` over the shared
+`useRecordCache`, see `docs/adr/0006-pickers-use-option-lists.md`): it shows
+once the stored lines' items are in, a line drops only when its item is found
+gone, and totals keep their last settled value while a new pick loads. Load meal plan and Copy day to… replace the
 chosen days and say which planned ones first; only Clear week is confirmed.
 The summary averages planned days only and counts days on target (empty days
 are off). A Meal plan's "Add to week plan" links to `?load=<id>`. On a phone

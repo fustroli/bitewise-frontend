@@ -5,6 +5,7 @@ import {
 import {
   IDraftSources,
   IResolvedDraft,
+  TDraftLineState,
 } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
 import {
   TDraftLine,
@@ -21,6 +22,7 @@ import {
 import { EDraftLineKind } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/enums';
 import { EMPTY_NUTRITION } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/constants';
 import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
+import { IIngredientOption } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { INutrition } from '@/app/(modules)/[lang]/dashboard/(modules)/_nutrition/interfaces';
 import { formatCalories } from '@/app/(modules)/[lang]/dashboard/(modules)/_body-metrics/helpers';
 
@@ -69,18 +71,35 @@ const findMeal = (id: number, { meals }: IDraftSources) =>
 const findIngredient = (id: number, { ingredients }: IDraftSources) =>
   ingredients.find((ingredient) => ingredient.id === id);
 
-const lineExists = ({ kind, itemId }: TDraftLine, sources: IDraftSources) =>
-  kind === EDraftLineKind.MEAL
-    ? Boolean(findMeal(itemId, sources))
-    : Boolean(findIngredient(itemId, sources));
+/** The ids of the lines' picked items of `kind`. */
+export const draftItemIds = (lines: TDraftLine[], kind: EDraftLineKind) =>
+  lines
+    .filter((line) => line.kind === kind && line.itemId > 0)
+    .map(({ itemId }) => itemId);
 
-/** Drops lines whose Meal or Ingredient no longer exists; unpicked lines stay. */
+export const draftLineState = (
+  { kind, itemId }: TDraftLine,
+  sources: IDraftSources,
+): TDraftLineState => {
+  const isMeal = kind === EDraftLineKind.MEAL;
+  if (itemId === 0) return 'ready';
+  if (isMeal ? findMeal(itemId, sources) : findIngredient(itemId, sources))
+    return 'ready';
+  const missing = isMeal ? sources.missing.meals : sources.missing.ingredients;
+  return missing.includes(itemId) ? 'missing' : 'pending';
+};
+
+/** No line's item is still loading. */
+export const isDraftSettled = (lines: TDraftLine[], sources: IDraftSources) =>
+  lines.every((line) => draftLineState(line, sources) !== 'pending');
+
+/** Drops lines whose Meal or Ingredient is gone; loading and unpicked ones stay. */
 export const resolveDraftLines = (
   lines: TDraftLine[],
   sources: IDraftSources,
 ) => {
   const kept = lines.filter(
-    (line) => line.itemId === 0 || lineExists(line, sources),
+    (line) => draftLineState(line, sources) !== 'missing',
   );
   return { lines: kept, removed: lines.length - kept.length };
 };
@@ -97,10 +116,10 @@ export const resolveDraft = (
 /** The Unit an Ingredient line's amount is in; unset for a Meal or unpicked line. */
 export const draftLineUnit = (
   { kind, itemId }: TDraftLine,
-  sources: IDraftSources,
+  ingredients: IIngredientOption[],
 ): EUnit | undefined =>
   kind === EDraftLineKind.INGREDIENT
-    ? findIngredient(itemId, sources)?.unit
+    ? ingredients.find((ingredient) => ingredient.id === itemId)?.unit
     : undefined;
 
 /**

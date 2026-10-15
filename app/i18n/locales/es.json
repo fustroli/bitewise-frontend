@@ -303,6 +303,7 @@
     "collapse": "Contraer borrador de plan de comidas",
     "expand": "Expandir borrador de plan de comidas",
     "removed": "Se quitaron del borrador {count} elemento(s) que ya no existen.",
+    "recordsError": "No se pudieron cargar las comidas y los ingredientes.",
     "total": "Total",
     "columns": {
       "item": "Comida o ingrediente",

@@ -51,7 +51,11 @@ const MEAL: IMeal = {
   ],
 };
 
-const SOURCES: IDraftSources = { meals: [MEAL], ingredients: [BAR] };
+const SOURCES: IDraftSources = {
+  meals: [MEAL],
+  ingredients: [BAR],
+  missing: { meals: [99, 97], ingredients: [98] },
+};
 
 const meal = (itemId: number, quantity = 1): TDraftLine => ({
   kind: EDraftLineKind.MEAL,
@@ -170,8 +174,10 @@ describe('resolveWeek', () => {
     expect(removed).toBe(3);
   });
 
-  it('keeps unpicked lines', () => {
-    expect(resolveWeek(week({ 0: [meal(0)] }), SOURCES).removed).toBe(0);
+  it('keeps unpicked lines and lines still loading', () => {
+    expect(
+      resolveWeek(week({ 0: [meal(0)], 1: [meal(50)] }), SOURCES).removed,
+    ).toBe(0);
   });
 });
 
