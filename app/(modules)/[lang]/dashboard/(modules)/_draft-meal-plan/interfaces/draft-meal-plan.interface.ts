@@ -14,13 +14,6 @@ export interface IResolvedDraft {
   removed: number;
 }
 
-/** A Meal plan the draft can be loaded from. */
-export interface IDraftMealPlanOption {
-  id: number;
-  name: string;
-  mealIds: number[];
-}
-
 export interface IDraftMealPlanContext {
   /** The stored draft: `undefined` until read on the client, `null` for none. */
   stored: TStoredDraft | null | undefined;

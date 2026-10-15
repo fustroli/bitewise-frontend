@@ -6,7 +6,7 @@ import { Button } from '@/app/components/ui/button';
 import ComboboxField from '@/app/components/form/ComboboxField';
 import { Delete } from 'lucide-react';
 import { EUnit } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/enums';
-import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
+import { IIngredientOption } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { IOption } from '@/app/utils/interfaces';
 import InputField from '@/app/components/form/InputField';
 import { TMealSchema } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/validations';
@@ -15,7 +15,7 @@ import { useDictionary } from '@/app/providers/dictionary-provider';
 interface IProps {
   index: number;
   options: IOption[];
-  ingredients: IIngredient[];
+  ingredients: IIngredientOption[];
   control: Control<TMealSchema>;
   onRemove: () => void;
 }

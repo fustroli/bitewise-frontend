@@ -1,7 +1,7 @@
 'use client';
 
 import DayPicker from '@/app/(modules)/[lang]/dashboard/(modules)/_week-plan/components/DayPicker';
-import { IDraftMealPlanOption } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
+import { IMealPlanOption } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
 import LoadMealPlanDialog from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/components/LoadMealPlanDialog';
 import ReplacesWarning from '@/app/(modules)/[lang]/dashboard/(modules)/_week-plan/components/ReplacesWarning';
 import { TStoredWeek } from '@/app/(modules)/[lang]/dashboard/(modules)/_week-plan/validations';
@@ -23,7 +23,7 @@ interface IProps {
   shortNames: string[];
   lang: string;
   mealPlansHref: string;
-  onLoad: (mealPlan: IDraftMealPlanOption, days: number[]) => void;
+  onLoad: (mealPlan: IMealPlanOption, days: number[]) => void;
 }
 
 /** Load meal plan onto chosen days, saying which planned days it replaces. */

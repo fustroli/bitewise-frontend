@@ -18,7 +18,7 @@ import { Button } from '@/app/components/ui/button';
 import ComboboxField from '@/app/components/form/ComboboxField';
 import { Form } from '@/app/components/ui/form';
 import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
-import { IDraftMealPlanOption } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/interfaces';
+import { IMealPlanOption } from '@/app/(modules)/[lang]/dashboard/(modules)/meal-plans/interfaces';
 import Link from 'next/link';
 import { fetchDraftMealPlans } from '@/app/(modules)/[lang]/dashboard/(modules)/_draft-meal-plan/actions';
 import { toast } from '@/app/hooks/use-toast';
@@ -38,11 +38,11 @@ interface IProps {
   submitLabel?: string;
   submitDisabled?: boolean;
   mealPlansHref: string;
-  onLoad: (mealPlan: IDraftMealPlanOption) => void;
+  onLoad: (mealPlan: IMealPlanOption) => void;
 }
 
 /** `undefined` while loading, `null` when the fetch failed. */
-type TMealPlans = IDraftMealPlanOption[] | null | undefined;
+type TMealPlans = IMealPlanOption[] | null | undefined;
 
 /**
  * Picks one of the User's Meal plans to copy from; the caller puts the copy

@@ -2,7 +2,7 @@
 
 import { convertToOptions, interpolate } from '@/app/utils/helpers';
 
-import { IMeal } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
+import { IMealOption } from '@/app/(modules)/[lang]/dashboard/(modules)/meals/interfaces';
 import { IResourceFieldsProps } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
 import InputField from '@/app/components/form/InputField';
 import MultiSelectField from '@/app/components/form/MultiSelectField';
@@ -13,7 +13,7 @@ import { useMemo } from 'react';
 const MealPlanFields = ({
   form,
   formData: meals,
-}: IResourceFieldsProps<TMealPlanSchema, IMeal[]>) => {
+}: IResourceFieldsProps<TMealPlanSchema, IMealOption[]>) => {
   const {
     resourceTable,
     resources: {

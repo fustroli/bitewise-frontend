@@ -3,7 +3,7 @@
 import { useFieldArray, useWatch } from 'react-hook-form';
 
 import { Button } from '@/app/components/ui/button';
-import { IIngredient } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
+import { IIngredientOption } from '@/app/(modules)/[lang]/dashboard/(modules)/ingredients/interfaces';
 import { IResourceFieldsProps } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/interfaces';
 import InputField from '@/app/components/form/InputField';
 import MealIngredient from '@/app/(modules)/[lang]/dashboard/(modules)/meals/components/MealIngredient';
@@ -15,7 +15,7 @@ import { useMemo } from 'react';
 const MealFields = ({
   form,
   formData: ingredients,
-}: IResourceFieldsProps<TMealSchema, IIngredient[]>) => {
+}: IResourceFieldsProps<TMealSchema, IIngredientOption[]>) => {
   const { fields: labels } = useDictionary().resources.meals;
 
   const options = useMemo(() => convertToOptions(ingredients), [ingredients]);
