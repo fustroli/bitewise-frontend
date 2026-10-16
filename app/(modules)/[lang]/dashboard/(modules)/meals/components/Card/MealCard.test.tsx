@@ -90,7 +90,8 @@ describe('MealCard', () => {
     await user.click(
       screen.getByRole('button', { name: 'Show 2 ingredients' }),
     );
-    const list = within(screen.getByRole('list'));
+    // The first list is the ingredients; each row nests its macro pills' list.
+    const list = within(screen.getAllByRole('list')[0]);
 
     expect(list.getByText('60 g')).toBeTruthy();
     expect(list.getByText('1 piece')).toBeTruthy();
