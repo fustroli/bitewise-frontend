@@ -106,6 +106,12 @@ const nutrientTable = () =>
 beforeAll(() => {
   Element.prototype.hasPointerCapture = () => false;
   Element.prototype.scrollIntoView = () => {};
+  // cmdk (the slot pickers' search list) observes its size.
+  globalThis.ResizeObserver ??= class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  } as unknown as typeof ResizeObserver;
 });
 
 describe('ComparePage', () => {

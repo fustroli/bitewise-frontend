@@ -4,21 +4,12 @@ import {
   IComparisonOption,
   SLOT_DOT_CLASSES,
 } from '@/app/(modules)/[lang]/dashboard/compare/components/compare.types';
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from '@/app/components/ui/select';
 
+import Combobox from '@/app/components/form/Combobox';
 import { cn } from '@/app/lib';
 import { interpolate } from '@/app/utils/helpers';
 import { useDictionary } from '@/app/providers/dictionary-provider';
 import { useMemo } from 'react';
-
-/** The Select's value for an empty optional slot. */
-const NONE = 'none';
 
 interface IProps {
   items: IComparisonOption[];
@@ -28,9 +19,12 @@ interface IProps {
 
 /** One labelled picker per slot; the first (the baseline) can't be emptied. */
 const SlotPickers = ({ items, ids, onPick }: IProps) => {
-  const labels = useDictionary().comparison;
+  const { comparison: labels, resourceTable } = useDictionary();
   const options = useMemo(
-    () => [...items].sort((a, b) => a.name.localeCompare(b.name)),
+    () =>
+      [...items]
+        .sort((a, b) => a.name.localeCompare(b.name))
+        .map((item) => ({ value: item.id, label: item.name })),
     [items],
   );
 
@@ -58,29 +52,17 @@ const SlotPickers = ({ items, ids, onPick }: IProps) => {
                 ? labels.baseline
                 : interpolate(labels.item, { n: slot + 1 })}
             </label>
-            <Select
-              value={isKnown ? String(id) : isBaseline ? '' : NONE}
-              onValueChange={(value) =>
-                onPick(slot, value === NONE ? null : Number(value))
-              }
-            >
-              <SelectTrigger
-                id={selectId}
-                className="min-w-0 flex-1 text-[15px] font-bold"
-              >
-                <SelectValue placeholder={labels.placeholder} />
-              </SelectTrigger>
-              <SelectContent>
-                {!isBaseline && (
-                  <SelectItem value={NONE}>{labels.none}</SelectItem>
-                )}
-                {options.map((item) => (
-                  <SelectItem key={item.id} value={String(item.id)}>
-                    {item.name}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Combobox
+              id={selectId}
+              value={isKnown ? id : null}
+              onChange={(value) => onPick(slot, value)}
+              options={options}
+              placeholder={labels.placeholder}
+              searchPlaceholder={resourceTable.search}
+              emptyText={resourceTable.notFound}
+              noneLabel={isBaseline ? undefined : labels.none}
+              className="w-auto min-w-0 flex-1 text-[15px] font-bold"
+            />
           </div>
         );
       })}
