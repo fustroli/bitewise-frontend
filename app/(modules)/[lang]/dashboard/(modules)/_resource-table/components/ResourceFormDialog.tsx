@@ -1,6 +1,5 @@
 'use client';
 
-import { Copy, Pencil, Plus } from 'lucide-react';
 import {
   DefaultValues,
   FieldValues,
@@ -26,7 +25,7 @@ import { useMemo, useState } from 'react';
 import { Button } from '@/app/components/ui/button';
 import { Form } from '@/app/components/ui/form';
 import FormDialogFooter from '@/app/components/dialogs/FormDialogFooter';
-import { ROW_ACTION_ITEM_CLASS } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/constants';
+import { Plus } from 'lucide-react';
 import { getResourceLabels } from '@/app/(modules)/[lang]/dashboard/(modules)/_resource-table/helpers';
 import { interpolate } from '@/app/utils/helpers';
 import { toastResult } from '@/app/utils/helpers/client';
@@ -48,7 +47,9 @@ interface IProps<
  * Add dialog without a `record`, Edit dialog with one. With `duplicate` the
  * record only seeds an Add dialog, its name prefixed "Copy of". Closes on success
  * (resetting the Add form); stays open on failure so the input isn't lost.
- * A name already in use shows on the name field instead of a toast.
+ * A name already in use shows on the name field instead of a toast. With
+ * `open` it's controlled and renders no trigger; the opener remounts it (via
+ * `key`) so Edit and Duplicate start from the record as it is now.
  */
 function ResourceFormDialog<
   TRecord extends IResourceRecord,
@@ -60,12 +61,17 @@ function ResourceFormDialog<
   duplicate,
   formData,
   trigger,
+  open,
+  onOpenChange,
 }: IProps<TRecord, TValues, TFormData>) {
   const { fields: Fields } = config;
   const dictionary = useDictionary();
   const t = dictionary.resourceTable;
   const labels = getResourceLabels(dictionary, config.resourceKey);
-  const [isOpen, setIsOpen] = useState(false);
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+  const isControlled = open !== undefined;
+  const isOpen = isControlled ? open : uncontrolledOpen;
+  const setIsOpen = onOpenChange ?? setUncontrolledOpen;
 
   const schema = useMemo(() => config.schema(dictionary), [config, dictionary]);
 
@@ -110,7 +116,7 @@ function ResourceFormDialog<
     }
   };
 
-  const triggerKind = trigger ?? (record ? 'menu' : 'button');
+  const triggerKind = trigger ?? (record ? 'outline' : 'button');
   const triggerText = isEdit
     ? t.edit
     : duplicate
@@ -118,14 +124,7 @@ function ResourceFormDialog<
       : labels.addTitle;
 
   const renderTrigger = () => {
-    if (triggerKind === 'menu') {
-      return (
-        <DialogTrigger className={ROW_ACTION_ITEM_CLASS}>
-          {duplicate ? <Copy /> : <Pencil />}
-          {triggerText}
-        </DialogTrigger>
-      );
-    }
+    if (isControlled) return null;
     if (triggerKind === 'icon') {
       return (
         <DialogTrigger asChild>

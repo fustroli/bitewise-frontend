@@ -16,8 +16,11 @@ interface IProps {
   onConfirm: () => void;
   title: string;
   subtitle: string;
-  triggerLabel: ReactNode;
+  /** Left out when the dialog is opened from elsewhere via `open`. */
+  triggerLabel?: ReactNode;
   triggerClassName?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
   cancelLabel: string;
   confirmLabel: string;
 }
@@ -31,14 +34,18 @@ const DeleteDialog = (props: IProps) => {
     triggerClassName,
     cancelLabel,
     confirmLabel,
+    open,
+    onOpenChange,
   } = props;
   const handleConfirm = () => onConfirm();
 
   return (
-    <AlertDialog>
-      <AlertDialogTrigger className={triggerClassName}>
-        {triggerLabel}
-      </AlertDialogTrigger>
+    <AlertDialog open={open} onOpenChange={onOpenChange}>
+      {triggerLabel && (
+        <AlertDialogTrigger className={triggerClassName}>
+          {triggerLabel}
+        </AlertDialogTrigger>
+      )}
       <AlertDialogContent>
         <AlertDialogHeader>
           <AlertDialogTitle>{title}</AlertDialogTitle>

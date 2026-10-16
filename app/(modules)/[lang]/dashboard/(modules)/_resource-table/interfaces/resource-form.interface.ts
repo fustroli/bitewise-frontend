@@ -38,10 +38,10 @@ export interface IResourceForm<
 
 /**
  * How a dialog's trigger looks: a primary button (Add), a 44px icon button
- * (Add, phone app bar), a row-actions menu entry or an outline button (Edit,
- * phone rows). Defaults: `button` for Add, `menu` with a record.
+ * (Add, phone app bar) or an outline button (Edit, phone rows). Defaults:
+ * `button` for Add, `outline` with a record.
  */
-export type TResourceDialogTrigger = 'button' | 'icon' | 'menu' | 'outline';
+export type TResourceDialogTrigger = 'button' | 'icon' | 'outline';
 
 export interface IResourceDialogProps<TRecord, TFormData> {
   record?: TRecord;
@@ -49,6 +49,9 @@ export interface IResourceDialogProps<TRecord, TFormData> {
   duplicate?: boolean;
   formData: TFormData;
   trigger?: TResourceDialogTrigger;
+  /** Opened from elsewhere (a menu item): no trigger is rendered. */
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export interface IResourceRowActionsProps<TRecord, TFormData> {
